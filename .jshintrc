@@ -1,0 +1,8 @@
+{
+  "browserify": true,
+  "esnext":true,
+  "predef": [
+    "angular",
+    "console"
+  ]
+}
