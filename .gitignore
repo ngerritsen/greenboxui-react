@@ -1,5 +1,5 @@
 node_modules
 app/bower_components
 app/bundle.js
+npm-debug.log
 .idea
-

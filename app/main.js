@@ -1,7 +1,7 @@
 import React from 'react';
-import HelloWorld from './components/HelloWorld.react';
+import ControlInstanceView from './controlInstance/ControlInstanceView.react';
 
 React.render(
-    <div><HelloWorld/><HelloWorld/></div>,
+    <ControlInstanceView/>,
     document.getElementById('greenbox-app')
 );

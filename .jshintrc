@@ -2,7 +2,13 @@
   "browserify": true,
   "esnext":true,
   "predef": [
-    "angular",
     "console"
-  ]
+  ],
+  "proto": true,
+  "eqnull": true
 }
+
+/*
+  This file contains the options for JSHint, "relaxing" options can be found at:
+  http://jshint.com/docs/options/
+*/

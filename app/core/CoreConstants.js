@@ -1,0 +1,5 @@
+export const CoreConstants = {
+    VIEW_ACTION: 'VIEW_ACTION',
+    SERVER_ACTION: 'SERVER_ACTION',
+    CHANGE_EVENT: 'CHANGE_EVENT'
+};
