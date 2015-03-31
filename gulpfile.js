@@ -13,7 +13,7 @@ var compass = require('gulp-compass');
 var source = require('vinyl-source-stream');
 
 gulp.task('lint', function() {
-    gulp.src(['./app/**/*.js', '!./app/**/*.test.js', '!./app/bundle.js'])
+    gulp.src(['./app/**/*.js', '!./app/**/*.test.js', '!./app/bundle.js', '!./app/**/*Dispatcher.js', '!./app/**/*Store.js'])
         .pipe(babel())
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
@@ -100,12 +100,20 @@ gulp.task('watch', function() {
     gulp.watch(['./app/**/*.js', '!./app/bundle.js'], ['lint', 'bundle']);
 });
 
-// default task
+gulp.task('watchdirty', function() {
+    gulp.watch(['./app/**/*.js', '!./app/bundle.js'], ['bundle']);
+});
+
 gulp.task('dev',
     ['lint', 'test', 'bundle', 'connect', 'watch']
 );
 
-// build task
+gulp.task('default', ['dev']);
+
+gulp.task('devdirty',
+    ['bundle', 'connect', 'watch']
+);
+
 gulp.task('build',
     ['lint', 'test', 'bundle', 'test', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connectDist']
 );
