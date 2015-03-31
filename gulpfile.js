@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 
-var fs = require("fs");
 var connect = require('gulp-connect');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
@@ -14,7 +13,7 @@ var compass = require('gulp-compass');
 var source = require('vinyl-source-stream');
 
 gulp.task('lint', function() {
-    gulp.src(['./app/**/*.js', '!./app/bower_components/**', '!./app/bundle.js', '!./app/**/*.test.*'])
+    gulp.src(['./app/**/*.js', '!./app/**/*.test.js', '!./app/bundle.js'])
         .pipe(babel())
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
@@ -22,7 +21,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', function(){
-   return gulp.src(['app/**/*.test.js'])
+   return gulp.src(['./app/**/*.test.js'])
        .pipe(karma({
            configFile: './karma.conf.js',
            action: 'run'

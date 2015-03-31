@@ -1,5 +1,5 @@
 import React from 'react';
-import HelloWorld from './HelloWorld.react';
+import HelloWorld from './components/HelloWorld.react';
 
 React.render(
     <HelloWorld/>,
