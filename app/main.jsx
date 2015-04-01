@@ -1,5 +1,5 @@
 import React from 'react';
-import ControlInstanceView from './controlInstance/ControlInstanceView.react';
+import ControlInstanceView from './control-instance/control-instance-view';
 
 React.render(
     <ControlInstanceView/>,

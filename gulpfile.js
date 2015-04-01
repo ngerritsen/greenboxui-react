@@ -2,10 +2,29 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require("babelify");
 var source = require('vinyl-source-stream');
+var path = require('path');
 var $ = require('gulp-load-plugins')();
 
+const files = {
+    bundle: 'bundle.js',
+    entry: 'main.jsx'
+};
+
+const paths = {
+    dist: './dist',
+    root: './app',
+    scripts: './app/**/*.js',
+    react: './app/**/*.jsx',
+    tests: './app/**/*.test.*',
+    bower: './app/bower_components/**/*.*'
+};
+
+function not(path) {
+    return '!' + path;
+}
+
 gulp.task('lint', function() {
-    gulp.src(['./app/**/*.js', '!./app/**/*.test.js', '!./app/bundle.js', '!./app/bower_components/**/*.*'])
+    gulp.src([paths.scripts, paths.react, not(paths.tests), not(path.resolve(paths.root, files.bundle)), not(paths.bower)])
         .pipe($.babel())
         .pipe($.jshint())
         .pipe($.jshint.reporter('default', { verbose: true }))
@@ -13,7 +32,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', function(){
-   return gulp.src(['./app/**/*.test.js'])
+   return gulp.src([path.tests])
        .pipe($.karma({
            configFile: './karma.conf.js',
            action: 'run'
@@ -27,15 +46,16 @@ gulp.task('test', function(){
 gulp.task('bundle', function() {
     return browserify({
             debug: true,
-            entries: "./app/main.js"
+            extensions: ['.js', '.jsx'],
+            entries: path.resolve(paths.root, files.entry)
         })
         .transform(babelify.configure({
             ignore: /(bower_components)|(node_modules)/
         }))
         .bundle()
         .on("error", function (err) { console.log("Error : " + err.message); })
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./app'));
+        .pipe(source(files.bundle))
+        .pipe(gulp.dest(paths.root));
 });
 
 gulp.task('compass', function(){
@@ -47,7 +67,7 @@ gulp.task('compass', function(){
 });
 
 gulp.task('clean', function() {
-    gulp.src('./dist/*')
+    gulp.src(path.resolve(paths.dist, '*'))
         .pipe($.clean({force: true}));
 });
 
@@ -79,20 +99,20 @@ gulp.task('copy-html-files', function () {
 
 gulp.task('connect', function () {
     $.connect.server({
-        root: 'app/',
+        root: paths.root,
         port: 8889
     });
 });
 
 gulp.task('connectDist', function () {
     $.connect.server({
-        root: 'dist/',
+        root: paths.dist,
         port: 9999
     });
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['./app/**/*.js', '!./app/bundle.js'], ['lint', 'bundle']);
+    gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint', 'bundle']);
 });
 
 gulp.task('dev',

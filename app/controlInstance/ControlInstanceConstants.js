@@ -1,5 +1,0 @@
-export const CoreConstants = {
-    ADD_CONTROL: 'ADD_CONTROL',
-    RENAME_CONTROL: 'RENAME_CONTROL',
-    REMOVE_CONTROL: 'REMOVE_CONTROL'
-};
