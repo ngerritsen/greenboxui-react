@@ -1,4 +1,4 @@
-import AltApplication from '../core/alt-application';
+import AltApp from '../core/alt-app';
 
 class ControlInstanceActions {
     constructor() {
@@ -26,4 +26,4 @@ class ControlInstanceActions {
     }
 }
 
-export default AltApplication.createActions(ControlInstanceActions);
+export default AltApp.createActions(ControlInstanceActions);

@@ -8,6 +8,7 @@ export default React.createClass({
     componentDidMount() {
         ControlInstanceStore.listen(this._onChange);
         this._onChange();
+        console.log(ControlInstanceStore);
     },
     componentWillUnmount() {
         ControlInstanceStore.unlisten(this._onChange)

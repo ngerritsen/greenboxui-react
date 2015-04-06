@@ -32,7 +32,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', function(){
-   return gulp.src([path.tests])
+   return gulp.src([paths.tests])
        .pipe($.karma({
            configFile: './karma.conf.js',
            action: 'run'
