@@ -19,9 +19,9 @@ class ControlInstanceActions {
         });
     }
 
-    removeControl(control) {
+    removeControl(controlInstanceId) {
         this.dispatch({
-            controlInstanceId: control.instanceId
+            controlInstanceId: controlInstanceId
         });
     }
 }

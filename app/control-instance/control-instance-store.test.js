@@ -3,41 +3,97 @@ import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 
 describe('control instance store tests', () => {
-    const testControl = {
+    const addControlAction = ControlInstanceActions.ADD_CONTROL;
+    const removeControlAction = ControlInstanceActions.REMOVE_CONTROL;
+
+    const testControlA = {
         controlTypeId: '123',
         name: 'TestControl'
     };
-    const addControlAction = ControlInstanceActions.ADD_CONTROL;
+
+    const testControlB = {
+        controlTypeId: '123',
+        name: 'TestControl'
+    };
 
     afterEach(() => {
         AltApp.flush();
     });
 
-    it('listens for add a control action', () => {
-        AltApp.dispatcher.dispatch({action: addControlAction, data: testControl});
+    describe('add a control tests', () => {
 
-        expect(ControlInstanceStore.getState().controls.length).toBe(1);
+        it('adds a control', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+
+            expect(ControlInstanceStore.getState().controls.length).toEqual(1);
+        });
+
+        it('adds multiple controls', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlB});
+
+            expect(ControlInstanceStore.getState().controls.length).toEqual(2);
+        });
+
+        it('adds the right data to the control', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+
+            expect(ControlInstanceStore.getState().controls[0].controlTypeId).toEqual(testControlA.controlTypeId);
+            expect(ControlInstanceStore.getState().controls[0].name).toEqual(testControlA.name);
+        });
+
+        it('generates an instance id when adding a control', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+
+            expect(ControlInstanceStore.getState().controls[0].controlInstanceId).toBeDefined();
+        });
+
+        it('generates different instance ids when adding controls', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlB});
+
+            expect(ControlInstanceStore.getState().controls[0].controlInstanceId)
+                .not.toEqual(ControlInstanceStore.getState().controls[1].controlInstanceId);
+        });
+
+        it('ignores invalid controls', () => {
+            const invalidControl1 = {
+                name: 'TestControl'
+            };
+
+            const invalidControl2 = {
+                controlTypeId: '123'
+            };
+
+            AltApp.dispatcher.dispatch({action: addControlAction, data: invalidControl1});
+            AltApp.dispatcher.dispatch({action: addControlAction, data: invalidControl2});
+
+            expect(ControlInstanceStore.getState().controls.length).toEqual(0);
+        });
     });
 
-    it('adds the right control', () => {
-        AltApp.dispatcher.dispatch({action: addControlAction, data: testControl});
+    describe('remove a control tests', () => {
 
-        expect(ControlInstanceStore.getState().controls[0].controlTypeId).toBe(testControl.controlTypeId);
-        expect(ControlInstanceStore.getState().controls[0].name).toBe(testControl.name);
-    });
+        it('removes a control', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
 
-    it('ignores invalid controls', () => {
-        const invalidControl1 = {
-            name: 'TestControl'
-        };
+            const instanceIdToRemove = ControlInstanceStore.getState().controls[0].controlInstanceId;
+            AltApp.dispatcher.dispatch({action: removeControlAction, data: {controlInstanceId: instanceIdToRemove}});
 
-        const invalidControl2 = {
-            controlTypeId: '123'
-        };
+            expect(ControlInstanceStore.getState().controls.length).toEqual(0);
+        });
 
-        AltApp.dispatcher.dispatch({action: addControlAction, data: invalidControl1});
-        AltApp.dispatcher.dispatch({action: addControlAction, data: invalidControl2});
+        it('removes one and the right control from multiple controls', () => {
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlA});
+            AltApp.dispatcher.dispatch({action: addControlAction, data: testControlB});
 
-        expect(ControlInstanceStore.getState().controls.length).toBe(0);
+            const instanceIdA = ControlInstanceStore.getState().controls[0].controlInstanceId;
+            const instanceIdB = ControlInstanceStore.getState().controls[1].controlInstanceId;
+
+            AltApp.dispatcher.dispatch({action: removeControlAction, data: {controlInstanceId: instanceIdA}});
+
+            expect(ControlInstanceStore.getState().controls.length).toEqual(1);
+            expect(ControlInstanceStore.getState().controls[0].controlInstanceId).toEqual(instanceIdB);
+        });
     });
 });
