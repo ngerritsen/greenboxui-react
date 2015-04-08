@@ -13,7 +13,8 @@ class ControlInstanceStore {
         });
     }
 
-    onControlAdded(payload){
+    onControlAdded(payload) {
+
         if(payload.controlTypeId && payload.name) {
             const {controlTypeId, name} = payload;
             this.controls.push({

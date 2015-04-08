@@ -1,10 +1,6 @@
 import AltApp from '../core/alt-app';
 
 class ControlInstanceActions {
-    constructor() {
-        this.generateActions('addControl', 'renameControl', 'removeControl')
-    }
-
     addControl(controlTypeId, name) {
         this.dispatch({
             controlTypeId: controlTypeId,
@@ -12,9 +8,9 @@ class ControlInstanceActions {
         });
     }
 
-    renameControl(control, newName) {
+    renameControl(controlInstanceId, newName) {
         this.dispatch({
-            controlInstanceId: control.instanceId,
+            controlInstanceId: controlInstanceId,
             newName: newName
         });
     }
