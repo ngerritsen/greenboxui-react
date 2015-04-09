@@ -26,7 +26,7 @@ export default React.createClass({
     render() {
         const controls = this.state.controls.map((control) => {
             return (
-                <ControlItem control={control}  key={control.controlInstanceId} />
+                <ControlItem control={control}  key={control.instanceId} />
             );
         });
 

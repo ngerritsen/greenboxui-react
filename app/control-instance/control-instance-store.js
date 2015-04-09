@@ -13,22 +13,17 @@ class ControlInstanceStore {
         });
     }
 
-    onControlAdded(payload) {
-
-        if(payload.controlTypeId && payload.name) {
-            const {controlTypeId, name} = payload;
-            this.controls.push({
-                controlTypeId: controlTypeId,
-                controlInstanceId: this.getNewInstanceId(),
-                name: name
-            });
+    onControlAdded(control) {
+        if(control.typeId && control.name) {
+            control.instanceId = this.getNewInstanceId();
+            this.controls.push(control);
         }
     }
 
     onControlRemoved(payload){
-        if(payload.controlInstanceId) {
-            const controlInstanceId = payload.controlInstanceId;
-            this.controls = this.controls.filter((control) => control.controlInstanceId !== controlInstanceId);
+        if(payload.instanceId) {
+            const instanceId = payload.instanceId;
+            this.controls = this.controls.filter((control) => control.instanceId !== instanceId);
         }
     }
 
