@@ -2,6 +2,7 @@ import React from 'react';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 import ControlItem from './control-instance-item-view';
+import ControlInstanceAddTool from './control-instance-add-tool-view';
 
 export default React.createClass({
     getInitialState() {
@@ -18,11 +19,6 @@ export default React.createClass({
         const newControls = ControlInstanceStore.getState().controls;
         this.setState({ controls: newControls });
     },
-    _handleAddControl(event) {
-        event.preventDefault();
-        const newControlName = React.findDOMNode(this.refs.controlNameInput).value;
-        ControlInstanceActions.addControl('Unknown type', newControlName);
-    },
     render() {
         const controls = this.state.controls.map((control) => {
             return (
@@ -32,13 +28,17 @@ export default React.createClass({
 
         return (
             <div>
-                <form>
-                    <input type="text" ref="controlNameInput"/>
-                    <button type="submit" className="btn btn-primary" onClick={this._handleAddControl}>Add Control</button>
-                </form>
-                <ul>
+                <ControlInstanceAddTool/>
+                <div className="row">
+                    <ul className="grid">
+                        <li className="grid-row row clearfix">
+                            <div className="grid-cell column small-5">Type</div>
+                            <div className="grid-cell column small-5">Name</div>
+                            <div className="grid-cell column small-2"></div>
+                        </li>
                     {controls}
-                </ul>
+                    </ul>
+                </div>
             </div>
         );
     }

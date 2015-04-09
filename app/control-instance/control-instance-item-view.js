@@ -12,8 +12,10 @@ export default React.createClass({
     render() {
         const control = this.props.control;
         return (
-            <li>{control.controlTypeId}: {control.name}
-                <a href="#" onClick={this._handleRemoveControl}>Delete</a>
+            <li className="grid-row row clearfix">
+                <div className="grid-cell column small-5">{control.typeId}</div>
+                <div className="grid-cell column small-5">{control.name}</div>
+                <div className="grid-cell column small-2"><a href="#" onClick={this._handleRemoveControl}>Delete</a></div>
             </li>
         );
     }

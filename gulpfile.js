@@ -16,7 +16,8 @@ const paths = {
     scripts: './app/**/*.js',
     react: './app/**/*.jsx',
     tests: './app/**/*.test.*',
-    bower: './app/bower_components/**/*.*'
+    bower: './app/bower_components/**/*.*',
+    styles: './app/assets/sass/*.scss'
 };
 
 function not(path) {
@@ -113,10 +114,11 @@ gulp.task('connectDist', function () {
 
 gulp.task('watch', function() {
     gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint', 'bundle']);
+    gulp.watch([paths.styles], ['compass']);
 });
 
 gulp.task('dev',
-    ['lint', 'compass', /*'test',*/ 'bundle', 'connect', 'watch']
+    ['lint', 'compass', 'test', 'bundle', 'connect', 'watch']
 );
 
 gulp.task('default', ['dev']);
