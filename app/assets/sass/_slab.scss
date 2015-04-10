@@ -1,0 +1,11 @@
+.slab {
+  background-color: $white;
+  @include box-shadow(0 1px 2px $light-grey);
+  @include border-radius(2px);
+  padding: $margin-regular 0;
+  margin-bottom: $margin-regular;
+}
+
+.slab-narrow {
+  padding: $margin-small 0;
+}

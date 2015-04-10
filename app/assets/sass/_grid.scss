@@ -8,17 +8,28 @@
   margin: 0;
   padding: 0;
   display: block;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid $light-grey;
+
 
   &:first-child {
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid $light-grey;
   }
 }
 
 .grid-cell {
-  border-right: 1px solid #e3e3e3;
+  border-right: 1px solid  darken($white, 5%);
+  height: 1.8rem;
+  line-height: 1.8rem;
 
-  &:first-child {
-    border-left: 1px solid #e3e3e3;
+  &:last-child {
+    border-right: 0 solid $white;
+  }
+}
+
+.grid-heading-row {
+  .grid-cell {
+    height: 2rem;
+    line-height: 2rem;
+    background-color: darken($white, 5%);
   }
 }

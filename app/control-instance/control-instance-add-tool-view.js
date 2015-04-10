@@ -26,7 +26,7 @@ export default React.createClass({
                     </label>
                 </div>
                 <div className="small-2 columns">
-                    <button type="submit" className="button radius small" onClick={this._handleAddControl}>Add Control</button>
+                    <button type="submit" className="button radius small button-form" onClick={this._handleAddControl}>Add Control</button>
                 </div>
             </div>
         </form>

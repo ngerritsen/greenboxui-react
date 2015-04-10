@@ -4,6 +4,9 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,400italic,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic);
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700,400italic);
 html {
   font-family: sans-serif;
   /* 1 */
@@ -443,7 +446,7 @@ html, body {
 
 html,
 body {
-  font-size: 100%;
+  font-size: 16px;
 }
 
 body {
@@ -454,7 +457,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
-  line-height: 1.5;
+  line-height: 24px;
   position: relative;
   cursor: auto;
 }
@@ -8046,20 +8049,56 @@ th.hide-for-touch {
   margin: 0;
   padding: 0;
   display: block;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #bfbfbf;
 }
 .grid-row:first-child {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #bfbfbf;
 }
 
 .grid-cell {
-  border-right: 1px solid #e3e3e3;
+  border-right: 1px solid #f2f2f2;
+  height: 1.8rem;
+  line-height: 1.8rem;
 }
-.grid-cell:first-child {
-  border-left: 1px solid #e3e3e3;
+.grid-cell:last-child {
+  border-right: 0 solid white;
+}
+
+.grid-heading-row .grid-cell {
+  height: 2rem;
+  line-height: 2rem;
+  background-color: #f2f2f2;
+}
+
+.slab {
+  background-color: white;
+  -webkit-box-shadow: 0 1px 2px #bfbfbf;
+  -moz-box-shadow: 0 1px 2px #bfbfbf;
+  box-shadow: 0 1px 2px #bfbfbf;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.slab-narrow {
+  padding: 0.5rem 0;
+}
+
+.button-form {
+  margin-top: 0.5rem;
+}
+
+body {
+  font-family: 'Titillium Web', arial, sans-serif;
+  color: #333333;
+  background-color: #f2f2f2;
 }
 
 .content {
   max-width: 1100px;
-  padding: 21px;
+  padding: 1rem;
 }
