@@ -1,6 +1,6 @@
 .slab {
   background-color: $white;
-  @include box-shadow(0 1px 2px $light-grey);
+  @include box-shadow(0 1px 2px $light-gray);
   @include border-radius(2px);
   padding: $margin-regular 0;
   margin-bottom: $margin-regular;

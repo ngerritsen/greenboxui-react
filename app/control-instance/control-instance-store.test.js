@@ -4,6 +4,7 @@ import ControlInstanceActions from './control-instance-actions';
 
 describe('control instance store tests', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
+    const renameControlAction = ControlInstanceActions.RENAME_CONTROL;
     const removeControlAction = ControlInstanceActions.REMOVE_CONTROL;
 
     const testControlA = { typeId: '123', name: 'TestControlA' };
@@ -85,11 +86,55 @@ describe('control instance store tests', () => {
         });
     });
 
+    describe('rename a control tests', () => {
+
+        it('renames a control', () => {
+            addControl(testControlA);
+
+            const newName = 'RenamedControlA';
+            const instanceIdA = ControlInstanceStore.getState().controls[0].instanceId;
+
+            renameControl(instanceIdA, newName);
+
+            expect(ControlInstanceStore.getState().controls[0].name).toEqual(newName);
+        });
+
+        it('renames the right control', () => {
+            addControl(testControlA);
+            addControl(testControlB);
+
+            const newName = 'RenamedControlB';
+            const instanceIdB = ControlInstanceStore.getState().controls[1].instanceId;
+
+            renameControl(instanceIdB, newName);
+
+            expect(ControlInstanceStore.getState().controls[1].name).toEqual(newName);
+        });
+
+        it('ignores non existing instance', () => {
+            addControl(testControlA);
+
+            const newName = 'RenamedControlB';
+            const nonExistingInstanceId = 'ThisIdDoesNotExist';
+            const controlsBeforeRename = ControlInstanceStore.getState().controls;
+
+            renameControl(nonExistingInstanceId, newName);
+
+            const controlsAfterRename = ControlInstanceStore.getState().controls;
+
+            expect(controlsBeforeRename).toEqual(controlsAfterRename);
+        });
+    });
+
     function addControl(control) {
         AltApp.dispatcher.dispatch({ action: addControlAction, data: control });
     }
 
     function removeControl(instanceId) {
         AltApp.dispatcher.dispatch({ action: removeControlAction, data: { instanceId: instanceId } });
+    }
+
+    function renameControl(instanceId, newName) {
+        AltApp.dispatcher.dispatch({ action: renameControlAction, data: { instanceId: instanceId, newName: newName } });
     }
 });

@@ -4,6 +4,7 @@
 @import './variables';
 @import './grid';
 @import './slab';
+@import './top-bar';
 @import './helper-classes';
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,400italic,700);
@@ -11,7 +12,7 @@
 @import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700,400italic);
 
 body {
-  font-family: 'Titillium Web', arial, sans-serif;
+  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
   color: $text-color;
   background-color: $background-color;
 }
@@ -19,4 +20,22 @@ body {
 .content {
   max-width: 1100px;
   padding: $margin-regular;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.fa {
+  &.clickable {
+    &:hover {
+      @include opacity(0.8);
+    }
+  }
+
+  &.fa-inline {
+    margin-top: 0.4rem;
+  }
 }

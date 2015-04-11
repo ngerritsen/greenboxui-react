@@ -7,6 +7,7 @@ class ControlInstanceStore {
 
         this.bindAction(ControlInstanceActions.addControl, this.onControlAdded);
         this.bindAction(ControlInstanceActions.removeControl, this.onControlRemoved);
+        this.bindAction(ControlInstanceActions.renameControl, this.onControlRenamed);
 
         this.exportPublicMethods({
             getNewInstanceId: this.getNewInstanceId
@@ -20,11 +21,21 @@ class ControlInstanceStore {
         }
     }
 
-    onControlRemoved(payload){
+    onControlRemoved(payload) {
         if(payload.instanceId) {
             const instanceId = payload.instanceId;
             this.controls = this.controls.filter((control) => control.instanceId !== instanceId);
         }
+    }
+
+    onControlRenamed(payload) {
+        const {instanceId, newName} = payload;
+        this.controls = this.controls.map((control) => {
+            if(control.instanceId === instanceId) {
+                control.name = newName;
+            }
+            return control;
+        });
     }
 
     getNewInstanceId() {

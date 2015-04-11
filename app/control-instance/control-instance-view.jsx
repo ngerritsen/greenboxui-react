@@ -7,11 +7,7 @@ import Grid from '../shared/grid-view.js';
 
 export default React.createClass({
     getInitialState() {
-        return { controls: [{
-            typeId: '123',
-            name: 'hello',
-            instanceId: 'hello world'
-        }] }
+        return { controls: [] }
     },
     componentDidMount() {
         ControlInstanceStore.listen(this._onChange);
@@ -24,11 +20,15 @@ export default React.createClass({
         const newControls = ControlInstanceStore.getState().controls;
         this.setState({ controls: newControls });
     },
+    _handleEditControlName(newName, control) {
+        const instanceId = control.instanceId;
+        ControlInstanceActions.renameControl(instanceId, newName);
+    },
     render() {
         const columnInfo = [
             { title: 'Type Id', columns: 5, id: 'typeId' },
-            { title: 'Name', columns: 5, id: 'name' },
-            { title: 'Delete', columns: 2, id: 'name', template: ControlInstanceDeleteCell }
+            { title: 'Name', columns: 5, id: 'name', editAble: true, onEdit: this._handleEditControlName },
+            { title: 'Delete', columns: 2, id: 'delete', template: ControlInstanceDeleteCell, noSort: true }
         ];
 
         return (

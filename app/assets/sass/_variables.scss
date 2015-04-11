@@ -1,9 +1,13 @@
 $white: #ffffff;
 $text-color: #333;
-$grey: darken($white, 50%);
-$light-grey: darken($white, 25%);
+$primary-color: #2476b9;
+$gray: darken($white, 50%);
+$light-gray: darken($white, 25%);
+$subtle-gray: darken($white, 12.5%);
 $background-color: darken($white, 5%);
 
 $margin-base: 1rem;
 $margin-regular: $margin-base;
 $margin-small: $margin-base/2;
+
+$top-bar-height: 3.5rem;

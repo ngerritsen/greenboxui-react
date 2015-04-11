@@ -1,0 +1,6 @@
+.top-bar {
+    background-color: $primary-color;
+    height: $top-bar-height;
+    line-height: $top-bar-height;
+    @include box-shadow(0 2px 3px $light-gray);
+}

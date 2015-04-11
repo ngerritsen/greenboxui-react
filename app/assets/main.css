@@ -8049,25 +8049,33 @@ th.hide-for-touch {
   margin: 0;
   padding: 0;
   display: block;
-  border-bottom: 1px solid #bfbfbf;
+  border-bottom: 1px solid #dfdfdf;
 }
 .grid-row:first-child {
-  border-top: 1px solid #bfbfbf;
+  border-top: 1px solid #dfdfdf;
+}
+
+.grid-body-row:nth-child(1) .grid-cell {
+  background-color: #f9f9f9;
 }
 
 .grid-cell {
-  border-right: 1px solid #f2f2f2;
+  border-right: 1px solid #dfdfdf;
   height: 1.8rem;
-  line-height: 1.8rem;
+  line-height: 2rem;
+  font-size: 0.9rem;
 }
-.grid-cell:last-child {
-  border-right: 0 solid white;
+.grid-cell:first-child {
+  border-left: 1px solid #dfdfdf;
 }
 
 .grid-heading-row .grid-cell {
   height: 2rem;
-  line-height: 2rem;
+  line-height: 2.1rem;
   background-color: #f2f2f2;
+}
+.grid-heading-row .grid-cell:hover {
+  background-color: #f9f9f9;
 }
 
 .slab {
@@ -8088,12 +8096,21 @@ th.hide-for-touch {
   padding: 0.5rem 0;
 }
 
+.top-bar {
+  background-color: #2476b9;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  -webkit-box-shadow: 0 2px 3px #bfbfbf;
+  -moz-box-shadow: 0 2px 3px #bfbfbf;
+  box-shadow: 0 2px 3px #bfbfbf;
+}
+
 .button-form {
   margin-top: 0.5rem;
 }
 
 body {
-  font-family: 'Titillium Web', arial, sans-serif;
+  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
   color: #333333;
   background-color: #f2f2f2;
 }
@@ -8101,4 +8118,16 @@ body {
 .content {
   max-width: 1100px;
   padding: 1rem;
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.fa.clickable:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+}
+.fa.fa-inline {
+  margin-top: 0.4rem;
 }
