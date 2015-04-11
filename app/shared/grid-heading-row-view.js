@@ -2,6 +2,10 @@ import React from 'react';
 import GridHeadingCell from './grid-heading-cell';
 
 export default React.createClass({
+    propTypes: {
+        columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        onSortBy: React.PropTypes.func.isRequired
+    },
     _handleSortByColumn(sortProperty) {
         this.props.onSortBy(sortProperty);
     },

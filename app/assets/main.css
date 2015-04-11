@@ -8055,7 +8055,7 @@ th.hide-for-touch {
   border-top: 1px solid #dfdfdf;
 }
 
-.grid-body-row:nth-child(1) .grid-cell {
+.grid-body-row:nth-child(odd) .grid-cell {
   background-color: #f9f9f9;
 }
 

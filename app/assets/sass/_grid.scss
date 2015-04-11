@@ -17,7 +17,7 @@
 }
 
 .grid-body-row {
-  &:nth-child(1) {
+  &:nth-child(odd) {
     .grid-cell {
       background-color: lighten($subtle-gray, 10%);
     }

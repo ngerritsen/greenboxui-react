@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default React.createClass({
+    propTypes: {
+        column: React.PropTypes.object.isRequired,
+        onSortBy: React.PropTypes.func.isRequired
+    },
     _handleSortByColumn(event) {
         const sortProperty = this.props.column.id;
         this.props.onSortBy(sortProperty);

@@ -26,8 +26,9 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: 'Type Id', columns: 5, id: 'typeId' },
-            { title: 'Name', columns: 5, id: 'name', editAble: true, onEdit: this._handleEditControlName },
+            { title: 'Type Id', columns: 3, id: 'typeId' },
+            { title: 'Instance Id', columns: 3, id: 'instanceId', unique: true },
+            { title: 'Name', columns: 4, id: 'name', editAble: true, onEdit: this._handleEditControlName },
             { title: 'Delete', columns: 2, id: 'delete', template: ControlInstanceDeleteCell, noSort: true }
         ];
 

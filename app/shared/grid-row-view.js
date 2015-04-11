@@ -2,6 +2,10 @@ import React from 'react';
 import GridEditableCell from './grid-editable-cell-view';
 
 export default React.createClass({
+    propTypes: {
+        columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        data: React.PropTypes.object.isRequired
+    },
     render() {
         const columnInfo = this.props.columnInfo;
         const data = this.props.data;
