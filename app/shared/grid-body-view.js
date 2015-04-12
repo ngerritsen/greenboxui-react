@@ -8,7 +8,8 @@ export default React.createClass({
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         searchParameter: React.PropTypes.string,
-        sortProperty: React.PropTypes.string
+        sortProperty: React.PropTypes.string,
+        sortInversed: React.PropTypes.bool
     },
     _searchRowData(rowData) {
         const formattedSearchParameter = String(this.props.searchParameter).toLowerCase();
@@ -23,10 +24,15 @@ export default React.createClass({
     },
     _sortRowData(rowData) {
         const sortProperty = this.props.sortProperty;
+        let newRowData = rowData;
+
         if (sortProperty) {
-            return _(rowData).sortBy((item) => item[sortProperty]);
+            newRowData = _(rowData).sortBy((item) => item[sortProperty]);
         }
-        return this.props.data;
+        if (this.props.sortInversed) {
+            newRowData = newRowData.reverse();
+        }
+        return newRowData;
     },
     _getUniqueId() {
         const uniqueColumn = _(this.props.columnInfo).find((column) => column.unique);
@@ -41,7 +47,7 @@ export default React.createClass({
         const rows = sortedData.map((rowData, index) => {
             const key = uniqueId ? rowData[uniqueId] : index;
             if (!searchParameter || this._searchRowData(rowData)) {
-                return <GridRow columnInfo={columnInfo} data={rowData} key={key}/>;
+                return <GridRow columnInfo={columnInfo} data={rowData} key={key} reactKey={key}/>;
             }
         });
 

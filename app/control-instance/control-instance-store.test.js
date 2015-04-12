@@ -13,7 +13,6 @@ describe('control instance store tests', () => {
     afterEach(() => AltApp.flush());
 
     describe('add a control tests', () => {
-
         it('adds a control', () => {
             addControl(testControlA);
 
@@ -61,7 +60,6 @@ describe('control instance store tests', () => {
     });
 
     describe('remove a control tests', () => {
-
         it('removes a control', () => {
             addControl(testControlA);
 
@@ -87,7 +85,6 @@ describe('control instance store tests', () => {
     });
 
     describe('rename a control tests', () => {
-
         it('renames a control', () => {
             addControl(testControlA);
 
