@@ -22,12 +22,12 @@ describe('grid heading cell tests', () => {
         );
     });
 
-    it('should fire sort handler with right parameters when heading cell is clicked', () => {
+    it('fires sort handler with right parameters when heading cell is clicked', () => {
         ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
         expect(dummyCallback).toHaveBeenCalledWith(dummyColumn.id, !gridHeadingCell.state.sortInversed);
     });
 
-    it('should be in descending sorted mode when sorted prop is true', () => {
+    it('is in descending sorted mode when sorted prop is true', () => {
         ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
         gridHeadingCell.setProps({ sorted: true });
 
@@ -37,7 +37,7 @@ describe('grid heading cell tests', () => {
         expect(sortedIcon.props.className).toContain(descendingSortIconClass);
     });
 
-    it('should be in ascending sorted mode when sorted prop is true', () => {
+    it('is in ascending sorted mode when sorted prop is true', () => {
         ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
         gridHeadingCell.setProps({ sorted: true });
 
@@ -50,7 +50,7 @@ describe('grid heading cell tests', () => {
         expect(sortedIcon.props.className).toContain(ascendingSortIconClass);
     });
 
-    it('should maintain sort inversed state with unexpected rerenders', () => {
+    it('maintains sort inversed state with unexpected rerenders', () => {
         gridHeadingCell.setState({ sortInversed: false });
 
         gridHeadingCell.setProps({ sorted: true });
@@ -58,7 +58,7 @@ describe('grid heading cell tests', () => {
         expect(gridHeadingCell.state.sortInversed).toBeFalsy();
     });
 
-    it('should render capitalized id when no title is provided', () => {
+    it('renders capitalized id when no title is provided', () => {
         const testId = 'testId';
         const capitalizedId = 'TestId';
 

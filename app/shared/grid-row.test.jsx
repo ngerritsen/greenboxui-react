@@ -26,7 +26,7 @@ describe('grid row tests', () => {
         );
     });
 
-    it('should render correct data in correct order', () => {
+    it('renders correct data in correct order', () => {
         const renderedData = ReactTestUtils.scryRenderedDOMComponentsWithTag(gridRow, 'span');
         expect(renderedData.length).toEqual(2);
 
@@ -34,7 +34,7 @@ describe('grid row tests', () => {
         expect(renderedData[1].getDOMNode().textContent).toEqual('bear');
     });
 
-    it('should render correct column widths', () => {
+    it('renders correct column widths', () => {
         const renderedCells = ReactTestUtils.scryRenderedDOMComponentsWithTag(gridRow, 'div');
         expect(renderedCells.length).toEqual(2);
 
@@ -42,7 +42,7 @@ describe('grid row tests', () => {
         expect(renderedCells[1].props.className).toContain('small-7');
     });
 
-    it('should render correct cell templates with correct props', () => {
+    it('renders correct cell templates with correct props', () => {
         const dummyFunc = () => { return 'dummy!' };
         const templatedDummyColumnInfo = [
             { title: 'Id', columns: 5, id: 'id', unique: true, template: DummyTemplate },

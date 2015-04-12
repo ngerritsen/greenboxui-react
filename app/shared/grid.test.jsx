@@ -26,7 +26,7 @@ describe('grid tests', () => {
         );
     });
 
-    it('should render the right components with the right properties', () => {
+    it('renders the right components with the right properties', () => {
         const gridHeadingRow = ReactTestUtils.findRenderedComponentWithType(grid, GridHeadingRow);
         const gridBody = ReactTestUtils.findRenderedComponentWithType(grid, GridBody);
 
@@ -39,7 +39,7 @@ describe('grid tests', () => {
         expect(gridBody.props.data).toEqual(dummyData);
     });
 
-    it('should pass the right sort properties to the right components when the sort handler is called', () => {
+    it('passes the right sort properties to the right components when the sort handler is called', () => {
         const dummySortProperty = 'name';
 
         const gridHeadingRow = ReactTestUtils.findRenderedComponentWithType(grid, GridHeadingRow);
@@ -53,7 +53,7 @@ describe('grid tests', () => {
         expect(gridBody.props.sortInversed).toEqual(false);
     });
 
-    it('should pass the search parameter to the right components when the search input changes', () => {
+    it('passes the search parameter to the right components when the search input changes', () => {
         const dummySearchParameter = 'bear';
 
         grid.refs.searchInput.getDOMNode().value = dummySearchParameter;

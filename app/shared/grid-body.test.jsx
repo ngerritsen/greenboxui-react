@@ -23,7 +23,7 @@ describe('grid body tests', () => {
         );
     });
 
-    it('should render correct rows', () => {
+    it('renders correct rows', () => {
         const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
         expect(renderedRows.length).toEqual(3);
@@ -38,7 +38,7 @@ describe('grid body tests', () => {
         expect(renderedRows[2].props.data).toEqual(dummyData[2]);
     });
 
-    it('should render no rows when there is no data', () => {
+    it('renders no rows when there is no data', () => {
         gridBody.setProps({ data: [] });
         const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
@@ -46,14 +46,14 @@ describe('grid body tests', () => {
     });
 
     describe('row keys', () => {
-        it('should set the key to the correct value when there is an unique column', () => {
+        it('sets the key to the correct value when there is an unique column', () => {
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
             expect(renderedRows[0].props.reactKey).toEqual(1);
             expect(renderedRows[1].props.reactKey).toEqual(2);
             expect(renderedRows[2].props.reactKey).toEqual(3);
         });
 
-        it('should set the key to the index when there is no unique column', () => {
+        it('sets the key to the index when there is no unique column', () => {
             let noUniqueColumnInfo = dummyColumnInfo.slice(); /* use slice to copy array by value */
             noUniqueColumnInfo[0].unique = false;
             gridBody.setProps({ columnInfo: noUniqueColumnInfo });
@@ -74,7 +74,7 @@ describe('grid body tests', () => {
             expect(renderedRows[2].props.data).toEqual(dummyData[2]);
         });
 
-        it('should sort rows inversed when there is a sort property specified and sort inversed property is true', () => {
+        it('sorts rows inversed when there is a sort property specified and sort inversed property is true', () => {
             gridBody.setProps({ sortProperty: 'name', sortInversed: true });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
@@ -83,7 +83,7 @@ describe('grid body tests', () => {
             expect(renderedRows[2].props.data).toEqual(dummyData[1]);
         });
 
-        it('should show the correct rows when there is a search parameter specified', () => {
+        it('shows the correct rows when there is a search parameter specified', () => {
             gridBody.setProps({ searchParameter: dummyData[1].name });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
@@ -91,14 +91,14 @@ describe('grid body tests', () => {
             expect(renderedRows[0].props.data).toEqual(dummyData[1]);
         });
 
-        it('should show no rows when there is a non existing search parameter specified', () => {
+        it('shows no rows when there is a non existing search parameter specified', () => {
             gridBody.setProps({ searchParameter: 'i do not exist' });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
             expect(renderedRows.length).toBe(0);
         });
 
-        it('should sort and filter rows correctly with a search parameter and sort property defined', () => {
+        it('sorts and filter rows correctly with a search parameter and sort property defined', () => {
             gridBody.setProps({ sortProperty: 'name' });
             gridBody.setProps({ searchParameter: 'r' });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
@@ -107,14 +107,14 @@ describe('grid body tests', () => {
             expect(renderedRows[1].props.data).toEqual(dummyData[0]);
         });
 
-        it('should find a numeric search parameter in string values', () => {
+        it('finds a numeric search parameter in string values', () => {
             gridBody.setProps({ searchParameter: 7 });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
             expect(renderedRows[0].props.data).toEqual(dummyData[1]);
         });
 
-        it('should find  astringified numeric search parameter in numeric values', () => {
+        it('finds astringified numeric search parameter in numeric values', () => {
             gridBody.setProps({ searchParameter: '1' });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 

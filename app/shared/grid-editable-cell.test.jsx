@@ -30,7 +30,7 @@ describe('grid editable cell tests', () => {
             expect(toggleButton.props.className).toContain(outOfEditModeIconClass);
         });
 
-        it('should switch to edit mode', () => {
+        it('switches to edit mode', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             const toggleButton = ReactTestUtils.findRenderedDOMComponentWithTag(gridBody, 'i');
 
@@ -38,7 +38,7 @@ describe('grid editable cell tests', () => {
             expect(toggleButton.props.className).toContain(inEditModeIconClass);
         });
 
-        it('should switch back to not edit mode', () => {
+        it('switches back to not edit mode', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             const toggleButton = ReactTestUtils.findRenderedDOMComponentWithTag(gridBody, 'i');
@@ -60,7 +60,7 @@ describe('grid editable cell tests', () => {
             expect(dummyCallback).toHaveBeenCalledWith(newValue, dummyContext);
         });
 
-        it('should not call on edit handler when submitting a non changed edit', () => {
+        it('doess not call on edit handler when submitting a non changed edit', () => {
             const initialValueWhiteSpaced = initialValue + ' ';
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             gridBody.refs.editedValueInput.getDOMNode().value = initialValueWhiteSpaced;
@@ -70,7 +70,7 @@ describe('grid editable cell tests', () => {
             expect(dummyCallback).not.toHaveBeenCalled();
         });
 
-        it('should not call on edit handler when submitting a whitespace edit', () => {
+        it('does not call on edit handler when submitting a whitespace edit', () => {
             const whiteSpace = ' ';
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             gridBody.refs.editedValueInput.getDOMNode().value = whiteSpace;
@@ -80,7 +80,7 @@ describe('grid editable cell tests', () => {
             expect(dummyCallback).not.toHaveBeenCalled();
         });
 
-        it('should not call on edit handler when submitting a non changed edit with trailing whitespace', () => {
+        it('does not call on edit handler when submitting a non changed edit with trailing whitespace', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             gridBody.refs.editedValueInput.getDOMNode().value = initialValue + ' ';
 
@@ -100,7 +100,7 @@ describe('grid editable cell tests', () => {
             );
         });
 
-        it('should call on edit handler with right parameters when submitting a valid numerical value', () => {
+        it('calls on edit handler with right parameters when submitting a valid numerical value', () => {
             const newNumericalValue = 456;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
@@ -111,7 +111,7 @@ describe('grid editable cell tests', () => {
             expect(dummyCallback).toHaveBeenCalledWith(newNumericalValue.toString(), dummyContext);
         });
 
-        it('should not call on edit handler when submitting the same numerical value', () => {
+        it('does not call on edit handler when submitting the same numerical value', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
             gridBody.refs.editedValueInput.getDOMNode().value = initialNumericalValue;
 
