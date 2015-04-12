@@ -4,11 +4,13 @@ module.exports = function(config) {
         frameworks: ['browserify', 'jasmine'],
         browsers: ['Chrome'],
         preprocessors: {
-            '**/*.test.js': ['browserify']
+            '**/*.test.js': ['browserify'],
+            '**/*.test.jsx': ['browserify']
         },
         browserify: {
             debug: true,
-            transform: ['babelify']
+            transform: ['babelify'],
+            extensions: ['.jsx']
         }
     });
 };

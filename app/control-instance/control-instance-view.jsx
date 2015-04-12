@@ -1,9 +1,10 @@
 import React from 'react';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
-import ControlInstanceDeleteCell from './control-instance-delete-cell-view';
-import ControlInstanceAddTool from './control-instance-add-tool-view';
-import Grid from '../shared/grid-view.js';
+
+import ControlInstanceDeleteCell from './control-instance-delete-cell';
+import ControlInstanceAddTool from './control-instance-add-tool';
+import Grid from '../shared/grid';
 
 export default React.createClass({
     getInitialState() {

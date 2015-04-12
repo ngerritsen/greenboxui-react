@@ -1,4 +1,5 @@
 import React from 'react';
+
 export default React.createClass({
     propTypes: {
         context: React.PropTypes.object.isRequired,

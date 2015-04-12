@@ -14,7 +14,7 @@ describe('control instance view tests', () => {
     let controlInstanceView;
 
     beforeEach(() => {
-        gridBody = ReactTestUtils.renderIntoDocument(
+        controlInstanceView = ReactTestUtils.renderIntoDocument(
             <ControlInstanceView/>
         );
     });

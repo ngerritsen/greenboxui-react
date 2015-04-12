@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import GridEditableCell from './grid-editable-cell-view';
+import GridEditableCell from './grid-editable-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 

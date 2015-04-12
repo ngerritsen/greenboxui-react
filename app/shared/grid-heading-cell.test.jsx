@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import GridHeadingCell from './grid-heading-cell-view';
+import GridHeadingCell from './grid-heading-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 

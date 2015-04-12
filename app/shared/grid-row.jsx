@@ -1,5 +1,5 @@
 import React from 'react';
-import GridEditableCell from './grid-editable-cell-view';
+import GridEditableCell from './grid-editable-cell';
 
 export default React.createClass({
     propTypes: {

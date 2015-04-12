@@ -1,5 +1,5 @@
 import React from 'react';
-import GridHeadingCell from './grid-heading-cell-view';
+import GridHeadingCell from './grid-heading-cell';
 
 export default React.createClass({
     propTypes: {

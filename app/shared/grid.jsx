@@ -1,6 +1,6 @@
 import React from 'react';
-import GridHeadingRow from './grid-heading-row-view';
-import GridBody from './grid-body-view';
+import GridHeadingRow from './grid-heading-row';
+import GridBody from './grid-body';
 import _ from 'underscore';
 
 export default React.createClass({
