@@ -10,6 +10,7 @@ input[type="text"] {
     @include box-shadow($medium-shadow);
   }
 }
+
 select {
   @include border-radius(2px);
   border-color: lighten($light-gray, 4%);

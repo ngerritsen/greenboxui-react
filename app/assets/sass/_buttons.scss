@@ -1,0 +1,21 @@
+button.button {
+  background-color: $primary-color;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+
+  &:hover {
+    background-color: lighten($primary-color, 5%);
+    @include box-shadow($shallow-shadow);
+  }
+
+  &.small {
+    padding: 0.8rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  &.button-form {
+    margin-top: 1.2rem;
+  }
+}

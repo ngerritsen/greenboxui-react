@@ -16,7 +16,11 @@ xdescribe('grid heading row', () => {
     beforeEach(() => {
         dummyCallback = jasmine.createSpy('dummyCallback');
         gridHeadingRow = ReactTestUtils.renderIntoDocument(
-            <GridHeadingRow columnInfo={dummyColumnInfo} onSortBy={dummyCallback} sortProperty={''}/>
+            <GridHeadingRow
+                columnInfo={dummyColumnInfo}
+                onSortBy={dummyCallback}
+                sortProperty={''}
+            />
         );
     });
 

@@ -3,6 +3,9 @@
   @include box-shadow($shallow-shadow);
   @include border-radius(2px);
   padding: $margin-regular 0;
+}
+
+.row .slab {
   margin-bottom: $margin-regular;
 }
 

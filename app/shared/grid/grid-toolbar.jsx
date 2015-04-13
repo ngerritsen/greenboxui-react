@@ -17,16 +17,20 @@ export default React.createClass({
         return (
             <form>
                 <div className="row">
-                    <div className="small-1 columns">
-                        <label htmlFor="search" className="inline"><i className="fa fa-search fa-lg"></i></label>
-                    </div>
                     <div className="small-4 columns">
-                        <select ref="searchBySelection" onChange={this._handleSearch}>
-                            <option value={''} key={'all'}>All</option>
+                        <div className="row">
+                            <div className="small-2 columns">
+                                <label htmlFor="search" className="inline"><i className="fa fa-search fa-lg"></i></label>
+                            </div>
+                            <div className="small-10 columns">
+                                <select ref="searchBySelection" onChange={this._handleSearch}>
+                                    <option value={''} key={'all'}>All</option>
                                 {searchOptions}
-                        </select>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div className="small-7 columns">
+                    <div className="small-8 columns">
                         <input type="text" id="search" placeholder="Search" ref="searchInput" onChange={this._handleSearch}></input>
                     </div>
                 </div>

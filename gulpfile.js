@@ -32,7 +32,7 @@ gulp.task('lint', function() {
         .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('test', function(){
+gulp.task('test', ['lint'], function(){
    return gulp.src([paths.tests])
        .pipe($.karma({
            configFile: './karma.conf.js',
@@ -118,7 +118,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('dev',
-    ['lint', 'compass', 'test', 'bundle', 'connect', 'watch']
+    ['compass', 'test', 'bundle', 'connect', 'watch']
 );
 
 gulp.task('default', ['dev']);

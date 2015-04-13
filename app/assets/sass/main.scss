@@ -7,6 +7,8 @@
 @import './top-bar';
 @import './helper-classes';
 @import './input-fields';
+@import './buttons';
+@import './side-nav';
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,400italic,700);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic);
@@ -19,8 +21,16 @@ body {
 }
 
 .content {
-  max-width: 1100px;
+  max-width: 1200px;
   padding: $margin-regular;
+}
+
+.content-section {
+  border-right: 0 solid $subtle-gray;
+
+  &:last-child {
+    border-right: 0 solid $subtle-gray;
+  }
 }
 
 .clickable {
