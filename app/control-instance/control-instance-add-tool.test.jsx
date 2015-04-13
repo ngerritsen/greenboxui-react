@@ -4,7 +4,7 @@ import ControlInstanceActions from './control-instance-actions';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('control instance delete cell tests', () => {
+describe('control instance delete cell', () => {
     const dummyControl = { typeId: 'Valve', instanceId: '9874200', name: 'Valve 1' };
 
     let controlInstanceAddTool;

@@ -1,6 +1,7 @@
 import React from 'react';
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
+import GridToolbar from './grid-toolbar';
 import _ from 'underscore';
 
 export default React.createClass({
@@ -12,22 +13,29 @@ export default React.createClass({
         return {
             sortProperty: '',
             sortInversed: false,
-            searchParameter: ''
+            searchParameter: '',
+            searchBy: ''
         }
     },
     _handleSortBy(sortProperty, sortInversed) {
-        this.setState({ sortProperty: sortProperty, sortInversed: sortInversed });
+        this.setState({
+            sortProperty: sortProperty,
+            sortInversed: sortInversed
+        });
     },
-    _handleSearch() {
-        const newSearchParameter = React.findDOMNode(this.refs.searchInput).value.trim();
-        this.setState({searchParameter: newSearchParameter});
+    _handleSearch(searchParameter, searchBy) {
+        this.setState({
+            searchParameter: searchParameter,
+            searchBy: searchBy
+        });
     },
     render() {
         return (
             <div>
-                <form>
-                    <input type="text" placeholder="Search" ref="searchInput" onChange={this._handleSearch}></input>
-                </form>
+                <GridToolbar
+                    onSearch={this._handleSearch}
+                    columnInfo={this.props.columnInfo}
+                />
                 <ul className="grid">
                     <GridHeadingRow
                         columnInfo={this.props.columnInfo}
@@ -38,6 +46,7 @@ export default React.createClass({
                         columnInfo={this.props.columnInfo}
                         data={this.props.data}
                         searchParameter={this.state.searchParameter}
+                        searchBy={this.state.searchBy}
                         sortProperty={this.state.sortProperty}
                         sortInversed={this.state.sortInversed}
                     />

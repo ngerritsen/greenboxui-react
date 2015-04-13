@@ -6,7 +6,7 @@ import ControlInstanceStore from './control-instance-store';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('control instance view tests', () => {
+describe('control instance view', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
 
     const dummyControls = [

@@ -7,19 +7,31 @@ export default React.createClass({
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.array.isRequired,
         searchParameter: React.PropTypes.string,
+        searchBy: React.PropTypes.string,
         sortProperty: React.PropTypes.string,
         sortInversed: React.PropTypes.bool
     },
     _searchRowData(rowData) {
         const formattedSearchParameter = String(this.props.searchParameter).toLowerCase();
         const columns = this.props.columnInfo;
+        const searchBy = this.props.searchBy;
 
-        for(let i = 0; i < columns.length; i++) {
-            const formattedCellData = String(rowData[columns[i].id]).toLowerCase();
-            if(formattedCellData.indexOf(formattedSearchParameter) > -1) {
-                return true;
+        if(searchBy) {
+            return this._searchCellData(rowData[searchBy], formattedSearchParameter)
+        }
+        else {
+            for(let i = 0; i < columns.length; i++) {
+                let cellData = rowData[columns[i].id];
+                if (this._searchCellData(cellData, formattedSearchParameter)) {
+                    return true;
+                }
             }
         }
+    },
+    _searchCellData(cellData, formattedSearchParameter) {
+        const formattedCellData = String(cellData).toLowerCase();
+        return formattedCellData.indexOf(formattedSearchParameter) > -1;
+
     },
     _sortRowData(rowData) {
         const sortProperty = this.props.sortProperty;

@@ -3,7 +3,7 @@ import GridHeadingCell from './grid-heading-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid heading cell tests', () => {
+describe('grid heading cell', () => {
     const descendingSortIconClass = 'fa-sort-desc';
     const ascendingSortIconClass = 'fa-sort-asc';
 

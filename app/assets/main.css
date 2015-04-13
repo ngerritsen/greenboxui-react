@@ -8080,9 +8080,9 @@ th.hide-for-touch {
 
 .slab {
   background-color: white;
-  -webkit-box-shadow: 0 1px 2px #bfbfbf;
-  -moz-box-shadow: 0 1px 2px #bfbfbf;
-  box-shadow: 0 1px 2px #bfbfbf;
+  -webkit-box-shadow: 0 1px 3px #c7c7c7;
+  -moz-box-shadow: 0 1px 3px #c7c7c7;
+  box-shadow: 0 1px 3px #c7c7c7;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -8107,6 +8107,38 @@ th.hide-for-touch {
 
 .button-form {
   margin-top: 0.5rem;
+}
+
+input[type="text"] {
+  background-color: white;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  border-color: #c9c9c9;
+  -webkit-box-shadow: 0 1px 3px #c7c7c7;
+  -moz-box-shadow: 0 1px 3px #c7c7c7;
+  box-shadow: 0 1px 3px #c7c7c7;
+}
+input[type="text"]:focus {
+  background-color: whitesmoke;
+  border-color: #c9c9c9;
+  -webkit-box-shadow: 0 2px 5px #c7c7c7;
+  -moz-box-shadow: 0 2px 5px #c7c7c7;
+  box-shadow: 0 2px 5px #c7c7c7;
+}
+
+select {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  border-color: #c9c9c9;
+  -webkit-box-shadow: 0 1px 3px #c7c7c7;
+  -moz-box-shadow: 0 1px 3px #c7c7c7;
+  box-shadow: 0 1px 3px #c7c7c7;
 }
 
 body {

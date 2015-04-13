@@ -4,6 +4,7 @@ $primary-color: #2476b9;
 $gray: darken($white, 50%);
 $light-gray: darken($white, 25%);
 $subtle-gray: darken($white, 12.5%);
+$barely-white: darken($white, 4%);
 $background-color: darken($white, 5%);
 
 $margin-base: 1rem;
@@ -11,3 +12,8 @@ $margin-regular: $margin-base;
 $margin-small: $margin-base/2;
 
 $top-bar-height: 3.5rem;
+
+$shadow-color: lighten($light-gray, 3%);
+$shallow-shadow: 0 1px 3px $shadow-color;
+$medium-shadow: 0 2px 5px $shadow-color;
+$deep-shadow: 0 3px 7px $shadow-color;

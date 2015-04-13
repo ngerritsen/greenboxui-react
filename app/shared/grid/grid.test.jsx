@@ -3,10 +3,13 @@ import Grid from './grid';
 import GridRow from './grid-row';
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
+import GridToolbar from './grid-toolbar';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid tests', () => {
+describe('grid', () => {
+    let grid;
+
     const dummyColumnInfo = [
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }
@@ -18,8 +21,6 @@ describe('grid tests', () => {
         { id: 3, name: 'closet' }
     ];
 
-    let grid;
-
     beforeEach(() => {
         grid = ReactTestUtils.renderIntoDocument(
             <Grid columnInfo={dummyColumnInfo} data={dummyData}/>
@@ -27,8 +28,13 @@ describe('grid tests', () => {
     });
 
     it('renders the right components with the right properties', () => {
+        const gridToolbar = ReactTestUtils.findRenderedComponentWithType(grid, GridToolbar);
         const gridHeadingRow = ReactTestUtils.findRenderedComponentWithType(grid, GridHeadingRow);
         const gridBody = ReactTestUtils.findRenderedComponentWithType(grid, GridBody);
+
+        expect(gridToolbar).toBeDefined();
+        expect(gridToolbar.props.columnInfo).toEqual(dummyColumnInfo);
+        expect(gridToolbar.props.onSearch).toEqual(grid._handleSearch);
 
         expect(gridHeadingRow).toBeDefined();
         expect(gridHeadingRow.props.columnInfo).toEqual(dummyColumnInfo);
@@ -53,14 +59,17 @@ describe('grid tests', () => {
         expect(gridBody.props.sortInversed).toEqual(false);
     });
 
-    it('passes the search parameter to the right components when the search input changes', () => {
+    it('passes the search parameter to the right components when the search handler is called', () => {
         const dummySearchParameter = 'bear';
+        const dummySearchBy = dummyColumnInfo[0].id;
 
-        grid.refs.searchInput.getDOMNode().value = dummySearchParameter;
-        ReactTestUtils.Simulate.change(grid.refs.searchInput);
-
+        const gridToolbar = ReactTestUtils.findRenderedComponentWithType(grid, GridToolbar);
         const gridBody = ReactTestUtils.findRenderedComponentWithType(grid, GridBody);
 
+        gridToolbar.props.onSearch(dummySearchParameter, dummySearchBy);
+
         expect(gridBody.props.searchParameter).toEqual(dummySearchParameter);
+        expect(gridBody.props.searchBy).toEqual(dummySearchBy);
     });
+
 });

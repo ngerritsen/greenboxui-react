@@ -3,7 +3,7 @@ import GridEditableCell from './grid-editable-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid editable cell tests', () => {
+describe('grid editable cell', () => {
     const outOfEditModeIconClass = 'fa-pencil';
     const inEditModeIconClass = 'fa-check-circle';
     const initialValue = 'initial value';

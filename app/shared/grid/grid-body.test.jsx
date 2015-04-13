@@ -4,7 +4,7 @@ import GridRow from './grid-row';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid body tests', () => {
+describe('grid body', () => {
     const dummyColumnInfo = [
         { title: 'Id', columns: 6, id: 'id', unique: true },
         { title: 'Name', columns: 6, id: 'name' }
@@ -65,7 +65,7 @@ describe('grid body tests', () => {
     });
 
     describe('sorting and searching rows', () => {
-        it('should sort rows correctly when there is a sort property specified', () => {
+        it('sorts rows correctly when there is a sort property specified', () => {
             gridBody.setProps({ sortProperty: 'name' });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
@@ -89,6 +89,21 @@ describe('grid body tests', () => {
 
             expect(renderedRows.length).toBe(1);
             expect(renderedRows[0].props.data).toEqual(dummyData[1]);
+        });
+
+        it('shows the correct rows when there is a search parameter and search by parameter specified case 1', () => {
+            gridBody.setProps({ searchParameter: dummyData[1].name, searchBy: 'name' });
+            const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
+
+            expect(renderedRows.length).toBe(1);
+            expect(renderedRows[0].props.data).toEqual(dummyData[1]);
+        });
+
+        it('shows the correct rows when there is a search parameter and search by parameter specified case 2', () => {
+            gridBody.setProps({ searchParameter: dummyData[1].name, searchBy: 'id' });
+            const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
+
+            expect(renderedRows.length).toBe(0);
         });
 
         it('shows no rows when there is a non existing search parameter specified', () => {

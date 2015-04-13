@@ -2,7 +2,7 @@ import AltApp from '../core/alt-app';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 
-describe('control instance store tests', () => {
+describe('control instance store', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
     const renameControlAction = ControlInstanceActions.RENAME_CONTROL;
     const removeControlAction = ControlInstanceActions.REMOVE_CONTROL;

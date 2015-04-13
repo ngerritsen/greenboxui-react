@@ -4,7 +4,7 @@ import GridEditableCell from './grid-editable-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid row tests', () => {
+describe('grid row', () => {
     const dummyColumnInfo = [
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }
@@ -43,7 +43,7 @@ describe('grid row tests', () => {
     });
 
     it('renders correct cell templates with correct props', () => {
-        const dummyFunc = () => { return 'dummy!' };
+        const dummyFunc = () => 'dummy!';
         const templatedDummyColumnInfo = [
             { title: 'Id', columns: 5, id: 'id', unique: true, template: DummyTemplate },
             { title: 'Name', columns: 7, id: 'name', editAble: true, onEdit: dummyFunc }
