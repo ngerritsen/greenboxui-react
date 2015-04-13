@@ -4,7 +4,8 @@ import ControlInstanceActions from './control-instance-actions';
 
 import ControlInstanceDeleteCell from './control-instance-delete-cell';
 import ControlInstanceAddTool from './control-instance-add-tool';
-import Grid from '../shared/grid';
+import Grid from '../shared/grid/grid';
+import Slab from '../shared/slab';
 
 export default React.createClass({
     getInitialState() {
@@ -35,17 +36,12 @@ export default React.createClass({
 
         return (
             <div>
-                <div className="slab slab-narrow row clearfix">
-                    <div className="small-12 columns">
-                        <ControlInstanceAddTool/>
-                    </div>
-                </div>
-
-                <div className="slab row clearfix">
-                    <div className="small-12 columns">
-                        <Grid columnInfo={columnInfo} data={this.state.controls}></Grid>
-                    </div>
-                </div>
+                <Slab narrow={true}>
+                    <ControlInstanceAddTool/>
+                </Slab>
+                <Slab>
+                    <Grid columnInfo={columnInfo} data={this.state.controls}></Grid>
+                </Slab>
             </div>
         );
     }

@@ -5,7 +5,7 @@ import _ from 'underscore';
 export default React.createClass({
     propTypes: {
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        data: React.PropTypes.array.isRequired,
         searchParameter: React.PropTypes.string,
         sortProperty: React.PropTypes.string,
         sortInversed: React.PropTypes.bool
