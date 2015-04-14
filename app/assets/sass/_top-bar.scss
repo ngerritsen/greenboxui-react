@@ -1,5 +1,5 @@
 .top-bar {
-  @include box-shadow(0 2px 3px $light-gray);
+  @include box-shadow($medium-shadow);
   background-color: $primary-color;
   color: $white;
   height: $top-bar-height;

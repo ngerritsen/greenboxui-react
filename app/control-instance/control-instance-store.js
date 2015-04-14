@@ -10,13 +10,13 @@ class ControlInstanceStore {
         this.bindAction(ControlInstanceActions.renameControl, this.onControlRenamed);
 
         this.exportPublicMethods({
-            getNewInstanceId: this.getNewInstanceId
+            _getNewInstanceId: this._getNewInstanceId
         });
     }
 
     onControlAdded(control) {
         if(control.typeId && control.name) {
-            control.instanceId = this.getNewInstanceId();
+            control.instanceId = this._getNewInstanceId();
             this.controls.push(control);
         }
     }
@@ -38,7 +38,7 @@ class ControlInstanceStore {
         });
     }
 
-    getNewInstanceId() {
+    _getNewInstanceId() {
         return Math.round((Math.random() * 1000000))
     }
 }

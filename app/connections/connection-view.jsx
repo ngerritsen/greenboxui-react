@@ -23,7 +23,7 @@ export default React.createClass({
         this.setState({ connections: newConnections });
     },
     _handleDeleteConnection(connection) {
-        ConnectionActions.removeConnection(connection);
+        ConnectionActions.removeConnection(connection.connectionId);
     },
     render() {
         const viewData = this.state.connections.map((connection) => {
@@ -31,7 +31,8 @@ export default React.createClass({
                 sourceTypeId: connection.sourceControl.typeId,
                 sourceName: connection.sourceControl.name,
                 targetTypeId: connection.targetControl.typeId,
-                targetName: connection.targetControl.name
+                targetName: connection.targetControl.name,
+                connectionId: connection.connectionId
             }
         });
         const columnInfo = [

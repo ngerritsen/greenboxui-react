@@ -1,17 +1,13 @@
 button.button {
+  @include box-shadow($shallow-shadow);
   background-color: $primary-color;
   font-size: .8rem;
-  font-weight: bold;
+  padding: .7rem 1rem;
   text-transform: uppercase;
 
   &:hover {
-    @include box-shadow($shallow-shadow);
+    @include box-shadow($medium-shadow);
     background-color: lighten($primary-color, 5%);
-  }
-
-  &.small {
-    font-size: .7rem;
-    padding: .8rem 1rem;
   }
 
   &.button-form {

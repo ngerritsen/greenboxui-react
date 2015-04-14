@@ -8,9 +8,9 @@ class ConnectionActions {
         });
     }
 
-    removeConnection(connection) {
+    removeConnection(connectionId) {
         this.dispatch({
-            connection: connection
+            connectionId: connectionId
         });
     }
 }
