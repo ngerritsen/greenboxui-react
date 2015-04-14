@@ -15,8 +15,12 @@ $margin-large: $margin-base*2;
 $top-bar-height: 3.5rem;
 
 $shadow-color: $light-gray;
+$subtle-shadow-color: lighten($shadow-color, 7.5%);
 
-$shallow-shadow: 0 1px 3px lighten($shadow-color, 4%);
-$medium-shadow: 0 2px 5px lighten($shadow-color, 2%);
+$shallow-shadow: 0 1px 3px $shadow-color;
+$medium-shadow: 0 2px 5px $shadow-color;
 $deep-shadow: 0 3px 7px $shadow-color;
-$deep-shadow: 0 3px 7px $shadow-color;
+
+$subtle-shallow-shadow: 0 1px 3px $subtle-shadow-color;
+$subtle-medium-shadow: 0 2px 5px $subtle-shadow-color;
+$subtle-deep-shadow: 0 3px 7px $subtle-shadow-color;

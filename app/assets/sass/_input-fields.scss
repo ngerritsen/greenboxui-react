@@ -1,11 +1,11 @@
 input[type="text"] {
   @include border-radius(2px);
-  @include box-shadow($shallow-shadow);
+  @include box-shadow($subtle-shallow-shadow);
   background-color: $white;
   border-color: lighten($light-gray, 4%);
 
   &:focus {
-    @include box-shadow($medium-shadow);
+    @include box-shadow($subtle-medium-shadow);
     background-color: $barely-white;
     border-color: lighten($light-gray, 4%);
   }
@@ -13,6 +13,6 @@ input[type="text"] {
 
 select {
   @include border-radius(2px);
-  @include box-shadow($shallow-shadow);
+  @include box-shadow($subtle-shallow-shadow);
   border-color: lighten($light-gray, 4%);
 }
