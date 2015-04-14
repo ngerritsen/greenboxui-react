@@ -2,7 +2,6 @@ import React from 'react';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 
-import ControlInstanceDeleteCell from './control-instance-delete-cell';
 import ControlInstanceAddTool from './control-instance-add-tool';
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
@@ -26,12 +25,15 @@ export default React.createClass({
         const instanceId = control.instanceId;
         ControlInstanceActions.renameControl(instanceId, newName);
     },
+    _handleDeleteControl(control) {
+        ControlInstanceActions.removeControl(control.instanceId);
+    },
     render() {
         const columnInfo = [
             { title: 'Type Id', columns: 3, id: 'typeId' },
             { title: 'Instance Id', columns: 3, id: 'instanceId', unique: true },
             { title: 'Name', columns: 4, id: 'name', editAble: true, onEdit: this._handleEditControlName },
-            { title: 'Delete', columns: 2, id: 'delete', template: ControlInstanceDeleteCell, noSort: true }
+            { title: 'Delete', columns: 2, id: 'delete', cellType: 'delete', noSort: true, onDelete: this._handleDeleteControl }
         ];
 
         return (

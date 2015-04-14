@@ -11,6 +11,7 @@ export default React.createClass({
                     <ul className="side-nav" role="navigation" title="Configuration menu">
                         <li role="menuitem">
                             <a href="#/configure/control-instances">Control Instances</a>
+                            <a href="#/configure/coupling">Couplings</a>
                         </li>
                     </ul>
                 </div>

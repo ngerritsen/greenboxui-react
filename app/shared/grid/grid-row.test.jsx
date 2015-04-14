@@ -1,6 +1,7 @@
 import React from 'react/addons';
 import GridRow from './grid-row';
 import GridEditableCell from './grid-editable-cell';
+import GridDeleteCell from './grid-delete-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 
@@ -44,15 +45,18 @@ describe('grid row', () => {
 
     it('renders correct cell templates with correct props', () => {
         const dummyFunc = () => 'dummy!';
+        const dummyDeleteFunc = () => 'dummy delete!';
         const templatedDummyColumnInfo = [
-            { title: 'Id', columns: 5, id: 'id', unique: true, template: DummyTemplate },
-            { title: 'Name', columns: 7, id: 'name', editAble: true, onEdit: dummyFunc }
+            { title: 'Id', columns: 4, id: 'id', unique: true, template: DummyTemplate },
+            { title: 'Name', columns: 4, id: 'name', editAble: true, onEdit: dummyFunc },
+            { title: 'Delete', columns: 4, id: 'delete', cellType: 'delete', onDelete: dummyDeleteFunc }
         ];
 
         gridRow.setProps({ columnInfo: templatedDummyColumnInfo });
 
         const dummyTemplateCell = ReactTestUtils.findRenderedComponentWithType(gridRow, DummyTemplate);
         const editableCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridEditableCell);
+        const deleteCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridDeleteCell);
 
         expect(dummyTemplateCell).toBeDefined();
         expect(dummyTemplateCell.props.context).toEqual(dummyData);
@@ -62,5 +66,9 @@ describe('grid row', () => {
         expect(editableCell.props.context).toEqual(dummyData);
         expect(editableCell.props.value).toEqual(dummyData['name']);
         expect(editableCell.props.onEdit).toEqual(dummyFunc);
+
+        expect(deleteCell).toBeDefined();
+        expect(deleteCell.props.context).toEqual(dummyData);
+        expect(deleteCell.props.onDelete).toEqual(dummyDeleteFunc);
     });
 });
