@@ -1,0 +1,17 @@
+Todo
+- Refactor Grid API w/ handler and default props and column info types
+- Refactor editable cell to form with submit
+- Add unit tests connections
+- Add watchify
+
+Backlog
+- Build grid pagination
+
+Epics
+- Build settings page
+- Think about modularization of edit fields/switches/selections for reusability
+- Translation functionality
+- Build 'actual' (fake) http calls/promises
+- Search for graph component/build one
+- Build report component
+- Experiment /w aria

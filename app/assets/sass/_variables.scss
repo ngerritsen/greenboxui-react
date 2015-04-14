@@ -14,7 +14,9 @@ $margin-large: $margin-base*2;
 
 $top-bar-height: 3.5rem;
 
-$shadow-color: lighten($light-gray, 3%);
-$shallow-shadow: 0 1px 3px $shadow-color;
-$medium-shadow: 0 2px 5px $shadow-color;
+$shadow-color: $light-gray;
+
+$shallow-shadow: 0 1px 3px lighten($shadow-color, 4%);
+$medium-shadow: 0 2px 5px lighten($shadow-color, 2%);
+$deep-shadow: 0 3px 7px $shadow-color;
 $deep-shadow: 0 3px 7px $shadow-color;

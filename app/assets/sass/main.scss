@@ -46,8 +46,10 @@ body {
 
 .fa {
   &.clickable {
+    @include opacity(.8);
+
     &:hover {
-      @include opacity(.8);
+      @include opacity(1);
     }
   }
 

@@ -55,10 +55,11 @@ export default React.createClass({
 
         const sourceControlOptions = this.state.controls.map((control) => {
             const option = <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
-            if (control.typeId === this.state.selectedSourceType || this._getAvailableControlTypes()[0]) {
+            if (control.typeId === this.state.selectedSourceType) {
                 return option;
             }
             else if(!this.state.selectedSourceType && control.typeId === this._getAvailableControlTypes()[0]) {
+                console.log(`${control.typeId} ${this._getAvailableControlTypes()[0]}`)
                 return option;
             }
         });
