@@ -1,6 +1,7 @@
 import React from 'react';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
+import _ from 'underscore';
 
 export default React.createClass({
     getInitialState() {
@@ -20,37 +21,40 @@ export default React.createClass({
     _handleAddConnection(event) {
         event.preventDefault();
 
-        const controlType = React.findDOMNode(this.refs.selectedControlType).value;
-        let controlNameNode = React.findDOMNode(this.refs.controlNameInput);
-        const controlName = controlNameNode.value.trim();
+        const sourceControlInstanceId = React.findDOMNode(this.refs.selectedSourceControl).value;
+        const targetControlInstanceId = React.findDOMNode(this.refs.selectedTargetControl).value;
 
-        if (controlName) {
-            ConnectionActions.addControl(controlType, controlName);
-            controlNameNode.value = '';
-        }
+        const sourceControl = _(this.state.controls).find((control) => control.instanceId == sourceControlInstanceId);
+        const targetControl = _(this.state.controls).find((control) => control.instanceId == targetControlInstanceId);
+
+        ConnectionActions.addConnection(sourceControl, targetControl);
+
     },
     render() {
-        const controlOptions = this.state.controls.map((control => {
-            return <option value={control.instanceId} key={control.instanceId}>{control.name}</option>
+        const controlOptions = this.state.controls.map((control) => {
+            return <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
         });
 
         return (
             <form>
                 <div className="row">
                     <div className="small-5 columns">
-                        <label>Control Type
-                            <select ref="selectedControlType">
-                                {controlTypeOptions}
+                        <label>Source Control
+                            <select ref="selectedSourceControl">
+                                {controlOptions}
                             </select>
                         </label>
                     </div>
                     <div className="small-5 columns">
-                        <label>Control Name
-                            <input type="text" ref="controlNameInput"/>
+                        <label>Target Control
+                            <select ref="selectedTargetControl">
+                                {controlOptions}
+                            </select>
                         </label>
                     </div>
+
                     <div className="small-2 columns">
-                        <button type="submit" className="button radius small button-form" onClick={this._handleAddControl}>Add Control</button>
+                        <button type="submit" className="button radius small button-form" onClick={this._handleAddConnection}>Add Connection</button>
                     </div>
                 </div>
             </form>
