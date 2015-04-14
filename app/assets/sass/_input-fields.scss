@@ -1,18 +1,18 @@
 input[type="text"] {
-  background-color: $white;
   @include border-radius(2px);
-  border-color: lighten($light-gray, 4%);
   @include box-shadow($shallow-shadow);
+  background-color: $white;
+  border-color: lighten($light-gray, 4%);
 
   &:focus {
+    @include box-shadow($medium-shadow);
     background-color: $barely-white;
     border-color: lighten($light-gray, 4%);
-    @include box-shadow($medium-shadow);
   }
 }
 
 select {
   @include border-radius(2px);
-  border-color: lighten($light-gray, 4%);
   @include box-shadow($shallow-shadow);
+  border-color: lighten($light-gray, 4%);
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Time from '../shared/time/time'
+
 export default React.createClass({
     render() {
         return (
@@ -7,7 +8,7 @@ export default React.createClass({
                 <nav className="top-bar" data-topbar role="navigation">
                     <ul className="title-area">
                         <li className="menu-button-container">
-                            <i className="fa fa-bars fa-lg clickable"></i>
+                            <i className="fa fa-bars fa-lg clickable left-off-canvas-toggle"></i>
                         </li>
                         <li className="logo-container">
                             <img src="assets/images/logo.png" className="logo"/>

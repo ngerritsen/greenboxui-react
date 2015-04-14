@@ -1,0 +1,12 @@
+scss_files: 'app/assets/sass/**/*.scss'
+
+linters:
+  BorderZero:
+    enabled: false
+
+  Indentation:
+    severity: warning
+    width: 2
+
+  QualifyingElement:
+    enabled: false

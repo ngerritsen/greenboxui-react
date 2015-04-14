@@ -1,8 +1,10 @@
 .side-nav {
+  padding-top: $margin-small;
+
   li {
-    a {
+    a:not(.button) {
+      color: lighten($gray, 10%);
       font-weight: bold;
-      color: $light-gray;
     }
   }
 }

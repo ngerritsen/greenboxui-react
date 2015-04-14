@@ -15,9 +15,14 @@
 @import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700,400italic);
 
 body {
-  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
-  color: $text-color;
   background-color: $background-color;
+  color: $text-color;
+  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
+}
+
+.off-canvas-wrap,
+.inner-wrap {
+  height: 100%;
 }
 
 .content {
@@ -42,11 +47,11 @@ body {
 .fa {
   &.clickable {
     &:hover {
-      @include opacity(0.8);
+      @include opacity(.8);
     }
   }
 
   &.fa-inline {
-    margin-top: 0.4rem;
+    margin-top: .4rem;
   }
 }

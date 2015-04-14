@@ -32,6 +32,14 @@ gulp.task('lint', function() {
         .pipe($.jshint.reporter('fail'));
 });
 
+gulp.task('scss-lint', function() {
+    gulp.src([paths.styles])
+        .pipe($.scssLint({
+            'config': 'scsslint.yml'
+        }))
+        .pipe($.scssLint.failReporter());
+});
+
 gulp.task('test', ['lint'], function(){
    return gulp.src([paths.tests])
        .pipe($.karma({
@@ -59,7 +67,7 @@ gulp.task('bundle', function() {
         .pipe(gulp.dest(paths.root));
 });
 
-gulp.task('compass', function(){
+gulp.task('compass', ['scss-lint'], function(){
     gulp.src('./app/assets/sass/main.scss')
         .pipe($.compass({
             css: 'app/assets',

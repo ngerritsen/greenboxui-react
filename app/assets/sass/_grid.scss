@@ -5,10 +5,10 @@
 }
 
 .grid-row {
+  border-bottom: 1px solid $subtle-gray;
+  display: block;
   margin: 0;
   padding: 0;
-  display: block;
-  border-bottom: 1px solid $subtle-gray;
 
 
   &:first-child {
@@ -26,9 +26,9 @@
 
 .grid-cell {
   border-right: 1px solid  $subtle-gray;
+  font-size: .9rem;
   height: 1.8rem;
   line-height: 2rem;
-  font-size: 0.9rem;
 
   &:first-child {
     border-left: 1px solid $subtle-gray;
@@ -37,9 +37,9 @@
 
 .grid-heading-row {
   .grid-cell {
+    background-color: lighten($subtle-gray, 7.5%);
     height: 2rem;
     line-height: 2.1rem;
-    background-color: lighten($subtle-gray, 7.5%);
 
     &:hover {
       background-color: lighten($subtle-gray, 10%);

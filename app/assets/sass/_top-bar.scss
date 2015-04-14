@@ -1,46 +1,47 @@
 .top-bar {
-    background-color: $primary-color;
+  @include box-shadow(0 2px 3px $light-gray);
+  background-color: $primary-color;
+  color: $white;
+  height: $top-bar-height;
+  line-height: $top-bar-height;
+
+  .menu-button-container {
+    float: left;
     height: $top-bar-height;
     line-height: $top-bar-height;
-    @include box-shadow(0 2px 3px $light-gray);
-    color: $white;
+    margin-left: $margin-regular;
+  }
 
-    .menu-button-container {
-        float: left;
-        height: $top-bar-height;
-        line-height: $top-bar-height;
-        margin-left:  $margin-regular;
-    }
+  .logo-container {
+    float: left;
+    height: $top-bar-height;
+    padding: $margin-small $margin-regular;
+  }
 
-    .logo-container {
-        float: left;
-        height: $top-bar-height;
-        padding: $margin-small $margin-regular;
-    }
+  .logo {
+    height: 100%;
+    max-width: 100%;
+  }
 
-    .logo {
-        height: 100%;
-        max-width: 100%;
-    }
+  .info-area {
+    margin-right: $margin-small;
+  }
 
-    .info-area {
-        margin-right: $margin-small;
-    }
+  .info-item {
+    height: $top-bar-height;
+    line-height: $top-bar-height;
+    margin-right: $margin-regular;
+  }
 
-    .info-item {
-        height: $top-bar-height;
-        line-height: $top-bar-height;
-        margin-right: $margin-regular;
-    }
+  i {
+    margin-right: $margin-small;
+  }
 
-    i {
-        margin-right: $margin-small;
-    }
+  ul {
+    background-color: transparent;
 
-    ul {
-        background-color: transparent;
-        li {
-            background-color: transparent;
-        }
+    li {
+      background-color: transparent;
     }
+  }
 }
