@@ -1,27 +1,27 @@
 import React from 'react';
-import CouplingStore from './coupling-store';
-import CouplingActions from './coupling-actions';
+import ConnectionStore from './connection-store';
+import ConnectionActions from './connection-actions';
 
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 
 export default React.createClass({
     getInitialState() {
-        return { couplings: [] }
+        return { connections: [] }
     },
     componentDidMount() {
-        CouplingStore.listen(this._onChange);
+        ConnectionStore.listen(this._onChange);
         this._onChange();
     },
     componentWillUnmount() {
-        CouplingStore.unlisten(this._onChange)
+        ConnectionStore.unlisten(this._onChange)
     },
     _onChange() {
-        const newCouplings = CouplingStore.getState().couplings;
-        this.setState({ couplings: newCouplings });
+        const newConnections = ConnectionStore.getState().connections;
+        this.setState({ connections: newConnections });
     },
-    _handleDeleteCoupling(coupling) {
-        CouplingActions.removeCoupling(coupling);
+    _handleDeleteConnection(connection) {
+        ConnectionActions.removeConnection(connection);
     },
     render() {
         const columnInfo = [
@@ -29,7 +29,7 @@ export default React.createClass({
             { title: 'Source Name', columns: 3, id: 'sourceName' },
             { title: 'Target Type Id', columns: 2, id: 'targetTypeId' },
             { title: 'Target Name', columns: 3, id: 'targetName' },
-            { title: 'Delete', columns: 2, id: 'delete', cellType: 'delete', noSort: true, onDelete: this._handleDeleteCoupling }
+            { title: 'Delete', columns: 2, id: 'delete', cellType: 'delete', noSort: true, onDelete: this._handleDeleteConnection }
         ];
 
         return (
@@ -38,7 +38,7 @@ export default React.createClass({
 
                 </Slab>
                 <Slab>
-                    <Grid columnInfo={columnInfo} data={this.state.couplings}></Grid>
+                    <Grid columnInfo={columnInfo} data={this.state.connections}></Grid>
                 </Slab>
             </div>
         );

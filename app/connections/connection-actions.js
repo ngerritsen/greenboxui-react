@@ -1,18 +1,18 @@
 import AltApp from '../core/alt-app';
 
-class CouplingActions {
-    addCoupling(sourceControl, targetControl) {
+class ConnectionActions {
+    addConnection(sourceControl, targetControl) {
         this.dispatch({
             sourceControl: sourceControl,
             targetControl: targetControl
         });
     }
 
-    removeCoupling(coupling) {
+    removeConnection(connection) {
         this.dispatch({
-            coupling: coupling
+            connection: connection
         });
     }
 }
 
-export default AltApp.createActions(CouplingActions);
+export default AltApp.createActions(ConnectionActions);
