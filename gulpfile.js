@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
-var babelify = require("babelify");
+var babelify = require('babelify');
+var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var path = require('path');
 var $ = require('gulp-load-plugins')();
@@ -53,19 +54,44 @@ gulp.task('test', ['lint'], function(){
 });
 
 gulp.task('bundle', function() {
-    return browserify({
+    var bundle = browserify({
             debug: true,
             extensions: ['.js', '.jsx'],
             entries: path.resolve(paths.root, files.entry)
-        })
+        });
+
+    executeBundle(bundle);
+});
+
+gulp.task('bundle-watch', function() {
+    var bundle = browserify({
+        debug: true,
+        extensions: ['.js', '.jsx'],
+        entries: path.resolve(paths.root, files.entry)
+    });
+
+    bundle = watchify(bundle);
+    bundle.on('update', function(){
+        executeBundle(bundle);
+    });
+    executeBundle(bundle);
+
+});
+
+function executeBundle(bundle) {
+    var start = Date.now();
+    bundle
         .transform(babelify.configure({
             ignore: /(bower_components)|(node_modules)/
         }))
         .bundle()
         .on("error", function (err) { console.log("Error : " + err.message); })
         .pipe(source(files.bundle))
-        .pipe(gulp.dest(paths.root));
-});
+        .pipe(gulp.dest(paths.root))
+        .pipe($.notify(function() {
+            console.log('bundle finished in ' + (Date.now() - start) + 'ms');
+        }))
+}
 
 gulp.task('compass', ['scss-lint'], function(){
     gulp.src('./app/assets/sass/main.scss')
@@ -121,12 +147,12 @@ gulp.task('connectDist', function () {
 });
 
 gulp.task('watch', function() {
-    gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint', 'bundle']);
+    gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint']);
     gulp.watch([paths.styles], ['compass']);
 });
 
 gulp.task('dev',
-    ['compass', 'test', 'bundle', 'connect', 'watch']
+    ['compass', 'test', 'bundle-watch', 'connect', 'watch']
 );
 
 gulp.task('default', ['dev']);
