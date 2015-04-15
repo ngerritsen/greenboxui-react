@@ -1,10 +1,28 @@
 .side-nav {
-  padding-top: $margin-small;
+  padding-top: 0;
 
-  li {
+  .side-nav-item {
     a:not(.button) {
       color: lighten($gray, 10%);
       font-weight: bold;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $gray;
+      }
+    }
+
+    .active:not(.button) {
+      background-color: $subtle-gray;
+      color: $link-color;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $subtle-gray;
+        color: $link-color;
+      }
     }
   }
 }

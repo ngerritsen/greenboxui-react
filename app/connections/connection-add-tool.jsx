@@ -26,10 +26,10 @@ export default React.createClass({
         return _(_(this.state.controls).pluck('typeId')).uniq();
     },
     _getSelectedSourceType() {
-        return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes()[0]
+        return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes()[0];
     },
     _getSelectedTargetType() {
-        return this.state.selectedTargetType ? this.state.selectedTargetType : this._getAvailableControlTypes()[0]
+        return this.state.selectedTargetType ? this.state.selectedTargetType : this._getAvailableControlTypes()[0];
     },
     _handleAddConnection(event) {
         event.preventDefault();

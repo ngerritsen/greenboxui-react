@@ -7,9 +7,9 @@ const ReactTestUtils = React.addons.TestUtils;
 
 describe('connection add tool', () => {
     const dummyControls = [
-        { typeId: 'Pump', connectionId: '0874134', name: 'Pump 1' },
-        { typeId: 'Valve', connectionId: '138134', name: 'Valve 1' },
-        { typeId: 'Valve', connectionId: '138134', name: 'Valve 2' }
+        { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
+        { typeId: 'Valve', instanceId: '138134', name: 'Valve 1' },
+        { typeId: 'Valve', instanceId: '1381dd34', name: 'Valve 2' }
     ];
 
     let connectionAddTool;
@@ -21,20 +21,18 @@ describe('connection add tool', () => {
         );
     });
 
-    xit('adds a connection', () => {
+    it('adds a connection', () => {
         spyOn(ConnectionActions, 'addConnection');
 
         const submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(connectionAddTool, 'button');
 
         React.findDOMNode(connectionAddTool.refs.selectedSourceType).value = dummyControls[0].typeId;
-        ReactTestUtils.Simulate.change(React.findDOMNode(connectionAddTool.refs.selectedSourceType), {target: {value: dummyControls[0].typeId}});
+        ReactTestUtils.Simulate.change(React.findDOMNode(connectionAddTool.refs.selectedSourceType));
         React.findDOMNode(connectionAddTool.refs.selectedSourceControl).value = dummyControls[0].instanceId;
 
         React.findDOMNode(connectionAddTool.refs.selectedTargetType).value = dummyControls[1].typeId;
-        ReactTestUtils.Simulate.change(React.findDOMNode(connectionAddTool.refs.selectedTargetType), {target: {value: dummyControls[1].typeId}});
+        ReactTestUtils.Simulate.change(React.findDOMNode(connectionAddTool.refs.selectedTargetType));
         React.findDOMNode(connectionAddTool.refs.selectedTargetControl).value = dummyControls[1].instanceId;
-
-
 
         ReactTestUtils.Simulate.click(submitButton);
 

@@ -1,10 +1,10 @@
 import React from 'react/addons';
 import GridHeadingCell from './grid-heading-cell';
-import GridHeadingRow from './grid-heading-cell';
+import GridHeadingRow from './grid-heading-row';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-xdescribe('grid heading row', () => {
+describe('grid heading row', () => {
     let dummyCallback;
     let gridHeadingRow;
 
@@ -28,9 +28,9 @@ xdescribe('grid heading row', () => {
         const dummySortProperty = 'id';
         const dummySortInversed = true;
 
-        ReactTestUtils.scryRenderedDOMComponentsWithClass(gridHeadingRow);
-        let firstHeadingRow = gridHeadingRow[0];
-        firstHeadingRow.onSortBy(dummySortProperty, dummySortInversed);
+        const headingCells = ReactTestUtils.scryRenderedComponentsWithType(gridHeadingRow, GridHeadingCell);
+        const firstHeadingCell = headingCells[0];
+        firstHeadingCell.props.onSortBy(dummySortProperty, dummySortInversed);
 
         expect(dummyCallback).toHaveBeenCalledWith(dummySortProperty, dummySortInversed);
     });

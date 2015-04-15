@@ -1,10 +1,13 @@
 $white: #fff;
-$text-color: #333;
-$primary-color: #3a77e6;
 $gray: darken($white, 50%);
 $light-gray: darken($white, 25%);
 $subtle-gray: darken($white, 12.5%);
 $barely-white: darken($white, 4%);
+
+$primary-color: #3a77e6;
+
+$text-color: #333;
+$link-color: saturate(lighten($primary-color, 7.5%), 12.5%);
 $background-color: darken($white, 5%);
 
 $margin-base: 1rem;

@@ -2,6 +2,20 @@
   @include reset-border-styles();
   @include box-shadow(4px 0 12px lighten($light-gray, 2%));
   background-color: darken($white, 1%);
-  padding-top: $margin-regular;
   z-index: $z-index-main-menu;
+}
+
+.main-menu {
+  margin-top: $margin-small;
+
+  li {
+    @include reset-spacing();
+
+    a:not(.button) {
+      @include vertical-center-height(3.2rem);
+      color: $gray;
+      font-weight: bold;
+      padding: 0 1.2rem;
+    }
+  }
 }

@@ -1,9 +1,4 @@
-Todo
-- Restyle side main menu
-    *fix icons
-    *add little bit more styling
-- Add watchify
-    *fix slow progression bug
+ToDo
 
 Backlog
 - Build grid pagination
@@ -12,8 +7,11 @@ Backlog
 
 Epics
 - Build settings page
-- Think about modularization of edit fields/switches/selections for reusability
 - Translation functionality
 - Build 'actual' (fake) http calls/promises
 - Build report component
 - Experiment /w aria
+
+Attention Points
+- Chrome bug for rerendering bg-color of side menu
+- Think about modularization of edit fields/switches/selections for reusability

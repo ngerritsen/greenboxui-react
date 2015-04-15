@@ -67,7 +67,9 @@ gulp.task('bundle-watch', function() {
     var bundle = browserify({
         debug: true,
         extensions: ['.js', '.jsx'],
-        entries: path.resolve(paths.root, files.entry)
+        entries: path.resolve(paths.root, files.entry),
+        cache: {},
+        packageCache: {}
     });
 
     bundle = watchify(bundle);
@@ -147,12 +149,12 @@ gulp.task('connectDist', function () {
 });
 
 gulp.task('watch', function() {
-    gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint', 'bundle']);
+    gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint']);
     gulp.watch([paths.styles], ['compass']);
 });
 
 gulp.task('dev',
-    ['compass', 'test', 'bundle', 'connect', 'watch']
+    ['compass', 'test', 'bundle-watch', 'connect', 'watch']
 );
 
 gulp.task('default', ['dev']);
