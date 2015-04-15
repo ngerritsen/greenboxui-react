@@ -4,14 +4,14 @@ import ControlInstanceActions from './control-instance-actions';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('control instance delete cell', () => {
+describe('control instance add tool', () => {
     const dummyControl = { typeId: 'Valve', instanceId: '9874200', name: 'Valve 1' };
 
     let controlInstanceAddTool;
 
     beforeEach(() => {
         controlInstanceAddTool = ReactTestUtils.renderIntoDocument(
-            <ControlInstanceAddTool context={dummyControl}/>
+            <ControlInstanceAddTool/>
         );
     });
 

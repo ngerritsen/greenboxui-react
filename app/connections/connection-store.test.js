@@ -2,7 +2,7 @@ import AltApp from '../core/alt-app';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
 
-describe('connection instance store', () => {
+describe('connection store', () => {
     const addConnectionAction = ConnectionActions.ADD_CONNECTION;
     const removeConnectionAction = ConnectionActions.REMOVE_CONNECTION;
 
