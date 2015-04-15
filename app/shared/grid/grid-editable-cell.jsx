@@ -26,15 +26,15 @@ export default React.createClass({
         const value = this.props.value;
         if(this.state.editMode) {
             return (
-                <span className="clearfix">
-                    <input className="left" defaultValue={value} ref="editedValueInput"/>
-                    <i className="fa fa-check-circle fa-inline right clickable" ref="toggleEditMode" onClick={this._handleEditValue}></i>
-                </span>
+                <form className="clearfix editable-cell">
+                    <input type="text" className="left" defaultValue={value} ref="editedValueInput"/>
+                    <i className="fa fa-check-circle fa-inline right clickable" ref="toggleEditMode" type="submit" onClick={this._handleEditValue}></i>
+                </form>
             );
         }
         else {
             return (
-                <span className="clearfix">
+                <span className="clearfix editable-cell">
                     <span className="left">{value}</span>
                     <i className="fa fa-pencil fa-inline right clickable" ref="toggleEditMode" onClick={this._handleToggleEdit}></i>
                 </span>

@@ -8068,6 +8068,40 @@ th.hide-for-touch {
 .grid-cell:first-child {
   border-left: 1px solid #dfdfdf;
 }
+.grid-cell .editable-cell .fa {
+  position: absolute;
+  right: 1rem;
+  top: 1px;
+}
+.grid-cell input[type="text"] {
+  -webkit-box-shadow: 0 0 0 white;
+  -moz-box-shadow: 0 0 0 white;
+  box-shadow: 0 0 0 white;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  background-color: #ececec;
+  border: 0 solid white;
+  height: 100%;
+  left: 0;
+  padding-left: 1rem;
+  padding-right: 2rem;
+  position: absolute;
+  right: 0;
+}
+.grid-cell input[type="text"]:hover, .grid-cell input[type="text"]:focus {
+  -webkit-box-shadow: 0 0 0 white;
+  -moz-box-shadow: 0 0 0 white;
+  box-shadow: 0 0 0 white;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  background-color: #eeeeee;
+}
 
 .grid-heading-row .grid-cell {
   background-color: #f2f2f2;

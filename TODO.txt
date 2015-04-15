@@ -1,5 +1,8 @@
 Todo
 - Refactor editable cell to form with submit
+    * Make icon button style
+    * Add some style mixins
+    * Auto add cell type classNames
 - Add unit tests connections
 - Restyle side main menu
 

@@ -33,6 +33,34 @@
   &:first-child {
     border-left: 1px solid $subtle-gray;
   }
+
+  .editable-cell {
+    .fa {
+      position: absolute;
+      right: $margin-regular;
+      top: 1px;
+    }
+  }
+
+  input[type="text"] {
+    @include box-shadow(0 0 0 $white);
+    @include border-radius(0);
+    background-color: lighten($subtle-gray, 5%);
+    border: 0 solid $white;
+    height: 100%;
+    left: 0;
+    padding-left: 1rem;
+    padding-right: 2rem;
+    position: absolute;
+    right: 0;
+
+    &:hover,
+    &:focus {
+      @include box-shadow(0 0 0 $white);
+      @include border-radius(0);
+      background-color: lighten($subtle-gray, 6%);
+    }
+  }
 }
 
 .grid-heading-row {

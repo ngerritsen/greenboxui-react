@@ -79,7 +79,7 @@ export default React.createClass({
                     <div className="small-5 columns">
                         <div className="row">
                             <div className="small-6 columns">
-                                <label>Source Typess
+                                <label>Source Type
                                     <select ref="selectedSourceType" onChange={this._handleChangeSelectedType}>
                                         {controlTypeOptions}
                                     </select>
