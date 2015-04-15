@@ -1,15 +1,15 @@
 .top-bar {
   @include box-shadow($deep-shadow);
+  @include vertical-center-height($top-bar-height);
   background-color: $primary-color;
   color: $white;
-  height: $top-bar-height;
-  line-height: $top-bar-height;
+  z-index: $z-index-top-bar;
 
   .menu-button-container {
+    @include vertical-center-height($top-bar-height);
     float: left;
     height: $top-bar-height;
-    line-height: $top-bar-height;
-    margin-left: $margin-regular;
+    margin-left: $margin-regular + $margin-small;
   }
 
   .logo-container {
@@ -28,8 +28,7 @@
   }
 
   .info-item {
-    height: $top-bar-height;
-    line-height: $top-bar-height;
+    @include vertical-center-height($top-bar-height);
     margin-right: $margin-regular;
   }
 

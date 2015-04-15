@@ -10,6 +10,10 @@ export default React.createClass({
         this.props.onDelete(this.props.context);
     },
     render() {
-        return <i className="fa fa-trash clickable" onClick={this._handleDelete}></i>;
+        return (
+            <button className="icon-button" onClick={this._handleDelete}>
+                <i className="fa fa-trash"></i>
+            </button>
+        );
     }
 });

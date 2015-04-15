@@ -15,3 +15,22 @@ button.button {
   }
 }
 
+.icon-button {
+  @include reset-border-styles();
+  @include reset-spacing();
+  @include opacity(.8);
+  background-color: transparent;
+  color: inherit;
+  display: inline-block;
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include reset-border-styles();
+    @include reset-spacing();
+    @include opacity(1);
+    background-color: transparent;
+    color: inherit;
+  }
+}
+

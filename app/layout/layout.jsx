@@ -8,17 +8,14 @@ let RouteHandler = Router.RouteHandler;
 export default React.createClass({
     render() {
         return (
-            <div className="off-canvas-wrap" data-offcanvas>
-                <div className="inner-wrap">
-
-                    <MainMenu/>
-
-                    <div className="container">
-                        <TopBar/>
+            <div className="container">
+                <TopBar/>
+                <div className="off-canvas-wrap" data-offcanvas>
+                    <div className="inner-wrap">
+                        <MainMenu/>
                         <RouteHandler/>
+                        <a className="exit-off-canvas"></a>
                     </div>
-
-                    <a className="exit-off-canvas"></a>
                 </div>
             </div>
         );

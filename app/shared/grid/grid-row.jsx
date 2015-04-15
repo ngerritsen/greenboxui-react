@@ -1,6 +1,7 @@
 import React from 'react';
 import GridEditableCell from './grid-editable-cell';
 import GridDeleteCell from './grid-delete-cell';
+import classnames from 'classnames';
 
 export default React.createClass({
     propTypes: {
@@ -25,8 +26,16 @@ export default React.createClass({
                 cellContent = <GridDeleteCell context={data} onDelete={column.handler}/>
             }
 
+            const classNames = classnames([
+                'grid-cell',
+                `small-${column.columns}`,
+                'columns',
+                'clickable',
+                {[`grid-${column.type}-cell`]: column.type}
+            ]);
+
             return (
-                <div className={`grid-cell small-${column.columns} columns clickable`} key={column.id}>
+                <div className={classNames} key={column.id}>
                     {cellContent}
                 </div>
             );

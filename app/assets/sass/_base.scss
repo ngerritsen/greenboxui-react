@@ -1,0 +1,25 @@
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.fa {
+  &.clickable {
+    @include opacity(.8);
+
+    &:hover {
+      @include opacity(1);
+    }
+  }
+
+  &.fa-inline {
+    margin-top: .4rem;
+  }
+}

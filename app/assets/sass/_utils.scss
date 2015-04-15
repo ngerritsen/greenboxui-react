@@ -1,0 +1,28 @@
+@mixin vertical-center-height($height) {
+  height: $height;
+  line-height: $height;
+}
+
+@mixin reset-border() {
+  border: 0 solid $white;
+}
+
+@mixin reset-border-radius() {
+  @include border-radius(0);
+}
+
+@mixin reset-box-shadow() {
+  @include box-shadow(0 0 0 $white);
+}
+
+@mixin reset-border-styles() {
+  @include reset-border();
+  @include reset-border-radius();
+  @include reset-box-shadow();
+  outline: none;
+}
+
+@mixin reset-spacing() {
+  margin: 0;
+  padding: 0;
+}

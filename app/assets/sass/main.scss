@@ -2,6 +2,10 @@
 @import '../../bower_components/foundation/scss/normalize';
 @import '../../bower_components/foundation/scss/foundation';
 @import './variables';
+@import './utils';
+@import './base';
+@import './layout';
+@import './main-menu';
 @import './grid';
 @import './slab';
 @import './top-bar';
@@ -11,49 +15,3 @@
 @import './side-nav';
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300,400italic,700);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic);
-@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600,700,400italic);
-
-body {
-  background-color: $background-color;
-  color: $text-color;
-  font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
-}
-
-.off-canvas-wrap,
-.inner-wrap {
-  height: 100%;
-}
-
-.content {
-  max-width: 1200px;
-  padding: $margin-regular;
-}
-
-.content-section {
-  border-right: 0 solid $subtle-gray;
-
-  &:last-child {
-    border-right: 0 solid $subtle-gray;
-  }
-}
-
-.clickable {
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.fa {
-  &.clickable {
-    @include opacity(.8);
-
-    &:hover {
-      @include opacity(1);
-    }
-  }
-
-  &.fa-inline {
-    margin-top: .4rem;
-  }
-}

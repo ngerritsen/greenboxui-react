@@ -1,0 +1,7 @@
+.left-off-canvas-menu {
+  @include reset-border-styles();
+  @include box-shadow(4px 0 12px lighten($light-gray, 2%));
+  background-color: darken($white, 1%);
+  padding-top: $margin-regular;
+  z-index: $z-index-main-menu;
+}
