@@ -47,7 +47,7 @@ export default React.createClass({
         return (
             <div>
                 <Slab narrow={true}>
-                    <ConnectionAddTool />
+                    <ConnectionAddTool/>
                 </Slab>
                 <Slab>
                     <Grid columnInfo={columnInfo} data={viewData}></Grid>

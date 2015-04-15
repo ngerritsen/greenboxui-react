@@ -1,4 +1,17 @@
-input[type="text"] {
+input[type="text"],
+input[type="number"],
+input[type="number"],
+input[type="file"],
+input[type="checkbox"],
+input[type="radio"],
+textarea,
+select {
+  margin-bottom: .6rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
   @include border-radius(2px);
   @include box-shadow($subtle-shallow-shadow);
   background-color: $white;

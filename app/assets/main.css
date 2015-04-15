@@ -20112,6 +20112,15 @@ body {
   margin-top: .4rem;
 }
 
+.container {
+  bottom: 0;
+  left: 0;
+  padding-top: 3.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .content {
   max-width: 1200px;
   padding: 1rem;
@@ -20129,12 +20138,8 @@ body {
   height: 100%;
 }
 
-.container {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+.inner-wrap {
+  overflow: auto;
 }
 
 .move-right > .inner-wrap {
@@ -20321,7 +20326,20 @@ body {
   background-color: transparent;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"],
+input[type="number"],
+input[type="file"],
+input[type="checkbox"],
+input[type="radio"],
+textarea,
+select {
+  margin-bottom: .5rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -20331,7 +20349,9 @@ input[type="text"] {
   background-color: #fff;
   border-color: #c9c9c9;
 }
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
   -moz-box-shadow: 0 2px 5px #c9c9c9;
   -webkit-box-shadow: 0 2px 5px #c9c9c9;
   box-shadow: 0 2px 5px #c9c9c9;

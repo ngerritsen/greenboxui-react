@@ -4,7 +4,7 @@ import Time from '../shared/time/time'
 export default React.createClass({
     render() {
         return (
-            <div className="sticky">
+            <div className="fixed">
                 <nav className="top-bar" data-topbar role="navigation">
                     <ul className="title-area">
                         <li className="menu-button-container">

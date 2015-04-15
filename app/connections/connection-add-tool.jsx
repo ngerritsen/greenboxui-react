@@ -23,7 +23,8 @@ export default React.createClass({
         this.setState({ controls: newControls });
     },
     _getAvailableControlTypes() {
-        return _(_(this.state.controls).pluck('typeId')).uniq();
+        const controlTypeIds = _(this.state.controls).pluck('typeId');
+        return _(controlTypeIds).unique();
     },
     _getSelectedSourceType() {
         return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes()[0];
@@ -76,16 +77,16 @@ export default React.createClass({
         return (
             <form>
                 <div className="row">
-                    <div className="small-5 columns">
+                    <div className="medium-12 large-5 columns">
                         <div className="row">
-                            <div className="small-6 columns">
+                            <div className="small-12 medium-6 columns">
                                 <label>Source Type
                                     <select ref="selectedSourceType" onChange={this._handleChangeSelectedType}>
                                         {controlTypeOptions}
                                     </select>
                                 </label>
                             </div>
-                            <div className="small-6 columns">
+                            <div className="small-12 medium-6 columns">
                                 <label>Source Control
                                     <select ref="selectedSourceControl" defaultValue={controlTypeOptions[0]}>
                                         {sourceControlOptions}
@@ -94,16 +95,16 @@ export default React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className="small-5 columns">
+                    <div className="medium-12 large-5 columns">
                         <div className="row">
-                            <div className="small-6 columns">
+                            <div className="small-12 medium-6 columns">
                                 <label>Target Type
                                     <select ref="selectedTargetType" onChange={this._handleChangeSelectedType}>
                                         {controlTypeOptions}
                                     </select>
                                 </label>
                             </div>
-                            <div className="small-6 columns">
+                            <div className="small-12 medium-6 columns">
                                 <label>Target Control
                                     <select ref="selectedTargetControl" defaultValue={controlTypeOptions[0]}>
                                         {targetControlOptions}
@@ -113,7 +114,7 @@ export default React.createClass({
                         </div>
                     </div>
 
-                    <div className="small-2 columns">
+                    <div className="medium-12 large-2 columns">
                         <button type="submit" className="button radius button-form" onClick={this._handleAddConnection}>Add Connection</button>
                     </div>
                 </div>
