@@ -25,6 +25,12 @@ export default React.createClass({
     _getAvailableControlTypes() {
         return _(_(this.state.controls).pluck('typeId')).uniq();
     },
+    _getSelectedSourceType() {
+        return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes()[0]
+    },
+    _getSelectedTargetType() {
+        return this.state.selectedTargetType ? this.state.selectedTargetType : this._getAvailableControlTypes()[0]
+    },
     _handleAddConnection(event) {
         event.preventDefault();
 
@@ -55,21 +61,14 @@ export default React.createClass({
 
         const sourceControlOptions = this.state.controls.map((control) => {
             const option = <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
-            if (control.typeId === this.state.selectedSourceType) {
-                return option;
-            }
-            else if(!this.state.selectedSourceType && control.typeId === this._getAvailableControlTypes()[0]) {
-                console.log(`${control.typeId} ${this._getAvailableControlTypes()[0]}`)
+            if (control.typeId === this._getSelectedSourceType()) {
                 return option;
             }
         });
 
         const targetControlOptions = this.state.controls.map((control) => {
             const option = <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
-            if (control.typeId === this.state.selectedTargetType) {
-                return option;
-            }
-            else if(!this.state.selectedTargetType && control.typeId === this._getAvailableControlTypes()[0]) {
+            if (control.typeId === this._getSelectedTargetType()) {
                 return option;
             }
         });

@@ -27,6 +27,17 @@ describe('grid heading cell', () => {
         expect(dummyCallback).toHaveBeenCalledWith(dummyColumn.id, !gridHeadingCell.state.sortInversed);
     });
 
+    it('does not fire sort handler if column has sort option false when heading cell is clicked', () => {
+        const dummyColumnNoSort = {
+            title: 'Dummy Column',
+            id: 'dummyColumn',
+            sort: false
+        };
+        gridHeadingCell.setProps({ column: dummyColumnNoSort });
+        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        expect(dummyCallback).not.toHaveBeenCalled();
+    });
+
     it('is in descending sorted mode when sorted prop is true', () => {
         ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
         gridHeadingCell.setProps({ sorted: true });

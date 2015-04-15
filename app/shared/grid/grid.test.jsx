@@ -45,6 +45,13 @@ describe('grid', () => {
         expect(gridBody.props.data).toEqual(dummyData);
     });
 
+    it('does not render tools if show tools prop is false', () => {
+        grid.setProps({ showTools: false });
+
+        const gridToolbar = ReactTestUtils.scryRenderedComponentsWithType(grid, GridToolbar);
+        expect(gridToolbar.length).toEqual(0);
+    });
+
     it('passes the right sort properties to the right components when the sort handler is called', () => {
         const dummySortProperty = 'name';
 

@@ -6,8 +6,21 @@ import _ from 'underscore';
 
 export default React.createClass({
     propTypes: {
-        columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        data: React.PropTypes.array.isRequired
+        columnInfo: React.PropTypes.arrayOf(React.PropTypes.shape({
+            columns: React.PropTypes.number.isRequired,
+            handler: React.PropTypes.func,
+            id: React.PropTypes.string.isRequired,
+            sort: React.PropTypes.bool,
+            title: React.PropTypes.string,
+            type: React.PropTypes.string,
+            template: React.PropTypes.element,
+            unique: React.PropTypes.bool
+        })),
+        data: React.PropTypes.array.isRequired,
+        showTools: React.PropTypes.bool
+    },
+    getDefaultProps() {
+        return { showTools: true };
     },
     getInitialState() {
         return {
@@ -30,12 +43,17 @@ export default React.createClass({
         });
     },
     render() {
+        let tools = '';
+
+        if(this.props.showTools) {
+            tools = <GridToolbar
+                onSearch={this._handleSearch}
+                columnInfo={this.props.columnInfo}
+            />
+        }
         return (
             <div>
-                <GridToolbar
-                    onSearch={this._handleSearch}
-                    columnInfo={this.props.columnInfo}
-                />
+                {tools}
                 <ul className="grid">
                     <GridHeadingRow
                         columnInfo={this.props.columnInfo}

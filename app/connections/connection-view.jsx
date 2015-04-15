@@ -35,12 +35,13 @@ export default React.createClass({
                 connectionId: connection.connectionId
             }
         });
+
         const columnInfo = [
             { title: 'Source Type Id', columns: 2, id: 'sourceTypeId' },
             { title: 'Source Name', columns: 3, id: 'sourceName' },
             { title: 'Target Type Id', columns: 2, id: 'targetTypeId' },
             { title: 'Target Name', columns: 3, id: 'targetName' },
-            { title: 'Delete', columns: 2, id: 'delete', cellType: 'delete', noSort: true, onDelete: this._handleDeleteConnection }
+            { title: 'Delete', columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
         ];
 
         return (

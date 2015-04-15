@@ -13,16 +13,18 @@ export default React.createClass({
 
         const cells = columnInfo.map((column) => {
             let cellContent = <span>{data[column.id]}</span>;
-            if (column.template) {
+
+            if (column.type === 'custom') {
                 const Template = column.template;
                 cellContent = <Template value={data[column.id]} context={data} key={column.id}/>;
             }
-            if (column.editAble) {
-                cellContent = <GridEditableCell value={data[column.id]} context={data} onEdit={column.onEdit} key={column.id}/>;
+            else if (column.type === 'editable') {
+                cellContent = <GridEditableCell value={data[column.id]} context={data} onEdit={column.handler} key={column.id}/>;
             }
-            if (column.cellType === 'delete') {
-                cellContent = <GridDeleteCell context={data} onDelete={column.onDelete}/>
+            else if (column.type === 'delete') {
+                cellContent = <GridDeleteCell context={data} onDelete={column.handler}/>
             }
+
             return (
                 <div className={`grid-cell small-${column.columns} columns clickable`} key={column.id}>
                     {cellContent}

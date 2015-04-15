@@ -47,9 +47,9 @@ describe('grid row', () => {
         const dummyFunc = () => 'dummy!';
         const dummyDeleteFunc = () => 'dummy delete!';
         const templatedDummyColumnInfo = [
-            { title: 'Id', columns: 4, id: 'id', unique: true, template: DummyTemplate },
-            { title: 'Name', columns: 4, id: 'name', editAble: true, onEdit: dummyFunc },
-            { title: 'Delete', columns: 4, id: 'delete', cellType: 'delete', onDelete: dummyDeleteFunc }
+            { title: 'Id', columns: 4, id: 'id', type: 'custom', unique: true, template: DummyTemplate },
+            { title: 'Name', columns: 4, id: 'name', type: 'editable', handler: dummyFunc },
+            { title: 'Delete', columns: 4, id: 'delete', type: 'delete', handler: dummyDeleteFunc }
         ];
 
         gridRow.setProps({ columnInfo: templatedDummyColumnInfo });

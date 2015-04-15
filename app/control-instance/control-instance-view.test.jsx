@@ -51,4 +51,14 @@ describe('control instance view', () => {
 
         expect(ControlInstanceActions.renameControl).toHaveBeenCalledWith(instanceId, newName);
     });
+
+    it('handles control deletes', () => {
+        const control = dummyControls[0];
+
+        spyOn(ControlInstanceActions, 'removeControl');
+
+        controlInstanceView._handleDeleteControl(control);
+
+        expect(ControlInstanceActions.removeControl).toHaveBeenCalledWith(control.instanceId);
+    });
 });

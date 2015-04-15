@@ -14,7 +14,7 @@ class ConnectionStore {
     }
 
     onConnectionAdded(connection) {
-        if (connection) {
+        if (connection && connection.sourceControl && connection.targetControl) {
             connection.connectionId = this._getNewInstanceId();
             this.connections.push(connection);
         }

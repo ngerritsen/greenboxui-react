@@ -17,8 +17,16 @@ export default React.createClass({
         return id.charAt(0).toUpperCase() + id.slice(1);
     },
     render() {
-        const cell = this.props.column;
-        const cellTitle = cell.title ? cell.title : this._capitalizeId(cell.id);
+        const column = this.props.column;
+        const cellTitle = column.title ? column.title : this._capitalizeId(column.id);
+
+        if (column.sort === false) {
+            return (
+                <div className={`grid-cell small-${column.columns} columns`}>
+                    <strong>{cellTitle}</strong>
+                </div>
+            );
+        }
 
         let sortIcon = '';
 
@@ -30,7 +38,7 @@ export default React.createClass({
         }
 
         return (
-            <div className={`grid-cell small-${cell.columns} columns clickable`} value={cell.id} onClick={this._handleSortByColumn}>
+            <div className={`grid-cell small-${column.columns} columns clickable`} onClick={this._handleSortByColumn}>
                 <strong>{cellTitle}</strong>
                 {sortIcon}
             </div>
