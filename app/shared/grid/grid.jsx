@@ -2,6 +2,7 @@ import React from 'react';
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
 import GridToolbar from './grid-toolbar';
+import GridPagination from './grid-pagination';
 import _ from 'underscore';
 
 export default React.createClass({
@@ -20,10 +21,14 @@ export default React.createClass({
         showTools: React.PropTypes.bool
     },
     getDefaultProps() {
-        return { showTools: true };
+        return {
+            showTools: true,
+            pagination: false
+        };
     },
     getInitialState() {
         return {
+            currentPage: 0,
             sortProperty: '',
             sortInversed: false,
             searchParameter: '',
@@ -42,8 +47,16 @@ export default React.createClass({
             searchBy: searchBy
         });
     },
+    _handleChangePage(newPage) {
+        this.setState({
+            currentPage: newPage
+        });
+    },
     render() {
         let tools = '';
+        let pagination = '';
+        const totalRowCount = this.props.data.length;
+        const pageRowCount = 5;
 
         if(this.props.showTools) {
             tools = <GridToolbar
@@ -51,6 +64,16 @@ export default React.createClass({
                 columnInfo={this.props.columnInfo}
             />
         }
+
+        if(this.props.pagination) {
+            pagination = <GridPagination
+                totalRowCount={totalRowCount}
+                pageRowCount={pageRowCount}
+                onChangePage={this._handleChangePage}
+                currentPage={this.state.currentPage}
+            />
+        }
+
         return (
             <div>
                 {tools}
@@ -63,12 +86,14 @@ export default React.createClass({
                     <GridBody
                         columnInfo={this.props.columnInfo}
                         data={this.props.data}
+                        currentPage={this.state.currentPage}
                         searchParameter={this.state.searchParameter}
                         searchBy={this.state.searchBy}
                         sortProperty={this.state.sortProperty}
                         sortInversed={this.state.sortInversed}
                     />
                 </ul>
+                {pagination}
             </div>
         );
     }

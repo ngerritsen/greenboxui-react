@@ -1,9 +1,11 @@
 ToDo
+- Build grid pagination
+    * Pass pagination info to grid body
+    * Write Unit tests
+    * Little bit of styling
 
 Backlog
-- Build grid pagination
 - Search for graph component/build one
-- Fix connection add tool unit test
 
 Epics
 - Build settings page

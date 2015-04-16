@@ -42,7 +42,11 @@ export default React.createClass({
                     <ControlInstanceAddTool/>
                 </Slab>
                 <Slab>
-                    <Grid columnInfo={columnInfo} data={this.state.controls}></Grid>
+                    <Grid
+                        columnInfo={columnInfo}
+                        data={this.state.controls}
+                        pagination={true}
+                    />
                 </Slab>
             </div>
         );

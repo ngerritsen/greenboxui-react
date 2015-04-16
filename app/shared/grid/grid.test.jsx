@@ -4,6 +4,7 @@ import GridRow from './grid-row';
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
 import GridToolbar from './grid-toolbar';
+import GridPagination from './grid-pagination';
 
 const ReactTestUtils = React.addons.TestUtils;
 
@@ -51,6 +52,14 @@ describe('grid', () => {
         const gridToolbar = ReactTestUtils.scryRenderedComponentsWithType(grid, GridToolbar);
         expect(gridToolbar.length).toEqual(0);
     });
+
+    it('renders pagination if pagination prop is true', () => {
+        grid.setProps({ pagination: true });
+
+        const gridPagination = ReactTestUtils.scryRenderedComponentsWithType(grid, GridPagination);
+        expect(gridPagination.length).toEqual(1);
+    });
+
 
     it('passes the right sort properties to the right components when the sort handler is called', () => {
         const dummySortProperty = 'name';

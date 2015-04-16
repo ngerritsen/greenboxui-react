@@ -45,23 +45,35 @@ export default React.createClass({
         }
         return newRowData;
     },
+    _paginateRows(rows) {
+        return _(rows).groupBy((row, index) => {
+            return Math.floor(index/10);
+        });
+    },
     _getUniqueId() {
         const uniqueColumn = _(this.props.columnInfo).find((column) => column.unique);
         return uniqueColumn ? uniqueColumn.id : false;
     },
     render() {
+        let rowsToShow = [];
+
         const searchParameter = this.props.searchParameter;
-        const sortedData = this._sortRowData(this.props.data);
         const columnInfo = this.props.columnInfo;
         const uniqueId = this._getUniqueId();
+        const sortedData = this._sortRowData(this.props.data);
 
-        const rows = sortedData.map((rowData, index) => {
+        rowsToShow = sortedData.map((rowData, index) => {
             const key = uniqueId ? rowData[uniqueId] : index;
             if (!searchParameter || this._searchRowData(rowData)) {
-                return <GridRow columnInfo={columnInfo} data={rowData} key={key} reactKey={key}/>;
+                return <GridRow
+                    columnInfo={columnInfo}
+                    data={rowData}
+                    key={key}
+                    reactKey={key}
+                />;
             }
         });
 
-        return <div>{rows}</div>;
+        return <div>{rowsToShow}</div>;
     }
 });
