@@ -1,19 +1,19 @@
-ToDo
-
-Backlog
+In Progress
 - Build settings styles
 - Build development settings page
+
+ToDo
 - Build 'actual' (fake) http calls/promises
 - Make graph with actual data
 
-Epics
+Backlog
 - Translation functionality
 - Build report component
 - Build Log component
 - Build License component
 - Build Controls component (w/ store(s) for parameters)
 - Experiment /w aria
-- More centralized routing
 
 Attention Points
 - Think about modularization of edit fields/switches/selections for reusability
+- Check if routing dev experience remains good

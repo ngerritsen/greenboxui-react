@@ -7,9 +7,9 @@ export default React.createClass({
     propTypes: {
         title: React.PropTypes.string.isRequired,
         items: React.PropTypes.arrayOf(React.PropTypes.shape({
-            icon: React.PropTypes.string,
+            title: React.PropTypes.string,
             name: React.PropTypes.string,
-            title: React.PropTypes.string
+            icon: React.PropTypes.string
         })).isRequired
     },
     render() {

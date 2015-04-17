@@ -10,22 +10,32 @@ let RouteHandler = Router.RouteHandler;
 let internalRoutes = routeConfig.map((route) => {
     if(route.subRoutes) {
         const subRoutes = route.subRoutes.map((subRoute) => {
-            return <Route name={subRoute.name} handler={subRoute.handler} path={subRoute.path} key={subRoute.name}/>;
+            return <Route
+                name={subRoute.name}
+                path={subRoute.path}
+                handler={subRoute.handler}
+                key={subRoute.name}
+            />;
         });
 
         return (
             <Route
                 name={route.name}
-                key={route.name}
                 path={route.path}
                 handler={multiPageFactory(route.title, route.path, route.subRoutes)}
+                key={route.name}
             >
                 {subRoutes}
             </Route>
         );
     }
     else {
-        return <Route name={route.name} handler={route.handler} path={route.path}  key={route.name}/>;
+        return <Route
+            name={route.name}
+            path={route.path}
+            handler={route.handler}
+            key={route.name}
+        />;
     }
 });
 

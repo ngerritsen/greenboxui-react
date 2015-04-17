@@ -8,7 +8,7 @@ export default React.createClass({
                 <form>
                     <div className="row setting">
                         <div className="small-6 medium-8 columns">
-                            <label htmlFor="greenbox-id" className="inline">Greenbox ID:</label>
+                            <label htmlFor="greenbox-id" className="inline">System ID:</label>
                         </div>
                         <div className="small-6 medium-4 columns">
                             <label name="greenbox-id" className="inline"><strong>118</strong></label>
@@ -17,10 +17,10 @@ export default React.createClass({
 
                     <div className="row setting">
                         <div className="small-6 medium-8 columns">
-                            <label htmlFor="version" className="inline">System Version:</label>
+                            <label htmlFor="version" className="inline">Software Version:</label>
                         </div>
                         <div className="small-6 medium-4 columns">
-                            <label name="version" className="inline"><strong>2.0.0</strong></label>
+                            <label name="version" className="inline"><strong>6535</strong></label>
                         </div>
                     </div>
 

@@ -1,13 +1,12 @@
-import Configure from './layout/configure';
+import GraphView from './graphs/graph-view';
+
 import ControlInstanceView from './control-instance/control-instance-view';
 import ConnectionView from './connections/connection-view';
-import GraphView from './graphs/graph-view';
-import Time from './shared/time/time';
-import Settings from './layout/settings';
-import AboutView from './settings/about';
 
-export const routeConfig = [
-    {
+import About from './settings/about';
+import Development from './settings/development';
+
+export const routeConfig = [{
         title: 'Graphs',
         name: 'graphs',
         path: '/',
@@ -19,8 +18,7 @@ export const routeConfig = [
         name: 'configure',
         path: '/configure',
         icon: 'wrench',
-        subRoutes:
-        [
+        subRoutes: [
             {
                 title: 'Control Instances',
                 name: 'control-instances',
@@ -42,14 +40,20 @@ export const routeConfig = [
         name: 'settings',
         path: '/settings',
         icon: 'cog',
-        subRoutes:
-        [
+        subRoutes: [
             {
                 title: 'About',
                 name: 'about',
                 path: '/settings/about',
                 icon: 'info-circle',
-                handler: AboutView
+                handler: About
+            },
+            {
+                title: 'Development',
+                name: 'development',
+                path: '/settings/development',
+                icon: 'flask',
+                handler: Development
             }
         ]
     }

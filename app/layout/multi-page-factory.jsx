@@ -17,7 +17,6 @@ export default function multiPageFactory(title, link, subNavs) {
             }
         },
         render() {
-            console.log(subNavs);
             return (
                 <Content>
                     <Section columns={2}>

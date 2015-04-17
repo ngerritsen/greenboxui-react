@@ -6,11 +6,11 @@ let Link = Router.Link;
 
 export default React.createClass({
     propTypes: {
-        navItems: React.PropTypes.shape({
-            icon: React.PropTypes.string.isRequired,
+        navItems: React.PropTypes.arrayOf(React.PropTypes.shape({
+            title: React.PropTypes.string.isRequired,
             name: React.PropTypes.string.isRequired,
-            title: React.PropTypes.string.isRequired
-        }).isRequired
+            icon: React.PropTypes.string.isRequired
+        })).isRequired
     },
     render() {
         return (
