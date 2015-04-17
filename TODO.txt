@@ -9,8 +9,11 @@ Backlog
 Epics
 - Translation functionality
 - Build report component
+- Build Log component
+- Build License component
+- Build Controls component (w/ store(s) for parameters)
 - Experiment /w aria
+- More centralized routing
 
 Attention Points
-- Chrome bug for rerendering bg-color of side menu
 - Think about modularization of edit fields/switches/selections for reusability
