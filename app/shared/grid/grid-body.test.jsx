@@ -1,6 +1,7 @@
 import React from 'react/addons';
 import GridBody from './grid-body';
 import GridRow from './grid-row';
+import GridPagination from './grid-pagination';
 
 const ReactTestUtils = React.addons.TestUtils;
 
@@ -43,6 +44,13 @@ describe('grid body', () => {
         const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
         expect(renderedRows.length).toEqual(0);
+    });
+
+    it('renders pagination if pagination prop is true', () => {
+        gridBody.setProps({ pagination: true });
+
+        const gridPagination = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridPagination);
+        expect(gridPagination.length).toEqual(1);
     });
 
     describe('row keys', () => {

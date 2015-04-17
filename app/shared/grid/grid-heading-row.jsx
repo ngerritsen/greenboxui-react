@@ -21,9 +21,9 @@ export default React.createClass({
         });
 
         return (
-            <li className="grid-row grid-heading-row clearfix">
+            <div className="grid-heading clearfix">
                 {cells}
-            </li>
+            </div>
         );
     }
 });

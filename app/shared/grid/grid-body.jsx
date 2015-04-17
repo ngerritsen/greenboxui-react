@@ -1,15 +1,28 @@
 import React from 'react';
 import GridRow from './grid-row';
+import GridPagination from './grid-pagination';
 import _ from 'underscore';
 
 export default React.createClass({
     propTypes: {
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.array.isRequired,
+        pagination: React.PropTypes.number,
         searchParameter: React.PropTypes.string,
         searchBy: React.PropTypes.string,
         sortProperty: React.PropTypes.string,
         sortInversed: React.PropTypes.bool
+    },
+    getInitialState() {
+        return {
+            currentPage: 0
+        }
+    },
+    _handleChangePage(newPage) {
+        console.log(newPage);
+        this.setState({
+           currentPage: newPage
+        });
     },
     _searchRowData(rowData) {
         const formattedSearchParameter = String(this.props.searchParameter).toLowerCase();
@@ -47,7 +60,7 @@ export default React.createClass({
     },
     _paginateRows(rows) {
         return _(rows).groupBy((row, index) => {
-            return Math.floor(index/10);
+            return Math.floor(index/this.props.pagination);
         });
     },
     _getUniqueId() {
@@ -56,6 +69,8 @@ export default React.createClass({
     },
     render() {
         let rowsToShow = [];
+        let pagination = '';
+        let totalRowCount = 0;
 
         const searchParameter = this.props.searchParameter;
         const columnInfo = this.props.columnInfo;
@@ -65,6 +80,7 @@ export default React.createClass({
         rowsToShow = sortedData.map((rowData, index) => {
             const key = uniqueId ? rowData[uniqueId] : index;
             if (!searchParameter || this._searchRowData(rowData)) {
+                totalRowCount++;
                 return <GridRow
                     columnInfo={columnInfo}
                     data={rowData}
@@ -74,6 +90,28 @@ export default React.createClass({
             }
         });
 
-        return <div>{rowsToShow}</div>;
+        if(this.props.pagination) {
+            const currentPage = this.state.currentPage;
+            const paginatedRows = this._paginateRows(rowsToShow);
+            rowsToShow = paginatedRows[this.state.currentPage];
+
+            pagination = (
+                <GridPagination
+                    totalRowCount={totalRowCount}
+                    pageRowCount={this.props.pagination}
+                    onChangePage={this._handleChangePage}
+                    currentPage={currentPage}
+                />
+            );
+        }
+
+        return (
+            <div>
+                <ul className="grid">
+                    {rowsToShow}
+                </ul>
+                {pagination}
+            </div>
+        );
     }
 });

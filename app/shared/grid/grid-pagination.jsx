@@ -10,17 +10,17 @@ export default React.createClass({
     _handleChangePage(event) {
         event.preventDefault();
 
-        const newIndex = parseInt(event.target.textContent) - 1;
+        const newIndex = parseInt(event.target.textContent);
         this.props.onChangePage(newIndex);
     },
     render() {
         let links = [];
-        for(var i = 0; i <= this.props.totalRowCount; i += this.props.pageRowCount) {
-            let page = (i/this.props.pageRowCount) + 1;
-            let className = (page === this.props.currentPage + 1) ? 'current' : '';
+        for(var rowCount = 0; rowCount < this.props.totalRowCount; rowCount += this.props.pageRowCount) {
+            let page = rowCount / this.props.pageRowCount;
+            let className = (page === this.props.currentPage) ? 'current' : '';
 
                 links.push(
-                <li className={className} key={i}>
+                <li className={className} key={rowCount}>
                     <a href="" onClick={this._handleChangePage}>{page}</a>
                 </li>
             );

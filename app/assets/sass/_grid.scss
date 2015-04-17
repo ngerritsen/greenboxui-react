@@ -7,10 +7,6 @@
   @include reset-spacing();
   border-bottom: 1px solid $subtle-gray;
   display: block;
-
-  &:first-child {
-    border-top: 1px solid $subtle-gray;
-  }
 }
 
 .grid-body-row {
@@ -57,7 +53,10 @@
   }
 }
 
-.grid-heading-row {
+.grid-heading {
+  border-bottom: 1px solid $subtle-gray;
+  border-top: 1px solid $subtle-gray;
+
   .grid-cell {
     background-color: lighten($subtle-gray, 7.5%);
     height: 2rem;
@@ -67,5 +66,22 @@
       background-color: lighten($subtle-gray, 10%);
     }
 
+  }
+}
+
+ul.pagination {
+  margin-bottom: .25rem;
+  margin-top: .75rem;
+
+  li {
+    a {
+      @include border-radius(99px);
+    }
+
+    &.current {
+      a {
+        background-color: $link-color;
+      }
+    }
   }
 }

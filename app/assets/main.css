@@ -8154,9 +8154,6 @@ body {
   border-bottom: 1px solid #dfdfdf;
   display: block;
 }
-.grid-row:first-child {
-  border-top: 1px solid #dfdfdf;
-}
 
 .grid-body-row:nth-child(even) .grid-cell {
   background-color: #f9f9f9;
@@ -8209,13 +8206,32 @@ body {
   background-color: #eeeeee;
 }
 
-.grid-heading-row .grid-cell {
+.grid-heading {
+  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid #dfdfdf;
+}
+.grid-heading .grid-cell {
   background-color: #f2f2f2;
   height: 2rem;
   line-height: 2.1rem;
 }
-.grid-heading-row .grid-cell:hover {
+.grid-heading .grid-cell:hover {
   background-color: #f9f9f9;
+}
+
+ul.pagination {
+  margin-bottom: .25rem;
+  margin-top: .75rem;
+}
+ul.pagination li a {
+  -webkit-border-radius: 99px;
+  -moz-border-radius: 99px;
+  -ms-border-radius: 99px;
+  -o-border-radius: 99px;
+  border-radius: 99px;
+}
+ul.pagination li.current a {
+  background-color: #508bf6;
 }
 
 .slab {
