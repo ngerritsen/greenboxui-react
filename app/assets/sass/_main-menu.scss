@@ -5,17 +5,20 @@
   z-index: $z-index-main-menu;
 }
 
+
 .main-menu {
-  margin-top: $margin-small;
+  .side-nav {
+    margin-top: $margin-small;
 
-  li {
-    @include reset-spacing();
+    li {
+      @include reset-spacing();
 
-    a:not(.button) {
-      @include vertical-center-height(3.2rem);
-      color: $gray;
-      font-weight: bold;
-      padding: 0 1.2rem;
+      a:not(.button) {
+        @include vertical-center-height(3.2rem);
+        color: $gray;
+        font-weight: bold;
+        padding: 0 1.2rem;
+      }
     }
   }
 }

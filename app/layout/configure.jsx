@@ -1,5 +1,8 @@
 import React from 'react';
 import Router from 'react-router';
+import Content from '../shared/content';
+import Section from '../shared/section';
+import SideNav from '../shared/side-nav';
 
 let RouteHandler = Router.RouteHandler;
 let Link = Router.Link;
@@ -13,26 +16,20 @@ export default React.createClass({
         }
     },
     render() {
+        const navItems = [
+            {icon: 'cubes', link: 'control-instances', title: 'Control Instances'},
+            {icon: 'link', link: 'connections', title: 'Connections'}
+        ];
+
         return (
-            <div className="content row">
-                <div className="small-2 columns content-section">
-                    <ul className="side-nav" role="navigation" title="Configuration menu">
-                        <li className="side-nav-item" role="menuitem">
-                            <Link to="control-instance-view" activeClassName="active">
-                                <i className="fa fa-cubes fa-fw"></i>&nbsp; Control Instances
-                            </Link>
-                        </li>
-                        <li className="side-nav-item" role="menuitem">
-                            <Link to="connections-view" activeClassName="active">
-                                <i className="fa fa-link fa-fw"></i>&nbsp; Connections
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="small-10 columns content-section">
+            <Content>
+                <Section columns={2}>
+                    <SideNav title="Configure" items={navItems}/>
+                </Section>
+                <Section columns={10}>
                     <RouteHandler/>
-                </div>
-            </div>
+                </Section>
+            </Content>
         );
     }
 });

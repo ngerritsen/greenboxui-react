@@ -31,8 +31,8 @@ describe('grid row', () => {
         const renderedData = ReactTestUtils.scryRenderedDOMComponentsWithTag(gridRow, 'span');
         expect(renderedData.length).toEqual(2);
 
-        expect(renderedData[0].getDOMNode().textContent).toEqual('1');
-        expect(renderedData[1].getDOMNode().textContent).toEqual('bear');
+        expect(React.findDOMNode(renderedData[0]).textContent).toEqual('1');
+        expect(React.findDOMNode(renderedData[1]).textContent).toEqual('bear');
     });
 
     it('renders correct column widths', () => {

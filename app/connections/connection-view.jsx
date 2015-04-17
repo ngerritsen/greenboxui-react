@@ -50,7 +50,10 @@ export default React.createClass({
                     <ConnectionAddTool/>
                 </Slab>
                 <Slab>
-                    <Grid columnInfo={columnInfo} data={viewData}></Grid>
+                    <Grid
+                        columnInfo={columnInfo}
+                        data={viewData}
+                    />
                 </Slab>
             </div>
         );

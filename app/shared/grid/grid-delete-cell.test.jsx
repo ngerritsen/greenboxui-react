@@ -15,7 +15,7 @@ describe('grid delete cell', () => {
     });
 
     it('handles deletes', () => {
-        ReactTestUtils.Simulate.click(gridDeleteCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridDeleteCell));
 
         expect(dummyDeleteHandler).toHaveBeenCalledWith(dummyContext);
     });

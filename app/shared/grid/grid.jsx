@@ -23,7 +23,7 @@ export default React.createClass({
     getDefaultProps() {
         return {
             showTools: true,
-            pagination: false
+            pagination: 0
         };
     },
     getInitialState() {

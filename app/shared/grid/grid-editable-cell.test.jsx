@@ -53,7 +53,7 @@ describe('grid editable cell', () => {
             const newValue = 'new value';
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = newValue;
+            React.findDOMNode(gridBody.refs.editedValueInput).value = newValue;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 
@@ -63,7 +63,7 @@ describe('grid editable cell', () => {
         it('doess not call on edit handler when submitting a non changed edit', () => {
             const initialValueWhiteSpaced = initialValue + ' ';
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = initialValueWhiteSpaced;
+            React.findDOMNode(gridBody.refs.editedValueInput).value = initialValueWhiteSpaced;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 
@@ -73,7 +73,7 @@ describe('grid editable cell', () => {
         it('does not call on edit handler when submitting a whitespace edit', () => {
             const whiteSpace = ' ';
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = whiteSpace;
+            React.findDOMNode(gridBody.refs.editedValueInput).value = whiteSpace;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 
@@ -82,7 +82,7 @@ describe('grid editable cell', () => {
 
         it('does not call on edit handler when submitting a non changed edit with trailing whitespace', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = initialValue + ' ';
+            React.findDOMNode(gridBody.refs.editedValueInput).value = initialValue + ' ';
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 
@@ -104,7 +104,7 @@ describe('grid editable cell', () => {
             const newNumericalValue = 456;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = newNumericalValue;
+            React.findDOMNode(gridBody.refs.editedValueInput).value = newNumericalValue;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 
@@ -113,7 +113,7 @@ describe('grid editable cell', () => {
 
         it('does not call on edit handler when submitting the same numerical value', () => {
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
-            gridBody.refs.editedValueInput.getDOMNode().value = initialNumericalValue;
+            React.findDOMNode(gridBody.refs.editedValueInput).value = initialNumericalValue;
 
             ReactTestUtils.Simulate.click(gridBody.refs.toggleEditMode);
 

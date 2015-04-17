@@ -23,7 +23,7 @@ describe('grid heading cell', () => {
     });
 
     it('fires sort handler with right parameters when heading cell is clicked', () => {
-        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         expect(dummyCallback).toHaveBeenCalledWith(dummyColumn.id, !gridHeadingCell.state.sortInversed);
     });
 
@@ -34,12 +34,12 @@ describe('grid heading cell', () => {
             sort: false
         };
         gridHeadingCell.setProps({ column: dummyColumnNoSort });
-        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         expect(dummyCallback).not.toHaveBeenCalled();
     });
 
     it('is in descending sorted mode when sorted prop is true', () => {
-        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         gridHeadingCell.setProps({ sorted: true });
 
         const sortedIcon = ReactTestUtils.findRenderedDOMComponentWithTag(gridHeadingCell, 'i');
@@ -49,10 +49,10 @@ describe('grid heading cell', () => {
     });
 
     it('is in ascending sorted mode when sorted prop is true', () => {
-        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         gridHeadingCell.setProps({ sorted: true });
 
-        ReactTestUtils.Simulate.click(gridHeadingCell.getDOMNode());
+        ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         gridHeadingCell.setProps({ sorted: true });
 
         const sortedIcon = ReactTestUtils.findRenderedDOMComponentWithTag(gridHeadingCell, 'i');
@@ -75,8 +75,8 @@ describe('grid heading cell', () => {
 
         gridHeadingCell.setProps({ column: { id: testId }});
 
-        const textContent = ReactTestUtils.findRenderedDOMComponentWithTag(gridHeadingCell, 'strong').getDOMNode().textContent;
-
+        const headingCell = ReactTestUtils.findRenderedDOMComponentWithTag(gridHeadingCell, 'strong');
+        const textContent = React.findDOMNode(headingCell).textContent;
         expect(textContent).toEqual(capitalizedId);
     });
 });

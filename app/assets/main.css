@@ -8127,14 +8127,14 @@ body {
   z-index: 99;
 }
 
-.main-menu {
+.main-menu .side-nav {
   margin-top: 0.5rem;
 }
-.main-menu li {
+.main-menu .side-nav li {
   margin: 0;
   padding: 0;
 }
-.main-menu li a:not(.button) {
+.main-menu .side-nav li a:not(.button) {
   height: 3.2rem;
   line-height: 3.2rem;
   color: gray;
@@ -8217,6 +8217,9 @@ body {
 }
 .grid-heading .grid-cell:hover {
   background-color: #f9f9f9;
+}
+.grid-heading .grid-cell .fa-sort-asc {
+  margin-top: .8rem;
 }
 
 ul.pagination {

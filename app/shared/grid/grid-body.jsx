@@ -19,7 +19,6 @@ export default React.createClass({
         }
     },
     _handleChangePage(newPage) {
-        console.log(newPage);
         this.setState({
            currentPage: newPage
         });

@@ -46,13 +46,6 @@ describe('grid body', () => {
         expect(renderedRows.length).toEqual(0);
     });
 
-    it('renders pagination if pagination prop is true', () => {
-        gridBody.setProps({ pagination: true });
-
-        const gridPagination = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridPagination);
-        expect(gridPagination.length).toEqual(1);
-    });
-
     describe('row keys', () => {
         it('sets the key to the correct value when there is an unique column', () => {
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
@@ -142,6 +135,42 @@ describe('grid body', () => {
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 
             expect(renderedRows[0].props.data).toEqual(dummyData[0]);
+        });
+    });
+
+    describe('paginating rows', () => {
+
+        it('renders pagination if pagination prop is true', () => {
+            gridBody.setProps({ pagination: 10 });
+
+            const gridPagination = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridPagination);
+            expect(gridPagination.length).toEqual(1);
+        });
+
+        it('paginates rows and only renders rows on current page', () => {
+            gridBody.setProps({ pagination: 2 });
+            const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
+
+            expect(renderedRows.length).toEqual(2);
+        });
+
+        it('handles page changes correctly', () => {
+            gridBody.setProps({ pagination: 2 });
+
+            const gridPagination = ReactTestUtils.findRenderedComponentWithType(gridBody, GridPagination);
+            gridPagination.props.onChangePage(1);
+
+            const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
+
+            expect(renderedRows.length).toEqual(1);
+        });
+
+        it('does not paginate rows if pagination property is zero', () => {
+            gridBody.setProps({ pagination: 0 });
+
+            const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
+
+            expect(renderedRows.length).toEqual(3);
         });
     });
 });

@@ -13,3 +13,6 @@ linters:
 
   NestingDepth:
     max_depth: 4
+
+  SelectorDepth:
+    max_depth: 4

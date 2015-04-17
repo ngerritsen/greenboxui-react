@@ -1,16 +1,13 @@
 ToDo
-- Build grid pagination
-    * Pass pagination info to grid body
-    * Write Unit tests
-    * Little bit of styling
 
 Backlog
-- Search for graph component/build one
+- Build settings page
+- Build development settings page
+- Build 'actual' (fake) http calls/promises
+- Make graph with actual data
 
 Epics
-- Build settings page
 - Translation functionality
-- Build 'actual' (fake) http calls/promises
 - Build report component
 - Experiment /w aria
 

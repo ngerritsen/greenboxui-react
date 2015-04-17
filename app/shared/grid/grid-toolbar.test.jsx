@@ -22,7 +22,7 @@ describe('grid toolbar', () => {
     it('fires the search handler with the correct parameters when the search input changes', () => {
         const dummySearchParameter = 'bear';
 
-        gridToolbar.refs.searchInput.getDOMNode().value = dummySearchParameter;
+        React.findDOMNode(gridToolbar.refs.searchInput).value = dummySearchParameter;
         ReactTestUtils.Simulate.change(gridToolbar.refs.searchInput);
 
         expect(onSearchDummyCallback).toHaveBeenCalledWith(dummySearchParameter, '');
@@ -32,8 +32,8 @@ describe('grid toolbar', () => {
         const dummySearchParameter = 'bear';
         const dummySearchByParameter = dummyColumnInfo[0].id;
 
-        gridToolbar.refs.searchInput.getDOMNode().value = dummySearchParameter;
-        gridToolbar.refs.searchBySelection.getDOMNode().value = dummySearchByParameter;
+        React.findDOMNode(gridToolbar.refs.searchInput).value = dummySearchParameter;
+        React.findDOMNode(gridToolbar.refs.searchBySelection).value = dummySearchByParameter;
         ReactTestUtils.Simulate.change(gridToolbar.refs.searchBySelection);
 
         expect(onSearchDummyCallback).toHaveBeenCalledWith(dummySearchParameter, dummySearchByParameter);
