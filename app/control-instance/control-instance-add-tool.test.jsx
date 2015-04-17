@@ -28,6 +28,26 @@ describe('control instance add tool', () => {
         expect(ControlInstanceActions.addControl).toHaveBeenCalledWith('Pump', newName);
     });
 
+    it('adds multiple controls if amount input is higher than 1', () => {
+        const newName = 'New Control Name';
+        const amount = 10;
+        let addedControls = [];
+
+        spyOn(ControlInstanceActions, 'addControl').and.callFake((type, name) => {
+            addedControls.push(name);
+        });
+
+        const submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(controlInstanceAddTool, 'button');
+
+        React.findDOMNode(controlInstanceAddTool.refs.controlNameInput).value = newName;
+        React.findDOMNode(controlInstanceAddTool.refs.controlAmountInput).value = amount;
+        ReactTestUtils.Simulate.click(submitButton);
+
+        expect(addedControls.length).toEqual(10);
+        expect(addedControls[0]).toEqual(`${newName} 1`);
+        expect(addedControls[9]).toEqual(`${newName} 10`);
+    });
+
     it('removes whitespace from the control name when adding a control', () => {
         const newName = 'New Control Name';
         const whiteSpacedNewName = '  New Control Name  ';

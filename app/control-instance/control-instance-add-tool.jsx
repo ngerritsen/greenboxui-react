@@ -6,16 +6,27 @@ export default React.createClass({
         event.preventDefault();
 
         const controlType = React.findDOMNode(this.refs.selectedControlType).value;
+        let controlAmountNode = React.findDOMNode(this.refs.controlAmountInput);
+        let controlAmount = React.findDOMNode(this.refs.controlAmountInput).value;
         let controlNameNode = React.findDOMNode(this.refs.controlNameInput);
         const controlName = controlNameNode.value.trim();
 
         if (controlName) {
-            ControlInstanceActions.addControl(controlType, controlName);
+            if (controlAmount > 1) {
+                for(let i = 1; i <= controlAmount; i++) {
+                    ControlInstanceActions.addControl(controlType, `${controlName} ${i}`);
+                }
+            }
+            else {
+                ControlInstanceActions.addControl(controlType, controlName);
+            }
+
             controlNameNode.value = '';
+            controlAmountNode.value = 1;
         }
     },
     render() {
-        const controlTypes = ['Pump', 'Valve', 'Meteo', 'Fan', 'Custom Alarm'];
+        const controlTypes = ['Pump', 'Crop Section', 'Valve', 'Meteo', 'Fan', 'Custom Alarm'];
         const controlTypeOptions = controlTypes.map((type) => {
             return <option value={type} key={type}>{type}</option>
         });
@@ -23,16 +34,21 @@ export default React.createClass({
         return (
             <form>
                 <div className="row">
-                    <div className="small-5 columns">
+                    <div className="small-4 columns">
                         <label>Control Type
                             <select ref="selectedControlType">
                                 {controlTypeOptions}
                             </select>
                         </label>
                     </div>
-                    <div className="small-5 columns">
+                    <div className="small-4 columns">
                         <label>Control Name
                             <input type="text" ref="controlNameInput"/>
+                        </label>
+                    </div>
+                    <div className="small-2 columns">
+                        <label>Amount
+                            <input type="number" ref="controlAmountInput" defaultValue="1"/>
                         </label>
                     </div>
                     <div className="small-2 columns">
