@@ -8,15 +8,15 @@ export default React.createClass({
         title: React.PropTypes.string.isRequired,
         items: React.PropTypes.arrayOf(React.PropTypes.shape({
             icon: React.PropTypes.string,
-            link: React.PropTypes.string,
+            name: React.PropTypes.string,
             title: React.PropTypes.string
         })).isRequired
     },
     render() {
         const items = this.props.items.map((item) => {
             return (
-                <li className="side-nav-item" role="menuitem" key={item.link}>
-                    <Link to={item.link} activeClassName="active">
+                <li className="side-nav-item" role="menuitem" key={item.name}>
+                    <Link to={item.name} activeClassName="active">
                         <i className={`fa fa-${item.icon} fa-fw`}></i>&nbsp; {item.title}
                     </Link>
                 </li>
