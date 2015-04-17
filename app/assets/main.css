@@ -8424,3 +8424,10 @@ button.button.button-form {
   background-color: #dfdfdf;
   color: #508bf6;
 }
+
+.setting {
+  padding: 0 1rem;
+}
+.setting label {
+  margin-bottom: 0.5rem;
+}

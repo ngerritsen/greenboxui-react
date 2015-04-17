@@ -1,7 +1,7 @@
 ToDo
 
 Backlog
-- Build settings page
+- Build settings styles
 - Build development settings page
 - Build 'actual' (fake) http calls/promises
 - Make graph with actual data

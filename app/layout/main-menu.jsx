@@ -8,7 +8,8 @@ export default React.createClass({
     render() {
         const navItems = [
             {icon: 'line-chart', link: 'graphs', title: 'Graphs'},
-            {icon: 'wrench', link: 'configure', title: 'Configure'}
+            {icon: 'wrench', link: 'configure', title: 'Configure'},
+            {icon: 'cog', link: 'settings', title: 'Settings'}
         ];
 
         return (
