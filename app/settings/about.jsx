@@ -5,34 +5,32 @@ export default React.createClass({
     render() {
         return (
             <Slab>
-                <form>
-                    <div className="row setting">
-                        <div className="small-6 medium-8 columns">
-                            <label htmlFor="greenbox-id" className="inline">System ID:</label>
-                        </div>
-                        <div className="small-6 medium-4 columns">
-                            <label name="greenbox-id" className="inline"><strong>118</strong></label>
-                        </div>
+                <div className="row setting">
+                    <div className="small-6 medium-8 columns">
+                        <span className="setting-description">System ID:</span>
                     </div>
+                    <div className="small-6 medium-4 columns">
+                        <span className="setting-value">118</span>
+                    </div>
+                </div>
 
-                    <div className="row setting">
-                        <div className="small-6 medium-8 columns">
-                            <label htmlFor="version" className="inline">Software Version:</label>
-                        </div>
-                        <div className="small-6 medium-4 columns">
-                            <label name="version" className="inline"><strong>6535</strong></label>
-                        </div>
+                <div className="row setting">
+                    <div className="small-6 medium-8 columns">
+                        <span className="setting-description">Software Version:</span>
                     </div>
+                    <div className="small-6 medium-4 columns">
+                        <span className="setting-value">6535</span>
+                    </div>
+                </div>
 
-                    <div className="row setting">
-                        <div className="small-6 medium-8 columns">
-                            <label htmlFor="ui-version" className="inline">UI Version:</label>
-                        </div>
-                        <div className="small-6 medium-4 columns">
-                            <label name="ui-version" className="inline"><strong>1.0.0</strong></label>
-                        </div>
+                <div className="row setting">
+                    <div className="small-6 medium-8 columns">
+                        <span className="setting-description">UI Version:</span>
                     </div>
-                </form>
+                    <div className="small-6 medium-4 columns">
+                        <span className="setting-value">1.0.0</span>
+                    </div>
+                </div>
             </Slab>
         );
     }

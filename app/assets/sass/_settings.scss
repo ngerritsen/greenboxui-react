@@ -1,7 +1,14 @@
+$setting-height: 2.8rem;
+
 .setting {
   padding: 0 $margin-regular;
+}
 
-  label {
-    margin-bottom: $margin-small;
-  }
+.setting-value,
+.setting-description {
+  @include vertical-center-height($setting-height);
+}
+
+.setting-value {
+  font-weight: bold;
 }

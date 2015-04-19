@@ -169,6 +169,7 @@ gulp.task('connectDist', function () {
 gulp.task('watch', function() {
     gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint']);
     gulp.watch([paths.styles], ['compass']);
+    gulp.watch(['./app/index.html'], browserSync.reload());
 });
 
 gulp.task('dev',

@@ -19,7 +19,14 @@
 <script src="bower_components/foundation/js/foundation.min.js"></script>
 
 <script>
+    $(document).foundation({
+        offcanvas : {
+            open_method: 'overlap',
+            close_on_click : true
+        }
+    });
     $(document).foundation('reflow');
+
 </script>
 </body>
 </html>

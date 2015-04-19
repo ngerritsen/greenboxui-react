@@ -1,7 +1,7 @@
+BUG:
+Search w/ pagination refresh!!
+
 In Progress
-- Performance Optimizations:
-    * Bundle libs?
-    * Resize/optimize img
 - Build settings styles
 - Build development settings page
 

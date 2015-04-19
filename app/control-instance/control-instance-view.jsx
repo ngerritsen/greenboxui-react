@@ -45,7 +45,6 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={this.state.controls}
-                        pagination={20}
                     />
                 </Slab>
             </div>

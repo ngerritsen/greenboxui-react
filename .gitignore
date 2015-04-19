@@ -1,6 +1,8 @@
 node_modules
 app/bower_components
 app/bundle.js
+app/assets/main.css
+dist
 .idea
 .sass-cache
 npm-debug.log

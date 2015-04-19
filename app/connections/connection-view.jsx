@@ -53,6 +53,7 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={viewData}
+                        pagination={10}
                     />
                 </Slab>
             </div>

@@ -20461,6 +20461,13 @@ button.button.button-form {
 .setting {
   padding: 0 1rem;
 }
-.setting label {
-  margin-bottom: 0.5rem;
+
+.setting-value,
+.setting-description {
+  height: 2.8rem;
+  line-height: 2.8rem;
+}
+
+.setting-value {
+  font-weight: bold;
 }
