@@ -43,4 +43,4 @@ class ControlInstanceStore {
     }
 }
 
-export default AltApp.createStore(ControlInstanceStore);
+export default AltApp.createStore(ControlInstanceStore, 'ControlInstanceStore');

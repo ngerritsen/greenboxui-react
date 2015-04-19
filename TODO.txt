@@ -1,4 +1,7 @@
 In Progress
+- Performance Optimizations:
+    * Bundle libs?
+    * Resize/optimize img
 - Build settings styles
 - Build development settings page
 
@@ -17,3 +20,4 @@ Backlog
 Attention Points
 - Think about modularization of edit fields/switches/selections for reusability
 - Check if routing dev experience remains good
+- Gzip js/css on server

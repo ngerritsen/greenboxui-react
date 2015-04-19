@@ -32,4 +32,4 @@ class ConnectionStore {
     }
 }
 
-export default AltApp.createStore(ConnectionStore);
+export default AltApp.createStore(ConnectionStore, 'ConnectionStore');

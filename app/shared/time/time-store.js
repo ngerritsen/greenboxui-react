@@ -24,4 +24,4 @@ class TimeStore {
     }
 }
 
-export default AltApp.createStore(TimeStore);
+export default AltApp.createStore(TimeStore, 'TimeStore');
