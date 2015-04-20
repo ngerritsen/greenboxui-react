@@ -52,10 +52,10 @@ export default React.createClass({
         return (
             <Slab>
                 <div className="row setting">
-                    <div className="small-6 medium-8 columns">
+                    <div className="small-6 medium-8 columns setting-column">
                         <span className="setting-description">Dummy configuration</span>
                     </div>
-                    <div className="small-6 medium-4 columns">
+                    <div className="small-6 medium-4 columns setting-column">
                         <button className="button radius" onClick={this._handleAddDummyConfiguration}>Add</button>
                     </div>
                 </div>

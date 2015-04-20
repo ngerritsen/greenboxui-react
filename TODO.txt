@@ -1,6 +1,3 @@
-BUG:
-Search w/ pagination refresh!!
-
 In Progress
 - Build settings styles
 - Build development settings page
@@ -16,6 +13,9 @@ Backlog
 - Build License component
 - Build Controls component (w/ store(s) for parameters)
 - Experiment /w aria
+
+Bugs:
+Pagination does not refresh on search
 
 Attention Points
 - Think about modularization of edit fields/switches/selections for reusability

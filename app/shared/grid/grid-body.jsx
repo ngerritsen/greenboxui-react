@@ -23,6 +23,17 @@ export default React.createClass({
            currentPage: newPage
         });
     },
+    _searchData(data) {
+        if (this.props.searchParameter) {
+            return data.filter((rowData) => {
+                return this._searchRowData(rowData) ? true : false;
+            });
+        }
+        else {
+            return data;
+        }
+
+    },
     _searchRowData(rowData) {
         const formattedSearchParameter = String(this.props.searchParameter).toLowerCase();
         const columns = this.props.columnInfo;
@@ -70,29 +81,31 @@ export default React.createClass({
         let rowsToShow = [];
         let pagination = '';
         let totalRowCount = 0;
-
-        const searchParameter = this.props.searchParameter;
         const columnInfo = this.props.columnInfo;
         const uniqueId = this._getUniqueId();
+
         const sortedData = this._sortRowData(this.props.data);
 
-        rowsToShow = sortedData.map((rowData, index) => {
+        const filteredData = this._searchData(sortedData);
+
+        rowsToShow = filteredData.map((rowData, index) => {
             const key = uniqueId ? rowData[uniqueId] : index;
-            if (!searchParameter || this._searchRowData(rowData)) {
-                totalRowCount++;
-                return <GridRow
-                    columnInfo={columnInfo}
-                    data={rowData}
-                    key={key}
-                    reactKey={key}
-                />;
-            }
+            totalRowCount++;
+            return <GridRow
+                columnInfo={columnInfo}
+                data={rowData}
+                key={key}
+                reactKey={key}
+            />;
         });
 
         if(this.props.pagination) {
-            const currentPage = this.state.currentPage;
+            let currentPage = this.state.currentPage;
             const paginatedRows = this._paginateRows(rowsToShow);
-            rowsToShow = paginatedRows[this.state.currentPage];
+            if (paginatedRows.length - 1 > currentPage) {
+                currentPage = paginatedRows.length - 1;
+            }
+            rowsToShow = paginatedRows[currentPage];
 
             pagination = (
                 <GridPagination

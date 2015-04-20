@@ -145,7 +145,7 @@ gulp.task('copy-html-files', function () {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('optimize-image-files', function () {
+gulp.task('optimize-images', function () {
     gulp.src('./app/**/*.png')
         .pipe($.imagemin())
         .pipe(gulp.dest('dist/'));
@@ -179,5 +179,5 @@ gulp.task('dev',
 gulp.task('default', ['dev']);
 
 gulp.task('build',
-    ['lint', 'compass', 'test', 'bundle', 'test', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'copy-image-files', 'connectDist']
+    ['lint', 'compass', 'test', 'bundle', 'test', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'optimize-images', 'connectDist']
 );

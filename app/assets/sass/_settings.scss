@@ -1,12 +1,17 @@
-$setting-height: 2.8rem;
+$setting-height: 3.2rem;
 
 .setting {
   padding: 0 $margin-regular;
+
+  button {
+    margin: 0;
+  }
 }
 
-.setting-value,
-.setting-description {
+.setting-column {
   @include vertical-center-height($setting-height);
+  font-size: .95rem;
+  max-height: $setting-height;
 }
 
 .setting-value {
