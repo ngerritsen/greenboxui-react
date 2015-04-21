@@ -1,19 +1,19 @@
 import AltApp from '../core/alt-app';
 import BlueBirdPromise from 'bluebird';
 import ControlInstanceServerActions from './control-instance-server-actions';
+import ControlInstanceApiCalls from './control-instance-api-calls';
 
 class ControlInstanceActions {
     addControl(typeId, name) {
         const dirtyId = _getNewRandomId();
-        const controlFromServer = {
+        const dummyControlFromServer = {
             typeId: typeId,
             name: name,
             instanceId: _getNewRandomId()
         };
-        let request = new BlueBirdPromise((resolve, reject) => {
-            setTimeout(() => resolve(), 1000);
-        });
-        request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, controlFromServer))
+
+        let request = ControlInstanceApiCalls.putNewControl(typeId, name);
+        request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, dummyControlFromServer));
         this.dispatch({
             typeId: typeId,
             name: name,
@@ -23,9 +23,7 @@ class ControlInstanceActions {
 
     renameControl(instanceId, newName) {
         const dirtyId = _getNewRandomId();
-        let request = new BlueBirdPromise((resolve, reject) => {
-            setTimeout(() => resolve(), 1000);
-        });
+        let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
         request.then(() => ControlInstanceServerActions.renameControlSucceeded(dirtyId, newName));
         this.dispatch({
             instanceId: instanceId,
@@ -35,8 +33,12 @@ class ControlInstanceActions {
     }
 
     removeControl(instanceId) {
+        const dirtyId = _getNewRandomId();
+        let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
+        request.then(() => ControlInstanceServerActions.removeControlSucceeded(dirtyId));
         this.dispatch({
-            instanceId: instanceId
+            instanceId: instanceId,
+            dirty: dirtyId
         });
     }
 }

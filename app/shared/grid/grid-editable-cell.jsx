@@ -14,6 +14,8 @@ export default React.createClass({
         this.setState({ editMode: editMode });
     },
     _handleEditValue(event) {
+        event.preventDefault();
+
         const newValue = React.findDOMNode(this.refs.editedValueInput).value.trim();
         const oldValue = String(this.props.value);
         const context = this.props.context;

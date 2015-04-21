@@ -1,7 +1,8 @@
 Progress
 - Build 'actual' (fake) http calls/promises
-    * Optimistic updates
-    * Dirty store values
+    * Ctrl renamed and removed failed
+    * Connections also?
+    * Auto focus on input grid
 
 Backlog
 - Translation functionality

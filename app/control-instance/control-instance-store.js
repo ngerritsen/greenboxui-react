@@ -13,7 +13,8 @@ class ControlInstanceStore {
         this.bindAction(ControlInstanceActions.renameControl, this.onControlOptimisticallyRenamed);
         this.bindAction(ControlInstanceServerActions.renameControlSucceeded, this.onControlSuccessfullyRenamed);
 
-        this.bindAction(ControlInstanceActions.removeControl, this.onControlRemoved);
+        this.bindAction(ControlInstanceActions.removeControl, this.onControlOptimisticallyRemoved);
+        this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlSuccessfullyRemoved);
 
 
         this.exportPublicMethods({
@@ -60,11 +61,20 @@ class ControlInstanceStore {
         });
     }
 
-    onControlRemoved(payload) {
-        if(payload.instanceId) {
-            const instanceId = payload.instanceId;
-            this.controls = this.controls.filter((control) => control.instanceId !== instanceId);
-        }
+    onControlOptimisticallyRemoved(payload) {
+        const {instanceId, dirty} = payload;
+        this.controls = this.controls.map((control) => {
+            if(control.instanceId === instanceId) {
+                control.dirty = dirty;
+            }
+            return control;
+        });
+
+    }
+
+    onControlSuccessfullyRemoved(payload) {
+        const clean = payload.clean;
+        this.controls = this.controls.filter((control) => control.dirty !== clean);
     }
 
     _getNewInstanceId() {
