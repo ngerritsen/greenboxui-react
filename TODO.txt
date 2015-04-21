@@ -1,17 +1,16 @@
-In Progress
-- Build settings styles
-- Build development settings page
-
-ToDo
+Progress
 - Build 'actual' (fake) http calls/promises
-- Make graph with actual data
+    * Optimistic updates
+    * Dirty store values
 
 Backlog
 - Translation functionality
-- Build report component
-- Build Log component
 - Build License component
 - Build Controls component (w/ store(s) for parameters)
+- Build report component
+- Build Log component
+- Make graph with actual data
+- Modularize Settings
 - Experiment /w aria
 
 Bugs:

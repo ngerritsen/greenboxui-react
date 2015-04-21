@@ -88,3 +88,7 @@ ul.pagination {
     }
   }
 }
+
+.dirty {
+  color: darken($light-gray, 10%);
+}

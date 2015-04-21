@@ -77,22 +77,30 @@ export default React.createClass({
         const uniqueColumn = _(this.props.columnInfo).find((column) => column.unique);
         return uniqueColumn ? uniqueColumn.id : false;
     },
+    _getKey(rowData, index) {
+        const uniqueId = this._getUniqueId();
+        let key = index;
+        if(uniqueId && rowData[uniqueId]) {
+            key = rowData[uniqueId]
+        }
+        else if(rowData.dirty) {
+            key = rowData.dirty
+        }
+
+    },
     render() {
         let rowsToShow = [];
         let pagination = '';
         let totalRowCount = 0;
-        const columnInfo = this.props.columnInfo;
-        const uniqueId = this._getUniqueId();
 
         const sortedData = this._sortRowData(this.props.data);
-
         const filteredData = this._searchData(sortedData);
 
         rowsToShow = filteredData.map((rowData, index) => {
-            const key = uniqueId ? rowData[uniqueId] : index;
+            const key = this._getKey(rowData, index);
             totalRowCount++;
             return <GridRow
-                columnInfo={columnInfo}
+                columnInfo={this.props.columnInfo}
                 data={rowData}
                 key={key}
                 reactKey={key}
