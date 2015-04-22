@@ -61,6 +61,7 @@ class ControlInstanceStore {
     }
 
     onControlRemoved(payload) {
+        console.log(payload);
         if(payload.instanceId) {
             const instanceId = payload.instanceId;
             this.controls = this.controls.filter((control) => control.instanceId !== instanceId);

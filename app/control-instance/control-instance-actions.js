@@ -13,7 +13,7 @@ class ControlInstanceActions {
         let request = new BlueBirdPromise((resolve, reject) => {
             setTimeout(() => resolve(), 1000);
         });
-        request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, controlFromServer))
+        request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, controlFromServer));
         this.dispatch({
             typeId: typeId,
             name: name,
