@@ -5,7 +5,7 @@ import GridDeleteCell from './grid-delete-cell';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('grid row', () => {
+xdescribe('grid row', () => {
     const dummyColumnInfo = [
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }

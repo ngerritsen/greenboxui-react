@@ -9,7 +9,7 @@ describe('connection add tool', () => {
     const dummyControls = [
         { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
         { typeId: 'Valve', instanceId: '138134', name: 'Valve 1' },
-        { typeId: 'Valve', instanceId: '1381dd34', name: 'Valve 2' }
+        { typeId: 'Valve', instanceId: '3451dd34', name: 'Valve 2' }
     ];
 
     let connectionAddTool;

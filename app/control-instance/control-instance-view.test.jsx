@@ -35,24 +35,25 @@ describe('control instance view', () => {
 
     it('gets listens to control instance store for updates', () => {
         spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
-        AltApp.dispatcher.dispatch({ action: addControlAction, data: {} });
+        AltApp.dispatcher.dispatch({ action: addControlAction, data: null });
 
         expect(ControlInstanceStore.getState).toHaveBeenCalled();
         expect(controlInstanceView.state.controls).toEqual(dummyControls);
     });
 
     it('handles control renames', () => {
+        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
         const newName = 'newName';
         const instanceId = dummyControls[0].instanceId;
 
         spyOn(ControlInstanceActions, 'renameControl');
 
         controlInstanceView._handleEditControlName(newName, { instanceId: instanceId });
-
         expect(ControlInstanceActions.renameControl).toHaveBeenCalledWith(instanceId, newName);
     });
 
     it('handles control deletes', () => {
+        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
         const control = dummyControls[0];
 
         spyOn(ControlInstanceActions, 'removeControl');

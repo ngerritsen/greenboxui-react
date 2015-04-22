@@ -42,7 +42,7 @@ describe('connection view', () => {
     });
 
     it('listens to connection store for updates', () => {
-        AltApp.dispatcher.dispatch({ action: addConnectionAction, data: {} });
+        AltApp.dispatcher.dispatch({ action: addConnectionAction, data: null });
 
         expect(ConnectionStore.getState).toHaveBeenCalled();
         expect(connectionView.state.connections).toEqual(dummyConnections);

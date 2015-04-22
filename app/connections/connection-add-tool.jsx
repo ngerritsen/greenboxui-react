@@ -23,7 +23,8 @@ export default React.createClass({
         this.setState({ controls: newControls });
     },
     _getAvailableControlTypes() {
-        const controlTypeIds = _(this.state.controls).pluck('typeId');
+        const cleanControls =  _(this.state.controls).filter((control) => !control.dirty);
+        const controlTypeIds = _(cleanControls).pluck('typeId');
         return _(controlTypeIds).unique();
     },
     _getSelectedSourceType() {
@@ -60,18 +61,14 @@ export default React.createClass({
             return <option value={type} key={type}>{type}</option>;
         });
 
-        const sourceControlOptions = this.state.controls.map((control) => {
-            const option = <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
-            if (control.typeId === this._getSelectedSourceType()) {
-                return option;
-            }
+        const availableSourceControlOptions = this.state.controls.filter((control) => control.typeId === this._getSelectedSourceType() && control.instanceId);
+        const sourceControlOptions = availableSourceControlOptions.map((control) => {
+            return <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
         });
 
-        const targetControlOptions = this.state.controls.map((control) => {
-            const option = <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
-            if (control.typeId === this._getSelectedTargetType()) {
-                return option;
-            }
+        const availableTargetControlOptions = this.state.controls.filter((control) => control.typeId === this._getSelectedTargetType() && control.instanceId);
+        const targetControlOptions = availableTargetControlOptions.map((control) => {
+            return <option value={control.instanceId} key={control.instanceId}>{control.name}</option>;
         });
 
         return (

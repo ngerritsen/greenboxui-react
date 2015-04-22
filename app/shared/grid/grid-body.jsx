@@ -79,13 +79,13 @@ export default React.createClass({
     },
     _getKey(rowData, index) {
         const uniqueId = this._getUniqueId();
-        let key = index;
         if(uniqueId && rowData[uniqueId]) {
-            key = rowData[uniqueId]
+            return rowData[uniqueId]
         }
         else if(rowData.dirty) {
-            key = rowData.dirty
+            return rowData.dirty
         }
+        return index;
 
     },
     render() {
