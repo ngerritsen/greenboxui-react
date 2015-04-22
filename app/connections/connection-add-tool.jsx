@@ -1,12 +1,13 @@
 import React from 'react';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
+import Immutable from 'immutable';
 import _ from 'underscore';
 
 export default React.createClass({
     getInitialState() {
         return {
-            controls: [],
+            controls: Immutable.List(),
             selectedSourceType: '',
             selectedTargetType: ''
         }
@@ -23,8 +24,8 @@ export default React.createClass({
         this.setState({ controls: newControls });
     },
     _getAvailableControlTypes() {
-        const cleanControls =  _(this.state.controls).filter((control) => !control.dirty);
-        const controlTypeIds = _(cleanControls).pluck('typeId');
+        const cleanControls =  this.state.controls.filter((control) => !control.dirty);
+        const controlTypeIds = _(cleanControls.toArray()).pluck('typeId');
         return _(controlTypeIds).unique();
     },
     _getSelectedSourceType() {
@@ -38,9 +39,8 @@ export default React.createClass({
 
         const sourceControlInstanceId = React.findDOMNode(this.refs.selectedSourceControl).value;
         const targetControlInstanceId = React.findDOMNode(this.refs.selectedTargetControl).value;
-
-        const sourceControl = _(this.state.controls).find((control) => control.instanceId == sourceControlInstanceId);
-        const targetControl = _(this.state.controls).find((control) => control.instanceId == targetControlInstanceId);
+        const sourceControl = _(this.state.controls.toArray()).find((control) => control.instanceId == sourceControlInstanceId);
+        const targetControl = _(this.state.controls.toArray()).find((control) => control.instanceId == targetControlInstanceId);
 
         ConnectionActions.addConnection(sourceControl, targetControl);
 
