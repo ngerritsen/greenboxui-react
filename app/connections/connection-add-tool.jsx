@@ -7,7 +7,7 @@ import _ from 'underscore';
 export default React.createClass({
     getInitialState() {
         return {
-            controls: Immutable.List(),
+            controls: [],
             selectedSourceType: '',
             selectedTargetType: ''
         }
@@ -25,7 +25,7 @@ export default React.createClass({
     },
     _getAvailableControlTypes() {
         const cleanControls =  this.state.controls.filter((control) => !control.dirty);
-        const controlTypeIds = _(cleanControls.toArray()).pluck('typeId');
+        const controlTypeIds = _(cleanControls).pluck('typeId');
         return _(controlTypeIds).unique();
     },
     _getSelectedSourceType() {
@@ -39,8 +39,8 @@ export default React.createClass({
 
         const sourceControlInstanceId = React.findDOMNode(this.refs.selectedSourceControl).value;
         const targetControlInstanceId = React.findDOMNode(this.refs.selectedTargetControl).value;
-        const sourceControl = _(this.state.controls.toArray()).find((control) => control.instanceId == sourceControlInstanceId);
-        const targetControl = _(this.state.controls.toArray()).find((control) => control.instanceId == targetControlInstanceId);
+        const sourceControl = _(this.state.controls).find((control) => control.instanceId == sourceControlInstanceId);
+        const targetControl = _(this.state.controls).find((control) => control.instanceId == targetControlInstanceId);
 
         ConnectionActions.addConnection(sourceControl, targetControl);
 

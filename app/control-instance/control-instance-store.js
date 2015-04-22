@@ -12,7 +12,7 @@ const ControlInstance = Immutable.Record({
 
 class ControlInstanceStore {
     constructor() {
-        this.controls = Immutable.List();
+        this.controls = [];
 
         this.bindAction(ControlInstanceActions.addControl, this.onControlOptimisticallyAdded);
         this.bindAction(ControlInstanceServerActions.addControlSucceeded, this.onControlSuccessfullyAdded);
@@ -33,7 +33,7 @@ class ControlInstanceStore {
     onControlOptimisticallyAdded(payload) {
         if(payload) {
             const newControl = new ControlInstance(payload);
-            this.controls = this.controls.push(newControl);
+            this.controls.push(newControl);
         }
     }
 
