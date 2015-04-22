@@ -14,6 +14,7 @@ class ControlInstanceActions {
 
         let request = ControlInstanceApiCalls.putNewControl(typeId, name);
         request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, dummyControlFromServer));
+        request.catch(() => ControlInstanceServerActions.addControlFailed(dirtyId));
         this.dispatch({
             typeId: typeId,
             name: name,
@@ -21,10 +22,11 @@ class ControlInstanceActions {
         });
     }
 
-    renameControl(instanceId, newName) {
+    renameControl(instanceId, newName, oldName) {
         const dirtyId = _getNewRandomId();
         let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
         request.then(() => ControlInstanceServerActions.renameControlSucceeded(dirtyId, newName));
+        request.catch(() => ControlInstanceServerActions.renameControlFailed(dirtyId, oldName));
         this.dispatch({
             instanceId: instanceId,
             newName: newName,
@@ -36,6 +38,7 @@ class ControlInstanceActions {
         const dirtyId = _getNewRandomId();
         let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
         request.then(() => ControlInstanceServerActions.removeControlSucceeded(dirtyId));
+        request.catch(() => ControlInstanceServerActions.removeControlFailed(dirtyId));
         this.dispatch({
             instanceId: instanceId,
             dirty: dirtyId

@@ -3,6 +3,7 @@ import AltApp from '../core/alt-app';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceView from './control-instance-view';
 import ControlInstanceStore from './control-instance-store';
+import ControlInstance from './control-instance';
 import Immutable from 'immutable';
 
 const ReactTestUtils = React.addons.TestUtils;
@@ -10,11 +11,11 @@ const ReactTestUtils = React.addons.TestUtils;
 describe('control instance view', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
 
-    const dummyControls = [
-        { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
-        { typeId: 'Valve', instanceId: '138134', name: 'Valve 1' },
-        { typeId: 'Valve', instanceId: '9874200', name: 'Valve 2' }
-    ];
+    const dummyControls = Immutable.List.of(
+        new ControlInstance({ typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' }),
+        new ControlInstance({ typeId: 'Valve', instanceId: '138134', name: 'Valve 1' }),
+        new ControlInstance({ typeId: 'Valve', instanceId: '9874200', name: 'Valve 2' })
+    );
 
     let controlInstanceView;
     beforeEach(() => {
@@ -45,7 +46,7 @@ describe('control instance view', () => {
     it('handles control renames', () => {
         spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
         const newName = 'newName';
-        const instanceId = dummyControls[0].instanceId;
+        const instanceId = dummyControls.get(0).instanceId;
 
         spyOn(ControlInstanceActions, 'renameControl');
 
@@ -55,7 +56,7 @@ describe('control instance view', () => {
 
     it('handles control deletes', () => {
         spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
-        const control = dummyControls[0];
+        const control = dummyControls.get(0);
 
         spyOn(ControlInstanceActions, 'removeControl');
 

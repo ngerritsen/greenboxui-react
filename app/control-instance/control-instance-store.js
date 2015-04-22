@@ -1,18 +1,15 @@
 import AltApp from '../core/alt-app';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceServerActions from './control-instance-server-actions';
+import ControlInstance from './control-instance';
 import Immutable from 'immutable';
-
-const ControlInstance = Immutable.Record({
-    typeId: null,
-    instanceId: null,
-    name: null,
-    dirty: null
-});
 
 class ControlInstanceStore {
     constructor() {
-        this.controls = [];
+        this.on('init', this.bootstrap);
+        this.on('bootstrap', this.bootstrap);
+
+        this.controls = Immutable.List();
 
         this.bindAction(ControlInstanceActions.addControl, this.onControlOptimisticallyAdded);
         this.bindAction(ControlInstanceServerActions.addControlSucceeded, this.onControlSuccessfullyAdded);
@@ -20,9 +17,11 @@ class ControlInstanceStore {
 
         this.bindAction(ControlInstanceActions.renameControl, this.onControlOptimisticallyRenamed);
         this.bindAction(ControlInstanceServerActions.renameControlSucceeded, this.onControlSuccessfullyRenamed);
+        this.bindAction(ControlInstanceServerActions.renameControlFailed, this.onControlUnsuccessfullyRenamed);
 
         this.bindAction(ControlInstanceActions.removeControl, this.onControlOptimisticallyRemoved);
         this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlSuccessfullyRemoved);
+        this.bindAction(ControlInstanceServerActions.removeControlFailed, this.onControlUnsuccessfullyRemoved);
 
 
         this.exportPublicMethods({
@@ -30,10 +29,17 @@ class ControlInstanceStore {
         });
     }
 
+    bootstrap() {
+        // Prevent alt app flush from converting list to regular js array, sorry guys..
+        if (! Immutable.List.isList(this.controls)) {
+            this.controls = Immutable.List(this.controls);
+        }
+    }
+
     onControlOptimisticallyAdded(payload) {
         if(payload) {
             const newControl = new ControlInstance(payload);
-            this.controls.push(newControl);
+            this.controls = this.controls.push(newControl);
         }
     }
 
@@ -75,6 +81,17 @@ class ControlInstanceStore {
         });
     }
 
+    onControlUnsuccessfullyRenamed(payload) {
+        const {oldName, clean} = payload;
+        this.controls = this.controls.map((control) => {
+            if(control.dirty === clean) {
+                control = control.set('name', oldName);
+                control = control.remove('dirty');
+            }
+            return control;
+        });
+    }
+
     onControlOptimisticallyRemoved(payload) {
         const {instanceId, dirty} = payload;
         this.controls = this.controls.map((control) => {
@@ -89,6 +106,16 @@ class ControlInstanceStore {
     onControlSuccessfullyRemoved(payload) {
         const clean = payload.clean;
         this.controls = this.controls.filter((control) => control.dirty !== clean);
+    }
+
+    onControlUnsuccessfullyRemoved(payload) {
+        const clean = payload.clean;
+        this.controls = this.controls.map((control) => {
+            if (control.dirty === payload) {
+                control = control.remove('dirty');
+            }
+            return control;
+        });
     }
 
     _getNewInstanceId() {

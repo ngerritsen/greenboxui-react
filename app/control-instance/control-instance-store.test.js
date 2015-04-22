@@ -35,9 +35,9 @@ describe('control instance store', () => {
         it('adds the right data to optimistic control', () => {
             optimisticallyAddControl(optimisticTestControlA);
 
-            expect(ControlInstanceStore.getState().controls[0].typeId).toEqual(optimisticTestControlA.typeId);
-            expect(ControlInstanceStore.getState().controls[0].name).toEqual(optimisticTestControlA.name);
-            expect(ControlInstanceStore.getState().controls[0].dirty).toEqual(optimisticTestControlA.dirty);
+            expect(ControlInstanceStore.getState().controls.get(0).typeId).toEqual(optimisticTestControlA.typeId);
+            expect(ControlInstanceStore.getState().controls.get(0).name).toEqual(optimisticTestControlA.name);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toEqual(optimisticTestControlA.dirty);
         });
 
         it('adds multiple controls', () => {
@@ -48,8 +48,8 @@ describe('control instance store', () => {
             successfullyAddControl(actualTestControlB);
 
             expect(ControlInstanceStore.getState().controls.length).toEqual(2);
-            expect(ControlInstanceStore.getState().controls[0].instanceId).toEqual(actualTestControlA.instanceId);
-            expect(ControlInstanceStore.getState().controls[1].instanceId).toEqual(actualTestControlB.instanceId);
+            expect(ControlInstanceStore.getState().controls.get(0).instanceId).toEqual(actualTestControlA.instanceId);
+            expect(ControlInstanceStore.getState().controls.get(1).instanceId).toEqual(actualTestControlB.instanceId);
         });
     });
 
@@ -60,11 +60,11 @@ describe('control instance store', () => {
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
 
-            const instanceIdToRemove = ControlInstanceStore.getState().controls[0].instanceId;
+            const instanceIdToRemove = ControlInstanceStore.getState().controls.get(0).instanceId;
 
             optimisticallyRemoveControl(instanceIdToRemove, dirtyId);
 
-            expect(ControlInstanceStore.getState().controls[0].dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toEqual(dirtyId);
         });
 
         it('marks one and the right control as dirty from multiple controls', () => {
@@ -76,12 +76,12 @@ describe('control instance store', () => {
             optimisticallyAddControl(optimisticTestControlB);
             successfullyAddControl(actualTestControlB);
 
-            const instanceIdA = ControlInstanceStore.getState().controls[0].instanceId;
+            const instanceIdA = ControlInstanceStore.getState().controls.get(0).instanceId;
 
             optimisticallyRemoveControl(instanceIdA, dirtyId);
 
-            expect(ControlInstanceStore.getState().controls[0].instanceId).toEqual(instanceIdA);
-            expect(ControlInstanceStore.getState().controls[0].dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.getState().controls.get(0).instanceId).toEqual(instanceIdA);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toEqual(dirtyId);
         });
 
         it('actually removes optimistically removed control after actual removal', () => {
@@ -90,7 +90,7 @@ describe('control instance store', () => {
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
 
-            const instanceIdA = ControlInstanceStore.getState().controls[0].instanceId;
+            const instanceIdA = ControlInstanceStore.getState().controls.get(0).instanceId;
 
             optimisticallyRemoveControl(instanceIdA, dirtyId);
             successfullyRemoveControl(dirtyId);
@@ -107,12 +107,12 @@ describe('control instance store', () => {
             successfullyAddControl(actualTestControlA);
 
             const newName = 'RenamedControlA';
-            const instanceIdA = ControlInstanceStore.getState().controls[0].instanceId;
+            const instanceIdA = ControlInstanceStore.getState().controls.get(0).instanceId;
 
             optimisticallyRenameControl(instanceIdA, newName, dirtyId);
 
-            expect(ControlInstanceStore.getState().controls[0].name).toEqual(newName);
-            expect(ControlInstanceStore.getState().controls[0].dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.getState().controls.get(0).name).toEqual(newName);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toEqual(dirtyId);
         });
 
         it('renames the right control successfully on actual successfull rename', () => {
@@ -125,13 +125,13 @@ describe('control instance store', () => {
             successfullyAddControl(actualTestControlB);
 
             const newName = 'RenamedControlB';
-            const instanceIdB = ControlInstanceStore.getState().controls[1].instanceId;
+            const instanceIdB = ControlInstanceStore.getState().controls.get(1).instanceId;
 
             optimisticallyRenameControl(instanceIdB, newName, dirtyId);
             successfullyRenameControl(newName, dirtyId);
 
-            expect(ControlInstanceStore.getState().controls[1].name).toEqual(newName);
-            expect(ControlInstanceStore.getState().controls[1].dirty).toBeFalsy();
+            expect(ControlInstanceStore.getState().controls.get(1).name).toEqual(newName);
+            expect(ControlInstanceStore.getState().controls.get(1).dirty).toBeFalsy();
         });
 
         it('ignores non existing instance', () => {

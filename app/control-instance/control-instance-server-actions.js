@@ -23,8 +23,9 @@ class ControlInstanceServerActions {
         });
     }
 
-    renameControlFailed(dirtyId) {
+    renameControlFailed(dirtyId, oldName) {
         this.dispatch({
+            oldName: oldName,
             clean: dirtyId
         });
     }
