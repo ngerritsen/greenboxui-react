@@ -22,11 +22,6 @@ class ControlInstanceStore {
         this.bindAction(ControlInstanceActions.removeControl, this.onControlOptimisticallyRemoved);
         this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlSuccessfullyRemoved);
         this.bindAction(ControlInstanceServerActions.removeControlFailed, this.onControlUnsuccessfullyRemoved);
-
-
-        this.exportPublicMethods({
-            _getNewInstanceId: this._getNewInstanceId
-        });
     }
 
     bootstrap() {
@@ -116,10 +111,6 @@ class ControlInstanceStore {
             }
             return control;
         });
-    }
-
-    _getNewInstanceId() {
-        return Math.round((Math.random() * 1000000))
     }
 }
 
