@@ -23,35 +23,35 @@ describe('connection store', () => {
         it('adds a connection', () => {
             addConnection(testConnectionA);
 
-            expect(ConnectionStore.getState().connections.length).toEqual(1);
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
         });
 
         it('adds multiple connections', () => {
             addConnection(testConnectionA);
             addConnection(testConnectionB);
 
-            expect(ConnectionStore.getState().connections.length).toEqual(2);
+            expect(ConnectionStore.getState().connections.count()).toEqual(2);
         });
 
         it('adds the right data to the connection', () => {
             addConnection(testConnectionA);
 
-            expect(ConnectionStore.getState().connections[0].typeId).toEqual(testConnectionA.typeId);
-            expect(ConnectionStore.getState().connections[0].name).toEqual(testConnectionA.name);
+            expect(ConnectionStore.getState().connections.get(0).typeId).toEqual(testConnectionA.typeId);
+            expect(ConnectionStore.getState().connections.get(0).name).toEqual(testConnectionA.name);
         });
 
         it('generates an connection id when adding a connection', () => {
             addConnection(testConnectionA);
 
-            expect(ConnectionStore.getState().connections[0].connectionId).toBeDefined();
+            expect(ConnectionStore.getState().connections.get(0).connectionId).toBeDefined();
         });
 
         it('generates different connection ids when adding connections', () => {
             addConnection(testConnectionA);
             addConnection(testConnectionB);
 
-            expect(ConnectionStore.getState().connections[0].connectionId)
-                .not.toEqual(ConnectionStore.getState().connections[1].connectionId);
+            expect(ConnectionStore.getState().connections.get(0).connectionId)
+                .not.toEqual(ConnectionStore.getState().connections.get(1).connectionId);
         });
 
         it('ignores invalid connections', () => {
@@ -61,7 +61,7 @@ describe('connection store', () => {
             addConnection(invalidConnection1);
             addConnection(invalidConnection2);
 
-            expect(ConnectionStore.getState().connections.length).toEqual(0);
+            expect(ConnectionStore.getState().connections.count()).toEqual(0);
         });
     });
 
@@ -69,24 +69,24 @@ describe('connection store', () => {
         it('removes a connection', () => {
             addConnection(testConnectionA);
 
-            const connectionIdToRemove = ConnectionStore.getState().connections[0].connectionId;
+            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
 
             removeConnection(connectionIdToRemove);
 
-            expect(ConnectionStore.getState().connections.length).toEqual(0);
+            expect(ConnectionStore.getState().connections.count()).toEqual(0);
         });
 
         it('removes one and the right connection from multiple connections', () => {
             addConnection(testConnectionA);
             addConnection(testConnectionB);
 
-            const connectionIdA = ConnectionStore.getState().connections[0].connectionId;
-            const connectionIdB = ConnectionStore.getState().connections[1].connectionId;
+            const connectionIdA = ConnectionStore.getState().connections.get(0).connectionId;
+            const connectionIdB = ConnectionStore.getState().connections.get(1).connectionId;
 
             removeConnection(connectionIdA);
 
-            expect(ConnectionStore.getState().connections.length).toEqual(1);
-            expect(ConnectionStore.getState().connections[0].connectionId).toEqual(connectionIdB);
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(connectionIdB);
         });
     });
 

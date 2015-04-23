@@ -2,7 +2,7 @@ import React from 'react';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import Immutable from 'immutable';
-import _ from 'underscore';
+import Connection from './connection';
 
 export default React.createClass({
     getInitialState() {
@@ -24,23 +24,25 @@ export default React.createClass({
         this.setState({ controls: newControls });
     },
     _getAvailableControlTypes() {
-        const cleanControls = this.state.controls.filter((control) => !control.dirty);
-        const controlTypeIds = cleanControls.map((control) => control.typeId);
-        return _(controlTypeIds.toArray()).unique();
+        return this.state.controls.toSeq()
+            .filter((control) => !control.dirty)
+            .map((control) => control.typeId)
+            .toOrderedSet().toList();
     },
     _getSelectedSourceType() {
-        return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes()[0];
+        return this.state.selectedSourceType ? this.state.selectedSourceType : this._getAvailableControlTypes().get(0);
+
     },
     _getSelectedTargetType() {
-        return this.state.selectedTargetType ? this.state.selectedTargetType : this._getAvailableControlTypes()[0];
+        return this.state.selectedTargetType ? this.state.selectedTargetType : this._getAvailableControlTypes().get(0);
     },
     _handleAddConnection(event) {
         event.preventDefault();
 
         const sourceControlInstanceId = React.findDOMNode(this.refs.selectedSourceControl).value;
         const targetControlInstanceId = React.findDOMNode(this.refs.selectedTargetControl).value;
-        const sourceControl = _(this.state.controls.toArray()).find((control) => control.instanceId == sourceControlInstanceId);
-        const targetControl = _(this.state.controls.toArray()).find((control) => control.instanceId == targetControlInstanceId);
+        const sourceControl = this.state.controls.find((control) => control.instanceId == sourceControlInstanceId);
+        const targetControl = this.state.controls.find((control) => control.instanceId == targetControlInstanceId);
 
         ConnectionActions.addConnection(sourceControl, targetControl);
 

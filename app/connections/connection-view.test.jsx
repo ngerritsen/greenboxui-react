@@ -1,31 +1,46 @@
 import React from 'react/addons';
 import AltApp from '../core/alt-app';
+import Immutable from 'immutable';
+
 import ConnectionActions from './connection-actions';
 import ConnectionView from './connection-view';
 import ConnectionStore from './connection-store';
+import Connection from './connection';
 
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('connection view', () => {
     const addConnectionAction = ConnectionActions.ADD_CONNECTION;
 
-    const dummyConnections = [
-        {
+    const dummyConnections = Immutable.List.of(
+        new Connection({
             connectionId: '58952352',
-            sourceControl: { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
-            targetControl: { typeId: 'Valve', instanceId: '138134', name: 'Valve 1' }
-        },
-        {
+            sourceControlInstanceId: '340fr7tj34t0',
+            sourceControlTypeId: 'Pump',
+            sourceControlname: 'Pump 1',
+            targetControlInstanceId: 'f54y54yf56yh',
+            targetControlTypeId: 'Valve',
+            targetControlname: 'Valve 1'
+        }),
+        new Connection({
             connectionId: '89f304g3',
-            sourceControl: { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
-            targetControl: { typeId: 'Valve', instanceId: '345254', name: 'Valve 2' }
-        },
-        {
+            sourceControlInstanceId: '340fr7tj34t0',
+            sourceControlTypeId: 'Pump',
+            sourceControlname: 'Pump 1',
+            targetControlInstanceId: '45fy56yf54y',
+            targetControlTypeId: 'Valve',
+            targetControlname:  'Valve 2'
+        }),
+        new Connection({
             connectionId: '23ct7340t3',
-            sourceControl: { typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' },
-            targetControl: { typeId: 'Valve', instanceId: '23534543', name: 'Valve 3' }
-        }
-    ];
+            sourceControlInstanceId: '340fr7tj34t0',
+            sourceControlTypeId: 'Pump',
+            sourceControlname: 'Pump 1',
+            targetControlInstanceId: 'f56y54yf54y54fy',
+            targetControlTypeId: 'Valve',
+            targetControlname:  'Valve 3'
+        })
+    );
 
     let connectionView;
 
@@ -49,7 +64,7 @@ describe('connection view', () => {
     });
 
     it('handles connection deletes', () => {
-        const connection = dummyConnections[0];
+        const connection = dummyConnections.get(0);
 
         spyOn(ConnectionActions, 'removeConnection');
 

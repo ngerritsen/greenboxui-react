@@ -1,4 +1,6 @@
 import React from 'react';
+import Immutable from 'immutable';
+
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 
@@ -8,7 +10,7 @@ import Slab from '../shared/slab';
 
 export default React.createClass({
     getInitialState() {
-        return { controls: [] }
+        return { controls: Immutable.List() }
     },
     componentDidMount() {
         ControlInstanceStore.listen(this._onChange);
@@ -44,7 +46,7 @@ export default React.createClass({
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}
-                        data={this.state.controls}
+                        data={this.state.controls.toArray()}
                     />
                 </Slab>
             </div>

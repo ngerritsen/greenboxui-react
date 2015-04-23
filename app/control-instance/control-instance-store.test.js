@@ -23,13 +23,13 @@ describe('control instance store', () => {
         it('optimistically adds a control', () => {
             optimisticallyAddControl(optimisticTestControlA);
 
-            expect(ControlInstanceStore.getState().controls.length).toEqual(1);
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(1);
         });
 
         it('replaces optimistically added control with actual', () => {
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
-            expect(ControlInstanceStore.getState().controls.length).toEqual(1);
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(1);
         });
 
         it('adds the right data to optimistic control', () => {
@@ -47,7 +47,7 @@ describe('control instance store', () => {
             successfullyAddControl(actualTestControlA);
             successfullyAddControl(actualTestControlB);
 
-            expect(ControlInstanceStore.getState().controls.length).toEqual(2);
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(2);
             expect(ControlInstanceStore.getState().controls.get(0).instanceId).toEqual(actualTestControlA.instanceId);
             expect(ControlInstanceStore.getState().controls.get(1).instanceId).toEqual(actualTestControlB.instanceId);
         });
@@ -55,7 +55,7 @@ describe('control instance store', () => {
 
     describe('remove a control tests', () => {
         it('marks an optimistically removed control as dirty', () => {
-            const dirtyId = _getNewRandomId();
+            const dirtyId = getNewRandomId();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -68,7 +68,7 @@ describe('control instance store', () => {
         });
 
         it('marks one and the right control as dirty from multiple controls', () => {
-            const dirtyId = _getNewRandomId();
+            const dirtyId = getNewRandomId();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -85,7 +85,7 @@ describe('control instance store', () => {
         });
 
         it('actually removes optimistically removed control after actual removal', () => {
-            const dirtyId = _getNewRandomId();
+            const dirtyId = getNewRandomId();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -95,13 +95,13 @@ describe('control instance store', () => {
             optimisticallyRemoveControl(instanceIdA, dirtyId);
             successfullyRemoveControl(dirtyId);
 
-            expect(ControlInstanceStore.getState().controls.length).toEqual(0);
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(0);
         });
     });
 
     describe('rename a control tests', () => {
         it('renames a control optimistically', () => {
-            const dirtyId = _getNewRandomId();
+            const dirtyId = getNewRandomId();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -116,7 +116,7 @@ describe('control instance store', () => {
         });
 
         it('renames the right control successfully on actual successfull rename', () => {
-            const dirtyId = _getNewRandomId();
+            const dirtyId = getNewRandomId();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -173,7 +173,7 @@ describe('control instance store', () => {
     function successfullyRenameControl(newName, dirtyId) {
         AltApp.dispatcher.dispatch({ action: successfullyRenameControlAction, data: { newName: newName, clean: dirtyId } });
     }
-    function _getNewRandomId() {
+    function getNewRandomId() {
         return Math.round((Math.random() * 1000000))
     }
 

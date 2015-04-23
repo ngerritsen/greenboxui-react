@@ -1,7 +1,8 @@
 import React from 'react';
+import Immutable from 'immutable';
+
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
-
 import ConnectionAddTool from './connection-add-tool';
 
 import Grid from '../shared/grid/grid';
@@ -9,7 +10,7 @@ import Slab from '../shared/slab';
 
 export default React.createClass({
     getInitialState() {
-        return { connections: [] }
+        return { connections: Immutable.List() }
     },
     componentDidMount() {
         ConnectionStore.listen(this._onChange);
@@ -26,16 +27,6 @@ export default React.createClass({
         ConnectionActions.removeConnection(connection.connectionId);
     },
     render() {
-        const viewData = this.state.connections.map((connection) => {
-            return {
-                sourceTypeId: connection.sourceControl.typeId,
-                sourceName: connection.sourceControl.name,
-                targetTypeId: connection.targetControl.typeId,
-                targetName: connection.targetControl.name,
-                connectionId: connection.connectionId
-            }
-        });
-
         const columnInfo = [
             { title: 'Source Type Id', columns: 2, id: 'sourceTypeId' },
             { title: 'Source Name', columns: 3, id: 'sourceName' },
@@ -52,7 +43,7 @@ export default React.createClass({
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}
-                        data={viewData}
+                        data={this.state.connections.toArray()}
                         pagination={10}
                     />
                 </Slab>
