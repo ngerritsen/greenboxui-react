@@ -1,11 +1,12 @@
 import AltApp from '../core/alt-app';
+import shortId from 'shortid';
 import ConnectionServerActions from './connection-server-actions';
 import ConnectionApiCalls from './connection-api-calls';
 
 class ConnectionActions {
     addConnection(sourceControl, targetControl) {
-        const dirtyId = getNewRandomId();
-        const connectionId = getNewRandomId();
+        const dirtyId = shortId.generate();
+        const connectionId = shortId.generate();
 
         let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
         request.then(() => ConnectionServerActions.addConnectionSucceeded(dirtyId, connectionId));
@@ -19,7 +20,7 @@ class ConnectionActions {
     }
 
     removeConnection(connectionId) {
-        const dirtyId = getNewRandomId();
+        const dirtyId = shortId.generate();
 
         let request = ConnectionApiCalls.postRemoveConnection(connectionId);
         request.then(() => ConnectionServerActions.removeConnectionSucceeded(dirtyId));
@@ -31,10 +32,6 @@ class ConnectionActions {
 
         });
     }
-}
-
-function getNewRandomId() {
-    return Math.round((Math.random() * 1000000))
 }
 
 export default AltApp.createActions(ConnectionActions);

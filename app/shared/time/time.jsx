@@ -1,6 +1,6 @@
 import React from 'react';
-import TimeStore from './time-store';
 import moment from 'moment';
+import TimeStore from './time-store';
 
 export default React.createClass({
     getInitialState() {

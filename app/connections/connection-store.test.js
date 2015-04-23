@@ -1,89 +1,118 @@
 import AltApp from '../core/alt-app';
+import shortId from 'shortid';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
+import ConnectionServerActions from './connection-server-actions';
 
 describe('connection store', () => {
     const addConnectionAction = ConnectionActions.ADD_CONNECTION;
+    const addConnectionSucceededAction = ConnectionServerActions.ADD_CONNECTION_SUCCEEDED;
+
     const removeConnectionAction = ConnectionActions.REMOVE_CONNECTION;
+    const removeConnectionSucceededAction = ConnectionServerActions.REMOVE_CONNECTION_SUCCEEDED;
+
+    const dirtyIdA = shortId.generate();
+    const dirtyIdB = shortId.generate();
 
     const testConnectionA = {
-        connectionId: '58952352',
+        connectionId: shortId.generate(),
         sourceControl: { typeId: 'Pump', connectionId: '0874134', name: 'Pump 1' },
-        targetControl: { typeId: 'Valve', connectionId: '138134', name: 'Valve 1' }
+        targetControl: { typeId: 'Valve', connectionId: '138134', name: 'Valve 1' },
+        dirty: dirtyIdA
     };
     const testConnectionB = {
-        connectionId: '89f304g3',
+        connectionId: shortId.generate(),
         sourceControl: { typeId: 'Pump', connectionId: '0874134', name: 'Pump 1' },
-        targetControl: { typeId: 'Valve', connectionId: '345254', name: 'Valve 2' }
+        targetControl: { typeId: 'Valve', connectionId: '345254', name: 'Valve 2' },
+        dirty: dirtyIdB
     };
 
     afterEach(() => AltApp.flush());
 
     describe('add a connection tests', () => {
-        it('adds a connection', () => {
-            addConnection(testConnectionA);
+        it('optimistically adds a connection', () => {
+            optimisticallyAddConnection(testConnectionA);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.getState().connections.get(0).dirty).toEqual(testConnectionA.dirty);
         });
 
-        it('adds multiple connections', () => {
-            addConnection(testConnectionA);
-            addConnection(testConnectionB);
+        it('adds connection actually', () => {
+            optimisticallyAddConnection(testConnectionA);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
+
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
+            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
+        });
+
+        it('adds multiple connections actually', () => {
+            optimisticallyAddConnection(testConnectionA);
+            optimisticallyAddConnection(testConnectionB);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
+            actuallyAddConnection(testConnectionB.connectionId, dirtyIdB);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(2);
-        });
-
-        it('adds the right data to the connection', () => {
-            addConnection(testConnectionA);
-
-            expect(ConnectionStore.getState().connections.get(0).typeId).toEqual(testConnectionA.typeId);
-            expect(ConnectionStore.getState().connections.get(0).name).toEqual(testConnectionA.name);
-        });
-
-        it('generates an connection id when adding a connection', () => {
-            addConnection(testConnectionA);
-
-            expect(ConnectionStore.getState().connections.get(0).connectionId).toBeDefined();
-        });
-
-        it('generates different connection ids when adding connections', () => {
-            addConnection(testConnectionA);
-            addConnection(testConnectionB);
-
-            expect(ConnectionStore.getState().connections.get(0).connectionId)
-                .not.toEqual(ConnectionStore.getState().connections.get(1).connectionId);
+            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
+            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
+            expect(ConnectionStore.getState().connections.get(1).dirty).toBeFalsy();
+            expect(ConnectionStore.getState().connections.get(1).connectionId).toEqual(testConnectionB.connectionId);
         });
 
         it('ignores invalid connections', () => {
             const invalidConnection1 = {sourceControl: {}};
             const invalidConnection2 = {targetControl: {}};
 
-            addConnection(invalidConnection1);
-            addConnection(invalidConnection2);
+            optimisticallyAddConnection(invalidConnection1);
+            optimisticallyAddConnection(invalidConnection2);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(0);
         });
     });
 
     describe('remove a connection tests', () => {
-        it('removes a connection', () => {
-            addConnection(testConnectionA);
+        it('optimistically removes a connection', () => {
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddConnection(testConnectionA);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
 
             const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
 
-            removeConnection(connectionIdToRemove);
+            optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
+
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.getState().connections.get(0).dirty).toEqual(dirtyId);
+        });
+
+        it('actually removes a connection', () => {
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddConnection(testConnectionA);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
+
+            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
+
+            optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
+            actuallyRemoveConnection(dirtyId);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(0);
         });
 
         it('removes one and the right connection from multiple connections', () => {
-            addConnection(testConnectionA);
-            addConnection(testConnectionB);
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddConnection(testConnectionA);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
+
+            optimisticallyAddConnection(testConnectionB);
+            actuallyAddConnection(testConnectionB.connectionId, dirtyIdB);
 
             const connectionIdA = ConnectionStore.getState().connections.get(0).connectionId;
             const connectionIdB = ConnectionStore.getState().connections.get(1).connectionId;
 
-            removeConnection(connectionIdA);
+            optmisticallyRemoveConnection(connectionIdA, dirtyId);
+            actuallyRemoveConnection(dirtyId);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(1);
             expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(connectionIdB);
@@ -91,11 +120,19 @@ describe('connection store', () => {
     });
 
 
-    function addConnection(connection) {
+    function optimisticallyAddConnection(connection) {
         AltApp.dispatcher.dispatch({ action: addConnectionAction, data: connection });
     }
 
-    function removeConnection(connectionId) {
-        AltApp.dispatcher.dispatch({ action: removeConnectionAction, data: { connectionId: connectionId } });
+    function actuallyAddConnection(connectionId, dirtyId) {
+        AltApp.dispatcher.dispatch({ action: addConnectionSucceededAction, data: { connectionId: connectionId, clean: dirtyId } });
+    }
+
+    function optmisticallyRemoveConnection(connectionId, dirtyId) {
+        AltApp.dispatcher.dispatch({ action: removeConnectionAction, data: { connectionId: connectionId, dirty: dirtyId } });
+    }
+
+    function actuallyRemoveConnection(dirtyId) {
+        AltApp.dispatcher.dispatch({ action: removeConnectionSucceededAction, data: { clean: dirtyId } });
     }
 });

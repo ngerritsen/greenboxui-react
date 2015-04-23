@@ -1,14 +1,13 @@
 Progress
 - Build 'actual' (fake) http calls/promises
-    * Ctrl renamed and removed failed
-    * Connections also?
-    * Auto focus on input grid
+    * Test failed situations
 
 Backlog
 - Translation functionality
 - Build License component
 - Build Controls component (w/ store(s) for parameters)
-- Build report component
+- Immutable for shared components, actions?
+- Build Report component
 - Build Log component
 - Make graph with actual data
 - Modularize Settings

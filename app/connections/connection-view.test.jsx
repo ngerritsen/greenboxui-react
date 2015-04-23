@@ -1,7 +1,6 @@
 import React from 'react/addons';
 import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
-
 import ConnectionActions from './connection-actions';
 import ConnectionView from './connection-view';
 import ConnectionStore from './connection-store';

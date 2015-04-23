@@ -1,7 +1,7 @@
 import React from 'react';
+import Immutable from 'immutable';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
-import Immutable from 'immutable';
 import Connection from './connection';
 
 export default React.createClass({

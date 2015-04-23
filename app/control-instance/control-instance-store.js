@@ -1,8 +1,8 @@
 import AltApp from '../core/alt-app';
+import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstance from './control-instance';
-import Immutable from 'immutable';
 
 class ControlInstanceStore {
     constructor() {

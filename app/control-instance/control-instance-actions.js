@@ -1,15 +1,17 @@
 import AltApp from '../core/alt-app';
 import BlueBirdPromise from 'bluebird';
+import shortId from 'shortid';
+
 import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstanceApiCalls from './control-instance-api-calls';
 
 class ControlInstanceActions {
     addControl(typeId, name) {
-        const dirtyId = _getNewRandomId();
+        const dirtyId = shortId.generate();
         const dummyControlFromServer = {
             typeId: typeId,
             name: name,
-            instanceId: _getNewRandomId()
+            instanceId: shortId.generate()
         };
 
         let request = ControlInstanceApiCalls.putNewControl(typeId, name);
@@ -23,7 +25,7 @@ class ControlInstanceActions {
     }
 
     renameControl(instanceId, newName, oldName) {
-        const dirtyId = _getNewRandomId();
+        const dirtyId = shortId.generate();
         let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
         request.then(() => ControlInstanceServerActions.renameControlSucceeded(dirtyId, newName));
         request.catch(() => ControlInstanceServerActions.renameControlFailed(dirtyId, oldName));
@@ -35,7 +37,7 @@ class ControlInstanceActions {
     }
 
     removeControl(instanceId) {
-        const dirtyId = _getNewRandomId();
+        const dirtyId = shortId.generate();
         let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
         request.then(() => ControlInstanceServerActions.removeControlSucceeded(dirtyId));
         request.catch(() => ControlInstanceServerActions.removeControlFailed(dirtyId));
@@ -44,10 +46,6 @@ class ControlInstanceActions {
             dirty: dirtyId
         });
     }
-}
-
-function _getNewRandomId() {
-    return Math.round((Math.random() * 1000000))
 }
 
 export default AltApp.createActions(ControlInstanceActions);

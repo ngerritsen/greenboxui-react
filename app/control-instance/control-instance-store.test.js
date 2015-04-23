@@ -1,4 +1,5 @@
 import AltApp from '../core/alt-app';
+import shortId from 'shortid';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceServerActions from './control-instance-server-actions';
@@ -12,10 +13,13 @@ describe('control instance store', () => {
     const successfullyRenameControlAction = ControlInstanceServerActions.RENAME_CONTROL_SUCCEEDED;
     const successfullyRemoveControlAction = ControlInstanceServerActions.REMOVE_CONTROL_SUCCEEDED;
 
-    const optimisticTestControlA = { typeId: '123', name: 'TestControlA', dirty: 20582052 };
-    const actualTestControlA = { typeId: '123', name: 'TestControlA', instanceId: 3023742, clean: 20582052 };
-    const optimisticTestControlB = { typeId: '456', name: 'TestControlB', dirty: 35235345 };
-    const actualTestControlB = { typeId: '456', name: 'TestControlB', instanceId: 2358529, clean: 35235345 };
+    const dirtyIdA = shortId.generate();
+    const dirtyIdB = shortId.generate();
+
+    const optimisticTestControlA = { typeId: '123', name: 'TestControlA', dirty: dirtyIdA };
+    const actualTestControlA = { typeId: '123', name: 'TestControlA', instanceId: shortId.generate(), clean: dirtyIdA };
+    const optimisticTestControlB = { typeId: '456', name: 'TestControlB', dirty: dirtyIdB };
+    const actualTestControlB = { typeId: '456', name: 'TestControlB', instanceId: shortId.generate(), clean: dirtyIdB };
 
     afterEach(() => AltApp.flush());
 
@@ -55,7 +59,7 @@ describe('control instance store', () => {
 
     describe('remove a control tests', () => {
         it('marks an optimistically removed control as dirty', () => {
-            const dirtyId = getNewRandomId();
+            const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -68,7 +72,7 @@ describe('control instance store', () => {
         });
 
         it('marks one and the right control as dirty from multiple controls', () => {
-            const dirtyId = getNewRandomId();
+            const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -85,7 +89,7 @@ describe('control instance store', () => {
         });
 
         it('actually removes optimistically removed control after actual removal', () => {
-            const dirtyId = getNewRandomId();
+            const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -101,7 +105,7 @@ describe('control instance store', () => {
 
     describe('rename a control tests', () => {
         it('renames a control optimistically', () => {
-            const dirtyId = getNewRandomId();
+            const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -116,7 +120,7 @@ describe('control instance store', () => {
         });
 
         it('renames the right control successfully on actual successfull rename', () => {
-            const dirtyId = getNewRandomId();
+            const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
             successfullyAddControl(actualTestControlA);
@@ -172,9 +176,6 @@ describe('control instance store', () => {
 
     function successfullyRenameControl(newName, dirtyId) {
         AltApp.dispatcher.dispatch({ action: successfullyRenameControlAction, data: { newName: newName, clean: dirtyId } });
-    }
-    function getNewRandomId() {
-        return Math.round((Math.random() * 1000000))
     }
 
 });

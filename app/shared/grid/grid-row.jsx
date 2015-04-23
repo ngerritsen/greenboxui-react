@@ -1,7 +1,7 @@
 import React from 'react';
+import classnames from 'classnames';
 import GridEditableCell from './grid-editable-cell';
 import GridDeleteCell from './grid-delete-cell';
-import classnames from 'classnames';
 
 export default React.createClass({
     propTypes: {

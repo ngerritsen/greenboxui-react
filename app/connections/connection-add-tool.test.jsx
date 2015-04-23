@@ -1,8 +1,8 @@
 import React from 'react/addons';
+import Immutable from 'immutable';
 import ConnectionAddTool from './connection-add-tool';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
-import Immutable from 'immutable';
 import ControlInstance from '../control-instance/control-instance';
 
 const ReactTestUtils = React.addons.TestUtils;

@@ -173,7 +173,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('dev',
-    ['compass', 'bundle-watch', 'serve', 'watch']
+    ['compass', 'test', 'bundle-watch', 'serve', 'watch']
 );
 
 gulp.task('default', ['dev']);

@@ -1,8 +1,8 @@
 import AltApp from '../core/alt-app';
+import Immutable from 'immutable';
 import ConnectionActions from './connection-actions';
 import ConnectionServerActions from './connection-server-actions';
 import Connection from './connection';
-import Immutable from 'immutable';
 
 class ConnectionStore {
     constructor() {

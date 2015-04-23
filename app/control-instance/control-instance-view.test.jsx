@@ -1,10 +1,10 @@
 import React from 'react/addons';
 import AltApp from '../core/alt-app';
+import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceView from './control-instance-view';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstance from './control-instance';
-import Immutable from 'immutable';
 
 const ReactTestUtils = React.addons.TestUtils;
 
