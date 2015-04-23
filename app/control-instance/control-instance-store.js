@@ -6,9 +6,6 @@ import ControlInstance from './control-instance';
 
 class ControlInstanceStore {
     constructor() {
-        this.on('init', this.bootstrap);
-        this.on('bootstrap', this.bootstrap);
-
         this.controls = Immutable.List();
 
         this.bindAction(ControlInstanceActions.addControl, this.onControlOptimisticallyAdded);
@@ -22,6 +19,8 @@ class ControlInstanceStore {
         this.bindAction(ControlInstanceActions.removeControl, this.onControlOptimisticallyRemoved);
         this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlSuccessfullyRemoved);
         this.bindAction(ControlInstanceServerActions.removeControlFailed, this.onControlUnsuccessfullyRemoved);
+
+        this.on('init', this.bootstrap);
     }
 
     bootstrap() {

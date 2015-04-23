@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import GridEditableCell from './grid-editable-cell';
 import GridDeleteCell from './grid-delete-cell';
+import GridProgressCell from './grid-progress-cell';
 
 export default React.createClass({
     propTypes: {
@@ -21,6 +22,9 @@ export default React.createClass({
             }
             else if (column.type === 'editable') {
                 cellContent = <GridEditableCell value={data[column.id]} context={data} onEdit={column.handler} key={column.id}/>;
+            }
+            else if (column.type === 'progress') {
+                cellContent = <GridProgressCell value={data[column.value]} total={data[column.total]} key={column.id}/>;
             }
             else if (column.type === 'delete') {
                 cellContent = <GridDeleteCell context={data} onDelete={column.handler}/>

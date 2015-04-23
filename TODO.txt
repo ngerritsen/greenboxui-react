@@ -1,8 +1,8 @@
 Progress
+- Build License component
 
 Backlog
 - Translation functionality
-- Build License component
 - Build Controls component (w/ store(s) for parameters)
 - Immutable for shared components, actions?
 - Build Report component

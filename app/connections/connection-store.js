@@ -17,7 +17,6 @@ class ConnectionStore {
         this.bindAction(ConnectionServerActions.removeConnectionFailed, this.onConnectionUnsuccessfullyRemoved);
 
         this.on('init', this.bootstrap);
-        this.on('bootstrap', this.bootstrap);
     }
 
     bootstrap() {

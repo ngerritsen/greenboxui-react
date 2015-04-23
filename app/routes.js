@@ -2,6 +2,7 @@ import GraphView from './graphs/graph-view';
 
 import ControlInstanceView from './control-instance/control-instance-view';
 import ConnectionView from './connections/connection-view';
+import LicenseView from './license/license-view';
 
 import About from './settings/about';
 import Development from './settings/development';
@@ -32,6 +33,13 @@ export const routeConfig = [{
                 path: '/configure/connections',
                 icon: 'link',
                 handler: ConnectionView
+            },
+            {
+                title: 'License',
+                name: 'license',
+                path: '/configure/license',
+                icon: 'key',
+                handler: LicenseView
             }
         ]
     },
