@@ -1,6 +1,4 @@
 Progress
-- Build 'actual' (fake) http calls/promises
-    * Test failed situations
 
 Backlog
 - Translation functionality
