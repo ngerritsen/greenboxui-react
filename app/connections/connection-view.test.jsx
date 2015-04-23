@@ -17,7 +17,7 @@ describe('connection view', () => {
             connectionId: '58952352',
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
-            sourceControlname: 'Pump 1',
+            sourceControlName: 'Pump 1',
             targetControlInstanceId: 'f54y54yf56yh',
             targetControlTypeId: 'Valve',
             targetControlname: 'Valve 1'
@@ -26,7 +26,7 @@ describe('connection view', () => {
             connectionId: '89f304g3',
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
-            sourceControlname: 'Pump 1',
+            sourceControlName: 'Pump 1',
             targetControlInstanceId: '45fy56yf54y',
             targetControlTypeId: 'Valve',
             targetControlname:  'Valve 2'
@@ -35,10 +35,10 @@ describe('connection view', () => {
             connectionId: '23ct7340t3',
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
-            sourceControlname: 'Pump 1',
+            sourceControlName: 'Pump 1',
             targetControlInstanceId: 'f56y54yf54y54fy',
             targetControlTypeId: 'Valve',
-            targetControlname:  'Valve 3'
+            targetControlName:  'Valve 3'
         })
     );
 

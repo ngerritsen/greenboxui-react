@@ -31,10 +31,10 @@ class ConnectionStore {
                 connectionId: this._getNewInstanceId(),
                 sourceControlInstanceId: payload.sourceControl.instanceId,
                 sourceControlTypeId: payload.sourceControl.typeId,
-                sourceControlname: payload.sourceControl.name,
+                sourceControlName: payload.sourceControl.name,
                 targetControlInstanceId: payload.targetControl.instanceId,
                 targetControlTypeId: payload.targetControl.typeId,
-                targetControlname: payload.targetControl.name
+                targetControlName: payload.targetControl.name
             });
             this.connections = this.connections.push(newConnection);
         }

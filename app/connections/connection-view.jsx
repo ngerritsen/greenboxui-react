@@ -28,10 +28,10 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: 'Source Type Id', columns: 2, id: 'sourceTypeId' },
-            { title: 'Source Name', columns: 3, id: 'sourceName' },
-            { title: 'Target Type Id', columns: 2, id: 'targetTypeId' },
-            { title: 'Target Name', columns: 3, id: 'targetName' },
+            { title: 'Source Type Id', columns: 2, id: 'sourceControlTypeId' },
+            { title: 'Source Name', columns: 3, id: 'sourceControlName' },
+            { title: 'Target Type Id', columns: 2, id: 'targetControlTypeId' },
+            { title: 'Target Name', columns: 3, id: 'targetControlName' },
             { title: 'Delete', columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
         ];
 
