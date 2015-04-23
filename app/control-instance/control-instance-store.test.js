@@ -5,14 +5,6 @@ import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceServerActions from './control-instance-server-actions';
 
 describe('control instance store', () => {
-    const optimisticallyAddControlAction = ControlInstanceActions.ADD_CONTROL;
-    const optimisticallyRenameControlAction = ControlInstanceActions.RENAME_CONTROL;
-    const optimisticallyRemoveControlAction = ControlInstanceActions.REMOVE_CONTROL;
-
-    const successfullyAddControlAction = ControlInstanceServerActions.ADD_CONTROL_SUCCEEDED;
-    const successfullyRenameControlAction = ControlInstanceServerActions.RENAME_CONTROL_SUCCEEDED;
-    const successfullyRemoveControlAction = ControlInstanceServerActions.REMOVE_CONTROL_SUCCEEDED;
-
     const dirtyIdA = shortId.generate();
     const dirtyIdB = shortId.generate();
 
@@ -55,6 +47,13 @@ describe('control instance store', () => {
             expect(ControlInstanceStore.getState().controls.get(0).instanceId).toEqual(actualTestControlA.instanceId);
             expect(ControlInstanceStore.getState().controls.get(1).instanceId).toEqual(actualTestControlB.instanceId);
         });
+
+        it('cancels addition of a control if addition failed', () => {
+            optimisticallyAddControl(optimisticTestControlA);
+            failToAddControl(dirtyIdA);
+
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(0);
+        });
     });
 
     describe('remove a control tests', () => {
@@ -88,7 +87,7 @@ describe('control instance store', () => {
             expect(ControlInstanceStore.getState().controls.get(0).dirty).toEqual(dirtyId);
         });
 
-        it('actually removes optimistically removed control after actual removal', () => {
+        it('actually removes optimistically removed control after successful removal', () => {
             const dirtyId = shortId.generate();
 
             optimisticallyAddControl(optimisticTestControlA);
@@ -100,6 +99,21 @@ describe('control instance store', () => {
             successfullyRemoveControl(dirtyId);
 
             expect(ControlInstanceStore.getState().controls.count()).toEqual(0);
+        });
+
+        it('cancels removal of a control if removal failed', () => {
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddControl(optimisticTestControlA);
+            successfullyAddControl(actualTestControlA);
+
+            const instanceIdA = ControlInstanceStore.getState().controls.get(0).instanceId;
+
+            optimisticallyRemoveControl(instanceIdA, dirtyId);
+            failToRemoveControl(dirtyId);
+
+            expect(ControlInstanceStore.getState().controls.count()).toEqual(1);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toBeFalsy();
         });
     });
 
@@ -152,30 +166,85 @@ describe('control instance store', () => {
 
             expect(controlsBeforeRename).toEqual(controlsAfterRename);
         });
+
+        it('cancels renaming a control on failed rename of control', () => {
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddControl(optimisticTestControlA);
+            successfullyAddControl(actualTestControlA);
+
+            const newName = 'RenamedControlA';
+            const oldName = optimisticTestControlA.name;
+            const instanceIdA = ControlInstanceStore.getState().controls.get(0).instanceId;
+
+            optimisticallyRenameControl(instanceIdA, newName, dirtyId);
+            failToRenameControl(oldName, dirtyId);
+
+            expect(ControlInstanceStore.getState().controls.get(0).name).toEqual(oldName);
+            expect(ControlInstanceStore.getState().controls.get(0).dirty).toBeFalsy();
+        });
     });
 
     function optimisticallyAddControl(control) {
-        AltApp.dispatcher.dispatch({ action: optimisticallyAddControlAction, data: control });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceActions.ADD_CONTROL,
+            data: control
+        });
     }
 
     function successfullyAddControl(control) {
-        AltApp.dispatcher.dispatch({ action: successfullyAddControlAction, data: control });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.ADD_CONTROL_SUCCEEDED,
+            data: control
+        });
+    }
+
+    function failToAddControl(dirtyId) {
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.ADD_CONTROL_FAILED,
+            data: { clean: dirtyId }
+        });
     }
 
     function optimisticallyRemoveControl(instanceId, dirtyId) {
-        AltApp.dispatcher.dispatch({ action: optimisticallyRemoveControlAction, data: { instanceId: instanceId, dirty: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceActions.REMOVE_CONTROL,
+            data: { instanceId: instanceId, dirty: dirtyId }
+        });
     }
 
     function successfullyRemoveControl(dirtyId) {
-        AltApp.dispatcher.dispatch({ action: successfullyRemoveControlAction, data: { clean: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.REMOVE_CONTROL_SUCCEEDED,
+            data: { clean: dirtyId }
+        });
+    }
+
+    function failToRemoveControl(dirtyId) {
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.REMOVE_CONTROL_FAILED,
+            data: { clean: dirtyId }
+        });
     }
 
     function optimisticallyRenameControl(instanceId, newName, dirtyId) {
-        AltApp.dispatcher.dispatch({ action: optimisticallyRenameControlAction, data: { instanceId: instanceId, dirty: dirtyId, newName: newName } });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceActions.RENAME_CONTROL,
+            data: { instanceId: instanceId, dirty: dirtyId, newName: newName }
+        });
     }
 
     function successfullyRenameControl(newName, dirtyId) {
-        AltApp.dispatcher.dispatch({ action: successfullyRenameControlAction, data: { newName: newName, clean: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.RENAME_CONTROL_SUCCEEDED,
+            data: { newName: newName, clean: dirtyId }
+        });
     }
 
+    function failToRenameControl(oldName, dirtyId) {
+        AltApp.dispatcher.dispatch({
+            action: ControlInstanceServerActions.RENAME_CONTROL_FAILED,
+            data: { oldName: oldName, clean: dirtyId }
+        });
+    }
 });

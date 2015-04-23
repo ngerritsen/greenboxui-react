@@ -43,9 +43,10 @@ class ConnectionStore {
     }
 
     onConnectionSuccessfullyAdded(payload) {
+        const {connectionId, clean} = payload;
         this.connections = this.connections.map((connection) => {
-            if(connection.dirty === payload.clean) {
-                connection = connection.set('connectionId', payload.connectionId);
+            if(connection.dirty === clean) {
+                connection = connection.set('connectionId', connectionId);
                 connection = connection.remove('dirty');
             }
             return connection;
@@ -57,9 +58,10 @@ class ConnectionStore {
     }
 
     onConnectionOptimisticallyRemoved(payload) {
+        const {connectionId, dirty} = payload;
         this.connections = this.connections.map((connection) => {
-            if(connection.connectionId === payload.connectionId) {
-                connection = connection.set('dirty', payload.dirty);
+            if(connection.connectionId === connectionId) {
+                connection = connection.set('dirty', dirty);
             }
             return connection;
         });
@@ -71,7 +73,7 @@ class ConnectionStore {
 
     onConnectionUnsuccessfullyRemoved(payload) {
         this.connections = this.connections.map((connection) => {
-            if(connection.connectionId === payload.connectionId) {
+            if(connection.dirty === payload.clean) {
                 connection = connection.remove('dirty');
             }
             return connection;

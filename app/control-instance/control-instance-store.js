@@ -99,14 +99,12 @@ class ControlInstanceStore {
     }
 
     onControlSuccessfullyRemoved(payload) {
-        const clean = payload.clean;
-        this.controls = this.controls.filter((control) => control.dirty !== clean);
+        this.controls = this.controls.filter((control) => control.dirty !== payload.clean);
     }
 
     onControlUnsuccessfullyRemoved(payload) {
-        const clean = payload.clean;
         this.controls = this.controls.map((control) => {
-            if (control.dirty === payload) {
+            if (control.dirty === payload.clean) {
                 control = control.remove('dirty');
             }
             return control;

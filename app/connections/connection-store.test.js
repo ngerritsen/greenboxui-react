@@ -5,12 +5,6 @@ import ConnectionActions from './connection-actions';
 import ConnectionServerActions from './connection-server-actions';
 
 describe('connection store', () => {
-    const addConnectionAction = ConnectionActions.ADD_CONNECTION;
-    const addConnectionSucceededAction = ConnectionServerActions.ADD_CONNECTION_SUCCEEDED;
-
-    const removeConnectionAction = ConnectionActions.REMOVE_CONNECTION;
-    const removeConnectionSucceededAction = ConnectionServerActions.REMOVE_CONNECTION_SUCCEEDED;
-
     const dirtyIdA = shortId.generate();
     const dirtyIdB = shortId.generate();
 
@@ -68,6 +62,13 @@ describe('connection store', () => {
 
             expect(ConnectionStore.getState().connections.count()).toEqual(0);
         });
+
+        it('cancels addition of a connection if addition failed', () => {
+            optimisticallyAddConnection(testConnectionA);
+            failToAddConnection(dirtyIdA);
+
+            expect(ConnectionStore.getState().connections.count()).toEqual(0);
+        });
     });
 
     describe('remove a connection tests', () => {
@@ -117,22 +118,63 @@ describe('connection store', () => {
             expect(ConnectionStore.getState().connections.count()).toEqual(1);
             expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(connectionIdB);
         });
+
+        it('cancels removal of a connection if removal failed', () => {
+            const dirtyId = shortId.generate();
+
+            optimisticallyAddConnection(testConnectionA);
+            actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
+
+            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
+
+            optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
+            failToRemoveConnection(dirtyId);
+
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
+        });
     });
 
-
     function optimisticallyAddConnection(connection) {
-        AltApp.dispatcher.dispatch({ action: addConnectionAction, data: connection });
+        AltApp.dispatcher.dispatch({
+            action: ConnectionActions.ADD_CONNECTION,
+            data: connection
+        });
     }
 
     function actuallyAddConnection(connectionId, dirtyId) {
-        AltApp.dispatcher.dispatch({ action: addConnectionSucceededAction, data: { connectionId: connectionId, clean: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ConnectionServerActions.ADD_CONNECTION_SUCCEEDED,
+            data: { connectionId: connectionId, clean: dirtyId }
+        });
+    }
+
+    function failToAddConnection(dirtyId) {
+        AltApp.dispatcher.dispatch({
+            action: ConnectionServerActions.ADD_CONNECTION_FAILED,
+            data: {  clean: dirtyId }
+        });
     }
 
     function optmisticallyRemoveConnection(connectionId, dirtyId) {
-        AltApp.dispatcher.dispatch({ action: removeConnectionAction, data: { connectionId: connectionId, dirty: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ConnectionActions.REMOVE_CONNECTION,
+            data: { connectionId: connectionId, dirty: dirtyId }
+        });
     }
 
     function actuallyRemoveConnection(dirtyId) {
-        AltApp.dispatcher.dispatch({ action: removeConnectionSucceededAction, data: { clean: dirtyId } });
+        AltApp.dispatcher.dispatch({
+            action: ConnectionServerActions.REMOVE_CONNECTION_SUCCEEDED,
+            data: { clean: dirtyId }
+        });
     }
+
+    function failToRemoveConnection(dirtyId) {
+        AltApp.dispatcher.dispatch({
+            action: ConnectionServerActions.REMOVE_CONNECTION_FAILED,
+            data: {  clean: dirtyId }
+        });
+    }
+
 });

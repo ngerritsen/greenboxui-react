@@ -19,15 +19,15 @@ functionality to develop this. The following choices have been made:
   support it yet we use Babel to transpile it to vanilla JS. We use JSX on top of ES6 because it is the recommended way
   to develop in the ReactJS framework. Babel also transpiles this for us.
 
-  [Babel ES6 Transpiler](https://babeljs.io/)
+  Babel ES6 Transpiler: [babeljs.io](https://babeljs.io/)
 
 * SASS + Compass
   We will use SASS for the stylesheets because it is just miles ahead of using just CSS3. It will allow use to develop
   stylesheets many times faster and in a more modular and organized manner. Compass will manage browser compatibility for
   CSS3 for us.
 
-  [SASS](http://sass-lang.com/)
-  [Compass](http://compass-style.org/)
+  SASS: [sass-lang.com](http://sass-lang.com/)  
+  Compass: [compass-style.org](http://compass-style.org/)
 
 ###Frameworks:
 * ReactJS
@@ -35,7 +35,8 @@ functionality to develop this. The following choices have been made:
   * Why?: ReactJS is one of the biggest frameworks developed by Facebook. It has already proved to be very useful and
     a lot of big companies are moving towards it. It is very fast and efficient in updating the DOM and works seamlessly with other
     Javascript libraries.
-  * [React](https://facebook.github.io/react/)
+    
+  * React: [facebook.github.io/react](https://facebook.github.io/react/)
 
 * Flux (Alt)
   * What?: Flux is a design pattern developed by Facebook alongside ReactJS. It manages the data within the application
@@ -44,45 +45,52 @@ functionality to develop this. The following choices have been made:
     data flow makes it very insightful how data is flowing through the application and less error prone. In the Greenbox
     we will have a lot of data changing all the time and Flux scales very well to more complex applications. Alt is one
     of the better implementations of Flux.
-  * [Flux](http://facebook.github.io/flux/)
-  * [Alt](https://github.com/goatslacker/alt)
+    
+  * Flux: [facebook.github.io/flux](http://facebook.github.io/flux/)  
+  * Alt: [github.com/goatslacker/alt](https://github.com/goatslacker/alt)
 
 ###Additional Libraries:
 * Immutable JS
   * What? This libraries allows you to create objects that are Immutable and only editable via setters.
   * Why? Because Javascript itself is not strict enough about accessing data, this will force developers to not hack in
     objects and follow a logical pattern. It also features a lot of nice utility functions for mutating collections.
-  * [Immutable](http://facebook.github.io/immutable-js/)
+    
+  * Immutable: [facebook.github.io/immutable-js](http://facebook.github.io/immutable-js/)
 
 * React Router
   * What? Allows you to create routing in you application, allowing for a single page application.
   * Why? React itself does not provide routing out of the box, so we need something for this. React Router is the only
     serious option that works well with React out of the box.
-  * [React Router](https://github.com/rackt/react-router)
+    
+  * React Router: [github.com/rackt/react-router](https://github.com/rackt/react-router)
 
 * Superagent Bluebird
   * What? Superagent is an HTTP call library for Javascript. Bluebird is a promise library.
   * Why? Because we need to do HTTP calls to the server we need a library for that. Superagent does just that in a very
     clean matter, the bluebird version makes all calls with promises, to make handling them more easy.
-  * [Superagent](https://github.com/visionmedia/superagent)
-  * [Bluebird](https://github.com/petkaantonov/bluebird)
-  * [Superagent Bluebird](https://www.npmjs.com/package/superagent-bluebird-promise)
+    
+  * Superagent: [github.com/visionmedia/superagent](https://github.com/visionmedia/superagent)  
+  * Bluebird: [github.com/petkaantonov/bluebird](https://github.com/petkaantonov/bluebird)  
+  * Superagent Bluebird: [npmjs.com/package/superagent-bluebird-promise](https://www.npmjs.com/package/superagent-bluebird-promise)
 
 * Underscore
   * What? Underscore provides utility functions for objects and arrays
   * Why? Not in all parts of the application we will/should/can currently work with Immutable collections.
-  * [Underscore](http://underscorejs.org/)
+  
+  * Underscore: [underscorejs.org](http://underscorejs.org/)
 
 * Moment.js
   * What? Library for manipulating date/time
   * Why? With only Javascript working with date/time is a pain, Moment makes this easy.
-  * [Moment.js](http://momentjs.com/)
+  
+  * Moment.js: [momentjs.com](http://momentjs.com/)
 
 * React Chartjs
   * What? Library for showing charts/graphs with React components
   * Why? ChartJS is one of the better chart libs, and since we are using React, the React version is handy.
-  * [Chart.js](http://www.chartjs.org/)
-  * [React Chart.js](https://github.com/jhudson8/react-chartjs)
+  
+  * Chart.js: [chartjs.org](http://www.chartjs.org/)  
+  * React Chart.js: [github.com/jhudson8/react-chartjs](https://github.com/jhudson8/react-chartjs)
 
 ###Tesing:
 We unit test components with common sense. If there is logic that is useful to test, then you do it. Do not test library
@@ -99,10 +107,10 @@ When testing Flux (Alt) stores you can use Alt.flush() after each test to get a 
 Testing framework used is Jasmine with Karma as it's runner. Jasmine is a full featured testing framework and on of the
 most popular/supported framework. Karma runs Jasmine tests in a real browser for more realistic tests. For react
 
-[Jasmine Guide](http://jasmine.github.io/2.2/introduction.html)
+Jasmine Guide: [jasmine.github.io/2.2/introduction.html](http://jasmine.github.io/2.2/introduction.html)  
 
 ###Code Style:
 We follow the following styleguides, just to have some guidance on code style and keeping code consistent and recognizable.
 
-[EcmaScript 6 Styleguide](https://github.com/elierotenberg/coding-styles/blob/master/es6.md)
-[ReactJS StyleGuide](https://reactjsnews.com/react-style-guide-patterns-i-like)
+EcmaScript 6 Styleguide: [github.com/elierotenberg/coding-styles/blob/master/es6.md](https://github.com/elierotenberg/coding-styles/blob/master/es6.md)  
+ReactJS StyleGuide: [reactjsnews.com/react-style-guide-patterns-i-like](https://reactjsnews.com/react-style-guide-patterns-i-like)
