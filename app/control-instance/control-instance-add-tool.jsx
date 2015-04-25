@@ -1,34 +1,61 @@
 import React from 'react';
+import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
+import LicenseStore from '../license/license-store';
+import LicenseActions from '../license/license-actions';
 
 export default React.createClass({
+    getInitialState() {
+        return { license: Immutable.List() }
+    },
+    componentDidMount() {
+        LicenseStore.listen(this._onChange);
+        this._onChange();
+    },
+    componentWillUnmount() {
+        LicenseStore.unlisten(this._onChange)
+    },
+    _onChange() {
+        const newLicense = LicenseStore.getState().license;
+        this.setState({license: newLicense});
+    },
+    _licenseSlotsAvailable(controlTypeId) {
+        const slot = this.state.license.find((slot) => slot.controlTypeId === controlTypeId);
+        return slot.total - slot.used;
+    },
     _handleAddControl(event) {
         event.preventDefault();
 
         const controlType = React.findDOMNode(this.refs.selectedControlType).value;
         let controlAmountNode = React.findDOMNode(this.refs.controlAmountInput);
-        let controlAmount = React.findDOMNode(this.refs.controlAmountInput).value;
+        let controlAmount = parseInt(React.findDOMNode(this.refs.controlAmountInput).value);
         let controlNameNode = React.findDOMNode(this.refs.controlNameInput);
         const controlName = controlNameNode.value.trim();
 
-        if (controlName) {
+        if(controlName && controlAmount > 0 && controlAmount <= this._licenseSlotsAvailable(controlType)) {
+            LicenseActions.useLicenseSlot(controlType, controlAmount);
+
             if (controlAmount > 1) {
-                for(let i = 1; i <= controlAmount; i++) {
+                for (let i = 1; i <= controlAmount; i++) {
                     ControlInstanceActions.addControl(controlType, `${controlName} ${i}`);
                 }
             }
             else {
                 ControlInstanceActions.addControl(controlType, controlName);
-            }
 
-            controlNameNode.value = '';
-            controlAmountNode.value = 1;
+                controlNameNode.value = '';
+                controlAmountNode.value = 1;
+            }
         }
     },
     render() {
-        const controlTypes = ['Pump', 'Crop Section', 'Valve', 'Meteo', 'Fan', 'Custom Alarm'];
-        const controlTypeOptions = controlTypes.map((type) => {
-            return <option value={type} key={type}>{type}</option>
+        const availableControlTypes = this.state.license.filter((slot) =>  slot.total > 0 && slot.used < slot.total);
+        const controlTypeOptions = availableControlTypes.map((slot) => {
+            return (
+                <option value={slot.controlTypeId} key={slot.controlTypeId}>
+                    {`${slot.controlTypeId} (${slot.used}/${slot.total})`}
+                </option>
+            );
         });
 
         return (

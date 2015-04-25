@@ -20,6 +20,7 @@ export default React.createClass({
         this.setState({ license: newLicense });
     },
     _getOnlyOwnedSlots() {
+        console.log(this.state.license.toJS());
         return this.state.license.filter((slot) => slot.total > 0);
     },
     render() {

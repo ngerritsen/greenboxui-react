@@ -1,7 +1,6 @@
 import AltApp from '../core/alt-app';
 import BlueBirdPromise from 'bluebird';
 import shortId from 'shortid';
-
 import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstanceApiCalls from './control-instance-api-calls';
 
