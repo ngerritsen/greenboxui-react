@@ -1,8 +1,7 @@
 ##Scrumboard Greenbox UI
 
 ###Progress
-- Translation functionality
-  * find solution for translating in-code strings
+- Use Alt auto unlisten mixin
 
 ###Backlog
 - Build Controls component (w/ store(s) for parameters)

@@ -2,8 +2,10 @@ import React from 'react';
 import Immutable from 'immutable';
 import Translator from '../../translation/translator';
 import TranslationStore from '../../translation/translation-store';
+import TranslationMixin from '../../translation/translation-mixin';
 
 export default React.createClass({
+    mixins: [TranslationMixin],
     propTypes: {
         onSearch: React.PropTypes.func.isRequired,
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
@@ -13,20 +15,6 @@ export default React.createClass({
             search: 'search',
             all: 'all'
         }) }
-    },
-    componentDidMount() {
-        TranslationStore.listen(this._onChange);
-        this._onChange();
-    },
-    componentWillUnmount() {
-        TranslationStore.unlisten(this._onChange)
-    },
-    _onChange() {
-        let translatedStrings = this.state.translatedStrings.set('search', TranslationStore.translate('search'));
-        translatedStrings = translatedStrings.set('all', TranslationStore.translate('all'));
-        this.setState({
-            translatedStrings: translatedStrings
-        });
     },
     _handleSearch() {
         const newSearchParameter = React.findDOMNode(this.refs.searchInput).value.trim();
