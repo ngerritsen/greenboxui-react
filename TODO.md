@@ -2,7 +2,6 @@
 
 ###Progress
 - Translation functionality
-  * make language settable
   * find solution for translating in-code strings
 
 ###Backlog
