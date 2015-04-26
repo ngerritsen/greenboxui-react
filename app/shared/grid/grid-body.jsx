@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react/addons';
 import GridRow from './grid-row';
 import GridPagination from './grid-pagination';
 import _ from 'underscore';
+const PureRenderMixin = React.addons.PureRenderMixin;
 
 export default React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.array.isRequired,
@@ -12,6 +14,15 @@ export default React.createClass({
         searchBy: React.PropTypes.string,
         sortProperty: React.PropTypes.string,
         sortInversed: React.PropTypes.bool
+    },
+    getDefaultProps() {
+        return {
+            pagination: 0,
+            searchParameter: '',
+            searchBy: '',
+            sortProperty: '',
+            sortInversed: false
+        };
     },
     getInitialState() {
         return {

@@ -3,6 +3,7 @@ import Slab from '../shared/slab';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
+import Translator from '../translation/translator';
 
 export default React.createClass({
     _handleAddDummyConfiguration() {
@@ -53,10 +54,10 @@ export default React.createClass({
             <Slab>
                 <div className="row setting">
                     <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description">Dummy configuration</span>
+                        <span className="setting-description"><Translator id="addDummyConfig"/></span>
                     </div>
                     <div className="small-6 medium-4 columns setting-column">
-                        <button className="button radius" onClick={this._handleAddDummyConfiguration}>Add</button>
+                        <button className="button radius" onClick={this._handleAddDummyConfiguration}><Translator id="add"/></button>
                     </div>
                 </div>
             </Slab>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'react-router';
 import SideNav from '../shared/side-nav';
+import Translator from '../translation/translator';
 
 let Link = Router.Link;
 
@@ -15,7 +16,7 @@ export default React.createClass({
     render() {
         return (
             <aside className="left-off-canvas-menu main-menu">
-                <SideNav title="Main Menu" items={this.props.navItems} />
+                <SideNav title={this.props.title} items={this.props.navItems} />
             </aside>
         );
     }

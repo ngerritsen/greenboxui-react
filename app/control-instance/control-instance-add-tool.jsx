@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
 import LicenseActions from '../license/license-actions';
+import Translator from '../translation/translator';
 
 export default React.createClass({
     getInitialState() {
@@ -60,24 +61,29 @@ export default React.createClass({
             <form>
                 <div className="row">
                     <div className="small-4 columns">
-                        <label>Control Type
+                        <label>
+                            <Translator id="controlType"/>
                             <select ref="selectedControlType">
                                 {controlTypeOptions}
                             </select>
                         </label>
                     </div>
                     <div className="small-4 columns">
-                        <label>Control Name
+                        <label>
+                            <Translator id="controlName"/>
                             <input type="text" ref="controlNameInput"/>
                         </label>
                     </div>
                     <div className="small-2 columns">
-                        <label>Amount
+                        <label>
+                            <Translator id="amount"/>
                             <input type="number" ref="controlAmountInput" defaultValue="1"/>
                         </label>
                     </div>
                     <div className="small-2 columns">
-                        <button type="submit" className="button radius button-form" onClick={this._handleAddControl}>Add Control</button>
+                        <button type="submit" className="button radius button-form" onClick={this._handleAddControl}>
+                            <Translator id="addControl"/>
+                        </button>
                     </div>
                 </div>
             </form>

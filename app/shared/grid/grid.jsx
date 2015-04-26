@@ -1,9 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
 import GridToolbar from './grid-toolbar';
-import ReactWithAddons from 'react/addons'
-const PureRenderMixin = ReactWithAddons.addons.PureRenderMixin;
+const PureRenderMixin = React.addons.PureRenderMixin;
 
 export default React.createClass({
     mixins: [PureRenderMixin],

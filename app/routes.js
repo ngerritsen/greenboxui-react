@@ -8,34 +8,34 @@ import About from './settings/about';
 import Development from './settings/development';
 
 export const routeConfig = [{
-        title: 'Graphs',
+        title: 'graphs',
         name: 'graphs',
         path: '/',
         icon: 'line-chart',
         handler: GraphView
     },
     {
-        title: 'Configure',
+        title: 'configure',
         name: 'configure',
         path: '/configure',
         icon: 'wrench',
         subRoutes: [
             {
-                title: 'Control Instances',
+                title: 'controlInstances',
                 name: 'control-instances',
                 path: '/configure/control-instances',
                 icon: 'cubes',
                 handler: ControlInstanceView
             },
             {
-                title: 'Connections',
+                title: 'connections',
                 name: 'connections',
                 path: '/configure/connections',
                 icon: 'link',
                 handler: ConnectionView
             },
             {
-                title: 'License',
+                title: 'license',
                 name: 'license',
                 path: '/configure/license',
                 icon: 'key',
@@ -44,20 +44,20 @@ export const routeConfig = [{
         ]
     },
     {
-        title: 'Settings',
+        title: 'settings',
         name: 'settings',
         path: '/settings',
         icon: 'cog',
         subRoutes: [
             {
-                title: 'About',
+                title: 'about',
                 name: 'about',
                 path: '/settings/about',
                 icon: 'info-circle',
                 handler: About
             },
             {
-                title: 'Development',
+                title: 'development',
                 name: 'development',
                 path: '/settings/development',
                 icon: 'flask',

@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react/addons';
 import classnames from 'classnames';
 import GridEditableCell from './grid-editable-cell';
 import GridDeleteCell from './grid-delete-cell';
 import GridProgressCell from './grid-progress-cell';
+const PureRenderMixin = React.addons.PureRenderMixin;
 
 export default React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.object.isRequired

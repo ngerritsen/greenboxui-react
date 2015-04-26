@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import Connection from './connection';
+import Translator from '../translation/translator';
 
 export default React.createClass({
     getInitialState() {
@@ -79,14 +80,16 @@ export default React.createClass({
                     <div className="medium-12 large-5 columns">
                         <div className="row">
                             <div className="small-12 medium-6 columns">
-                                <label>Source Type
+                                <label>
+                                    <Translator id="sourceType"/>
                                     <select ref="selectedSourceType" onChange={this._handleChangeSelectedType}>
                                         {controlTypeOptions}
                                     </select>
                                 </label>
                             </div>
                             <div className="small-12 medium-6 columns">
-                                <label>Source Control
+                                <label>
+                                    <Translator id="sourceInstance"/>
                                     <select ref="selectedSourceControl" defaultValue={controlTypeOptions[0]}>
                                         {sourceControlOptions}
                                     </select>
@@ -97,14 +100,16 @@ export default React.createClass({
                     <div className="medium-12 large-5 columns">
                         <div className="row">
                             <div className="small-12 medium-6 columns">
-                                <label>Target Type
+                                <label>
+                                    <Translator id="targetType"/>
                                     <select ref="selectedTargetType" onChange={this._handleChangeSelectedType}>
                                         {controlTypeOptions}
                                     </select>
                                 </label>
                             </div>
                             <div className="small-12 medium-6 columns">
-                                <label>Target Control
+                                <label>
+                                    <Translator id="targetInstance"/>
                                     <select ref="selectedTargetControl" defaultValue={controlTypeOptions[0]}>
                                         {targetControlOptions}
                                     </select>
@@ -114,7 +119,9 @@ export default React.createClass({
                     </div>
 
                     <div className="medium-12 large-2 columns">
-                        <button type="submit" className="button radius button-form" onClick={this._handleAddConnection}>Add Connection</button>
+                        <button type="submit" className="button radius button-form" onClick={this._handleAddConnection}>
+                            <Translator id="addConnection"/>
+                        </button>
                     </div>
                 </div>
             </form>

@@ -7,6 +7,9 @@ export default React.createClass({
         onSortBy: React.PropTypes.func.isRequired,
         sortProperty: React.PropTypes.string
     },
+    getDefaultProps() {
+        return { sortProperty: '' };
+    },
     _handleSortByColumn(sortProperty, sortInversed) {
         this.props.onSortBy(sortProperty, sortInversed);
     },

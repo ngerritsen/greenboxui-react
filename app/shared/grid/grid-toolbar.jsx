@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from '../../translation/translator';
 
 export default React.createClass({
     propTypes: {
