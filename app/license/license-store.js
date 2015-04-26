@@ -5,32 +5,20 @@ import LicenseActions from './license-actions';
 
 class LicenseStore {
     constructor() {
-        this.license = Immutable.List.of(
-            new LicenseSlot({ controlTypeId: 'Pump', total: 2 }),
-            new LicenseSlot({ controlTypeId: 'Crop Section', total: 10 }),
-            new LicenseSlot({ controlTypeId: 'Valve', total: 400 }),
-            new LicenseSlot({ controlTypeId: 'Meteo', total: 1 }),
-            new LicenseSlot({ controlTypeId: 'Fan', total: 4 }),
-            new LicenseSlot({ controlTypeId: 'Custom Alarm', total: 10})
-        );
+        this.license = Immutable.List();
 
-        //this.bindAction(LicenseActions.refreshLicense, this.onRefreshLicense);
+        this.bindAction(LicenseActions.refreshLicense, this.onRefreshLicense);
         this.bindAction(LicenseActions.useLicenseSlot, this.onOptimisticallyUseLicenseSlot);
 
         this.on('init', this.bootstrap);
     }
 
     bootstrap() {
+        LicenseActions.refreshLicense();
+
         // Prevent alt app flush from converting list to regular js array, sorry guys..
         if (! Immutable.List.isList(this.license)) {
-            this.license = Immutable.List(
-                new LicenseSlot({ controlTypeId: 'Pump', total: 2 }),
-                new LicenseSlot({ controlTypeId: 'Crop Section', total: 10 }),
-                new LicenseSlot({ controlTypeId: 'Valve', total: 400 }),
-                new LicenseSlot({ controlTypeId: 'Meteo', total: 1 }),
-                new LicenseSlot({ controlTypeId: 'Fan', total: 4 }),
-                new LicenseSlot({ controlTypeId: 'Custom Alarm', total: 10})
-            );
+            this.license = Immutable.List.of(this.license);
         }
     }
 

@@ -17,11 +17,9 @@ export default React.createClass({
     render() {
         const widthPercentage = this._getCalculatedWidthPercentage();
         return (
-            <span>
-                <div className="progress round">
-                    <span className="meter" style={{width: `${widthPercentage}%`}}></span>
-                </div>
-            </span>
+            <div className="progress round">
+                <span className="meter" style={{width: `${widthPercentage}%`}}></span>
+            </div>
         );
 
     }

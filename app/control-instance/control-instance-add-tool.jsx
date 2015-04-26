@@ -33,8 +33,6 @@ export default React.createClass({
         const controlName = controlNameNode.value.trim();
 
         if(controlName && controlAmount > 0 && controlAmount <= this._licenseSlotsAvailable(controlType)) {
-            LicenseActions.useLicenseSlot(controlType, controlAmount);
-
             if (controlAmount > 1) {
                 for (let i = 1; i <= controlAmount; i++) {
                     ControlInstanceActions.addControl(controlType, `${controlName} ${i}`);

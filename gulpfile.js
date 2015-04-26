@@ -61,7 +61,7 @@ gulp.task('bundle', function() {
             entries: path.resolve(paths.root, files.entry)
         });
 
-    executeBundle(bundle);
+    return executeBundle(bundle);
 });
 
 gulp.task('bundle-watch', function() {
@@ -77,7 +77,7 @@ gulp.task('bundle-watch', function() {
     bundle.on('update', function(){
         executeBundle(bundle);
     });
-    executeBundle(bundle);
+    return executeBundle(bundle);
 
 });
 

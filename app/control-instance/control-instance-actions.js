@@ -3,6 +3,7 @@ import BlueBirdPromise from 'bluebird';
 import shortId from 'shortid';
 import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstanceApiCalls from './control-instance-api-calls';
+import LicenseActions from '../license/license-actions';
 
 class ControlInstanceActions {
     addControl(typeId, name) {
@@ -16,6 +17,9 @@ class ControlInstanceActions {
         let request = ControlInstanceApiCalls.putNewControl(typeId, name);
         request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, dummyControlFromServer));
         request.catch(() => ControlInstanceServerActions.addControlFailed(dirtyId));
+
+        LicenseActions.useLicenseSlot(typeId, 1);
+
         this.dispatch({
             typeId: typeId,
             name: name,
