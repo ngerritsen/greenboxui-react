@@ -1,20 +1,19 @@
 import React from 'react';
 import Immutable from 'immutable';
+import ListenerMixin from 'alt/mixins/ListenerMixin';
+import Translator from '../translation/translator';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
 import LicenseActions from '../license/license-actions';
-import Translator from '../translation/translator';
 
 export default React.createClass({
+    mixins: [ListenerMixin],
     getInitialState() {
         return { license: Immutable.List() }
     },
     componentDidMount() {
-        LicenseStore.listen(this._onChange);
+        this.listenTo(LicenseStore, this._onChange);
         this._onChange();
-    },
-    componentWillUnmount() {
-        LicenseStore.unlisten(this._onChange)
     },
     _onChange() {
         const newLicense = LicenseStore.getState().license;

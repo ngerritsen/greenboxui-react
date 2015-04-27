@@ -1,23 +1,22 @@
 import React from 'react';
 import Immutable from 'immutable';
-
+import ListenerMixin from 'alt/mixins/ListenerMixin';
+import TranslationMixin from '../translation/translation-mixin';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
 import ConnectionAddTool from './connection-add-tool';
-
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 
 export default React.createClass({
+    mixins: [ListenerMixin, TranslationMixin],
+    translations: ['sourceType', 'sourceInstance', 'targetType', 'targetInstance', 'delete'],
     getInitialState() {
         return { connections: Immutable.List() }
     },
     componentDidMount() {
-        ConnectionStore.listen(this._onChange);
+        this.listenTo(ConnectionStore, this._onChange);
         this._onChange();
-    },
-    componentWillUnmount() {
-        ConnectionStore.unlisten(this._onChange)
     },
     _onChange() {
         const newConnections = ConnectionStore.getState().connections;
@@ -28,11 +27,11 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: 'Source Type Id', columns: 2, id: 'sourceControlTypeId' },
-            { title: 'Source Name', columns: 3, id: 'sourceControlName' },
-            { title: 'Target Type Id', columns: 2, id: 'targetControlTypeId' },
-            { title: 'Target Name', columns: 3, id: 'targetControlName' },
-            { title: 'Delete', columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
+            { title: this.getTranslation('sourceType'), columns: 2, id: 'sourceControlTypeId' },
+            { title: this.getTranslation('sourceInstance'), columns: 3, id: 'sourceControlName' },
+            { title: this.getTranslation('targetType'), columns: 2, id: 'targetControlTypeId' },
+            { title: this.getTranslation('targetInstance'), columns: 3, id: 'targetControlName' },
+            { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
         ];
 
         return (

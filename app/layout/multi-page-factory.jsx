@@ -20,7 +20,7 @@ export default function multiPageFactory(title, link, subNavs) {
             return (
                 <Content>
                     <Section columns={2}>
-                        <SideNav title={title} items={subNavs}/>
+                        <SideNav items={subNavs}/>
                     </Section>
                     <Section columns={10}>
                         <RouteHandler/>

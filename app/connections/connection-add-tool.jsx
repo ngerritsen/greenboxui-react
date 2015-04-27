@@ -1,11 +1,14 @@
 import React from 'react';
 import Immutable from 'immutable';
+import ListenerMixin from 'alt/mixins/ListenerMixin';
+import TranslationMixin from '../translation/translation-mixin';
+import Translator from '../translation/translator';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import Connection from './connection';
-import Translator from '../translation/translator';
 
 export default React.createClass({
+    mixins: [ListenerMixin],
     getInitialState() {
         return {
             controls: Immutable.List(),
@@ -14,11 +17,8 @@ export default React.createClass({
         }
     },
     componentDidMount() {
-        ControlInstanceStore.listen(this._onChange);
+        this.listenTo(ControlInstanceStore, this._onChange);
         this._onChange();
-    },
-    componentWillUnmount() {
-        ControlInstanceStore.unlisten(this._onChange)
     },
     _onChange() {
         const newControls = ControlInstanceStore.getState().controls;

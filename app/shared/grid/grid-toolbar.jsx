@@ -1,11 +1,10 @@
 import React from 'react';
 import Immutable from 'immutable';
-import Translator from '../../translation/translator';
-import TranslationStore from '../../translation/translation-store';
 import TranslationMixin from '../../translation/translation-mixin';
 
 export default React.createClass({
     mixins: [TranslationMixin],
+    translations: ['all', 'search'],
     propTypes: {
         onSearch: React.PropTypes.func.isRequired,
         columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
@@ -36,14 +35,14 @@ export default React.createClass({
                             </div>
                             <div className="small-10 columns">
                                 <select ref="searchBySelection" onChange={this._handleSearch}>
-                                    <option value={''} key={'all'}>{translatedStrings.get('all')}</option>
+                                    <option value={''} key={'all'}>{this.getTranslation('all')}</option>
                                 {searchOptions}
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className="small-8 columns">
-                        <input type="text" id="search" placeholder={translatedStrings.get('search')} ref="searchInput" onChange={this._handleSearch}></input>
+                        <input type="text" id="search" placeholder={this.getTranslation('search')} ref="searchInput" onChange={this._handleSearch}></input>
                     </div>
                 </div>
             </form>

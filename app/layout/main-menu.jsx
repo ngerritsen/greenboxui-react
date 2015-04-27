@@ -16,7 +16,7 @@ export default React.createClass({
     render() {
         return (
             <aside className="left-off-canvas-menu main-menu">
-                <SideNav title={this.props.title} items={this.props.navItems} />
+                <SideNav items={this.props.navItems} />
             </aside>
         );
     }

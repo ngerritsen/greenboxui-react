@@ -1,23 +1,22 @@
 import React from 'react';
 import Immutable from 'immutable';
-
+import ListenerMixin from 'alt/mixins/ListenerMixin';
+import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
-
 import ControlInstanceAddTool from './control-instance-add-tool';
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 
 export default React.createClass({
+    mixins: [ListenerMixin, TranslationMixin],
+    translations: ['typeId', 'instanceId', 'name', 'delete'],
     getInitialState() {
         return { controls: Immutable.List() }
     },
     componentDidMount() {
-        ControlInstanceStore.listen(this._onChange);
+        this.listenTo(ControlInstanceStore, this._onChange);
         this._onChange();
-    },
-    componentWillUnmount() {
-        ControlInstanceStore.unlisten(this._onChange)
     },
     _onChange() {
         const newControls = ControlInstanceStore.getState().controls;
@@ -32,10 +31,10 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: 'Type Id', columns: 3, id: 'typeId' },
-            { title: 'Instance Id', columns: 3, id: 'instanceId', unique: true },
-            { title: 'Name', columns: 4, id: 'name', type: 'editable', handler: this._handleEditControlName },
-            { title: 'Delete', columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteControl, sort: false }
+            { title: this.getTranslation('typeId'), columns: 3, id: 'typeId' },
+            { title: this.getTranslation('instanceId'), columns: 3, id: 'instanceId', unique: true },
+            { title: this.getTranslation('name'), columns: 4, id: 'name', type: 'editable', handler: this._handleEditControlName },
+            { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteControl, sort: false }
         ];
 
         return (

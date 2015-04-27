@@ -1,6 +1,7 @@
 import React from 'react';
 import Slab from '../shared/slab';
 import Translator from '../translation/translator';
+import TranslationStore from '../translation/translation-store';
 import TranslationActions from '../translation/translation-actions';
 
 export default React.createClass({
@@ -43,7 +44,11 @@ export default React.createClass({
                         <span className="setting-description"><Translator id="language"/>:</span>
                     </div>
                     <div className="small-6 medium-4 columns setting-column">
-                        <select ref="selectedLanguage" defaultValue="en" onChange={this._handleChangeLanguage}>
+                        <select
+                            ref="selectedLanguage"
+                            defaultValue={TranslationStore.getState().currentLanguage}
+                            onChange={this._handleChangeLanguage}
+                        >
                             <option value="en">English</option>
                             <option value="nl">Nederlands</option>
                         </select>

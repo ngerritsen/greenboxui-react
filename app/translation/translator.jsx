@@ -1,7 +1,9 @@
 import React from 'react';
+import ListenerMixin from 'alt/mixins/ListenerMixin';
 import TranslationStore from './translation-store';
 
 export default React.createClass({
+    mixins: [ListenerMixin],
     propTypes: {
         id: React.PropTypes.string.isRequired
     },
@@ -9,11 +11,8 @@ export default React.createClass({
         return { translatedString: '' }
     },
     componentDidMount() {
-        TranslationStore.listen(this._onChange);
+        this.listenTo(TranslationStore, this._onChange);
         this._onChange();
-    },
-    componentWillUnmount() {
-        TranslationStore.unlisten(this._onChange)
     },
     _onChange() {
         const translatedString = TranslationStore.translate(this.props.id);

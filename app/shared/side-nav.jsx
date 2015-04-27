@@ -6,10 +6,6 @@ let Link = ReactRouter.Link;
 
 export default React.createClass({
     propTypes: {
-        title: React.PropTypes.oneOfType(
-            React.PropTypes.string,
-            React.PropTypes.instanceOf(Translator)
-        ).isRequired,
         items: React.PropTypes.arrayOf(React.PropTypes.shape({
             title: React.PropTypes.string,
             name: React.PropTypes.string,

@@ -5,8 +5,8 @@ import TranslationActions from './translation-actions';
 
 class TranslationStore {
     constructor() {
-        this.currentLanguage = 'en';
         this.defaultLanguage = 'en';
+        this.currentLanguage = this.defaultLanguage;
 
         this.translations = Immutable.List();
 

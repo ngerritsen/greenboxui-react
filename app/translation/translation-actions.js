@@ -19,9 +19,13 @@ class TranslationActions {
                 new Translation({ id: 'language', en: 'Language', nl: 'Taal' }),
                 new Translation({ id: 'name', en: 'Name', nl: 'Naam' }),
                 new Translation({ id: 'delete', en: 'Delete', nl: 'Verwijder' }),
+                new Translation({ id: 'total', en: 'Total', nl: 'Totaal' }),
+                new Translation({ id: 'used', en: 'Used', nl: 'Gebruikt' }),
+                new Translation({ id: 'usage', en: 'Usage', nl: 'Gebruik' }),
 
                 //Greenbox terms
                 new Translation({ id: 'typeId', en: 'Type ID', nl: 'Type ID' }),
+                new Translation({ id: 'controlTypeId', en: 'Control type ID', nl: 'Regeling type ID' }),
                 new Translation({ id: 'instanceId', en: 'Instance ID', nl: 'Instantie ID' }),
 
                 // Main menu
