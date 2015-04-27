@@ -3,17 +3,17 @@ import TranslationStore from './translation-store';
 
 export default {
     getInitialState() {
-        return { translationDictionary: Immutable.Map() };
-    },
-    componentWillMount() {
-        const translationIds = Immutable.List(this.translations);
-        let translationDictionary = Immutable.Map();
-        translationIds.forEach((id) => { translationDictionary = translationDictionary.set(id, id)});
-        this.setState({ translationDictionary: translationDictionary });
+        return { translationDictionary: this._getMappedTranslationIds() };
     },
     componentDidMount() {
         TranslationStore.listen(this._onTranslationsChanged);
         this._onTranslationsChanged();
+    },
+    _getMappedTranslationIds() {
+        const translationIds = Immutable.List(this.translations);
+        let translationDictionary = Immutable.Map();
+        translationIds.forEach((id) => { translationDictionary = translationDictionary.set(id, id)});
+        return translationDictionary;
     },
     _onTranslationsChanged() {
         const translationDictionary = this.state.translationDictionary.map((string, id) => {
