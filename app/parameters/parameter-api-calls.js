@@ -1,17 +1,17 @@
 import BlueBirdPromise from 'bluebird';
 
-class ConnectionApiCalls {
-    putNewConnection(sourceControl, targetControl) {
+class ParameterApiCalls {
+    postParameterValue(controlInstanceId, parameterId, newValue) {
         return new BlueBirdPromise((resolve, reject) => {
             setTimeout(() => resolve(), 500);
         });
     }
 
-    postRemoveConnection(connectionId) {
+    getParameters(parameters) {
         return new BlueBirdPromise((resolve, reject) => {
             setTimeout(() => resolve(), 500);
         });
     }
 }
 
-export default new ConnectionApiCalls;
+export default new ParameterApiCalls;

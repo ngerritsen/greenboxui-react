@@ -1,15 +1,22 @@
 ##Scrumboard Greenbox UI
 
 ###Progress
-- Use Alt auto unlisten mixin
+- Fix warning setState()
+- Build Controls component (w/ store(s) for parameters)
+  * Finish parameter store /w calls
+  * Build controls view
+  * Somehow dummy hook up controls to parameters, extend control instance object, rename control instance to control?
+  * Be able to (fake) set new setpoints
+  * Implement read-only/hidden/write-able parameters
 
 ###Backlog
-- Build Controls component (w/ store(s) for parameters)
+- Implement type id and type name pairs instead of just type id as name
 - Immutable for shared components, actions?
 - Build Report component
 - Build Log component
 - Make graph with actual data
 - Modularize Settings
+- Hook up to real greenbox
 - Experiment /w aria
 
 ###Bugs:
