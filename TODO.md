@@ -7,6 +7,7 @@
   * Somehow dummy hook up controls to parameters
   * Be able to (fake) set new setpoints
   * Implement read-only/hidden/write-able parameters
+- Think about naming conventions (for instance, on-prefix for action handlers)
 
 ###Backlog
 - Immutable for shared components, actions?

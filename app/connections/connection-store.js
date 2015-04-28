@@ -17,7 +17,7 @@ class ConnectionStore {
         this.bindAction(ConnectionServerActions.removeConnectionFailed, this.onConnectionUnsuccessfullyRemoved);
 
         this.exportPublicMethods({
-            _connectionExists: this._connectionExists
+            connectionExists: this.connectionExists
         });
 
         this.on('init', this.bootstrap);
@@ -43,7 +43,7 @@ class ConnectionStore {
                 targetControlName: payload.targetControl.name,
                 dirty: payload.dirty
             });
-            if(!this._connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
+            if(!this.connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
                 this.connections = this.connections.push(newConnection);
             }
         }
@@ -87,7 +87,7 @@ class ConnectionStore {
         });
     }
 
-    _connectionExists(sourceInstanceId, targetInstanceId) {
+    connectionExists(sourceInstanceId, targetInstanceId) {
         return this.connections.find((connection) => connection.sourceControlInstanceId === sourceInstanceId && connection.targetControlInstanceId === targetInstanceId);
     }
 }

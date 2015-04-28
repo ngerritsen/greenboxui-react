@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import shortId from 'shortid';
 import ConnectionAddTool from './connection-add-tool';
 import ConnectionActions from './connection-actions';
+import ConnectionStore from './connection-store';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import Control from '../control-instance/control';
 
@@ -29,6 +30,7 @@ describe('connection add tool', () => {
 
     it('adds a connection', () => {
         spyOn(ConnectionActions, 'addConnection');
+        spyOn(ConnectionStore, 'connectionExists').and.returnValue(false);
 
         const submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(connectionAddTool, 'button');
 
@@ -43,5 +45,16 @@ describe('connection add tool', () => {
         ReactTestUtils.Simulate.click(submitButton);
 
         expect(ConnectionActions.addConnection).toHaveBeenCalledWith(dummyControls.get(0), dummyControls.get(1));
+    });
+
+    it('does not add an existing connection', () => {
+        spyOn(ConnectionActions, 'addConnection');
+        spyOn(ConnectionStore, 'connectionExists').and.returnValue(true);
+
+        const submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(connectionAddTool, 'button');
+
+        ReactTestUtils.Simulate.click(submitButton);
+
+        expect(ConnectionActions.addConnection).not.toHaveBeenCalled();
     });
 });

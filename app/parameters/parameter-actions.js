@@ -10,6 +10,20 @@ class ParameterActions {
         request.then(() => ParameterServerActions.refreshParametersSucceeded(parameters));
         request.catch(() => ParameterServerActions.refreshParametersFailed());
     }
+
+    registerParameter(controlInstanceId, parameterId) {
+        this.dispatch({
+            controlInstanceId: controlInstanceId,
+            parameterId: parameterId
+        });
+    }
+
+    unregisterParameter(controlInstanceId, parameterId) {
+        this.dispatch({
+            controlInstanceId: controlInstanceId,
+            parameterId: parameterId
+        });
+    }
 }
 
 export default AltApp.createActions(ParameterActions);
