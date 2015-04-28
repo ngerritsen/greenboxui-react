@@ -4,7 +4,7 @@ export default Immutable.Record({
     controlInstanceId: null,
     parameterId: null,
     name: null,
-    value: Math.round(Math.random() * 100)/10,
+    value: null,
     unit: null,
     dirty: null,
     isSet: false

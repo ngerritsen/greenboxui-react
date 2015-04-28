@@ -97,7 +97,6 @@ class ControlInstanceStore {
             }
             return control;
         });
-
     }
 
     onControlSuccessfullyRemoved(payload) {
@@ -113,5 +112,6 @@ class ControlInstanceStore {
         });
     }
 }
+
 
 export default AltApp.createStore(ControlInstanceStore, 'ControlInstanceStore');

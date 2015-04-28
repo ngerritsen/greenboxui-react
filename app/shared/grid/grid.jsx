@@ -17,7 +17,8 @@ export default React.createClass({
             template: React.PropTypes.element,
             value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
             total: React.PropTypes.number,
-            unique: React.PropTypes.bool
+            unique: React.PropTypes.bool,
+            show: React.PropTypes.bool
         })),
         data: React.PropTypes.array.isRequired,
         showTools: React.PropTypes.bool,

@@ -32,6 +32,10 @@ export default React.createClass({
                 cellContent = <GridDeleteCell context={data} onDelete={column.handler}/>
             }
 
+            if(column.show === false) {
+                cellContent = '';
+            }
+
             const classNames = classnames([
                 'grid-cell',
                 `small-${column.columns}`,

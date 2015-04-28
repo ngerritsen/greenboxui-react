@@ -15,6 +15,8 @@ class ParameterStore {
         this.bindAction(ParameterActions.unregisterParameter, this.unregisterParameter);
 
         this.on('init', this.bootstrap);
+
+        ParameterActions.refreshParameters(this.parameters);
     }
 
     bootstrap() {
