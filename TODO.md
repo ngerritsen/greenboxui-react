@@ -1,6 +1,6 @@
 ##Scrumboard Greenbox UI
 
-###Progress
+###Progressgit
 - Build Controls component (w/ store(s) for parameters)
   * Finish parameter store /w calls
   * Build controls view
