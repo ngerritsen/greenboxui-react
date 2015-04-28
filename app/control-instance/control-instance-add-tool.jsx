@@ -51,7 +51,7 @@ export default React.createClass({
         const controlTypeOptions = availableControlTypes.map((slot) => {
             return (
                 <option value={slot.controlTypeId} key={slot.controlTypeId}>
-                    {`${slot.controlTypeId} (${slot.used}/${slot.total})`}
+                    {`${slot.controlTypeName} (${slot.used}/${slot.total})`}
                 </option>
             );
         });

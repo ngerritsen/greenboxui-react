@@ -12,20 +12,20 @@ select {
 input[type="text"],
 input[type="number"],
 textarea {
-  @include border-radius(2px);
+  @include border-radius(3px);
   @include box-shadow($subtle-shallow-shadow);
   background-color: $white;
-  border-color: lighten($light-gray, 4%);
+  border-color: lighten($light-gray, 5%);
 
   &:focus {
     @include box-shadow($subtle-medium-shadow);
     background-color: $barely-white;
-    border-color: lighten($light-gray, 4%);
+    border-color: lighten($light-gray, 5%);
   }
 }
 
 select {
-  @include border-radius(2px);
+  @include border-radius(3px);
   @include box-shadow($subtle-shallow-shadow);
-  border-color: lighten($light-gray, 4%);
+  border-color: lighten($light-gray, 5%);
 }

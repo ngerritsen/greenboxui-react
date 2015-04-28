@@ -1,17 +1,21 @@
 import React from 'react/addons';
 import Immutable from 'immutable';
+import shortId from 'shortid';
 import ConnectionAddTool from './connection-add-tool';
 import ConnectionActions from './connection-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
-import ControlInstance from '../control-instance/control-instance';
+import Control from '../control-instance/control';
 
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('connection add tool', () => {
+    const pumpTypeId = shortId.generate();
+    const valveTypeId = shortId.generate();
+
     const dummyControls = Immutable.List.of(
-        new ControlInstance({ typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' }),
-        new ControlInstance({ typeId: 'Valve', instanceId: '138134', name: 'Valve 1' }),
-        new ControlInstance({ typeId: 'Valve', instanceId: '3451dd34', name: 'Valve 2' })
+        new Control({ typeId: pumpTypeId, typeName: 'Pump', instanceId: shortId.generate(), name: 'Pump 1' }),
+        new Control({ typeId: valveTypeId, typeName: 'Valve', instanceId: shortId.generate(), name: 'Valve 1' }),
+        new Control({ typeId: valveTypeId, typeName: 'Valve', instanceId: shortId.generate(), name: 'Valve 2' })
     );
 
     let connectionAddTool;

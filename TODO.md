@@ -5,12 +5,11 @@
 - Build Controls component (w/ store(s) for parameters)
   * Finish parameter store /w calls
   * Build controls view
-  * Somehow dummy hook up controls to parameters, extend control instance object, rename control instance to control?
+  * Somehow dummy hook up controls to parameters
   * Be able to (fake) set new setpoints
   * Implement read-only/hidden/write-able parameters
 
 ###Backlog
-- Implement type id and type name pairs instead of just type id as name
 - Immutable for shared components, actions?
 - Build Report component
 - Build Log component

@@ -10,7 +10,7 @@ import Slab from '../shared/slab';
 
 export default React.createClass({
     mixins: [ListenerMixin, TranslationMixin],
-    translations: ['typeId', 'instanceId', 'name', 'delete'],
+    translations: ['type', 'instanceId', 'name', 'delete'],
     getInitialState() {
         return { controls: Immutable.List() }
     },
@@ -31,7 +31,7 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: this.getTranslation('typeId'), columns: 3, id: 'typeId' },
+            { title: this.getTranslation('type'), columns: 3, id: 'typeName' },
             { title: this.getTranslation('instanceId'), columns: 3, id: 'instanceId', unique: true },
             { title: this.getTranslation('name'), columns: 4, id: 'name', type: 'editable', handler: this._handleEditControlName },
             { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteControl, sort: false }

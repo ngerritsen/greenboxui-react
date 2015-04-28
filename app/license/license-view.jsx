@@ -8,7 +8,7 @@ import LicenseStore from './license-store';
 
 export default React.createClass({
     mixins: [ListenerMixin, TranslationMixin],
-    translations: ['controlTypeId', 'total', 'used', 'usage'],
+    translations: ['controlTypeId', 'controlTypeName', 'total', 'used', 'usage'],
     getInitialState() {
         return {
             license: LicenseStore.getState().license
@@ -25,10 +25,11 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: this.getTranslation('controlTypeId'), columns: 4, id: 'controlTypeId', unique: true },
-            { title: this.getTranslation('total'), columns: 2, id: 'total' },
-            { title: this.getTranslation('used'), columns: 2, id: 'used' },
-            { title: this.getTranslation('usage'), type: 'progress', columns: 4, id: 'usage', total: 'total', value: 'used' }
+            { title: this.getTranslation('controlTypeId'), columns: 3, id: 'controlTypeId', unique: true },
+            { title: this.getTranslation('controlTypeName'), columns: 4, id: 'controlTypeName', unique: true },
+            { title: this.getTranslation('total'), columns: 1, id: 'total' },
+            { title: this.getTranslation('used'), columns: 1, id: 'used' },
+            { title: this.getTranslation('usage'), type: 'progress', columns: 3, id: 'usage', total: 'total', value: 'used' }
         ];
 
         return (

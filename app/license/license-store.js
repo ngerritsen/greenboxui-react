@@ -10,6 +10,10 @@ class LicenseStore {
         this.bindAction(LicenseActions.refreshLicense, this.onRefreshLicense);
         this.bindAction(LicenseActions.useLicenseSlot, this.onOptimisticallyUseLicenseSlot);
 
+        this.exportPublicMethods({
+            getControlTypeName: this.getControlTypeName
+        });
+
         this.on('init', this.bootstrap);
     }
 
@@ -34,6 +38,14 @@ class LicenseStore {
             }
             return slot;
         });
+    }
+
+    getControlTypeName(typeId) {
+        const slot = this.getState().license.find((slot) => slot.controlTypeId === typeId);
+        if (slot) {
+            return slot.controlTypeName;
+        }
+        return 'Unknown control type';
     }
 }
 

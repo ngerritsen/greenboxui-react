@@ -1,6 +1,7 @@
 import React from 'react/addons';
 import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
+import shortId from 'shortid';
 import ConnectionActions from './connection-actions';
 import ConnectionView from './connection-view';
 import ConnectionStore from './connection-store';
@@ -13,7 +14,7 @@ describe('connection view', () => {
 
     const dummyConnections = Immutable.List.of(
         new Connection({
-            connectionId: '58952352',
+            connectionId: shortId.generate(),
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
             sourceControlName: 'Pump 1',
@@ -22,7 +23,7 @@ describe('connection view', () => {
             targetControlname: 'Valve 1'
         }),
         new Connection({
-            connectionId: '89f304g3',
+            connectionId: shortId.generate(),
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
             sourceControlName: 'Pump 1',
@@ -31,7 +32,7 @@ describe('connection view', () => {
             targetControlname:  'Valve 2'
         }),
         new Connection({
-            connectionId: '23ct7340t3',
+            connectionId: shortId.generate(),
             sourceControlInstanceId: '340fr7tj34t0',
             sourceControlTypeId: 'Pump',
             sourceControlName: 'Pump 1',

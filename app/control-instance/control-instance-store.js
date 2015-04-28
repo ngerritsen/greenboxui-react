@@ -2,7 +2,8 @@ import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceServerActions from './control-instance-server-actions';
-import ControlInstance from './control-instance';
+import LicenseStore from '../license/license-store';
+import Control from './control';
 
 class ControlInstanceStore {
     constructor() {
@@ -32,7 +33,9 @@ class ControlInstanceStore {
 
     onControlOptimisticallyAdded(payload) {
         if(payload) {
-            const newControl = new ControlInstance(payload);
+            let newControl = new Control(payload);
+            const typeName = LicenseStore.getControlTypeName(newControl.typeId);
+            newControl = newControl.set('typeName', typeName);
             this.controls = this.controls.push(newControl);
         }
     }

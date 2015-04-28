@@ -31,9 +31,11 @@ class ConnectionStore {
             const newConnection = new Connection({
                 sourceControlInstanceId: payload.sourceControl.instanceId,
                 sourceControlTypeId: payload.sourceControl.typeId,
+                sourceControlTypeName: payload.sourceControl.typeName,
                 sourceControlName: payload.sourceControl.name,
                 targetControlInstanceId: payload.targetControl.instanceId,
                 targetControlTypeId: payload.targetControl.typeId,
+                targetControlTypeName: payload.targetControl.typeName,
                 targetControlName: payload.targetControl.name,
                 dirty: payload.dirty
             });

@@ -27,9 +27,9 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: this.getTranslation('sourceType'), columns: 2, id: 'sourceControlTypeId' },
+            { title: this.getTranslation('sourceType'), columns: 2, id: 'sourceControlTypeName' },
             { title: this.getTranslation('sourceInstance'), columns: 3, id: 'sourceControlName' },
-            { title: this.getTranslation('targetType'), columns: 2, id: 'targetControlTypeId' },
+            { title: this.getTranslation('targetType'), columns: 2, id: 'targetControlTypeName' },
             { title: this.getTranslation('targetInstance'), columns: 3, id: 'targetControlName' },
             { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
         ];

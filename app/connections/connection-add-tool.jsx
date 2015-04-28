@@ -1,6 +1,7 @@
 import React from 'react';
 import Immutable from 'immutable';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
+import LicenseStore from '../license/license-store';
 import TranslationMixin from '../translation/translation-mixin';
 import Translator from '../translation/translator';
 import ConnectionActions from './connection-actions';
@@ -61,7 +62,7 @@ export default React.createClass({
     },
     render() {
         const controlTypeOptions = this._getAvailableControlTypes().map((type) => {
-            return <option value={type} key={type}>{type}</option>;
+            return <option value={type} key={type}>{LicenseStore.getControlTypeName(type)}</option>;
         });
 
         const availableSourceControlOptions = this.state.controls.filter((control) => control.typeId === this._getSelectedSourceType() && control.instanceId);
