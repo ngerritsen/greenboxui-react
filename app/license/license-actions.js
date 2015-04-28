@@ -19,7 +19,9 @@ class LicenseActions {
                new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Valve', total: 15 }),
                new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Meteo', total: 1 }),
                new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Fan', total: 4 }),
-               new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Custom Alarm', total: 10})
+               new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Custom Alarm', total: 10}),
+               new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Irrigation Strategy', total: 4}),
+               new LicenseSlot({ controlTypeId: shortId.generate(), controlTypeName: 'Irrigation Stage', total: 8})
            )
         });
     }

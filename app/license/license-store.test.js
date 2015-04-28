@@ -16,6 +16,13 @@ describe('license store', () => {
         expect(LicenseStore.getState().license.get(0).used).toEqual(usedOld + amount);
     });
 
+    it('get control type name returns the right control type name', () => {
+        const typeId = LicenseStore.getState().license.get(0).controlTypeId;
+        const typeName = LicenseStore.getState().license.get(0).controlTypeName;
+        const result = LicenseStore.getControlTypeName(typeId);
+        expect(result).toEqual(typeName);
+    });
+
     function useLicenseSlot(controlTypeId, amount) {
         AltApp.dispatcher.dispatch({
             action: LicenseActions.USE_LICENSE_SLOT,

@@ -74,6 +74,9 @@ gulp.task('bundle-watch', function() {
     });
 
     bundle = watchify(bundle);
+    bundle.transform(babelify.configure({
+        ignore: /(bower_components)|(node_modules)/
+    }));
     bundle.on('update', function(){
         executeBundle(bundle);
     });
@@ -84,11 +87,7 @@ gulp.task('bundle-watch', function() {
 function executeBundle(bundle) {
     var start = Date.now();
     bundle
-        .transform(babelify.configure({
-            ignore: /(bower_components)|(node_modules)/
-        }))
         .bundle()
-
         .on("error", function (err) { console.log("Error : " + err.message); })
         .pipe(source(files.bundle))
         .pipe(gulp.dest(paths.root))

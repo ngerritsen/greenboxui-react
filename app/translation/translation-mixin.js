@@ -3,23 +3,30 @@ import TranslationStore from './translation-store';
 
 export default {
     getInitialState() {
-        return { translationDictionary: this._getMappedTranslationIds() };
+        return {translationDictionary: this._getMappedTranslationIds()};
     },
     componentDidMount() {
         TranslationStore.listen(this._onTranslationsChanged);
-        this._onTranslationsChanged();
+        this.setState({ translationDictionary: this._getTranslations() });
+    },
+    componentWillUnmount() {
+        TranslationStore.unlisten(this._onTranslationsChanged);
     },
     _getMappedTranslationIds() {
         const translationIds = Immutable.List(this.translations);
         let translationDictionary = Immutable.Map();
-        translationIds.forEach((id) => { translationDictionary = translationDictionary.set(id, id)});
+        translationIds.forEach((id) => {
+            translationDictionary = translationDictionary.set(id, id)
+        });
         return translationDictionary;
     },
     _onTranslationsChanged() {
-        const translationDictionary = this.state.translationDictionary.map((string, id) => {
+        this.setState({ translationDictionary: this._getTranslations() });
+    },
+    _getTranslations() {
+        return this.state.translationDictionary.map((string, id) => {
             return TranslationStore.translate(id);
         });
-        this.setState({ translationDictionary: translationDictionary });
     },
     getTranslation(id) {
         const translation = this.state.translationDictionary.get(id);

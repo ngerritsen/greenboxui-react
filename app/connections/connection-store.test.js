@@ -8,16 +8,23 @@ describe('connection store', () => {
     const dirtyIdA = shortId.generate();
     const dirtyIdB = shortId.generate();
 
+    const typeIdA = shortId.generate();
+    const typeIdB = shortId.generate();
+
+    const dummyControlA = { instanceId: shortId.generate(), typeId: typeIdA, name: 'Pump 1' };
+    const dummyControlB = { instanceId: shortId.generate(), typeId: typeIdB, name: 'Valve 1' };
+    const dummyControlC = { instanceId: shortId.generate(), typeId: typeIdB, name: 'Valve 1' };
+
     const testConnectionA = {
         connectionId: shortId.generate(),
-        sourceControl: { typeId: 'Pump', connectionId: '0874134', name: 'Pump 1' },
-        targetControl: { typeId: 'Valve', connectionId: '138134', name: 'Valve 1' },
+        sourceControl: dummyControlA,
+        targetControl: dummyControlB,
         dirty: dirtyIdA
     };
     const testConnectionB = {
         connectionId: shortId.generate(),
-        sourceControl: { typeId: 'Pump', connectionId: '0874134', name: 'Pump 1' },
-        targetControl: { typeId: 'Valve', connectionId: '345254', name: 'Valve 2' },
+        sourceControl: dummyControlA,
+        targetControl: dummyControlC,
         dirty: dirtyIdB
     };
 
@@ -68,6 +75,13 @@ describe('connection store', () => {
             failToAddConnection(dirtyIdA);
 
             expect(ConnectionStore.getState().connections.count()).toEqual(0);
+        });
+
+        it('does not add an existing connection', () => {
+            optimisticallyAddConnection(testConnectionA);
+            optimisticallyAddConnection(testConnectionA);
+
+            expect(ConnectionStore.getState().connections.count()).toEqual(1);
         });
     });
 

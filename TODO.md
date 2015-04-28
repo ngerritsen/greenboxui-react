@@ -1,7 +1,6 @@
 ##Scrumboard Greenbox UI
 
 ###Progress
-- Fix warning setState()
 - Build Controls component (w/ store(s) for parameters)
   * Finish parameter store /w calls
   * Build controls view
@@ -25,6 +24,7 @@
 - Think about modularization of edit fields/switches/selections for reusability
 - Check if routing dev experience remains good
 - Gzip js/css on server
+- Fix warning proptype checker
 
 - [React best practices](http://aeflash.com/2015-02/react-tips-and-best-practices.html)
   - Use purerendermixin
