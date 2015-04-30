@@ -1,59 +1,31 @@
 import React from 'react';
+import Immutable from 'immutable';
 import Slab from '../shared/slab';
 import Translator from '../translation/translator';
 import TranslationStore from '../translation/translation-store';
 import TranslationActions from '../translation/translation-actions';
+import Setting from './setting';
 
 export default React.createClass({
-    _handleChangeLanguage() {
-        const newLanguageId = React.findDOMNode(this.refs.selectedLanguage).value;
+    _handleChangeLanguage(newLanguageId) {
         TranslationActions.setCurrentLanguage(newLanguageId);
     },
     render() {
         return (
             <Slab>
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="systemId"/>:</span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <span className="setting-value">118</span>
-                    </div>
-                </div>
-
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="softwareVersion"/>:</span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <span className="setting-value">6535</span>
-                    </div>
-                </div>
-
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="uiVersion"/>:</span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <span className="setting-value">1.0.0</span>
-                    </div>
-                </div>
-
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="language"/>:</span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <select
-                            ref="selectedLanguage"
-                            defaultValue={TranslationStore.getState().currentLanguage}
-                            onChange={this._handleChangeLanguage}
-                        >
-                            <option value="en">English</option>
-                            <option value="nl">Nederlands</option>
-                        </select>
-                    </div>
-                </div>
+                <Setting label="systemId" value="118"/>
+                <Setting label="softwareVersion" value="6535"/>
+                <Setting label="uiVersion" value="1.0.0"/>
+                <Setting
+                    label="language"
+                    type="selection"
+                    handler={this._handleChangeLanguage}
+                    options={Immutable.List.of(
+                        { label: 'English', value: 'en' },
+                        { label: 'Nederlands', value: 'nl' }
+                    )}
+                    defaultValue={TranslationStore.getState().currentLanguage}
+                />
             </Slab>
         );
     }

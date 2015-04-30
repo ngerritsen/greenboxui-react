@@ -4,14 +4,13 @@ import Immutable from 'immutable';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
-import Translator from '../translation/translator';
 import LicenseStore from '../license/license-store';
 import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';
+import Setting from './setting';
 
 export default React.createClass({
-    _handleChangeProduct() {
-        const product = React.findDOMNode(this.refs.selectedProduct).value;
+    _handleChangeProduct(product) {
         SettingsActions.setSettings(Immutable.Map({
            product: product
         }));
@@ -19,29 +18,17 @@ export default React.createClass({
     render() {
         return (
             <Slab>
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="addDummyConfig"/></span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <button className="button radius" onClick={this._handleAddDummyConfiguration}><Translator id="add"/></button>
-                    </div>
-                </div>
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="language"/>:</span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <select
-                            ref="selectedProduct"
-                            defaultValue={SettingsStore.getState().settings.get('product')}
-                            onChange={this._handleChangeProduct}
-                        >
-                            <option value="isii">iSii</option>
-                            <option value="isii-compact">iSii Compact</option>
-                        </select>
-                    </div>
-                </div>
+                <Setting label="addDummyConfig" type="button" buttonLabel="add" handler={this._handleAddDummyConfiguration} />
+                <Setting
+                    label="product"
+                    type="selection"
+                    handler={this._handleChangeProduct}
+                    options={Immutable.List.of(
+                        { label: 'iSii', value: 'isii' },
+                        { label: 'iSii Compact', value: 'isii-compact' }
+                    )}
+                    defaultValue={SettingsStore.getState().settings.get('product')}
+                />
             </Slab>
         );
     },
