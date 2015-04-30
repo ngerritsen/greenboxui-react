@@ -157,7 +157,7 @@ gulp.task('serve', function() {
         }
     });
 });
-
+//
 gulp.task('connectDist', function () {
     $.connect.server({
         root: paths.dist,
