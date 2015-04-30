@@ -1,9 +1,8 @@
 import GraphView from './graphs/graph-view';
-
 import ControlInstanceView from './control-instance/control-instance-view';
 import ConnectionView from './connections/connection-view';
 import LicenseView from './license/license-view';
-
+import ControlView from './control/controls-view';
 import About from './settings/about';
 import Development from './settings/development';
 
@@ -13,6 +12,13 @@ export const routeConfig = [{
         path: '/',
         icon: 'line-chart',
         handler: GraphView
+    },
+    {
+        title: 'control',
+        name: 'control',
+        path: '/control',
+        icon: 'sliders',
+        handler: ControlView
     },
     {
         title: 'configure',

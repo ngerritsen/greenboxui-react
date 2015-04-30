@@ -16,7 +16,7 @@ class ParameterStore {
 
         this.on('init', this.bootstrap);
 
-        ParameterActions.refreshParameters(this.parameters);
+        setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false , 3500);
     }
 
     bootstrap() {

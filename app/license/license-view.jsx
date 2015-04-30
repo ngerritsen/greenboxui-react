@@ -31,7 +31,6 @@ export default React.createClass({
             { title: this.getTranslation('used'), columns: 1, id: 'used' },
             { title: this.getTranslation('usage'), type: 'progress', columns: 3, id: 'usage', total: 'total', value: 'used' }
         ];
-
         return (
             <div>
                 <Slab>

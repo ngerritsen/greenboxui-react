@@ -40,7 +40,6 @@ export default React.createClass({
                 'grid-cell',
                 `small-${column.columns}`,
                 'columns',
-                'clickable',
                 {'dirty' : this.props.data.dirty},
                 {[`grid-${column.type}-cell`]: column.type}
             ]);

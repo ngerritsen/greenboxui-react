@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import shortId from 'shortId';
+import Parameter from '../parameters/parameter';
 
 export default Immutable.Record({
     typeId: null,

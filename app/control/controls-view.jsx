@@ -7,6 +7,8 @@ import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
+import Content from '../shared/content';
+import Section from '../shared/section';
 
 export default React.createClass({
     mixins: [ListenerMixin, TranslationMixin],
@@ -40,11 +42,13 @@ export default React.createClass({
     },
     _processControls(oldControls, newControls) {
         const reallyNewControls = newControls.filter((newControl) => {
-            oldControls.find((oldControl) => oldControl.instanceId !== newControl.instanceId);
+            const existing = oldControls.find((oldControl) => oldControl.instanceId !== newControl.instanceId);
+            return existing ? false : true;
         });
+
         this._registerNewParametersFromControls(reallyNewControls);
     },
-    _registerNewParametersFromControls() {
+    _registerNewParametersFromControls(reallyNewControls) {
         let registeredParameters = Immutable.List();
 
         reallyNewControls.forEach((control) => {
@@ -61,21 +65,22 @@ export default React.createClass({
     },
     render() {
         const columnInfo = [
-            { title: this.getTranslation('name'), columns: 3, id: 'name' },
-            { title: this.getTranslation('value'), columns: 3, id: 'value', unique: true },
-            { title: this.getTranslation('unit'), columns: 4, id: 'unit', type: 'editable' },
-            { id: 'parameterId', unique: true, show: false }
+            { title: this.getTranslation('name'), columns: 6, id: 'name' },
+            { title: this.getTranslation('value'), columns: 3, id: 'value'},
+            { title: this.getTranslation('unit'), columns: 3, id: 'unit'}
         ];
 
         return (
-            <div>
-                <Slab>
-                    <Grid
-                        columnInfo={columnInfo}
-                        data={this.state.parameters.toArray()}
-                    />
-                </Slab>
-            </div>
+            <Content>
+                <Section>
+                    <Slab>
+                        <Grid
+                            columnInfo={columnInfo}
+                            data={this.state.parameters.toArray()}
+                        />
+                    </Slab>
+                </Section>
+            </Content>
         );
     }
 });

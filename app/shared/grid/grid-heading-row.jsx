@@ -16,6 +16,9 @@ export default React.createClass({
     render() {
         const sortProperty = this.props.sortProperty;
         const cells = this.props.columnInfo.map((column) => {
+            if(column.show === false) {
+                return '';
+            }
             return <GridHeadingCell
                 column={column}
                 onSortBy={this._handleSortByColumn}
