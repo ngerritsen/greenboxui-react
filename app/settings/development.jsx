@@ -8,6 +8,7 @@ import LicenseStore from '../license/license-store';
 import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';
 import Setting from './setting';
+import SettingTypes from './setting-types';
 
 export default React.createClass({
     _handleChangeProduct(product) {
@@ -18,10 +19,10 @@ export default React.createClass({
     render() {
         return (
             <Slab>
-                <Setting label="addDummyConfig" type="button" buttonLabel="add" handler={this._handleAddDummyConfiguration} />
+                <Setting label="addDummyConfig" type={SettingTypes.Button} buttonLabel="add" handler={this._handleAddDummyConfiguration} />
                 <Setting
                     label="product"
-                    type="selection"
+                    type={SettingTypes.Selection}
                     handler={this._handleChangeProduct}
                     options={Immutable.List.of(
                         { label: 'iSii', value: 'isii' },

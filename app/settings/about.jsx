@@ -5,6 +5,7 @@ import Translator from '../translation/translator';
 import TranslationStore from '../translation/translation-store';
 import TranslationActions from '../translation/translation-actions';
 import Setting from './setting';
+import SettingTypes from './setting-types';
 
 export default React.createClass({
     _handleChangeLanguage(newLanguageId) {
@@ -18,7 +19,7 @@ export default React.createClass({
                 <Setting label="uiVersion" value="1.0.0"/>
                 <Setting
                     label="language"
-                    type="selection"
+                    type={SettingTypes.Selection}
                     handler={this._handleChangeLanguage}
                     options={Immutable.List.of(
                         { label: 'English', value: 'en' },

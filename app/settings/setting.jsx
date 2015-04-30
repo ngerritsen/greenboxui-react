@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import Translator from '../translation/translator';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import SelectionBox from '../shared/selection-box';
+import SettingTypes from './setting-types';
 
 export default React.createClass({
     propTypes: {
@@ -17,14 +18,20 @@ export default React.createClass({
         })),
         defaultValue: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
     },
+    getDefaultProps() {
+        return { type: SettingTypes.Info }
+    },
     render() {
-        let setting = <span className="setting-value">{this.props.value}</span>;
+        let setting = '';
         const {type, label} = this.props;
 
-        if(type === 'button') {
+        if(type === SettingTypes.Info) {
+            setting = <span className="setting-value">{this.props.value}</span>;
+        }
+        if(type === SettingTypes.Button) {
             setting = <button className="button radius" onClick={this.props.handler}><Translator id={this.props.buttonLabel}/></button>
         }
-        else if(type === 'selection') {
+        else if(type === SettingTypes.Selection) {
             setting = <SelectionBox options={this.props.options} handler={this.props.handler} defaultValue={this.props.defaultValue}/>
         }
 
