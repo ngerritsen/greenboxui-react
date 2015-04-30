@@ -1,3 +1,15 @@
+.isii-theme {
+  .top-bar {
+    background-color: $primary-color-isii;
+  }
+}
+
+.isii-compact-theme {
+  .top-bar {
+    background-color: $primary-color-isii-compact;
+  }
+}
+
 .top-bar {
   @include box-shadow($deep-shadow);
   @include vertical-center-height($top-bar-height);

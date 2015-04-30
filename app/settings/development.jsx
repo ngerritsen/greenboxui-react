@@ -1,12 +1,50 @@
 import React from 'react';
 import Slab from '../shared/slab';
+import Immutable from 'immutable';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
 import Translator from '../translation/translator';
 import LicenseStore from '../license/license-store';
+import SettingsStore from '../settings/settings-store';
+import SettingsActions from '../settings/settings-actions';
 
 export default React.createClass({
+    _handleChangeProduct() {
+        const product = React.findDOMNode(this.refs.selectedProduct).value;
+        SettingsActions.setSettings(Immutable.Map({
+           product: product
+        }));
+    },
+    render() {
+        return (
+            <Slab>
+                <div className="row setting">
+                    <div className="small-6 medium-8 columns setting-column">
+                        <span className="setting-description"><Translator id="addDummyConfig"/></span>
+                    </div>
+                    <div className="small-6 medium-4 columns setting-column">
+                        <button className="button radius" onClick={this._handleAddDummyConfiguration}><Translator id="add"/></button>
+                    </div>
+                </div>
+                <div className="row setting">
+                    <div className="small-6 medium-8 columns setting-column">
+                        <span className="setting-description"><Translator id="language"/>:</span>
+                    </div>
+                    <div className="small-6 medium-4 columns setting-column">
+                        <select
+                            ref="selectedProduct"
+                            defaultValue={SettingsStore.getState().settings.get('product')}
+                            onChange={this._handleChangeProduct}
+                        >
+                            <option value="isii">iSii</option>
+                            <option value="isii-compact">iSii Compact</option>
+                        </select>
+                    </div>
+                </div>
+            </Slab>
+        );
+    },
     _handleAddDummyConfiguration() {
         const {license} = LicenseStore.getState();
         ControlInstanceActions.addControl(license.get(0).controlTypeId, 'Pump1');
@@ -50,19 +88,5 @@ export default React.createClass({
         ConnectionActions.addConnection(controls.get(13), controls.get(16));
         ConnectionActions.addConnection(controls.get(14), controls.get(17));
         ConnectionActions.addConnection(controls.get(14), controls.get(18));
-    },
-    render() {
-        return (
-            <Slab>
-                <div className="row setting">
-                    <div className="small-6 medium-8 columns setting-column">
-                        <span className="setting-description"><Translator id="addDummyConfig"/></span>
-                    </div>
-                    <div className="small-6 medium-4 columns setting-column">
-                        <button className="button radius" onClick={this._handleAddDummyConfiguration}><Translator id="add"/></button>
-                    </div>
-                </div>
-            </Slab>
-        );
     }
 });

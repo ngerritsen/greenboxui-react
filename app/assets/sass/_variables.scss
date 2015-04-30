@@ -3,8 +3,10 @@ $gray: darken($white, 50%);
 $light-gray: darken($white, 25%);
 $subtle-gray: darken($white, 12.5%);
 $barely-white: darken($white, 4%);
+$primary-color: #2181f7;
 
-$primary-color: #3a77e6;
+$primary-color-isii-compact: #2181f7;
+$primary-color-isii: #fb1031;
 
 $text-color: #333;
 $link-color: saturate(lighten($primary-color, 7.5%), 12.5%);
