@@ -28,7 +28,7 @@ export default React.createClass({
         if(type === SettingTypes.Info) {
             setting = <span className="setting-value">{this.props.value}</span>;
         }
-        if(type === SettingTypes.Button) {
+        else if(type === SettingTypes.Button) {
             setting = <button className="button radius" onClick={this.props.handler}><Translator id={this.props.buttonLabel}/></button>
         }
         else if(type === SettingTypes.Selection) {
