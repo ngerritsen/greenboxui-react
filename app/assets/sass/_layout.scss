@@ -23,20 +23,9 @@
 .off-canvas-wrap,
 .inner-wrap {
   height: 100%;
+  z-index: $z-index-main-menu;
 }
 
 .inner-wrap {
   overflow: auto;
-}
-
-.move-right > .inner-wrap {
-  @include transform(translate3d(0, 0, 0));
-}
-
-.move-right .left-off-canvas-menu {
-  @include transform(translate3d(0, 0, 0));
-}
-
-.move-right .exit-off-canvas {
-  z-index: $z-index-exit-menu-link;
 }

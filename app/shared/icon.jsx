@@ -5,7 +5,8 @@ export default React.createClass({
     propTypes: {
         type: React.PropTypes.string.isRequired,
         large: React.PropTypes.bool,
-        fixedWidth: React.PropTypes.bool
+        fixedWidth: React.PropTypes.bool,
+        clickable: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
@@ -14,12 +15,13 @@ export default React.createClass({
         };
     },
     render() {
-        const {type, large, fixedWidth} = this.props;
+        const {type, large, fixedWidth, clickable} = this.props;
         const classNames = classnames([
             'fa',
             `fa-${type}`,
             { 'fa-lg': large },
-            { 'fa-fw': fixedWidth }
+            { 'fa-fw': fixedWidth },
+            { 'clickable': clickable }
         ]);
         return (
             <i className={classNames}></i>

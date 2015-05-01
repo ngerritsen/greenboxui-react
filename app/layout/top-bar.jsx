@@ -2,6 +2,8 @@ import React from 'react';
 import Time from '../shared/time/time'
 import ListenerMixin from 'alt/mixins/ListenerMixin';
 import SettingsStore from '../settings/settings-store';
+import Icon from '../shared/icon';
+import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
     mixins: [ListenerMixin],
@@ -22,7 +24,9 @@ export default React.createClass({
                 <nav className="top-bar" data-topbar role="navigation">
                     <ul className="title-area">
                         <li className="menu-button-container">
-                            <i className="fa fa-bars fa-lg clickable left-off-canvas-toggle"></i>
+                            <span className="clickable left-off-canvas-toggle">
+                                <Icon type={IconTypes.menu} large={true} clickable={true}/>
+                            </span>
                         </li>
                         <li className="logo-container">
                             <img src={`assets/images/${this.state.product}-logo.png`} className="logo"/>
@@ -31,13 +35,13 @@ export default React.createClass({
                     <section className="top-bar-section">
                         <ul className="right info-area">
                             <li className="info-item">
-                                <span><i className="fa fa-globe"></i></span>
+                                <Icon type={IconTypes.network}/>
                             </li>
                             <li className="info-item">
-                                <span><i className="fa fa-bell"></i></span>
+                                <Icon type={IconTypes.alarm}/>
                             </li>
                             <li className="info-item">
-                                <span><i className="fa fa-clock-o"></i><Time/></span>
+                                <Icon type={IconTypes.time}/><Time/>
                             </li>
                         </ul>
                     </section>

@@ -10,12 +10,16 @@
   }
 }
 
+.fixed,
+.top-bar {
+  z-index: $z-index-top-bar;
+}
+
 .top-bar {
   @include box-shadow($deep-shadow);
   @include vertical-center-height($top-bar-height);
   background-color: $primary-color;
   color: $white;
-  z-index: $z-index-top-bar;
 
   .menu-button-container {
     @include vertical-center-height($top-bar-height);

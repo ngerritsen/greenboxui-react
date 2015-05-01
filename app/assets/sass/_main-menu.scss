@@ -1,10 +1,14 @@
 .left-off-canvas-menu {
   @include reset-border-styles();
-  @include box-shadow(4px 0 12px lighten($light-gray, 2%));
+  @include transform(translate3d(-105%, 0, 0));
+  @include box-shadow($hard-deep-shadow);
   background-color: darken($white, 1%);
   z-index: $z-index-main-menu;
 }
 
+.offcanvas-overlap .left-off-canvas-menu {
+  z-index: $z-index-main-menu;
+}
 
 .main-menu {
   .side-nav {
@@ -20,5 +24,26 @@
         padding: 0 1.2rem;
       }
     }
+  }
+}
+
+.move-right > .inner-wrap {
+  @include transform(translate3d(0, 0, 0));
+}
+
+.move-right .left-off-canvas-menu {
+  @include transform(translate3d(0, 0, 0));
+}
+
+.move-right .exit-off-canvas {
+  z-index: $z-index-exit-menu-link;
+}
+
+.offcanvas-overlap .exit-off-canvas {
+  background-color: rgba(55, 55, 55, .075);
+  z-index: $z-index-exit-menu-link;
+
+  &:hover {
+    background-color: rgba(55, 55, 55, .05);
   }
 }

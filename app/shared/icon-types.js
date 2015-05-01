@@ -1,18 +1,19 @@
 export default Object.freeze({
-    info: 'info-circle',
-    graphs: 'line-chart',
+    alarm: 'bell',
     configure: 'wrench',
+    connection: 'link',
     control: 'sliders',
     controls: 'cubes',
-    connection: 'link',
+    development: 'flask',
+    graphs: 'line-chart',
+    info: 'info-circle',
     license: 'key',
+    menu: 'bars',
+    network: 'globe',
+    search: 'search',
     settings: 'cogs',
     settingsGeneral: 'cogs',
-    development: 'flask',
-    network: 'globe',
-    alarm: 'bell',
-    time: 'clock-o',
-    search: 'search'
+    time: 'clock-o'
 });
 
 //Current iconset is from font-awesome:
