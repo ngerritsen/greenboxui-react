@@ -26,6 +26,9 @@ class TranslationActions {
                 new Translation({ id: 'control', en: 'Control', nl: 'Regelen' }),
                 new Translation({ id: 'product', en: 'Product', nl: 'Product' }),
                 new Translation({ id: 'general', en: 'General', nl: 'Algemeen' }),
+                new Translation({ id: 'id', en: 'ID', nl: 'ID' }),
+                new Translation({ id: 'date', en: 'Date', nl: 'Datum' }),
+                new Translation({ id: 'message', en: 'Message', nl: 'Bericht' }),
 
                 //Greenbox terms
                 new Translation({ id: 'typeId', en: 'Type ID', nl: 'Type ID' }),

@@ -3,6 +3,7 @@ import ControlInstanceView from './control-instance/control-instance-view';
 import ConnectionView from './connections/connection-view';
 import LicenseView from './license/license-view';
 import ControlView from './control/controls-view';
+import AlarmView from './alarms/alarm-view';
 import About from './settings/about';
 import General from './settings/general';
 import Development from './settings/development';
@@ -21,6 +22,13 @@ export const routeConfig = [{
         path: '/control',
         icon: IconTypes.control,
         handler: ControlView
+    },
+    {
+        title: 'alarms',
+        name: 'alarms',
+        path: '/alarms',
+        icon: IconTypes.alarm,
+        handler: AlarmView
     },
     {
         title: 'configure',

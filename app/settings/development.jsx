@@ -9,6 +9,7 @@ import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';
 import Setting from './setting';
 import SettingTypes from './setting-types';
+import AlarmActions from '../alarms/alarm-actions.js';
 
 export default React.createClass({
     _handleChangeProduct(product) {
@@ -16,10 +17,14 @@ export default React.createClass({
            product: product
         }));
     },
+    _handleRaiseAlarm() {
+        AlarmActions.raiseAlarm('This is a dummy alarm');
+    },
     render() {
         return (
             <Slab>
                 <Setting label="addDummyConfig" type={SettingTypes.action} actionLabel="add" handler={this._handleAddDummyConfiguration} />
+                <Setting label="raiseAnAlarm" type={SettingTypes.action} actionLabel="raise" handler={this._handleRaiseAlarm} />
                 <Setting
                     label="product"
                     type={SettingTypes.selection}
