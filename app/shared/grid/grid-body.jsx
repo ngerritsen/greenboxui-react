@@ -25,14 +25,10 @@ export default React.createClass({
         };
     },
     getInitialState() {
-        return {
-            currentPage: 0
-        }
+        return { currentPage: 0 };
     },
     _handleChangePage(newPage) {
-        this.setState({
-           currentPage: newPage
-        });
+        this.setState({ currentPage: newPage });
     },
     _searchData(data) {
         if (this.props.searchParameter) {
@@ -46,16 +42,15 @@ export default React.createClass({
 
     },
     _searchRowData(rowData) {
-        const formattedSearchParameter = String(this.props.searchParameter).toLowerCase();
-        const columns = this.props.columnInfo;
-        const searchBy = this.props.searchBy;
+        const {columnInfo, searchParameter, searchBy} = this.props;
+        const formattedSearchParameter = String(searchParameter).toLowerCase();
 
         if(searchBy) {
             return this._searchCellData(rowData[searchBy], formattedSearchParameter)
         }
         else {
-            for(let i = 0; i < columns.length; i++) {
-                let cellData = rowData[columns[i].id];
+            for(let i = 0; i < columnInfo.length; i++) {
+                let cellData = rowData[columnInfo[i].id];
                 if (this._searchCellData(cellData, formattedSearchParameter)) {
                     return true;
                 }
@@ -68,13 +63,13 @@ export default React.createClass({
 
     },
     _sortRowData(rowData) {
-        const sortProperty = this.props.sortProperty;
+        const {sortProperty, sortInversed} = this.props;
         let newRowData = rowData;
 
         if (sortProperty) {
             newRowData = _(rowData).sortBy((item) => item[sortProperty]);
         }
-        if (this.props.sortInversed) {
+        if (sortInversed) {
             newRowData = newRowData.reverse();
         }
         return newRowData;
@@ -99,37 +94,42 @@ export default React.createClass({
         return index;
 
     },
+    _getCurrentPage(paginatedRows) {
+        let currentPage = this.state.currentPage;
+
+        if (paginatedRows.length - 1 > currentPage) {
+            currentPage = paginatedRows.length - 1;
+        }
+        return currentPage;
+    },
     render() {
-        let rowsToShow = [];
-        let pagination = '';
+        const {columnInfo, data, pagination} = this.props;
+        let renderedPagination = '';
         let totalRowCount = 0;
 
-        const sortedData = this._sortRowData(this.props.data);
+        const sortedData = this._sortRowData(data);
         const filteredData = this._searchData(sortedData);
 
-        rowsToShow = filteredData.map((rowData, index) => {
+        let rowsToShow = filteredData.map((rowData, index) => {
             const key = this._getKey(rowData, index);
             totalRowCount++;
             return <GridRow
-                columnInfo={this.props.columnInfo}
+                columnInfo={columnInfo}
                 data={rowData}
                 key={key}
                 reactKey={key}
             />;
         });
 
-        if(this.props.pagination) {
-            let currentPage = this.state.currentPage;
+        if(pagination) {
             const paginatedRows = this._paginateRows(rowsToShow);
-            if (paginatedRows.length - 1 > currentPage) {
-                currentPage = paginatedRows.length - 1;
-            }
+            let currentPage = this._getCurrentPage(paginatedRows);
             rowsToShow = paginatedRows[currentPage];
 
-            pagination = (
+            renderedPagination = (
                 <GridPagination
                     totalRowCount={totalRowCount}
-                    pageRowCount={this.props.pagination}
+                    pageRowCount={pagination}
                     onChangePage={this._handleChangePage}
                     currentPage={currentPage}
                 />
@@ -141,7 +141,7 @@ export default React.createClass({
                 <ul className="grid">
                     {rowsToShow}
                 </ul>
-                {pagination}
+                {renderedPagination}
             </div>
         );
     }

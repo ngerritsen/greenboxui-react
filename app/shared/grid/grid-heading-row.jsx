@@ -16,14 +16,15 @@ export default React.createClass({
     render() {
         const sortProperty = this.props.sortProperty;
         const cells = this.props.columnInfo.map((column) => {
-            if(column.show === false) {
+            const {id, show} = column;
+            if(show === false) {
                 return '';
             }
             return <GridHeadingCell
                 column={column}
                 onSortBy={this._handleSortByColumn}
-                key={column.id}
-                sorted={column.id === sortProperty}/>;
+                key={id}
+                sorted={id === sortProperty}/>;
         });
 
         return (

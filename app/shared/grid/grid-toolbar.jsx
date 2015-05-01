@@ -1,6 +1,7 @@
 import React from 'react';
 import Immutable from 'immutable';
 import TranslationMixin from '../../translation/translation-mixin';
+import IconTypes from '../icon-types';
 
 export default React.createClass({
     mixins: [TranslationMixin],
@@ -31,7 +32,7 @@ export default React.createClass({
                     <div className="small-4 columns">
                         <div className="row">
                             <div className="small-2 columns">
-                                <label htmlFor="search" className="inline"><i className="fa fa-search fa-lg"></i></label>
+                                <label htmlFor="search" className="inline"><i className={`fa fa-${IconTypes.search} fa-lg`}></i></label>
                             </div>
                             <div className="small-10 columns">
                                 <select ref="searchBySelection" onChange={this._handleSearch}>

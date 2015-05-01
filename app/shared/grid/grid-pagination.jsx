@@ -17,16 +17,16 @@ export default React.createClass({
         }
     },
     _getTotalPageCount() {
-        return Math.ceil(this.props.totalRowCount/this.props.pageRowCount);
+        const {totalRowCount, pageRowCount} = this.props;
+        return Math.ceil(totalRowCount/pageRowCount);
     },
     render() {
+        const {currentPage, totalRowCount, pageRowCount} = this.props;
         let pages = [];
-        const currentPage = this.props.currentPage;
         const firstPage = 0;
         const prevPage = currentPage - 1;
         const nextPage = currentPage + 1;
         const lastPage = this._getTotalPageCount() - 1;
-        const totalRowCount = this.props.totalRowCount;
 
         const prevArrowClass = classNames([
             'arrow',
@@ -37,8 +37,8 @@ export default React.createClass({
             {'unavailable': currentPage >= (this._getTotalPageCount() - 1)}
         ]);
 
-        for(var rowCount = 0; rowCount < totalRowCount; rowCount += this.props.pageRowCount) {
-            let page = rowCount / this.props.pageRowCount;
+        for(var rowCount = 0; rowCount < totalRowCount; rowCount += pageRowCount) {
+            let page = rowCount / pageRowCount;
             let className = (page === currentPage) ? 'current' : '';
 
                 pages.push(

@@ -19,10 +19,10 @@ export default React.createClass({
     render() {
         return (
             <Slab>
-                <Setting label="addDummyConfig" type={SettingTypes.Button} buttonLabel="add" handler={this._handleAddDummyConfiguration} />
+                <Setting label="addDummyConfig" type={SettingTypes.action} actionLabel="add" handler={this._handleAddDummyConfiguration} />
                 <Setting
                     label="product"
-                    type={SettingTypes.Selection}
+                    type={SettingTypes.selection}
                     handler={this._handleChangeProduct}
                     options={Immutable.List.of(
                         { label: 'iSii', value: 'isii' },

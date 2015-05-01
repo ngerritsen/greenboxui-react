@@ -8,10 +8,10 @@ import SettingTypes from './setting-types';
 export default React.createClass({
     propTypes: {
         label: React.PropTypes.string.isRequired,
-        buttonLabel: React.PropTypes.string,
-        value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
         type: React.PropTypes.string,
         handler: React.PropTypes.func,
+        actionLabel: React.PropTypes.string,
+        value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
         options: ImmutablePropTypes.listOf(React.PropTypes.shape({
             label: React.PropTypes.string,
             value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
@@ -19,19 +19,19 @@ export default React.createClass({
         defaultValue: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
     },
     getDefaultProps() {
-        return { type: SettingTypes.Info }
+        return { type: SettingTypes.info }
     },
     render() {
         let setting = '';
         const {type, label} = this.props;
 
-        if(type === SettingTypes.Info) {
+        if(type === SettingTypes.info) {
             setting = <span className="setting-value">{this.props.value}</span>;
         }
-        else if(type === SettingTypes.Button) {
-            setting = <button className="button radius" onClick={this.props.handler}><Translator id={this.props.buttonLabel}/></button>
+        else if(type === SettingTypes.action) {
+            setting = <button className="button radius" onClick={this.props.handler}><Translator id={this.props.actionLabel}/></button>
         }
-        else if(type === SettingTypes.Selection) {
+        else if(type === SettingTypes.selection) {
             setting = <SelectionBox options={this.props.options} handler={this.props.handler} defaultValue={this.props.defaultValue}/>
         }
 

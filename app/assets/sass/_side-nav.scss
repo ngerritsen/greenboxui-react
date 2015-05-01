@@ -1,6 +1,10 @@
 .side-nav {
   padding-top: 0;
 
+  i {
+    margin-right: $margin-small;
+  }
+
   .side-nav-item {
     a:not(.button) {
       color: lighten($gray, 10%);

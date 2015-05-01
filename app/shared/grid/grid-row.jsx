@@ -12,40 +12,40 @@ export default React.createClass({
         data: React.PropTypes.object.isRequired
     },
     render() {
-        const columnInfo = this.props.columnInfo;
-        const data = this.props.data;
+        const {columnInfo, data} = this.props;
 
         const cells = columnInfo.map((column) => {
-            let cellContent = <span>{data[column.id]}</span>;
+            const {id, columns, type, template, handler, value, total, show} = column;
+            let cellContent = <span>{data[id]}</span>;
 
-            if (column.type === 'custom') {
-                const Template = column.template;
-                cellContent = <Template value={data[column.id]} context={data} key={column.id}/>;
+            if (type === 'custom') {
+                const Template = template;
+                cellContent = <Template value={data[id]} context={data} key={id}/>;
             }
-            else if (column.type === 'editable') {
-                cellContent = <GridEditableCell value={data[column.id]} context={data} onEdit={column.handler} key={column.id}/>;
+            else if (type === 'editable') {
+                cellContent = <GridEditableCell value={data[id]} context={data} onEdit={handler} key={id}/>;
             }
-            else if (column.type === 'progress') {
-                cellContent = <GridProgressCell value={data[column.value]} total={data[column.total]} key={column.id}/>;
+            else if (type === 'progress') {
+                cellContent = <GridProgressCell value={data[value]} total={data[total]} key={id}/>;
             }
-            else if (column.type === 'delete') {
-                cellContent = <GridDeleteCell context={data} onDelete={column.handler}/>
+            else if (type === 'delete') {
+                cellContent = <GridDeleteCell context={data} onDelete={handler}/>
             }
 
-            if(column.show === false) {
+            if(show === false) {
                 cellContent = '';
             }
 
             const classNames = classnames([
                 'grid-cell',
-                `small-${column.columns}`,
+                `small-${columns}`,
                 'columns',
-                {'dirty' : this.props.data.dirty},
-                {[`grid-${column.type}-cell`]: column.type}
+                {'dirty' : data.dirty},
+                {[`grid-${type}-cell`]: type}
             ]);
 
             return (
-                <div className={classNames} key={column.id}>
+                <div className={classNames} key={id}>
                     {cellContent}
                 </div>
             );

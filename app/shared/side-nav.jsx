@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactRouter from 'react-router';
 import Translator from '../translation/translator';
+import Icon from './icon';
 
 let Link = ReactRouter.Link;
 
@@ -14,10 +15,12 @@ export default React.createClass({
     },
     render() {
         const items = this.props.items.map((item) => {
+            const {name, icon, title} = item;
             return (
-                <li className="side-nav-item" role="menuitem" key={item.name}>
-                    <Link to={item.name} activeClassName="active">
-                        <i className={`fa fa-${item.icon} fa-fw`}></i>&nbsp; <Translator id={item.title}/>
+                <li className="side-nav-item" role="menuitem" key={name}>
+                    <Link to={name} activeClassName="active">
+                        <Icon type={icon} fixedWidth={true}/>
+                        <Translator id={title}/>
                     </Link>
                 </li>
             );

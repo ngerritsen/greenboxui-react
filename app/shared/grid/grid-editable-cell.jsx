@@ -16,11 +16,11 @@ export default React.createClass({
     _handleEditValue(event) {
         event.preventDefault();
 
+        const {value, context, onEdit} = this.props;
         const newValue = React.findDOMNode(this.refs.editedValueInput).value.trim();
-        const oldValue = String(this.props.value);
-        const context = this.props.context;
+        const oldValue = String(value);
         if (newValue && newValue !== oldValue) {
-            this.props.onEdit(newValue, context);
+            onEdit(newValue, context);
         }
         this._handleToggleEdit(event);
     },

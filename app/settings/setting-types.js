@@ -1,7 +1,7 @@
 export default Object.freeze({
-    Info: 'INFO',
-    Editable: 'EDITABLE',
-    Selection: 'SELECTION',
-    Button: 'BUTTON',
-    Switch: 'SWITCH'
+    info: 'INFO',
+    input: 'INPUT',
+    selection: 'SELECTION',
+    action: 'ACTION',
+    onOff: 'ON_OFF'
 });

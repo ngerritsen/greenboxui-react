@@ -19,7 +19,7 @@ export default React.createClass({
                 <Setting label="uiVersion" value="1.0.0"/>
                 <Setting
                     label="language"
-                    type={SettingTypes.Selection}
+                    type={SettingTypes.selection}
                     handler={this._handleChangeLanguage}
                     options={Immutable.List.of(
                         { label: 'English', value: 'en' },

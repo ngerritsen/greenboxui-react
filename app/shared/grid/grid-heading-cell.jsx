@@ -10,14 +10,15 @@ export default React.createClass({
         return { sortInversed: true };
     },
     _handleSortByColumn(event) {
+        const {onSortBy, column} = this.props;
         this.setState({ sortInversed: !this.state.sortInversed });
-        this.props.onSortBy(this.props.column.id, this.state.sortInversed);
+        onSortBy(column.id, this.state.sortInversed);
     },
     _capitalizeId(id) {
         return id.charAt(0).toUpperCase() + id.slice(1);
     },
     render() {
-        const column = this.props.column;
+        const {column, sorted} = this.props;
         const cellTitle = column.title ? column.title : this._capitalizeId(column.id);
 
         if (column.sort === false) {
@@ -30,10 +31,10 @@ export default React.createClass({
 
         let sortIcon = '';
 
-        if(this.props.sorted && !this.state.sortInversed) {
+        if(sorted && !this.state.sortInversed) {
             sortIcon = <i className="fa fa-sort-desc right fa-inline"></i>
         }
-        else if (this.props.sorted) {
+        else if (sorted) {
             sortIcon = <i className="fa fa-sort-asc right fa-inline"></i>
         }
 
