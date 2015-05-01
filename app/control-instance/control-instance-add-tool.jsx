@@ -1,23 +1,18 @@
 import React from 'react';
 import Immutable from 'immutable';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import Translator from '../translation/translator';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
 import LicenseActions from '../license/license-actions';
 
 export default React.createClass({
-    mixins: [ListenerMixin],
+    mixins: [AutoListenerMixin],
     getInitialState() {
-        return { license: Immutable.List() }
+        return { license: LicenseStore.getState().license }
     },
     componentDidMount() {
-        this.listenTo(LicenseStore, this._onChange);
-        this._onChange();
-    },
-    _onChange() {
-        const newLicense = LicenseStore.getState().license;
-        this.setState({license: newLicense});
+        this.listenToAuto(LicenseStore);
     },
     _licenseSlotsAvailable(controlTypeId) {
         const slot = this.state.license.find((slot) => slot.controlTypeId === controlTypeId);

@@ -8,7 +8,7 @@ class LicenseStore {
         this.license = Immutable.List();
 
         this.bindAction(LicenseActions.refreshLicense, this.onRefreshLicense);
-        this.bindAction(LicenseActions.useLicenseSlot, this.onOptimisticallyUseLicenseSlot);
+        this.bindAction(LicenseActions.useLicenseSlot, this.onUseLicenseSlotOptimistic);
 
         this.exportPublicMethods({
             getControlTypeName: this.getControlTypeName
@@ -30,7 +30,7 @@ class LicenseStore {
         this.license = payload.license;
     }
 
-    onOptimisticallyUseLicenseSlot(payload) {
+    onUseLicenseSlotOptimistic(payload) {
         const {amount, controlTypeId} = payload;
         this.license = this.license.map((slot) => {
             if(slot.controlTypeId === controlTypeId) {

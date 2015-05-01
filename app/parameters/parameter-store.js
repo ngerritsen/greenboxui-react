@@ -11,8 +11,8 @@ class ParameterStore {
 
         this.bindAction(ParameterServerActions.refreshParametersSucceeded, this.onRefreshParametersSucceeded);
 
-        this.bindAction(ParameterActions.registerParameter, this.registerParameter);
-        this.bindAction(ParameterActions.unregisterParameter, this.unregisterParameter);
+        this.bindAction(ParameterActions.registerParameter, this.onRegisterParameter);
+        this.bindAction(ParameterActions.unregisterParameter, this.onUnregisterParameter);
 
         this.on('init', this.bootstrap);
 
@@ -25,7 +25,7 @@ class ParameterStore {
         }
     }
 
-    registerParameter(payload) {
+    onRegisterParameter(payload) {
         const {parameterId, controlInstanceId} = payload;
         if(!this.parameters.find((param) => parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)) {
             this.parameters = this.parameters.push(new Parameter({
@@ -35,7 +35,7 @@ class ParameterStore {
         }
     }
 
-    unregisterParameter(payload) {
+    onUnregisterParameter(payload) {
         const {parameterId, controlInstanceId} = payload;
         this.parameters = this.parameters.filter((param) => {
             return !(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)

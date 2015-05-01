@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
@@ -9,18 +9,13 @@ import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 
 export default React.createClass({
-    mixins: [ListenerMixin, TranslationMixin],
+    mixins: [AutoListenerMixin, TranslationMixin],
     translations: ['type', 'instanceId', 'name', 'delete'],
     getInitialState() {
-        return { controls: Immutable.List() }
+        return { controls: ControlInstanceStore.getState().controls }
     },
     componentDidMount() {
-        this.listenTo(ControlInstanceStore, this._onChange);
-        this._onChange();
-    },
-    _onChange() {
-        const newControls = ControlInstanceStore.getState().controls;
-        this.setState({ controls: newControls });
+        this.listenToAuto(ControlInstanceStore);
     },
     _handleEditControlName(newName, control) {
         const instanceId = control.instanceId;

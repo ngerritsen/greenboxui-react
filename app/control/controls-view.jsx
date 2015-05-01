@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ParameterStore from '../parameters/parameter-store';
@@ -11,7 +11,7 @@ import Content from '../shared/content';
 import Section from '../shared/section';
 
 export default React.createClass({
-    mixins: [ListenerMixin, TranslationMixin],
+    mixins: [AutoListenerMixin, TranslationMixin],
     translations: ['name', 'value', 'unit'],
     getInitialState() {
         return {
@@ -21,10 +21,8 @@ export default React.createClass({
         }
     },
     componentDidMount() {
-        this.listenTo(ControlInstanceStore, this._onChangeControls);
-        this.listenTo(ParameterStore, this._onChangeParams);
-        this._onChangeControls();
-        this._onChangeParams();
+        this.listenToAuto(ControlInstanceStore, this._onChangeControls);
+        this.listenToAuto(ParameterStore, this._onChangeParams);
     },
     componentWillUnmount() {
         this.state.registeredParameters.forEach((parameter) => {

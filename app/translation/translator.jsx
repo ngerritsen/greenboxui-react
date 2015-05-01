@@ -1,9 +1,9 @@
 import React from 'react';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationStore from './translation-store';
 
 export default React.createClass({
-    mixins: [ListenerMixin],
+    mixins: [AutoListenerMixin],
     propTypes: {
         id: React.PropTypes.string.isRequired
     },
@@ -11,8 +11,7 @@ export default React.createClass({
         return { translatedString: '' }
     },
     componentDidMount() {
-        this.listenTo(TranslationStore, this._onChange);
-        this._onChange();
+        this.listenToAuto(TranslationStore, this._onChange);
     },
     _onChange() {
         const translatedString = TranslationStore.translate(this.props.id);

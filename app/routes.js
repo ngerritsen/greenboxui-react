@@ -4,6 +4,7 @@ import ConnectionView from './connections/connection-view';
 import LicenseView from './license/license-view';
 import ControlView from './control/controls-view';
 import About from './settings/about';
+import General from './settings/general';
 import Development from './settings/development';
 import IconTypes from './shared/icon-types';
 
@@ -68,7 +69,7 @@ export const routeConfig = [{
                 name: 'general',
                 path: '/settings/general',
                 icon: IconTypes.settingsGeneral,
-                handler: About
+                handler: General
             },
             {
                 title: 'development',

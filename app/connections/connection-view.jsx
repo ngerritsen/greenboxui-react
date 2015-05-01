@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
@@ -9,18 +9,13 @@ import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 
 export default React.createClass({
-    mixins: [ListenerMixin, TranslationMixin],
+    mixins: [AutoListenerMixin, TranslationMixin],
     translations: ['sourceType', 'sourceInstance', 'targetType', 'targetInstance', 'delete'],
     getInitialState() {
-        return { connections: Immutable.List() }
+        return { connections: ConnectionStore.getState().connections }
     },
     componentDidMount() {
-        this.listenTo(ConnectionStore, this._onChange);
-        this._onChange();
-    },
-    _onChange() {
-        const newConnections = ConnectionStore.getState().connections;
-        this.setState({ connections: newConnections });
+        this.listenToAuto(ConnectionStore);
     },
     _handleDeleteConnection(connection) {
         ConnectionActions.removeConnection(connection.connectionId);

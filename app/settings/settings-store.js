@@ -5,7 +5,7 @@ import SettingsActions from './settings-actions'
 class SettingsStore {
     constructor() {
         this.settings = Immutable.Map({
-            product: 'isii'
+            product: 'isii-compact'
         });
         this.bindAction(SettingsActions.setSettings, this.onSetSettings);
 

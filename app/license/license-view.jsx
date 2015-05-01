@@ -1,24 +1,20 @@
 import React from 'react';
 import Immutable from 'immutable';
 import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import Slab from '../shared/slab';
 import Grid from '../shared/grid/grid';
 import LicenseStore from './license-store';
 
 export default React.createClass({
-    mixins: [ListenerMixin, TranslationMixin],
+    mixins: [AutoListenerMixin, TranslationMixin],
     translations: ['controlTypeId', 'controlTypeName', 'total', 'used', 'usage'],
     getInitialState() {
-        return {
-            license: LicenseStore.getState().license
-        };
+        return { license: LicenseStore.getState().license };
     },
     componentDidMount() {
-        this.listenTo(LicenseStore, this._onChange);
-    },
-    _onChange() {
-        this.setState(LicenseStore.getState());
+        this.listenToAuto(LicenseStore);
     },
     _getOnlyOwnedSlots() {
         return this.state.license.filter((slot) => slot.total > 0);

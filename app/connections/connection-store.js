@@ -8,16 +8,17 @@ class ConnectionStore {
     constructor() {
         this.connections = Immutable.List();
 
-        this.bindAction(ConnectionActions.addConnection, this.onConnectionOptimisticallyAdded);
-        this.bindAction(ConnectionServerActions.addConnectionSucceeded, this.onConnectionSuccessfullyAdded);
-        this.bindAction(ConnectionServerActions.addConnectionFailed, this.onConnectionUnsuccessfullyAdded);
+        this.bindAction(ConnectionActions.addConnection, this.onAddConnectionOptimistic);
+        this.bindAction(ConnectionServerActions.addConnectionSucceeded, this.onAddConnectionSucceeded);
+        this.bindAction(ConnectionServerActions.addConnectionFailed, this.onAddConnectionFailed);
 
-        this.bindAction(ConnectionActions.removeConnection, this.onConnectionOptimisticallyRemoved);
-        this.bindAction(ConnectionServerActions.removeConnectionSucceeded, this.onConnectionSuccessfullyRemoved);
-        this.bindAction(ConnectionServerActions.removeConnectionFailed, this.onConnectionUnsuccessfullyRemoved);
+        this.bindAction(ConnectionActions.removeConnection, this.onRemoveConnectionOptimistic);
+        this.bindAction(ConnectionServerActions.removeConnectionSucceeded, this.onRemoveConnectionSucceeded);
+        this.bindAction(ConnectionServerActions.removeConnectionFailed, this.onRemoveConnectionFailed);
 
         this.exportPublicMethods({
-            connectionExists: this.connectionExists
+            connectionExists: this.connectionExists,
+            _connectionExists: this._connectionExists
         });
 
         this.on('init', this.bootstrap);
@@ -30,7 +31,7 @@ class ConnectionStore {
         }
     }
 
-    onConnectionOptimisticallyAdded(payload) {
+    onAddConnectionOptimistic(payload) {
         if(payload && payload.sourceControl && payload.targetControl) {
             const newConnection = new Connection({
                 sourceControlInstanceId: payload.sourceControl.instanceId,
@@ -43,13 +44,13 @@ class ConnectionStore {
                 targetControlName: payload.targetControl.name,
                 dirty: payload.dirty
             });
-            if(!this.connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
+            if(!this._connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
                 this.connections = this.connections.push(newConnection);
             }
         }
     }
 
-    onConnectionSuccessfullyAdded(payload) {
+    onAddConnectionSucceeded(payload) {
         const {connectionId, clean} = payload;
         this.connections = this.connections.map((connection) => {
             if(connection.dirty === clean) {
@@ -60,11 +61,11 @@ class ConnectionStore {
         });
     }
 
-    onConnectionUnsuccessfullyAdded(payload) {
+    onAddConnectionFailed(payload) {
         this.connections = this.connections.filter((connection) => connection.dirty !== payload.clean);
     }
 
-    onConnectionOptimisticallyRemoved(payload) {
+    onRemoveConnectionOptimistic(payload) {
         const {connectionId, dirty} = payload;
         this.connections = this.connections.map((connection) => {
             if(connection.connectionId === connectionId) {
@@ -74,11 +75,11 @@ class ConnectionStore {
         });
     }
 
-    onConnectionSuccessfullyRemoved(payload) {
+    onRemoveConnectionSucceeded(payload) {
         this.connections = this.connections.filter((connection) => connection.dirty !== payload.clean);
     }
 
-    onConnectionUnsuccessfullyRemoved(payload) {
+    onRemoveConnectionFailed(payload) {
         this.connections = this.connections.map((connection) => {
             if(connection.dirty === payload.clean) {
                 connection = connection.remove('dirty');
@@ -87,8 +88,12 @@ class ConnectionStore {
         });
     }
 
-    connectionExists(sourceInstanceId, targetInstanceId) {
+    _connectionExists(sourceInstanceId, targetInstanceId) {
         return this.connections.find((connection) => connection.sourceControlInstanceId === sourceInstanceId && connection.targetControlInstanceId === targetInstanceId);
+    }
+
+    connectionExists(sourceInstanceId, targetInstanceId) {
+        return this.getState().connections.find((connection) => connection.sourceControlInstanceId === sourceInstanceId && connection.targetControlInstanceId === targetInstanceId);
     }
 }
 

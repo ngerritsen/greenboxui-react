@@ -1,18 +1,17 @@
 import React from 'react';
 import Time from '../shared/time/time'
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import SettingsStore from '../settings/settings-store';
 import Icon from '../shared/icon';
 import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
-    mixins: [ListenerMixin],
+    mixins: [AutoListenerMixin],
     getInitialState() {
         return { product: 'isii' }
     },
     componentDidMount() {
-        this.listenTo(SettingsStore, this._onSettingsChange);
-        this._onSettingsChange();
+        this.listenToAuto(SettingsStore, this._onSettingsChange);
     },
     _onSettingsChange() {
         const product = SettingsStore.getState().settings.get('product');

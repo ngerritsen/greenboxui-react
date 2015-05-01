@@ -9,17 +9,17 @@ class ControlInstanceStore {
     constructor() {
         this.controls = Immutable.List();
 
-        this.bindAction(ControlInstanceActions.addControl, this.onControlOptimisticallyAdded);
-        this.bindAction(ControlInstanceServerActions.addControlSucceeded, this.onControlSuccessfullyAdded);
-        this.bindAction(ControlInstanceServerActions.addControlFailed, this.onControlUnsuccessfullyAdded);
+        this.bindAction(ControlInstanceActions.addControl, this.onAddControlOptimistic);
+        this.bindAction(ControlInstanceServerActions.addControlSucceeded, this.onAddControlSucceeded);
+        this.bindAction(ControlInstanceServerActions.addControlFailed, this.onAddControlFailed);
 
-        this.bindAction(ControlInstanceActions.renameControl, this.onControlOptimisticallyRenamed);
-        this.bindAction(ControlInstanceServerActions.renameControlSucceeded, this.onControlSuccessfullyRenamed);
-        this.bindAction(ControlInstanceServerActions.renameControlFailed, this.onControlUnsuccessfullyRenamed);
+        this.bindAction(ControlInstanceActions.renameControl, this.onRenameControlOptimistic);
+        this.bindAction(ControlInstanceServerActions.renameControlSucceeded, this.onRenameControlSucceeded);
+        this.bindAction(ControlInstanceServerActions.renameControlFailed, this.onRenameControlFailed);
 
-        this.bindAction(ControlInstanceActions.removeControl, this.onControlOptimisticallyRemoved);
-        this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlSuccessfullyRemoved);
-        this.bindAction(ControlInstanceServerActions.removeControlFailed, this.onControlUnsuccessfullyRemoved);
+        this.bindAction(ControlInstanceActions.removeControl, this.onRemoveControlOptimistic);
+        this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onRemoveControlSucceeded);
+        this.bindAction(ControlInstanceServerActions.removeControlFailed, this.onRemoveControlFailed);
 
         this.on('init', this.bootstrap);
     }
@@ -31,7 +31,7 @@ class ControlInstanceStore {
         }
     }
 
-    onControlOptimisticallyAdded(payload) {
+    onAddControlOptimistic(payload) {
         if(payload) {
             let newControl = new Control(payload);
             const typeName = LicenseStore.getControlTypeName(newControl.typeId);
@@ -40,7 +40,7 @@ class ControlInstanceStore {
         }
     }
 
-    onControlSuccessfullyAdded(payload) {
+    onAddControlSucceeded(payload) {
         this.controls = this.controls.map((control) => {
             if (control.dirty === payload.clean) {
                 control = control.remove('dirty');
@@ -50,13 +50,13 @@ class ControlInstanceStore {
         });
     }
 
-    onControlUnsuccessfullyAdded(payload) {
+    onAddControlFailed(payload) {
         this.controls = this.controls.filter((control) => {
             return control.dirty !== payload.clean;
         });
     }
 
-    onControlOptimisticallyRenamed(payload) {
+    onRenameControlOptimistic(payload) {
         const {newName, instanceId, dirty} = payload;
         this.controls = this.controls.map((control) => {
             if(control.instanceId === instanceId) {
@@ -67,7 +67,7 @@ class ControlInstanceStore {
         });
     }
 
-    onControlSuccessfullyRenamed(payload) {
+    onRenameControlSucceeded(payload) {
         const {newName, clean} = payload;
         this.controls = this.controls.map((control) => {
             if(control.dirty === clean) {
@@ -78,7 +78,7 @@ class ControlInstanceStore {
         });
     }
 
-    onControlUnsuccessfullyRenamed(payload) {
+    onRenameControlFailed(payload) {
         const {oldName, clean} = payload;
         this.controls = this.controls.map((control) => {
             if(control.dirty === clean) {
@@ -89,7 +89,7 @@ class ControlInstanceStore {
         });
     }
 
-    onControlOptimisticallyRemoved(payload) {
+    onRemoveControlOptimistic(payload) {
         const {instanceId, dirty} = payload;
         this.controls = this.controls.map((control) => {
             if(control.instanceId === instanceId) {
@@ -99,11 +99,11 @@ class ControlInstanceStore {
         });
     }
 
-    onControlSuccessfullyRemoved(payload) {
+    onRemoveControlSucceeded(payload) {
         this.controls = this.controls.filter((control) => control.dirty !== payload.clean);
     }
 
-    onControlUnsuccessfullyRemoved(payload) {
+    onRemoveControlFailed(payload) {
         this.controls = this.controls.map((control) => {
             if (control.dirty === payload.clean) {
                 control = control.remove('dirty');

@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import LicenseStore from '../license/license-store';
 import TranslationMixin from '../translation/translation-mixin';
 import Translator from '../translation/translator';
@@ -10,7 +10,7 @@ import ControlInstanceStore from '../control-instance/control-instance-store';
 import Connection from './connection';
 
 export default React.createClass({
-    mixins: [ListenerMixin],
+    mixins: [AutoListenerMixin],
     getInitialState() {
         return {
             controls: Immutable.List(),
@@ -19,12 +19,7 @@ export default React.createClass({
         }
     },
     componentDidMount() {
-        this.listenTo(ControlInstanceStore, this._onChange);
-        this._onChange();
-    },
-    _onChange() {
-        const newControls = ControlInstanceStore.getState().controls;
-        this.setState({ controls: newControls });
+        this.listenToAuto(ControlInstanceStore);
     },
     _getAvailableControlTypes() {
         return this.state.controls.toSeq()

@@ -2,20 +2,19 @@ import React from 'react';
 import Router from 'react-router';
 import TopBar from './top-bar';
 import MainMenu from './main-menu';
-import ListenerMixin from 'alt/mixins/ListenerMixin';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import SettingsStore from '../settings/settings-store';
 
 let RouteHandler = Router.RouteHandler;
 
 export default function layoutFactory(routes) {
     return React.createClass({
-        mixins: [ListenerMixin],
+        mixins: [AutoListenerMixin],
         getInitialState() {
             return { product: 'isii' }
         },
         componentDidMount() {
-            this.listenTo(SettingsStore, this._onSettingsChange);
-            this._onSettingsChange();
+            this.listenToAuto(SettingsStore, this._onSettingsChange);
         },
         _onSettingsChange() {
             const product = SettingsStore.getState().settings.get('product');

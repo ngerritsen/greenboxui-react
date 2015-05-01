@@ -1,6 +1,8 @@
 import Immutable from 'immutable';
 import AltApp from '../core/alt-app';
 import Translation from './translation';
+import SettingsStore from '../settings/settings-store';
+import SettingsActions from '../settings/settings-actions';
 import TranslationActions from './translation-actions';
 
 class TranslationStore {
@@ -12,6 +14,7 @@ class TranslationStore {
 
         this.bindAction(TranslationActions.refreshTranslations, this.onRefreshTranslations);
         this.bindAction(TranslationActions.setCurrentLanguage, this.onSetCurrentLanguage);
+        this.bindAction(SettingsActions.setSettings, this.onSetSettings);
 
         this.exportPublicMethods({
             translate: this.translate
@@ -33,6 +36,12 @@ class TranslationStore {
 
     onSetCurrentLanguage(payload) {
         this.currentLanguage = payload.languageId;
+    }
+
+    onSetSettings() {
+        this.waitFor(SettingsStore.dispatchToken);
+        this.currentLanguage = SettingsStore.getState().settings.get('currentLanguage');
+        this.emitChange();
     }
 
     translate(id) {

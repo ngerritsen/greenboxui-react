@@ -1,8 +1,8 @@
 button.button {
   @include box-shadow($shallow-shadow);
   background-color: $primary-color;
-  font-size: .8rem;
-  padding: .7rem 1rem;
+  font-size: .75rem;
+  padding: .55rem .9rem;
   text-transform: uppercase;
 
   &:hover {
