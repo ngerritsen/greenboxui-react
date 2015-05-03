@@ -7,16 +7,19 @@ export default React.createClass({
         large: React.PropTypes.bool,
         fixedWidth: React.PropTypes.bool,
         clickable: React.PropTypes.bool,
-        inline: React.PropTypes.bool
+        inline: React.PropTypes.bool,
+        notifications: React.PropTypes.number
     },
     getDefaultProps() {
         return {
             large: false,
-            fixedWidth: false
+            fixedWidth: false,
+            notifications: 0
         };
     },
     render() {
-        const {type, large, fixedWidth, clickable, inline} = this.props;
+        const {type, large, fixedWidth, clickable, inline, notifications} = this.props;
+        let notificationSign = '';
         const classNames = classnames([
             'fa',
             `fa-${type}`,
@@ -25,8 +28,11 @@ export default React.createClass({
             { 'fa-inline': inline },
             { 'clickable': clickable }
         ]);
+        if(notifications > 0) {
+            notificationSign = <div className="notifications">{notifications}</div>
+        }
         return (
-            <i className={classNames}></i>
+            <i className={classNames}>{notificationSign}</i>
         );
     }
 });

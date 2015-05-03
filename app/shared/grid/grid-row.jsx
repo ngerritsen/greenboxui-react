@@ -1,9 +1,10 @@
 import React from 'react/addons';
 import classnames from 'classnames';
-import GridEditableCell from './grid-editable-cell';
-import GridActionCell from './grid-action-cell';
-import GridProgressCell from './grid-progress-cell';
+import GridEditableCell from './grid-cells/grid-editable-cell';
+import GridActionCell from './grid-cells/grid-action-cell';
+import GridProgressCell from './grid-cells/grid-progress-cell';
 import GridCellTypes from './grid-cell-types';
+import GridDateCell from './grid-cells/grid-date-cell';
 const PureRenderMixin = React.addons.PureRenderMixin;
 
 export default React.createClass({
@@ -31,6 +32,9 @@ export default React.createClass({
             }
             else if (type === GridCellTypes.action) {
                 cellContent = <GridActionCell context={data} onAction={handler} actionIcon={actionIcon}/>
+            }
+            else if (type === GridCellTypes.date) {
+                cellContent = <GridDateCell date={data[id]}/>
             }
 
             if(show === false) {

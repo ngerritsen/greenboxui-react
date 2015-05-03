@@ -28,7 +28,8 @@ export const routeConfig = [{
         name: 'alarms',
         path: '/alarms',
         icon: IconTypes.alarm,
-        handler: AlarmView
+        handler: AlarmView,
+        inMenu: false
     },
     {
         title: 'configure',

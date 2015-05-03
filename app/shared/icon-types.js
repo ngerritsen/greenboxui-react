@@ -13,6 +13,7 @@ export default Object.freeze({
     menu: 'bars',
     network: 'globe',
     remove: 'trash',
+    resetAlarm: 'bell-slash',
     search: 'search',
     settings: 'cogs',
     settingsGeneral: 'cogs',

@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon from '../icon';
-import IconTypes from '../icon-types';
+import Icon from '../../icon';
+import IconTypes from '../../icon-types';
 
 export default React.createClass({
     propTypes: {

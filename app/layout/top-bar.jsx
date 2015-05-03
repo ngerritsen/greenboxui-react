@@ -10,17 +10,24 @@ import IconTypes from '../shared/icon-types';
 export default React.createClass({
     mixins: [AutoListenerMixin],
     getInitialState() {
-        return { product: 'isii' }
+        return {
+            product: 'isii',
+            alarmCount: 0
+        }
     },
     componentDidMount() {
         this.listenToAuto(SettingsStore, this._onSettingsChange);
-        this.listenToAuto(AlarmStore);
+        this.listenToAuto(AlarmStore, this._onAlarmsChange);
     },
     _onSettingsChange() {
         const product = SettingsStore.getState().settings.get('product');
         this.setState({ product: product });
     },
+    _onAlarmsChange() {
+        this.setState({ alarmCount: AlarmStore.getState().alarms.count() });
+    },
     render() {
+        const {product, alarmCount} = this.state;
         return (
             <div className="fixed">
                 <nav className="top-bar" data-topbar role="navigation">
@@ -31,7 +38,7 @@ export default React.createClass({
                             </span>
                         </li>
                         <li className="logo-container">
-                            <img src={`assets/images/${this.state.product}-logo.png`} className="logo"/>
+                            <img src={`assets/images/${product}-logo.png`} className="logo"/>
                         </li>
                     </ul>
                     <section className="top-bar-section">
@@ -41,7 +48,7 @@ export default React.createClass({
                             </li>
                             <li className="info-item">
                                 <Link to="alarms">
-                                    <Icon type={IconTypes.alarm}/>
+                                    <Icon type={IconTypes.alarm} notifications={alarmCount} clickable={true}/>
                                 </Link>
                             </li>
                             <li className="info-item">

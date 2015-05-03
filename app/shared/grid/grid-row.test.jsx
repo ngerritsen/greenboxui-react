@@ -1,8 +1,8 @@
 import React from 'react/addons';
 import GridRow from './grid-row';
-import GridEditableCell from './grid-editable-cell';
-import GridActionCell from './grid-action-cell';
-import GridProgressCell from './grid-progress-cell';
+import GridEditableCell from './grid-cells/grid-editable-cell';
+import GridActionCell from './grid-cells/grid-action-cell';
+import GridProgressCell from './grid-cells/grid-progress-cell';
 import GridCellTypes from './grid-cell-types';
 
 const ReactTestUtils = React.addons.TestUtils;

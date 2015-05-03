@@ -10,20 +10,6 @@ body {
   }
 }
 
-.fa {
-  &.clickable {
-    @include opacity(.8);
-
-    &:hover {
-      @include opacity(1);
-    }
-  }
-
-  &.fa-inline {
-    margin-top: .4rem;
-  }
-}
-
 .progress {
   background-color: $subtle-gray;
   border: 0 solid $white;

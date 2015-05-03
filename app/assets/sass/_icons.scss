@@ -1,0 +1,26 @@
+.notifications {
+  @include box-shadow($medium-shadow);
+  @include border-radius(99px);
+  background-color: $primary-color-isii;
+  display: block;
+  font-size: .8rem;
+  font-weight: bold;
+  padding: .1rem .3rem;
+  position: absolute;
+  right: -.5rem;
+  top: -.6rem;
+}
+
+.fa {
+  &.clickable {
+    @include opacity(1);
+
+    &:hover {
+      @include opacity(.8);
+    }
+  }
+
+  &.fa-inline {
+    margin-top: .4rem;
+  }
+}

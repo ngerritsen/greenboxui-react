@@ -10,11 +10,13 @@ export default React.createClass({
         items: React.PropTypes.arrayOf(React.PropTypes.shape({
             title: React.PropTypes.string,
             name: React.PropTypes.string,
-            icon: React.PropTypes.string
+            icon: React.PropTypes.string,
+            inMenu: React.PropTypes.bool
         })).isRequired
     },
     render() {
-        const items = this.props.items.map((item) => {
+        const filteredItems = this.props.items.filter((item) => item.inMenu !== false);
+        const items = filteredItems.map((item) => {
             const {name, icon, title} = item;
             return (
                 <li className="side-nav-item" role="menuitem" key={name}>
