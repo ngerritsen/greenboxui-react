@@ -1,8 +1,9 @@
 import React from 'react/addons';
 import classnames from 'classnames';
 import GridEditableCell from './grid-editable-cell';
-import GridDeleteCell from './grid-delete-cell';
+import GridActionCell from './grid-action-cell';
 import GridProgressCell from './grid-progress-cell';
+import GridCellTypes from './grid-cell-types';
 const PureRenderMixin = React.addons.PureRenderMixin;
 
 export default React.createClass({
@@ -15,21 +16,21 @@ export default React.createClass({
         const {columnInfo, data} = this.props;
 
         const cells = columnInfo.map((column) => {
-            const {id, columns, type, template, handler, value, total, show} = column;
+            const {id, columns, type, template, handler, value, total, show, actionIcon} = column;
             let cellContent = <span>{data[id]}</span>;
 
-            if (type === 'custom') {
+            if (type === GridCellTypes.custom) {
                 const Template = template;
                 cellContent = <Template value={data[id]} context={data} key={id}/>;
             }
-            else if (type === 'editable') {
+            else if (type === GridCellTypes.editable) {
                 cellContent = <GridEditableCell value={data[id]} context={data} onEdit={handler} key={id}/>;
             }
-            else if (type === 'progress') {
+            else if (type === GridCellTypes.progress) {
                 cellContent = <GridProgressCell value={data[value]} total={data[total]} key={id}/>;
             }
-            else if (type === 'delete') {
-                cellContent = <GridDeleteCell context={data} onDelete={handler}/>
+            else if (type === GridCellTypes.action) {
+                cellContent = <GridActionCell context={data} onAction={handler} actionIcon={actionIcon}/>
             }
 
             if(show === false) {

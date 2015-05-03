@@ -6,6 +6,7 @@ import TranslationMixin from '../translation/translation-mixin';
 import Slab from '../shared/slab';
 import Grid from '../shared/grid/grid';
 import LicenseStore from './license-store';
+import GridCellTypes from '../shared/grid/grid-cell-types';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
@@ -25,7 +26,7 @@ export default React.createClass({
             { title: this.getTranslation('controlTypeName'), columns: 4, id: 'controlTypeName', unique: true },
             { title: this.getTranslation('total'), columns: 1, id: 'total' },
             { title: this.getTranslation('used'), columns: 1, id: 'used' },
-            { title: this.getTranslation('usage'), type: 'progress', columns: 3, id: 'usage', total: 'total', value: 'used' }
+            { title: this.getTranslation('usage'), type: GridCellTypes.progress, columns: 3, id: 'usage', total: 'total', value: 'used' }
         ];
         return (
             <div>

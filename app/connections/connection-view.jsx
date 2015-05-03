@@ -5,8 +5,10 @@ import TranslationMixin from '../translation/translation-mixin';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
 import ConnectionAddTool from './connection-add-tool';
-import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
+import Grid from '../shared/grid/grid';
+import GridCellTypes from '../shared/grid/grid-cell-types';
+import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
@@ -26,7 +28,12 @@ export default React.createClass({
             { title: this.getTranslation('sourceInstance'), columns: 3, id: 'sourceControlName' },
             { title: this.getTranslation('targetType'), columns: 2, id: 'targetControlTypeName' },
             { title: this.getTranslation('targetInstance'), columns: 3, id: 'targetControlName' },
-            { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteConnection, sort: false }
+            { title: this.getTranslation('delete'), columns: 2, id: 'delete',
+                type: GridCellTypes.action,
+                actionIcon: IconTypes.remove,
+                handler: this._handleDeleteConnection,
+                sort: false
+            }
         ];
 
         return (

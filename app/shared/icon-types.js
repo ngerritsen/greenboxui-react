@@ -4,6 +4,7 @@ export default Object.freeze({
     connection: 'link',
     control: 'sliders',
     controls: 'cubes',
+    remove: 'trash',
     development: 'flask',
     graphs: 'line-chart',
     info: 'info-circle',

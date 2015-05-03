@@ -7,6 +7,8 @@ import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceAddTool from './control-instance-add-tool';
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
+import GridCellTypes from '../shared/grid/grid-cell-types';
+import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
@@ -28,8 +30,13 @@ export default React.createClass({
         const columnInfo = [
             { title: this.getTranslation('type'), columns: 3, id: 'typeName' },
             { title: this.getTranslation('instanceId'), columns: 3, id: 'instanceId', unique: true },
-            { title: this.getTranslation('name'), columns: 4, id: 'name', type: 'editable', handler: this._handleEditControlName },
-            { title: this.getTranslation('delete'), columns: 2, id: 'delete', type: 'delete', handler: this._handleDeleteControl, sort: false }
+            { title: this.getTranslation('name'), columns: 4, id: 'name', type: GridCellTypes.editable, handler: this._handleEditControlName },
+            { title: this.getTranslation('delete'), columns: 2, id: 'delete',
+                type: GridCellTypes.action,
+                actionIcon: IconTypes.remove,
+                handler: this._handleDeleteControl,
+                sort: false
+            }
         ];
 
         return (

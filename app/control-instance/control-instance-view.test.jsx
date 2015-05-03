@@ -1,4 +1,5 @@
 import React from 'react/addons';
+import shortId from 'shortid';
 import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
@@ -12,9 +13,9 @@ describe('control instance view', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
 
     const dummyControls = Immutable.List.of(
-        new Control({ typeId: 'Pump', instanceId: '0874134', name: 'Pump 1' }),
-        new Control({ typeId: 'Valve', instanceId: '138134', name: 'Valve 1' }),
-        new Control({ typeId: 'Valve', instanceId: '9874200', name: 'Valve 2' })
+        new Control({ typeId: 'Pump', instanceId: shortId.generate(), name: 'Pump 1' }),
+        new Control({ typeId: 'Valve', instanceId: shortId.generate(), name: 'Valve 1' }),
+        new Control({ typeId: 'Valve', instanceId: shortId.generate(), name: 'Valve 2' })
     );
 
     let controlInstanceView;

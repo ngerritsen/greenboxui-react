@@ -1,7 +1,9 @@
 import React from 'react/addons';
 import GridRow from './grid-row';
 import GridEditableCell from './grid-editable-cell';
-import GridDeleteCell from './grid-delete-cell';
+import GridActionCell from './grid-action-cell';
+import GridProgressCell from './grid-progress-cell';
+import GridCellTypes from './grid-cell-types';
 
 const ReactTestUtils = React.addons.TestUtils;
 
@@ -12,7 +14,9 @@ describe('grid row', () => {
     ];
     const dummyData = {
         id: 1,
-        name: 'bear'
+        name: 'bear',
+        progress: 2,
+        total: 1
     };
 
     const DummyTemplate = React.createClass({
@@ -44,31 +48,36 @@ describe('grid row', () => {
     });
 
     it('renders correct cell templates with correct props', () => {
-        const dummyFunc = () => 'dummy!';
-        const dummyDeleteFunc = () => 'dummy delete!';
+        const dummyEditFunc = () => 'dummy!';
+        const dummyActionFunc = () => 'dummy action!';
         const templatedDummyColumnInfo = [
-            { title: 'Id', columns: 4, id: 'id', type: 'custom', unique: true, template: DummyTemplate },
-            { title: 'Name', columns: 4, id: 'name', type: 'editable', handler: dummyFunc },
-            { title: 'Delete', columns: 4, id: 'delete', type: 'delete', handler: dummyDeleteFunc }
+            { title: 'Id', columns: 4, id: 'id', type: GridCellTypes.custom, unique: true, template: DummyTemplate },
+            { title: 'Name', columns: 4, id: 'name', type: GridCellTypes.editable, handler: dummyEditFunc },
+            { title: 'Action', columns: 4, id: 'action', type: GridCellTypes.action, handler: dummyActionFunc, actionIcon: 'testIcon' },
+            { title: 'Progress', columns: 4, id: 'progress', type: GridCellTypes.progress, total: 'total', value: 'progress' }
         ];
 
         gridRow.setProps({ columnInfo: templatedDummyColumnInfo });
 
         const dummyTemplateCell = ReactTestUtils.findRenderedComponentWithType(gridRow, DummyTemplate);
         const editableCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridEditableCell);
-        const deleteCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridDeleteCell);
+        const actionCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridActionCell);
+        const progressCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridProgressCell);
 
         expect(dummyTemplateCell).toBeDefined();
         expect(dummyTemplateCell.props.context).toEqual(dummyData);
-        expect(dummyTemplateCell.props.value).toEqual(dummyData['id']);
+        expect(dummyTemplateCell.props.value).toEqual(dummyData.id);
 
         expect(editableCell).toBeDefined();
         expect(editableCell.props.context).toEqual(dummyData);
-        expect(editableCell.props.value).toEqual(dummyData['name']);
-        expect(editableCell.props.onEdit).toEqual(dummyFunc);
+        expect(editableCell.props.value).toEqual(dummyData.name);
+        expect(editableCell.props.onEdit).toEqual(dummyEditFunc);
 
-        expect(deleteCell).toBeDefined();
-        expect(deleteCell.props.context).toEqual(dummyData);
-        expect(deleteCell.props.onDelete).toEqual(dummyDeleteFunc);
+        expect(actionCell).toBeDefined();
+        expect(actionCell.props.context).toEqual(dummyData);
+        expect(actionCell.props.onAction).toEqual(dummyActionFunc);
+
+        expect(progressCell).toBeDefined();
+        expect(progressCell.props.total).toEqual(dummyData.total);
     });
 });
