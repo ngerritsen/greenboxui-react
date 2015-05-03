@@ -1,4 +1,6 @@
 import React from 'react';
+import Icon from '../icon';
+import IconTypes from '../icon-types';
 
 export default React.createClass({
     propTypes: {
@@ -28,20 +30,20 @@ export default React.createClass({
         const value = this.props.value;
         if(this.state.editMode) {
             return (
-                <form className="clearfix editable-cell clickable" onSubmit={this._handleEditValue}>
+                <form className="clearfix grid-editable-cell clickable" onSubmit={this._handleEditValue}>
                     <input type="text" className="left" defaultValue={value} ref="editedValueInput"/>
                     <button type="submit" className="icon-button" ref="toggleEditMode" onClick={this._handleEditValue}>
-                        <i className="fa fa-check-circle fa-inline"></i>
+                        <Icon type={IconTypes.confirm} inline={true}/>
                     </button>
                 </form>
             );
         }
         else {
             return (
-                <span className="clearfix editable-cell clickable" onClick={this._handleToggleEdit}>
+                <span className="clearfix grid-editable-cell clickable" onClick={this._handleToggleEdit}>
                     <span className="left">{value}</span>
                     <button type="submit" className="icon-button" ref="toggleEditMode" onClick={this._handleToggleEdit}>
-                        <i className="fa fa-pencil fa-inline"></i>
+                        <Icon type={IconTypes.edit} inline={true}/>
                     </button>
                 </span>
             );

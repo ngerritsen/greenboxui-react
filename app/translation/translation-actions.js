@@ -68,7 +68,9 @@ class TranslationActions {
                 new Translation({ id: 'systemId', en: 'System ID', nl: 'Systeem ID' }),
                 new Translation({ id: 'softwareVersion', en: 'Software version', nl: 'Software versie' }),
                 new Translation({ id: 'uiVersion', en: 'UI version', nl: 'UI versie' }),
-                new Translation({ id: 'addDummyConfig', en: 'Add dummy configuration', nl: 'Dummy configuratie toevoegen' })
+                new Translation({ id: 'addDummyConfig', en: 'Add dummy configuration', nl: 'Dummy configuratie toevoegen' }),
+                new Translation({ id: 'raiseAnAlarm', en: 'Raise an alarm', nl: 'Activeer een alarm' })
+
             )
         });
     }

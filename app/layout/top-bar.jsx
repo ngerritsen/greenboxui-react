@@ -1,7 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router';
 import Time from '../shared/time/time'
 import AutoListenerMixin from '../shared/auto-listener-mixin';
 import SettingsStore from '../settings/settings-store';
+import AlarmStore from '../alarms/alarm-store';
 import Icon from '../shared/icon';
 import IconTypes from '../shared/icon-types';
 
@@ -12,6 +14,7 @@ export default React.createClass({
     },
     componentDidMount() {
         this.listenToAuto(SettingsStore, this._onSettingsChange);
+        this.listenToAuto(AlarmStore);
     },
     _onSettingsChange() {
         const product = SettingsStore.getState().settings.get('product');
@@ -37,7 +40,9 @@ export default React.createClass({
                                 <Icon type={IconTypes.network}/>
                             </li>
                             <li className="info-item">
-                                <Icon type={IconTypes.alarm}/>
+                                <Link to="alarms">
+                                    <Icon type={IconTypes.alarm}/>
+                                </Link>
                             </li>
                             <li className="info-item">
                                 <Icon type={IconTypes.time}/><Time/>

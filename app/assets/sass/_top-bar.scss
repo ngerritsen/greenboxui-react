@@ -15,6 +15,24 @@
   z-index: $z-index-top-bar;
 }
 
+.top-bar-section li:not(.has-form) a:not(.button) {
+  @include reset-spacing();
+  background: transparent;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.top-bar-section .info-area li > a {
+  @include reset-border-styles();
+  @include reset-spacing();
+  background: transparent;
+  display: inline-block;
+  font-size: 1em;
+  width: auto;
+}
+
 .top-bar {
   @include box-shadow($deep-shadow);
   @include vertical-center-height($top-bar-height);

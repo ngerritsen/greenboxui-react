@@ -6,7 +6,8 @@ export default React.createClass({
         type: React.PropTypes.string.isRequired,
         large: React.PropTypes.bool,
         fixedWidth: React.PropTypes.bool,
-        clickable: React.PropTypes.bool
+        clickable: React.PropTypes.bool,
+        inline: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
@@ -15,12 +16,13 @@ export default React.createClass({
         };
     },
     render() {
-        const {type, large, fixedWidth, clickable} = this.props;
+        const {type, large, fixedWidth, clickable, inline} = this.props;
         const classNames = classnames([
             'fa',
             `fa-${type}`,
             { 'fa-lg': large },
             { 'fa-fw': fixedWidth },
+            { 'fa-inline': inline },
             { 'clickable': clickable }
         ]);
         return (
