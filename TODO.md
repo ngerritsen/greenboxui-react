@@ -1,15 +1,16 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
+- Build alarm component
+  * Show amount of alarms as notification in top-bar
+  
 - Build Controls component (w/ store(s) for parameters)
   * Be able to control specific control
   * Be able to (fake) set new setpoints
   * Implement read-only/hidden/write-able parameters
-- Refactor naming conventions (for instance, on-prefix for action handlers)
 
 ###Backlog
 - Immutable for shared components, actions?
-- More easy mixin for listening to stores?
 - Build Log component
 - Make graph with actual data
 - Hook up to real greenbox

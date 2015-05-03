@@ -15,6 +15,10 @@
   z-index: $z-index-top-bar;
 }
 
+.top-bar-section li:hover:not(.has-form) a:not(.button) {
+  background: transparent;
+}
+
 .top-bar-section li:not(.has-form) a:not(.button) {
   @include reset-spacing();
   background: transparent;
