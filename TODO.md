@@ -1,9 +1,6 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Build alarm component
-  * Optimistic updates
-
 - Build Controls component (w/ store(s) for parameters)
   * Be able to control specific control
   * Be able to (fake) set new setpoints

@@ -34,7 +34,7 @@ class AlarmStore {
         const {id, dirty} = payload;
         this.alarms = this.alarms.map((alarm) => {
             if(alarm.id === id) {
-                alarm.set('dirty', dirty);
+                alarm = alarm.set('dirty', dirty);
             }
             return alarm;
         });
@@ -49,7 +49,7 @@ class AlarmStore {
         const {clean} = payload;
         this.alarms = this.alarms.map((alarm) => {
             if(alarm.dirty === clean) {
-                alarm.remove('dirty');
+                alarm = alarm.remove('dirty');
             }
             return alarm;
         });

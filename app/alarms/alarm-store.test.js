@@ -33,14 +33,14 @@ describe('alarm store', () => {
 
     it('resets an alarm optimistically', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmMsgA, dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyIdA);
 
         expect(AlarmStore.getState().alarms.get(0).dirty).toEqual(dirtyIdA);
     });
 
     it('resets an alarm actually on success', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmMsgA, dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyIdA);
         resetAlarmSucceeded(dirtyIdA);
 
         expect(AlarmStore.getState().alarms.count()).toEqual(0);
@@ -48,11 +48,11 @@ describe('alarm store', () => {
 
     it('does not reset an alarm actually on failure', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmMsgA, dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyIdA);
         resetAlarmFailed(dirtyIdA);
 
         expect(AlarmStore.getState().alarms.count()).toEqual(1);
-        expect(AlarmStore.getState().alarms[0].dirty).toBeFalsy();
+        expect(AlarmStore.getState().alarms.get(0).dirty).toBeFalsy();
     });
 
     function raiseAlarm(message, id) {
