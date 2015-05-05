@@ -14,9 +14,9 @@ describe('control instance add tool', () => {
     let controlInstanceAddTool;
 
     beforeEach(() => {
-        spyOn(LicenseStore, 'getState').and.returnValue({ license: Immutable.List.of(
+        spyOn(LicenseStore, 'getAvailableTypes').and.returnValue(Immutable.List.of(
             new LicenseSlot({ controlTypeId: dummyType, total: 10, used: 0 })
-        )});
+        ));
 
         controlInstanceAddTool = ReactTestUtils.renderIntoDocument(
             <ControlInstanceAddTool/>

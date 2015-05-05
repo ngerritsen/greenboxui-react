@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from '../control-instance/control-instance-store';
+import ControlTypeStore from '../control-instance/control-type-store';
 import LicenseStore from '../license/license-store';
 import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
@@ -96,12 +97,8 @@ export default React.createClass({
                 .map((control) => { return { value: control.instanceId, label: control.name }} )
                 .unshift({ value: '', label: this.getTranslation('all') });
 
-        const controlTypeOptions =
-            controls
-                .map((control) => control.typeId)
-                .toOrderedSet()
-                .toList()
-                .map((typeId) => { return { value: typeId, label: LicenseStore.getControlTypeName(typeId) }} )
+        const controlTypeOptions = ControlTypeStore.getState().controlTypes
+                .map((type) => { return { value: type.id, label: type.name }} )
                 .unshift({ value: '', label: this.getTranslation('all') });
 
         return (

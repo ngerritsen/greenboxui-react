@@ -7,9 +7,9 @@
   * Implement read-only/hidden/write-able parameters
 
 ###Backlog
-- Think about 'utility' or 'intermediate' stores
+- Think about more 'utility' or 'intermediate' stores
   * what? stores that process data from base stores to pre-formatted data for views
-  * example: store that gets all unique control type's so that the views can use that (control-type-store?)
+  * example: store that gets all unique control type's so that the views can use that (control-type-store)
   * why? prevent lot of (duplicate) logic in views, improving solid-ness, clean code and performance in views, WIN-WIN!
 - Make graph with actual data
 - Immutable for shared components, grid, actions?

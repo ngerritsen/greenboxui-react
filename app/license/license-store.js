@@ -11,7 +11,8 @@ class LicenseStore {
         this.bindAction(LicenseActions.useLicenseSlot, this.onUseLicenseSlotOptimistic);
 
         this.exportPublicMethods({
-            getControlTypeName: this.getControlTypeName
+            getControlTypeName: this.getControlTypeName,
+            getAvailableTypes: this.getAvailableTypes
         });
 
         this.on('init', this.bootstrap);
@@ -46,6 +47,10 @@ class LicenseStore {
             return slot.controlTypeName;
         }
         return 'Unknown control type';
+    }
+
+    getAvailableTypes() {
+        return this.getState().license.filter((slot) => slot.isAvailable);
     }
 }
 

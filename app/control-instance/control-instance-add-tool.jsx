@@ -9,41 +9,40 @@ import LicenseActions from '../license/license-actions';
 export default React.createClass({
     mixins: [AutoListenerMixin],
     getInitialState() {
-        return { license: LicenseStore.getState().license }
+        return { availableLicense: LicenseStore.getAvailableTypes() }
     },
     componentDidMount() {
-        this.listenToAuto(LicenseStore);
+        this.listenToAuto(LicenseStore, this._onLicenseChange);
     },
-    _licenseSlotsAvailable(controlTypeId) {
-        const slot = this.state.license.find((slot) => slot.controlTypeId === controlTypeId);
-        return slot.total - slot.used;
+    _onLicenseChange() {
+        this.setState({ availableLicense: LicenseStore.getAvailableTypes() });
     },
     _handleAddControl(event) {
         event.preventDefault();
 
-        const controlType = React.findDOMNode(this.refs.selectedControlType).value;
+        const controlTypeId = React.findDOMNode(this.refs.selectedControlType).value;
         let controlAmountNode = React.findDOMNode(this.refs.controlAmountInput);
         let controlAmount = parseInt(React.findDOMNode(this.refs.controlAmountInput).value);
         let controlNameNode = React.findDOMNode(this.refs.controlNameInput);
         const controlName = controlNameNode.value.trim();
 
-        if(controlName && controlAmount > 0 && controlAmount <= this._licenseSlotsAvailable(controlType)) {
+        const licenseSlot = this.state.availableLicense.find((slot) => slot.controlTypeId === controlTypeId);
+
+        if(controlName && controlAmount > 0 && controlAmount <= licenseSlot.available) {
             if (controlAmount > 1) {
                 for (let i = 1; i <= controlAmount; i++) {
-                    ControlInstanceActions.addControl(controlType, `${controlName} ${i}`);
+                    ControlInstanceActions.addControl(controlTypeId, `${controlName} ${i}`);
                 }
             }
             else {
-                ControlInstanceActions.addControl(controlType, controlName);
-
+                ControlInstanceActions.addControl(controlTypeId, controlName);
                 controlNameNode.value = '';
                 controlAmountNode.value = 1;
             }
         }
     },
     render() {
-        const availableControlTypes = this.state.license.filter((slot) =>  slot.total > 0 && slot.used < slot.total);
-        const controlTypeOptions = availableControlTypes.map((slot) => {
+        const controlTypeOptions = this.state.availableLicense.map((slot) => {
             return (
                 <option value={slot.controlTypeId} key={slot.controlTypeId}>
                     {`${slot.controlTypeName} (${slot.used}/${slot.total})`}
