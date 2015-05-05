@@ -21,7 +21,9 @@ export default React.createClass({
         if(defaultValue) {
             return defaultValue
         } else {
-            return options.get(0).value;
+            if(options.count() > 0) {
+                return options.get(0).value;
+            }
         }
     },
     render() {

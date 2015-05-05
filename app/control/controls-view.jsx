@@ -3,21 +3,24 @@ import Immutable from 'immutable';
 import AutoListenerMixin from '../shared/auto-listener-mixin';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from '../control-instance/control-instance-store';
+import LicenseStore from '../license/license-store';
 import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
 import Grid from '../shared/grid/grid';
 import Slab from '../shared/slab';
 import Content from '../shared/content';
 import Section from '../shared/section';
+import SelectionBox from '../shared/selection-box';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
-    translations: ['name', 'value', 'unit'],
+    translations: ['name', 'value', 'unit', 'all'],
     getInitialState() {
         return {
             controls: Immutable.List(),
             parameters: Immutable.List(),
-            registeredParameters: Immutable.List()
+            registeredParameters: Immutable.List(),
+            selectedControlInstanceId: ''
         }
     },
     componentDidMount() {
@@ -61,20 +64,61 @@ export default React.createClass({
 
         this.setState({ registeredParameters: registeredParameters });
     },
+    _handleSelectControl(controlInstanceId) {
+        this.setState({ selectedControlInstanceId: controlInstanceId });
+    },
+    _handleSelectControlType(controlTypeId) {
+        this.setState({ selectedControlTypeId: controlTypeId, selectedControlInstanceId: '' });
+    },
     render() {
+        const {controls, parameters, selectedControlInstanceId, selectedControlTypeId} = this.state;
+
+        let parametersToShow = parameters;
         const columnInfo = [
             { title: this.getTranslation('name'), columns: 6, id: 'name' },
             { title: this.getTranslation('value'), columns: 3, id: 'value'},
             { title: this.getTranslation('unit'), columns: 3, id: 'unit'}
         ];
 
+        if(!selectedControlInstanceId && selectedControlTypeId) {
+            parametersToShow = parameters.filter((parameter) => {
+                const relatedControl = controls.find((control) => control.instanceId === parameter.controlInstanceId);
+                return selectedControlTypeId=== relatedControl.typeId;
+            });
+        }
+        else if(selectedControlInstanceId) {
+            parametersToShow = parameters.filter((parameter) => parameter.controlInstanceId === selectedControlInstanceId);
+        }
+
+        const controlOptions =
+            controls
+                .filter((control) => control.typeId === selectedControlTypeId)
+                .map((control) => { return { value: control.instanceId, label: control.name }} )
+                .unshift({ value: '', label: this.getTranslation('all') });
+
+        const controlTypeOptions =
+            controls
+                .map((control) => control.typeId)
+                .toOrderedSet()
+                .toList()
+                .map((typeId) => { return { value: typeId, label: LicenseStore.getControlTypeName(typeId) }} )
+                .unshift({ value: '', label: this.getTranslation('all') });
+
         return (
             <Content>
                 <Section>
                     <Slab>
+                        <div className="row">
+                            <div className="small-6 columns">
+                                <SelectionBox options={controlTypeOptions} handler={this._handleSelectControlType}/>
+                            </div>
+                            <div className="small-6 columns">
+                                <SelectionBox options={controlOptions} handler={this._handleSelectControl}/>
+                            </div>
+                        </div>
                         <Grid
                             columnInfo={columnInfo}
-                            data={this.state.parameters.toArray()}
+                            data={parametersToShow.toArray()}
                         />
                     </Slab>
                 </Section>
