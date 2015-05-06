@@ -34,15 +34,11 @@ export default React.createClass({
     },
     render() {
         const options = this.props.options.map((option) => {
-            return  <option value={option.value} key={`${option.value}${option.label}`}>{option.label}</option>;
+            return <option value={option.value} key={`${option.value}${option.label}`}>{option.label}</option>;
         });
         return (
-            <select
-                ref={this._getRef()}
-                defaultValue={this._getDefaultValue()}
-                onChange={this._handleSelectionChange}
-            >
-                    {options}
+            <select ref={this._getRef()} value={this._getDefaultValue()} onChange={this._handleSelectionChange}>
+                {options}
             </select>
         )
     }

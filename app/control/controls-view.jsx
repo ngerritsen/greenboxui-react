@@ -64,6 +64,7 @@ export default React.createClass({
                 });
             });
         });
+        ParameterActions.refreshParameters(ParameterStore.getState().parameters);
 
         this.setState({ registeredParameters: registeredParameters });
     },
@@ -73,15 +74,21 @@ export default React.createClass({
     _handleSelectControlType(controlTypeId) {
         this.setState({ selectedControlTypeId: controlTypeId, selectedControlInstanceId: '' });
     },
+    _handleSetParameter(newValue, context) {
+        const {controlInstanceId, parameterId, value} = context;
+        ParameterActions.setParameter(controlInstanceId, parameterId, newValue, value);
+    },
     render() {
         const {controls, parameters, selectedControlInstanceId, selectedControlTypeId} = this.state;
         const userLevel = SettingsStore.getState().settings.get('user');
 
-        let parametersToShow = parameters;
+        let parametersToShow = parameters.filter((param) => param[userLevel] !== ParameterAccessLevels.hidden);
+
         const columnInfo = [
             { title: this.getTranslation('name'), columns: 6, id: 'name' },
             { title: this.getTranslation('value'), columns: 3, id: 'value',
-                type: ((data) => data[userLevel] === ParameterAccessLevels.fullAccess ? GridCellTypes.editable : GridCellTypes.readonly)
+                type: ((data) => data[userLevel] === ParameterAccessLevels.fullAccess ? GridCellTypes.editable : GridCellTypes.readonly),
+                handler: this._handleSetParameter
             },
             { title: this.getTranslation('unit'), columns: 3, id: 'unit'}
         ];

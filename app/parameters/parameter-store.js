@@ -14,6 +14,10 @@ class ParameterStore {
         this.bindAction(ParameterActions.registerParameter, this.onRegisterParameter);
         this.bindAction(ParameterActions.unregisterParameter, this.onUnregisterParameter);
 
+        this.bindAction(ParameterActions.setParameter, this.onSetParameterOptimistic);
+        this.bindAction(ParameterServerActions.setParameterSucceeded, this.onSetParameterSucceeded);
+        this.bindAction(ParameterServerActions.setParameterFailed, this.onSetParameterFailed);
+
         this.on('init', this.bootstrap);
 
         setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false , 3500);
@@ -46,12 +50,13 @@ class ParameterStore {
         this.parameters = Immutable.List(payload.parameters);
     }
 
-    optimisticallySetParameter(payload) {
-        const {parameterId, controlInstanceId, value, dirty} = payload;
+    onSetParameterOptimistic(payload) {
+        const {parameterId, controlInstanceId, newValue, dirty} = payload;
         this.parameters = this.parameters.map((param) => {
             if(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId) {
-                param = param.set('value', value);
-                param = param.set('dirty', shortId.generate());
+                param = param
+                    .set('value', newValue)
+                    .set('dirty', dirty);
             }
             return param;
         });
@@ -71,8 +76,9 @@ class ParameterStore {
         const {oldValue, clean} = payload;
         this.parameters = this.parameters.map((param) => {
             if(param.dirty === clean) {
-                param = param.set('value', oldValue);
-                param = param.remove('dirty');
+                param = param
+                    .set('value', oldValue)
+                    .remove('dirty');
             }
             return param;
         });

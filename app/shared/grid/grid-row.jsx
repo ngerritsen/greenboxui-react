@@ -45,7 +45,7 @@ export default React.createClass({
             if(show === false) {
                 cellContent = '';
             }
-
+            console.log(data.toJS());
             const classNames = classnames([
                 'grid-cell',
                 `small-${columns}`,

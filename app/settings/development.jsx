@@ -26,6 +26,7 @@ export default React.createClass({
         AlarmActions.raiseAlarm('This is a dummy alarm');
     },
     render() {
+        const currentSettings = SettingsStore.getState().settings;
         return (
             <Slab>
                 <Setting label="addDummyConfig" type={SettingTypes.action} actionLabel="add" handler={this._handleAddDummyConfiguration} />
@@ -38,7 +39,7 @@ export default React.createClass({
                         { label: 'iSii', value: 'isii' },
                         { label: 'iSii Compact', value: 'isii-compact' }
                     )}
-                    defaultValue={SettingsStore.getState().settings.get('product')}
+                    defaultValue={currentSettings.get('product')}
                 />
                 <Setting
                     label="userLevel"
@@ -49,7 +50,7 @@ export default React.createClass({
                         { label: this.getTranslation('service'), value: UserLevels.service },
                         { label: this.getTranslation('developer'), value: UserLevels.developer }
                     )}
-                    defaultValue={SettingsStore.getState().settings.get('user')}
+                    defaultValue={currentSettings.get('user')}
                 />
             </Slab>
         );

@@ -38,9 +38,10 @@
   input[type="text"] {
     @include reset-border-styles();
     background-color: lighten($subtle-gray, 5%);
+    font-size: 1em;
     height: 100%;
     left: 0;
-    padding-left: 1rem;
+    padding-left: .9rem;
     padding-right: 2rem;
     position: absolute;
     right: 0;
