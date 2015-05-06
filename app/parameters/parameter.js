@@ -1,5 +1,7 @@
 import Immutable from 'immutable';
 import ParameterAccessLevels from './parameter-access-levels';
+import UserLevels from '../shared/user-levels';
+
 export default Immutable.Record({
     controlInstanceId: null,
     parameterId: null,
@@ -8,7 +10,7 @@ export default Immutable.Record({
     unit: null,
     dirty: null,
     isSet: false,
-    userAccess: ParameterAccessLevels.readOnly,
-    serviceAccess: ParameterAccessLevels.readOnly,
-    developerAccess: ParameterAccessLevels.fullAccess
+    [UserLevels.user]: ParameterAccessLevels.readOnly,
+    [UserLevels.service]: ParameterAccessLevels.readOnly,
+    [UserLevels.developer]: ParameterAccessLevels.readOnly
 });

@@ -43,16 +43,7 @@ class ParameterStore {
     }
 
     onRefreshParametersSucceeded(payload) {
-        this.parameters = Immutable.List(payload.parameters).map((param) => {
-            return new Parameter({
-                parameterId: param.parameterId,
-                controlInstanceId: param.controlInstanceId,
-                value: param.value,
-                unit: param.unit,
-                name: param.name,
-                isSet: true
-            });
-        });
+        this.parameters = Immutable.List(payload.parameters);
     }
 
     optimisticallySetParameter(payload) {

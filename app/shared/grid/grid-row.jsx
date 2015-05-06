@@ -19,21 +19,26 @@ export default React.createClass({
         const cells = columnInfo.map((column) => {
             const {id, columns, type, template, handler, value, total, show, actionIcon} = column;
             let cellContent = <span>{data[id]}</span>;
+            let finalType = type;
 
-            if (type === GridCellTypes.custom) {
+            if(typeof type === 'function') {
+                finalType = type(data);
+            }
+
+            if (finalType === GridCellTypes.custom) {
                 const Template = template;
                 cellContent = <Template value={data[id]} context={data} key={id}/>;
             }
-            else if (type === GridCellTypes.editable) {
+            else if (finalType === GridCellTypes.editable) {
                 cellContent = <GridEditableCell value={data[id]} context={data} onEdit={handler} key={id}/>;
             }
-            else if (type === GridCellTypes.progress) {
+            else if (finalType === GridCellTypes.progress) {
                 cellContent = <GridProgressCell value={data[value]} total={data[total]} key={id}/>;
             }
-            else if (type === GridCellTypes.action) {
+            else if (finalType === GridCellTypes.action) {
                 cellContent = <GridActionCell context={data} onAction={handler} actionIcon={actionIcon}/>
             }
-            else if (type === GridCellTypes.date) {
+            else if (finalType === GridCellTypes.date) {
                 cellContent = <GridDateCell date={data[id]}/>
             }
 

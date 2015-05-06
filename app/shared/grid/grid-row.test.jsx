@@ -16,7 +16,8 @@ describe('grid row', () => {
         id: 1,
         name: 'bear',
         progress: 2,
-        total: 1
+        total: 1,
+        dummy: { editable: true }
     };
 
     const DummyTemplate = React.createClass({
@@ -58,13 +59,14 @@ describe('grid row', () => {
             { title: 'Id', columns: 4, id: 'id', type: GridCellTypes.custom, unique: true, template: DummyTemplate },
             { title: 'Name', columns: 4, id: 'name', type: GridCellTypes.editable, handler: dummyEditFunc },
             { title: 'Action', columns: 4, id: 'action', type: GridCellTypes.action, handler: dummyActionFunc, actionIcon: 'testIcon' },
-            { title: 'Progress', columns: 4, id: 'progress', type: GridCellTypes.progress, total: 'total', value: 'progress' }
+            { title: 'Progress', columns: 2, id: 'progress', type: GridCellTypes.progress, total: 'total', value: 'progress' },
+            { title: 'Dummy', columns: 2, id: 'dummy', type: ((data) => data.dummy.editable ? GridCellTypes.editable : GridCellTypes.readonly), handler: dummyEditFunc }
         ];
 
         gridRow.setProps({ columnInfo: templatedDummyColumnInfo });
 
         const dummyTemplateCell = ReactTestUtils.findRenderedComponentWithType(gridRow, DummyTemplate);
-        const editableCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridEditableCell);
+        const editableCells = ReactTestUtils.scryRenderedComponentsWithType(gridRow, GridEditableCell);
         const actionCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridActionCell);
         const progressCell = ReactTestUtils.findRenderedComponentWithType(gridRow, GridProgressCell);
 
@@ -72,10 +74,10 @@ describe('grid row', () => {
         expect(dummyTemplateCell.props.context).toEqual(dummyData);
         expect(dummyTemplateCell.props.value).toEqual(dummyData.id);
 
-        expect(editableCell).toBeDefined();
-        expect(editableCell.props.context).toEqual(dummyData);
-        expect(editableCell.props.value).toEqual(dummyData.name);
-        expect(editableCell.props.onEdit).toEqual(dummyEditFunc);
+        expect(editableCells[0]).toBeDefined();
+        expect(editableCells[0].props.context).toEqual(dummyData);
+        expect(editableCells[0].props.value).toEqual(dummyData.name);
+        expect(editableCells[0].props.onEdit).toEqual(dummyEditFunc);
 
         expect(actionCell).toBeDefined();
         expect(actionCell.props.context).toEqual(dummyData);
@@ -83,5 +85,10 @@ describe('grid row', () => {
 
         expect(progressCell).toBeDefined();
         expect(progressCell.props.total).toEqual(dummyData.total);
+
+        expect(editableCells[1]).toBeDefined();
+        expect(editableCells[1].props.context).toEqual(dummyData);
+        expect(editableCells[1].props.value).toEqual(dummyData.dummy);
+        expect(editableCells[1].props.onEdit).toEqual(dummyEditFunc);
     });
 });

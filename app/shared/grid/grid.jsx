@@ -13,7 +13,7 @@ export default React.createClass({
             id: React.PropTypes.string.isRequired,
             sort: React.PropTypes.bool,
             title: React.PropTypes.string,
-            type: React.PropTypes.string,
+            type: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.func),
             template: React.PropTypes.element,
             value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
             total: React.PropTypes.number,

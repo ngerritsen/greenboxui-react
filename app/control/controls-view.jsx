@@ -7,11 +7,14 @@ import ControlTypeStore from '../control-instance/control-type-store';
 import LicenseStore from '../license/license-store';
 import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
+import ParameterAccessLevels from '../parameters/parameter-access-levels';
 import Grid from '../shared/grid/grid';
+import GridCellTypes from '../shared/grid/grid-cell-types';
 import Slab from '../shared/slab';
 import Content from '../shared/content';
 import Section from '../shared/section';
 import SelectionBox from '../shared/selection-box';
+import SettingsStore from '../settings/settings-store';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
@@ -72,11 +75,14 @@ export default React.createClass({
     },
     render() {
         const {controls, parameters, selectedControlInstanceId, selectedControlTypeId} = this.state;
+        const userLevel = SettingsStore.getState().settings.get('user');
 
         let parametersToShow = parameters;
         const columnInfo = [
             { title: this.getTranslation('name'), columns: 6, id: 'name' },
-            { title: this.getTranslation('value'), columns: 3, id: 'value'},
+            { title: this.getTranslation('value'), columns: 3, id: 'value',
+                type: ((data) => data[userLevel] === ParameterAccessLevels.fullAccess ? GridCellTypes.editable : GridCellTypes.readonly)
+            },
             { title: this.getTranslation('unit'), columns: 3, id: 'unit'}
         ];
 
