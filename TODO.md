@@ -1,8 +1,7 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Build Controls component (w/ store(s) for parameters)
-  * Be able to (fake) set new setpoints
+- Support different parameter types
 
 ###Backlog
 - Think about more 'utility' or 'intermediate' stores
