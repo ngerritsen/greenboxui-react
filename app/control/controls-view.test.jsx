@@ -49,7 +49,10 @@ describe('controls view', () => {
         );
     });
 
-    afterEach(() => controlsView.componentWillUnmount());
+    afterEach(() => {
+        controlsView.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('gets initial state from stores and registers params', () => {
         expect(ParameterStore.getState).toHaveBeenCalled();

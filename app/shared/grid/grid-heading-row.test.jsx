@@ -24,6 +24,10 @@ describe('grid heading row', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('fires sort handler with right parameters when heading cell calls on sort by', () => {
         const dummySortProperty = 'id';
         const dummySortInversed = true;

@@ -22,6 +22,10 @@ describe('grid heading cell', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('fires sort handler with right parameters when heading cell is clicked', () => {
         ReactTestUtils.Simulate.click(React.findDOMNode(gridHeadingCell));
         expect(dummyCallback).toHaveBeenCalledWith(dummyColumn.id, !gridHeadingCell.state.sortInversed);

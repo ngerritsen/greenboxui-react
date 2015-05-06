@@ -28,12 +28,14 @@ describe('connection add tool', () => {
         );
     });
 
-    afterEach(() => connectionAddTool.componentWillUnmount());
+    afterEach(() => {
+        connectionAddTool.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('adds a connection', () => {
         spyOn(ConnectionActions, 'addConnection');
         spyOn(ConnectionStore, 'connectionExists').and.returnValue(false);
-
         const submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(connectionAddTool, 'button');
 
         React.findDOMNode(connectionAddTool.refs.selectedSourceType).value = dummyControls.get(0).typeId;

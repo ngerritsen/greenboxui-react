@@ -14,7 +14,10 @@ describe('time', () => {
         );
     });
 
-    afterEach(() => time.componentWillUnmount());
+    afterEach(() => {
+        time.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('listens to the time store', () => {
         let oldTime = time.state.time;

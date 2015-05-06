@@ -31,6 +31,10 @@ describe('grid row', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('renders correct data in correct order', () => {
         const renderedData = ReactTestUtils.scryRenderedDOMComponentsWithTag(gridRow, 'span');
         expect(renderedData.length).toEqual(2);

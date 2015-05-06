@@ -27,6 +27,10 @@ describe('grid', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('renders the right components with the right properties', () => {
         const gridToolbar = ReactTestUtils.findRenderedComponentWithType(grid, GridToolbar);
         const gridHeadingRow = ReactTestUtils.findRenderedComponentWithType(grid, GridHeadingRow);

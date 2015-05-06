@@ -14,6 +14,10 @@ describe('grid action cell', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('handles actions', () => {
         ReactTestUtils.Simulate.click(React.findDOMNode(gridActionCell));
 

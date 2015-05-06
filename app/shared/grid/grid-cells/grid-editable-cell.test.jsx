@@ -13,13 +13,17 @@ describe('grid editable cell', () => {
     };
 
     let dummyCallback;
-    let gridBody = {};
+    let gridBody;
 
     beforeEach(() => {
         dummyCallback = jasmine.createSpy('dummyCallback');
         gridBody = ReactTestUtils.renderIntoDocument(
             <GridEditableCell context={dummyContext} onEdit={dummyCallback} value={initialValue}/>
         );
+    });
+
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
     });
 
     describe('edit mode switching' , () => {

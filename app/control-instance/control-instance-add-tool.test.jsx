@@ -23,7 +23,10 @@ describe('control instance add tool', () => {
         );
     });
 
-    afterEach(() => controlInstanceAddTool.componentWillUnmount());
+    afterEach(() => {
+        controlInstanceAddTool.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('adds a control', () => {
         const newName = 'New Control Name';

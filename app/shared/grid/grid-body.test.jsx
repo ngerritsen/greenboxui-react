@@ -24,6 +24,10 @@ describe('grid body', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('renders correct rows', () => {
         const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
 

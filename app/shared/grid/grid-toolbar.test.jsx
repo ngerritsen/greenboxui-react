@@ -19,6 +19,10 @@ describe('grid toolbar', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('fires the search handler with the correct parameters when the search input changes', () => {
         const dummySearchParameter = 'bear';
 

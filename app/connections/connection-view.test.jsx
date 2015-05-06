@@ -51,7 +51,10 @@ describe('connection view', () => {
         );
     });
 
-    afterEach(() => connectionView.componentWillUnmount());
+    afterEach(() => {
+        connectionView.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('gets initial state from connection store', () => {
         expect(ConnectionStore.getState).toHaveBeenCalled();

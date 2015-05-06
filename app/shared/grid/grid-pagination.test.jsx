@@ -30,6 +30,10 @@ describe('grid pagination', () => {
         );
     });
 
+    afterEach(() => {
+        React.unmountComponentAtNode(document.body);
+    });
+
     it('renders right amount of pagination links', () => {
         const paginationLinks = ReactTestUtils.scryRenderedDOMComponentsWithTag(gridPagination, 'a');
         expect(paginationLinks.length).toEqual(totalPageAmount + 4);

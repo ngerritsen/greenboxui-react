@@ -25,7 +25,10 @@ describe('control instance view', () => {
         );
     });
 
-    afterEach(() => controlInstanceView.componentWillUnmount());
+    afterEach(() => {
+        controlInstanceView.componentWillUnmount();
+        React.unmountComponentAtNode(document.body);
+    });
 
     it('gets initial state from control instance store', () => {
         spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
