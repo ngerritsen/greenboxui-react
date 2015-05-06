@@ -14,6 +14,8 @@ describe('time', () => {
         );
     });
 
+    afterEach(() => time.componentWillUnmount());
+
     it('listens to the time store', () => {
         let oldTime = time.state.time;
         setTimeout(() => {

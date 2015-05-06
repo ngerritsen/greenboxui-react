@@ -39,7 +39,6 @@ export default React.createClass({
             <Content>
                 <Section>
                     <Slab>
-                        {console.log(this.state)}
                         <Grid
                             columnInfo={columnInfo}
                             data={this.state.alarms.toArray()}

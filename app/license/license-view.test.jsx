@@ -26,6 +26,8 @@ describe('control instance view', () => {
         );
     });
 
+    afterEach(() => licenseView.componentWillUnmount());
+
     it('shows only owned licenses', () => {
         const rows = ReactTestUtils.scryRenderedComponentsWithType(licenseView, GridRow);
 

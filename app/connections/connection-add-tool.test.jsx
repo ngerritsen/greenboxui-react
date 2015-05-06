@@ -28,6 +28,8 @@ describe('connection add tool', () => {
         );
     });
 
+    afterEach(() => connectionAddTool.componentWillUnmount());
+
     it('adds a connection', () => {
         spyOn(ConnectionActions, 'addConnection');
         spyOn(ConnectionStore, 'connectionExists').and.returnValue(false);

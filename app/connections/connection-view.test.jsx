@@ -51,6 +51,8 @@ describe('connection view', () => {
         );
     });
 
+    afterEach(() => connectionView.componentWillUnmount());
+
     it('gets initial state from connection store', () => {
         expect(ConnectionStore.getState).toHaveBeenCalled();
         expect(connectionView.state.connections).toEqual(dummyConnections);

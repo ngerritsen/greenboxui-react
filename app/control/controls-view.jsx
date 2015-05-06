@@ -15,7 +15,7 @@ import SelectionBox from '../shared/selection-box';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
-    translations: ['name', 'value', 'unit', 'all'],
+    translations: ['name', 'value', 'unit', 'all', 'controlType', 'controlInstance'],
     getInitialState() {
         return {
             controls: Immutable.List(),
@@ -52,13 +52,12 @@ export default React.createClass({
     },
     _registerNewParametersFromControls(reallyNewControls) {
         let registeredParameters = Immutable.List();
-
         reallyNewControls.forEach((control) => {
             control.parameters.forEach((parameter) => {
                 ParameterActions.registerParameter(control.instanceId, parameter.parameterId);
                 registeredParameters = registeredParameters.push({
                     controlInstanceId: control.instanceId,
-                    parameterInstanceId: parameter.parameterId
+                    parameterId: parameter.parameterId
                 });
             });
         });
@@ -107,12 +106,17 @@ export default React.createClass({
                     <Slab>
                         <div className="row">
                             <div className="small-6 columns">
-                                <SelectionBox options={controlTypeOptions} handler={this._handleSelectControlType}/>
+                                <label>{this.getTranslation('controlType')}
+                                    <SelectionBox options={controlTypeOptions} handler={this._handleSelectControlType} ref="controlTypeSelection"/>
+                                </label>
                             </div>
                             <div className="small-6 columns">
-                                <SelectionBox options={controlOptions} handler={this._handleSelectControl}/>
+                                <label>{this.getTranslation('controlInstance')}
+                                    <SelectionBox options={controlOptions} handler={this._handleSelectControl}  ref="controlSelection"/>
+                                </label>
                             </div>
                         </div>
+                        <hr></hr>
                         <Grid
                             columnInfo={columnInfo}
                             data={parametersToShow.toArray()}

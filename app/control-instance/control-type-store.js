@@ -30,7 +30,6 @@ class ControlTypeStore {
                 .toOrderedSet()
                 .toList()
                 .map((typeId) => { return { id: typeId, name: LicenseStore.getControlTypeName(typeId) }});
-        console.log(this.controlTypes.toJS());
     };
 }
 
