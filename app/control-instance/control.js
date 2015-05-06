@@ -9,7 +9,8 @@ export default Immutable.Record({
     name: 'Unknown control instance',
     parameters: Immutable.List.of(
         new Parameter({ parameterId: shortId.generate(), name: 'Measurement' }),
-        new Parameter({ parameterId: shortId.generate(), name: 'Setpoint' })
+        new Parameter({ parameterId: shortId.generate(), name: 'Setpoint' }),
+        new Parameter({ parameterId: shortId.generate(), name: 'P-Band' })
     ),
     dirty: null
 });

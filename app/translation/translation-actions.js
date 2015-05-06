@@ -32,12 +32,20 @@ class TranslationActions {
                 new Translation({ id: 'alarms', en: 'Alarms', nl: 'Alarmen' }),
                 new Translation({ id: 'reset', en: 'Reset', nl: 'Reset' }),
 
+                //User levels
+                new Translation({ id: 'userLevel', en: 'User level', nl: 'Gebruikersniveau' }),
+                new Translation({ id: 'user', en: 'User', nl: 'Gebruiker' }),
+                new Translation({ id: 'service', en: 'Service', nl: 'Service' }),
+                new Translation({ id: 'developer', en: 'Developer', nl: 'Ontwikkelaar' }),
+
                 //Greenbox terms
                 new Translation({ id: 'typeId', en: 'Type ID', nl: 'Type ID' }),
                 new Translation({ id: 'controlType', en: 'Control type', nl: 'Regeling type' }),
                 new Translation({ id: 'controlInstance', en: 'Control instance', nl: 'Regeling instantie' }),
                 new Translation({ id: 'controlTypeId', en: 'Control type ID', nl: 'Regeling type ID' }),
                 new Translation({ id: 'instanceId', en: 'Instance ID', nl: 'Instantie ID' }),
+                new Translation({ id: 'value', en: 'Value', nl: 'Waarde' }),
+                new Translation({ id: 'unit', en: 'Unit', nl: 'Eenheid' }),
 
                 // Main menu
                 new Translation({ id: 'graphs', en: 'Graphs', nl: 'Grafieken' }),
@@ -72,7 +80,6 @@ class TranslationActions {
                 new Translation({ id: 'uiVersion', en: 'UI version', nl: 'UI versie' }),
                 new Translation({ id: 'addDummyConfig', en: 'Add dummy configuration', nl: 'Dummy configuratie toevoegen' }),
                 new Translation({ id: 'raiseAnAlarm', en: 'Raise an alarm', nl: 'Activeer een alarm' })
-
             )
         });
     }

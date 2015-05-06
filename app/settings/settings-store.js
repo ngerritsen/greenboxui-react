@@ -1,11 +1,13 @@
 import Immutable from 'immutable';
 import AltApp from '../core/alt-app';
 import SettingsActions from './settings-actions'
+import UserLevels from '../shared/user-levels';
 
 class SettingsStore {
     constructor() {
         this.settings = Immutable.Map({
-            product: 'isii-compact'
+            product: 'isii-compact',
+            user: UserLevels.user
         });
         this.bindAction(SettingsActions.setSettings, this.onSetSettings);
 

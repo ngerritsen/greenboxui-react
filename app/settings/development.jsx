@@ -9,13 +9,18 @@ import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';
 import Setting from './setting';
 import SettingTypes from './setting-types';
-import AlarmActions from '../alarms/alarm-actions.js';
+import AlarmActions from '../alarms/alarm-actions';
+import UserLevels from '../shared/user-levels';
+import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
+    mixins: [TranslationMixin],
+    translations: ['user', 'service', 'developer'],
     _handleChangeProduct(product) {
-        SettingsActions.setSettings(Immutable.Map({
-           product: product
-        }));
+        SettingsActions.setSettings(Immutable.Map({ product: product }));
+    },
+    _handleChangeUserLevel(userLevel) {
+        SettingsActions.setSettings(Immutable.Map({ user: userLevel }));
     },
     _handleRaiseAlarm() {
         AlarmActions.raiseAlarm('This is a dummy alarm');
@@ -34,6 +39,17 @@ export default React.createClass({
                         { label: 'iSii Compact', value: 'isii-compact' }
                     )}
                     defaultValue={SettingsStore.getState().settings.get('product')}
+                />
+                <Setting
+                    label="userLevel"
+                    type={SettingTypes.selection}
+                    handler={this._handleChangeUserLevel}
+                    options={Immutable.List.of(
+                        { label: this.getTranslation('user'), value: UserLevels.user },
+                        { label: this.getTranslation('service'), value: UserLevels.service },
+                        { label: this.getTranslation('developer'), value: UserLevels.developer }
+                    )}
+                    defaultValue={SettingsStore.getState().settings.get('user')}
                 />
             </Slab>
         );
