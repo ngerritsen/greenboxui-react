@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 import AltApp from '../core/alt-app';
 import LoggingActions from './logging-actions';
+import SettingsStore from '../settings/settings-store';
 import Log from './log';
 
 class LoggingStore {
@@ -22,7 +23,10 @@ class LoggingStore {
         let log = new Log(payload);
         log = log.set('date', new Date());
         this.logging = this.logging.push(log);
-        console.log(log.message);
+
+        if(SettingsStore.getSetting('logToConsole')) {
+            console.log(log.message);
+        }
     }
 }
 

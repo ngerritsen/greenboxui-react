@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import Translator from '../translation/translator';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import SelectionBox from '../shared/selection-box';
+import Switch from '../shared/switch';
 import SettingTypes from './setting-types';
 
 export default React.createClass({
@@ -33,6 +34,9 @@ export default React.createClass({
         }
         else if(type === SettingTypes.selection) {
             setting = <SelectionBox options={this.props.options} handler={this.props.handler} defaultValue={this.props.defaultValue}/>
+        }
+        else if(type === SettingTypes.onOff) {
+            setting = <Switch value={this.props.defaultValue} handler={this.props.handler}/>
         }
 
         return (

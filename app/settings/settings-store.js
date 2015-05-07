@@ -7,9 +7,15 @@ class SettingsStore {
     constructor() {
         this.settings = Immutable.Map({
             product: 'isii-compact',
-            user: UserLevels.user
+            user: UserLevels.user,
+            logToConsole: false
         });
+
         this.bindAction(SettingsActions.setSettings, this.onSetSettings);
+
+        this.exportPublicMethods({
+            getSetting: this.getSetting
+        });
 
         this.on('init', this.bootstrap);
     }
@@ -24,6 +30,10 @@ class SettingsStore {
         payload.settings.forEach((setting, key) => {
             this.settings = this.settings.set(key, setting);
         });
+    }
+
+    getSetting(setting) {
+        this.getState().settings.get(setting);
     }
 }
 
