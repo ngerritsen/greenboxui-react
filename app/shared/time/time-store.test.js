@@ -23,7 +23,7 @@ describe('control instance store', () => {
             expect(oldTime).not.toEqual(newTime);
         }, 1100);
     });
-
+    ///Comment
     function updateTime(newTime) {
         AltApp.dispatcher.dispatch({ action: updateTimeAction, data: { time: newTime } });
     }

@@ -15,6 +15,7 @@ class TimeStore {
             this.time = payload.time;
         }
     }
+    //Comment
 
     _refreshTime() {
         setInterval(() => {
