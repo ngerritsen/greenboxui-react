@@ -10,7 +10,7 @@ export default React.createClass({
             <Content>
                 <Section>
                     <Slab>
-                        <Chart/>
+                        <Chart />
                     </Slab>
                 </Section>
             </Content>
