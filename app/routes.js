@@ -8,6 +8,7 @@ import About from './settings/about';
 import General from './settings/general';
 import Development from './settings/development';
 import IconTypes from './shared/icon-types';
+import LoggingView from './logging/logging-view';
 
 export const routeConfig = [{
         title: 'graphs',
@@ -86,6 +87,13 @@ export const routeConfig = [{
                 path: '/settings/development',
                 icon: IconTypes.development,
                 handler: Development
+            },
+            {
+                title: 'logging',
+                name: 'logging',
+                path: '/settings/loggin',
+                icon: IconTypes.logging,
+                handler: LoggingView
             }
         ]
     }

@@ -31,6 +31,8 @@ class TranslationActions {
                 new Translation({ id: 'message', en: 'Message', nl: 'Bericht' }),
                 new Translation({ id: 'alarms', en: 'Alarms', nl: 'Alarmen' }),
                 new Translation({ id: 'reset', en: 'Reset', nl: 'Reset' }),
+                new Translation({ id: 'level', en: 'Level', nl: 'Niveau' }),
+                new Translation({ id: 'logging', en: 'Logging', nl: 'Logging' }),
 
                 //User levels
                 new Translation({ id: 'userLevel', en: 'User level', nl: 'Gebruikersniveau' }),

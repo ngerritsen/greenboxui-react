@@ -10,6 +10,7 @@ export default Object.freeze({
     graphs: 'line-chart',
     info: 'info-circle',
     license: 'key',
+    logging: 'book',
     menu: 'bars',
     network: 'globe',
     remove: 'trash',

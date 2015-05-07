@@ -2,6 +2,8 @@ import AltApp from '../core/alt-app';
 import shortId from 'shortid';
 import ConnectionServerActions from './connection-server-actions';
 import ConnectionApiCalls from './connection-api-calls';
+import LoggingActions from'../logging/logging-actions';
+import LogLevels from'../logging/log-levels';
 
 class ConnectionActions {
     addConnection(sourceControl, targetControl) {
@@ -11,6 +13,8 @@ class ConnectionActions {
         let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
         request.then(() => ConnectionServerActions.addConnectionSucceeded(dirtyId, connectionId));
         request.then(() => ConnectionServerActions.addConnectionFailed(dirtyId));
+
+        LoggingActions.log(LogLevels.info, `Adding a connection from ${sourceControl.name} to ${targetControl.name}.`);
 
         this.dispatch({
             sourceControl: sourceControl,

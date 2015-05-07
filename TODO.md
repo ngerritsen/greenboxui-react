@@ -1,6 +1,13 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
+- Finish logging functionality
+    * Let logging to console be optional
+    * Be able to filter by log type
+    * Be able to delete and flush logs
+    * Add more logging
+    * Make logging levels visually nice in logging view
+- Fix development adding connections
 - Make graph with actual data
 
 ###Backlog

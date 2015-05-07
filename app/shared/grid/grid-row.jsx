@@ -42,16 +42,13 @@ export default React.createClass({
                 cellContent = <GridDateCell date={data[id]}/>
             }
 
-            if(show === false) {
-                cellContent = '';
-            }
-
             const classNames = classnames([
                 'grid-cell',
                 `small-${columns}`,
                 'columns',
                 {'dirty' : data.dirty},
-                {[`grid-${type}-cell`]: type}
+                {[`grid-${type}-cell`]: type},
+                {'hidden': show === false}
             ]);
 
             return (
