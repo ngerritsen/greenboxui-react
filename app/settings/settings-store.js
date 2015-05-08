@@ -33,7 +33,7 @@ class SettingsStore {
     }
 
     getSetting(setting) {
-        this.getState().settings.get(setting);
+        return this.getState().settings.get(setting);
     }
 }
 

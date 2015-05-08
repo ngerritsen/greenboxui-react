@@ -1,6 +1,7 @@
 import React from 'react';
 import Slab from '../shared/slab';
 import Immutable from 'immutable';
+import AutoListenerMixin from '../shared/auto-listener-mixin';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
@@ -14,18 +15,28 @@ import UserLevels from '../shared/user-levels';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
-    mixins: [TranslationMixin],
+    mixins: [TranslationMixin, AutoListenerMixin],
     translations: ['user', 'service', 'developer'],
+    getInitialState() {
+        return { settings: Immutable.Map() };
+    },
+    componentDidMount() {
+        this.listenToAuto(SettingsStore);
+    },
     _handleChangeProduct(product) {
         SettingsActions.setSettings(Immutable.Map({ product: product }));
     },
     _handleChangeUserLevel(userLevel) {
         SettingsActions.setSettings(Immutable.Map({ user: userLevel }));
     },
+    _handleSwitchLogToConsole(newValue) {
+        SettingsActions.setSettings(Immutable.Map({ logToConsole: newValue }));
+    },
     _handleRaiseAlarm() {
         AlarmActions.raiseAlarm('This is a dummy alarm');
     },
     render() {
+        const settings = this.state.settings;
         return (
             <Slab>
                 <Setting label="addDummyConfig" type={SettingTypes.action} actionLabel="add" handler={this._handleAddDummyConfiguration} />
@@ -38,7 +49,7 @@ export default React.createClass({
                         { label: 'iSii', value: 'isii' },
                         { label: 'iSii Compact', value: 'isii-compact' }
                     )}
-                    defaultValue={SettingsStore.getSetting('product')}
+                    defaultValue={settings.get('product')}
                 />
                 <Setting
                     label="userLevel"
@@ -49,13 +60,13 @@ export default React.createClass({
                         { label: this.getTranslation('service'), value: UserLevels.service },
                         { label: this.getTranslation('developer'), value: UserLevels.developer }
                     )}
-                    defaultValue={SettingsStore.getSetting('user')}
+                    defaultValue={settings.get('user')}
                 />
                 <Setting
                     label="logToConsole"
                     type={SettingTypes.onOff}
                     handler={this._handleSwitchLogToConsole}
-                    defaultValue={SettingsStore.getSetting('logToConsole')}
+                    defaultValue={settings.get('logToConsole')}
                 />
             </Slab>
         );

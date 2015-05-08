@@ -2,7 +2,6 @@
 
 ###Progressgit
 - Finish logging functionality
-    * Let logging to console be optional
     * Be able to filter by log type
     * Be able to delete and flush logs
     * Add more logging

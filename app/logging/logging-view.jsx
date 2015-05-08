@@ -11,7 +11,7 @@ import LogLevels from './log-levels';
 
 export default React.createClass({
     mixins: [AutoListenerMixin, TranslationMixin],
-    translations: [],
+    translations: ['level', 'date', 'message'],
     getInitialState() {
         return { logging: Immutable.List() }
     },

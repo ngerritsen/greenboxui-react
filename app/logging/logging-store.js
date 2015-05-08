@@ -23,7 +23,6 @@ class LoggingStore {
         let log = new Log(payload);
         log = log.set('date', new Date());
         this.logging = this.logging.push(log);
-
         if(SettingsStore.getSetting('logToConsole')) {
             console.log(log.message);
         }

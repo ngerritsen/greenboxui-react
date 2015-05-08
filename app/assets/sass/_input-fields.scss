@@ -29,3 +29,23 @@ select {
   @include box-shadow($subtle-shallow-shadow);
   border-color: lighten($light-gray, 5%);
 }
+
+.switch {
+  &.tiny {
+    label:after {
+      @include box-shadow($medium-shadow);
+      height: 1.1rem;
+      left: .2rem;
+      top: .2rem;
+      width: 1.1rem;
+    }
+  }
+
+  input:checked + label {
+    background: $positive-color;
+  }
+
+  input + label {
+    background: $subtle-gray;
+  }
+}
