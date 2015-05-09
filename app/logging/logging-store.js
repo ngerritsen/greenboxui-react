@@ -21,6 +21,7 @@ export default Reflux.createStore({
 
         this.logging = this.logging.push(log);
         this.trigger(this.logging);
+
         if(SettingsStore.getSetting('logToConsole')) {
             console.log(log.message);
         }
