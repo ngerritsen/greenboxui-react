@@ -1,6 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 import Immutable from 'immutable';
+import TranslationMixin from '../translation/translation-mixin';
 import Grid from '../shared/grid/grid';
 import GridCellTypes from '../shared/grid/grid-cell-types';
 import Slab from '../shared/slab';
@@ -9,13 +10,10 @@ import LogLevels from './log-levels';
 
 
 export default React.createClass({
-    mixins: [AutoListenerMixin, TranslationMixin],
+    mixins: [TranslationMixin, Reflux.connect(LoggingStore, 'logging')],
     translations: ['level', 'date', 'message'],
     getInitialState() {
         return { logging: Immutable.List() }
-    },
-    componentDidMount() {
-        this.listenToAuto(LoggingStore);
     },
     render() {
         const columnInfo = [
