@@ -1,0 +1,51 @@
+input[type="text"],
+input[type="number"],
+input[type="number"],
+input[type="file"],
+input[type="checkbox"],
+input[type="radio"],
+textarea,
+select {
+  margin-bottom: .6rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  @include border-radius(3px);
+  @include box-shadow($subtle-shallow-shadow);
+  background-color: $white;
+  border-color: lighten($light-gray, 5%);
+
+  &:focus {
+    @include box-shadow($subtle-medium-shadow);
+    background-color: $barely-white;
+    border-color: lighten($light-gray, 5%);
+  }
+}
+
+select {
+  @include border-radius(3px);
+  @include box-shadow($subtle-shallow-shadow);
+  border-color: lighten($light-gray, 5%);
+}
+
+.switch {
+  &.tiny {
+    label:after {
+      @include box-shadow($medium-shadow);
+      height: 1.1rem;
+      left: .2rem;
+      top: .2rem;
+      width: 1.1rem;
+    }
+  }
+
+  input:checked + label {
+    background: $positive-color;
+  }
+
+  input + label {
+    background: $subtle-gray;
+  }
+}

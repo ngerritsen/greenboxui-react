@@ -11,9 +11,9 @@ export default React.createClass({
     },
     render() {
         return (
-            <div className="switch round small">
-                <input id="switch" type="checkbox" checked={this.props.value} onChange={this._handleSwitch}/>
-                <label for="switch"></label>
+            <div className="switch round tiny">
+                <input id="switch" type="checkbox" ref="switch" checked={this.props.value} readOnly onChange={this._handleSwitch}/>
+                <label htmlFor="switch"></label>
             </div>
         );
     }

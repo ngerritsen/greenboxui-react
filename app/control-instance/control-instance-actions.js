@@ -4,6 +4,9 @@ import shortId from 'shortid';
 import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstanceApiCalls from './control-instance-api-calls';
 import LicenseActions from '../license/license-actions';
+import LicenseStore from '../license/license-store';
+import LoggingActions from '../logging/logging-actions';
+import LogLevels from '../logging/log-levels';
 
 class ControlInstanceActions {
     addControl(typeId, name) {
@@ -19,6 +22,7 @@ class ControlInstanceActions {
         request.catch(() => ControlInstanceServerActions.addControlFailed(dirtyId));
 
         LicenseActions.useLicenseSlot(typeId, 1);
+        LoggingActions.log(LogLevels.info, `Adding a control of type ${LicenseStore.getControlTypeName(typeId)} with name ${name}.`);
 
         this.dispatch({
             typeId: typeId,

@@ -1,8 +1,8 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
+- Test out Reflux even more, replace for instance the logging store
 - Finish logging functionality
-    * Let logging to console be optional
     * Be able to filter by log type
     * Be able to delete and flush logs
     * Add more logging
