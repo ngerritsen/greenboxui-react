@@ -29,6 +29,7 @@ select {
   @include box-shadow($subtle-shallow-shadow);
   border-color: lighten($light-gray, 5%);
 }
+//git status
 
 .switch {
   &.tiny {
