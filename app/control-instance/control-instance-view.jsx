@@ -1,6 +1,7 @@
 import React from 'react';
+import Reflux from 'reflux';
 import Immutable from 'immutable';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import shortId from 'shortid';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
@@ -11,13 +12,13 @@ import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin, TranslationMixin],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(ControlInstanceStore, 'controls')
+    ],
     translations: ['type', 'instanceId', 'name', 'delete'],
     getInitialState() {
-        return { controls: ControlInstanceStore.getState().controls }
-    },
-    componentDidMount() {
-        this.listenToAuto(ControlInstanceStore);
+        return { controls: Immutable.List() }
     },
     _handleEditControlName(newName, control) {
         const instanceId = control.instanceId;

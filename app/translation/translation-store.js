@@ -14,7 +14,7 @@ class TranslationStore {
 
         this.bindAction(TranslationActions.refreshTranslations, this.onRefreshTranslations);
         this.bindAction(TranslationActions.setCurrentLanguage, this.onSetCurrentLanguage);
-        this.bindAction(SettingsActions.setSettings, this.onSetSettings);
+        SettingsStore.listen(this.onSetSettings);
 
         this.exportPublicMethods({
             translate: this.translate
@@ -39,9 +39,7 @@ class TranslationStore {
     }
 
     onSetSettings() {
-        this.waitFor(SettingsStore.dispatchToken);
-        this.currentLanguage = SettingsStore.getState().settings.get('currentLanguage');
-        this.emitChange();
+        this.currentLanguage = SettingsStore.settings.get('currentLanguage');
     }
 
     translate(id) {

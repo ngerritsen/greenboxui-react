@@ -1,44 +1,29 @@
 import Immutable from 'immutable';
 import shortId from 'shortid';
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import Parameter from './parameter';
 import ParameterServerActions from './parameter-server-actions';
 import ParameterApiCalls from './parameter-api-calls';
 
-class ParameterActions {
-    refreshParameters(parameters) {
-        let request = ParameterApiCalls.getParameters(parameters);
-        request.then(() => ParameterServerActions.refreshParametersSucceeded(parameters));
-        request.catch(() => ParameterServerActions.refreshParametersFailed());
-    }
+let ParameterActions = Reflux.createActions({
+    'refreshParameters': {children: ['completed', 'failed']},
+    'registerParameter': {},
+    'unregisterParameter': {},
+    'setParameter': {children: ['completed', 'failed']}
+});
 
-    registerParameter(controlInstanceId, parameterId) {
-        this.dispatch({
-            controlInstanceId: controlInstanceId,
-            parameterId: parameterId
-        });
-    }
+ParameterActions.refreshParameters.listen((parameters) => {
+    let request = ParameterApiCalls.getParameters(parameters);
+    request.then(() => this.completed(parameters));
+    request.catch(() => this.failed(parameters));
+});
 
-    unregisterParameter(controlInstanceId, parameterId) {
-        this.dispatch({
-            controlInstanceId: controlInstanceId,
-            parameterId: parameterId
-        });
-    }
+ParameterActions.setParameter.listen((controlInstanceId, parameterId, newValue, oldValue) => {
+    const dirty = shortId.generate();
 
-    setParameter(controlInstanceId, parameterId, newValue, oldValue) {
-        const dirtyId = shortId.generate();
+    let request = ParameterApiCalls.postParameterValue(controlInstanceId, parameterId, newValue);
+    request.then(() => ParameterServerActions.setParameterSucceeded(newValue, dirty));
+    request.catch(() => ParameterServerActions.setParameterFailed(oldValue, dirty));
+});
 
-        let request = ParameterApiCalls.postParameterValue(controlInstanceId, parameterId, newValue);
-        request.then(() => ParameterServerActions.setParameterSucceeded(dirtyId, newValue));
-        request.catch(() => ParameterServerActions.setParameterFailed(dirtyId, oldValue));
-
-        this.dispatch({
-            controlInstanceId: controlInstanceId,
-            parameterId: parameterId,
-            newValue: newValue
-        });
-    }
-}
-
-export default AltApp.createActions(ParameterActions);
+export default ParameterActions;

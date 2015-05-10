@@ -16,11 +16,14 @@ export default React.createClass({
         }
     },
     componentDidMount() {
-        this.listenToAuto(SettingsStore, this._onSettingsChange);
+        this.unsubscribe = SettingsStore.listen(this._onSettingsChange);
         this.listenToAuto(AlarmStore, this._onAlarmsChange);
     },
-    _onSettingsChange() {
-        const product = SettingsStore.getState().settings.get('product');
+    componentWillUnmount() {
+        this.unsubscribe();
+    },
+    _onSettingsChange(settings) {
+        const product = settings.get('product');
         this.setState({ product: product });
     },
     _onAlarmsChange() {

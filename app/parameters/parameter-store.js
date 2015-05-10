@@ -1,57 +1,34 @@
 import Immutable from 'immutable';
 import shortId from 'shortid';
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import Parameter from './parameter';
 import ParameterActions from './parameter-actions';
-import ParameterServerActions from './parameter-server-actions';
 
-class ParameterStore {
+export default Reflux.createStore({
     constructor() {
         this.parameters = Immutable.List();
 
-        this.bindAction(ParameterServerActions.refreshParametersSucceeded, this.onRefreshParametersSucceeded);
-
-        this.bindAction(ParameterActions.registerParameter, this.onRegisterParameter);
-        this.bindAction(ParameterActions.unregisterParameter, this.onUnregisterParameter);
-
-        this.bindAction(ParameterActions.setParameter, this.onSetParameterOptimistic);
-        this.bindAction(ParameterServerActions.setParameterSucceeded, this.onSetParameterSucceeded);
-        this.bindAction(ParameterServerActions.setParameterFailed, this.onSetParameterFailed);
-
-        this.on('init', this.bootstrap);
+        this.listenToMany(ParameterActions);
 
         setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false , 3500);
-    }
-
-    bootstrap() {
-        if (! Immutable.List.isList(this.parameters)) {
-            this.parameters = Immutable.List(this.parameters);
-        }
-    }
-
-    onRegisterParameter(payload) {
-        const {parameterId, controlInstanceId} = payload;
+    },
+    onRegisterParameter(parameterId, controlInstanceId) {
         if(!this.parameters.find((param) => parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)) {
             this.parameters = this.parameters.push(new Parameter({
                 parameterId: parameterId,
                 controlInstanceId: controlInstanceId
             }));
         }
-    }
-
-    onUnregisterParameter(payload) {
-        const {parameterId, controlInstanceId} = payload;
+    },
+    onUnregisterParameter(parameterId, controlInstanceId) {
         this.parameters = this.parameters.filter((param) => {
             return !(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)
         });
-    }
-
-    onRefreshParametersSucceeded(payload) {
-        this.parameters = Immutable.List(payload.parameters);
-    }
-
-    onSetParameterOptimistic(payload) {
-        const {parameterId, controlInstanceId, newValue, dirty} = payload;
+    },
+    onRefreshParametersCompleted(parameters) {
+        this.parameters = Immutable.List(parameters);
+    },
+    onSetParameterOptimistic(parameterId, controlInstanceId, newValue, dirty) {
         this.parameters = this.parameters.map((param) => {
             if(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId) {
                 param = param
@@ -60,29 +37,23 @@ class ParameterStore {
             }
             return param;
         });
-    }
-
-    onSetParameterSucceeded(payload) {
-        const {clean} = payload;
+    },
+    onSetParameterCompleted(dirty) {
         this.parameters = this.parameters.map((param) => {
-            if(param.dirty === clean) {
+            if(param.dirty === dirty) {
                 param = param.remove('dirty');
             }
             return param;
         });
-    }
-
-    onSetParameterFailed(payload) {
-        const {oldValue, clean} = payload;
+    },
+    onSetParameterFailed(oldValue, dirty) {
         this.parameters = this.parameters.map((param) => {
-            if(param.dirty === clean) {
+            if(param.dirty === dirty) {
                 param = param
                     .set('value', oldValue)
                     .remove('dirty');
             }
             return param;
         });
-    }
-}
-
-export default AltApp.createStore(ParameterStore, 'ParameterStore');
+    },
+});

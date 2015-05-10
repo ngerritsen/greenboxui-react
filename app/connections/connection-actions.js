@@ -1,9 +1,23 @@
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import shortId from 'shortid';
-import ConnectionServerActions from './connection-server-actions';
 import ConnectionApiCalls from './connection-api-calls';
 import LoggingActions from'../logging/logging-actions';
 import LogLevels from'../logging/log-levels';
+
+let ControlInstanceActions = Reflux.createActions({
+    'addConnection': {children: ['optimistic', 'completed', 'failed']},
+    'removeControl': {children: ['optimistic', 'completed', 'failed']}
+});
+
+ControlInstanceActions.addConnection.listen((sourceControl, targetControl) => {
+    const dirty = shortId.generate();
+    const connectionId = shortId.generate();
+
+    this.optimistic(sourceControl, targetControl, dirty);
+    let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
+    request.then(() => ConnectionServerActions.addConnectionSucceeded(connectionId, dirty));
+    request.then(() => ConnectionServerActions.addConnectionFailed(dirty));
+});
 
 class ConnectionActions {
     addConnection(sourceControl, targetControl) {
@@ -14,7 +28,6 @@ class ConnectionActions {
         request.then(() => ConnectionServerActions.addConnectionSucceeded(dirtyId, connectionId));
         request.then(() => ConnectionServerActions.addConnectionFailed(dirtyId));
 
-        LoggingActions.log(LogLevels.info, `Adding a connection from ${sourceControl.name} to ${targetControl.name}.`);
 
         this.dispatch({
             sourceControl: sourceControl,
@@ -38,4 +51,4 @@ class ConnectionActions {
     }
 }
 
-export default AltApp.createActions(ConnectionActions);
+export default ConnectionActions;

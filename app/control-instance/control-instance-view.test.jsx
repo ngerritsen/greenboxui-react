@@ -1,6 +1,5 @@
 import React from 'react/addons';
 import shortId from 'shortid';
-import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceView from './control-instance-view';
@@ -20,6 +19,7 @@ describe('control instance view', () => {
 
     let controlInstanceView;
     beforeEach(() => {
+        ControlInstanceStore.controls = dummyControls;
         controlInstanceView = ReactTestUtils.renderIntoDocument(
             <ControlInstanceView/>
         );
@@ -30,27 +30,11 @@ describe('control instance view', () => {
         React.unmountComponentAtNode(document.body);
     });
 
-    it('gets initial state from control instance store', () => {
-        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
-
-        controlInstanceView = ReactTestUtils.renderIntoDocument(
-            <ControlInstanceView/>
-        );
-
-        expect(ControlInstanceStore.getState).toHaveBeenCalled();
-        expect(controlInstanceView.state.controls).toEqual(dummyControls);
-    });
-
-    it('gets listens to control instance store for updates', () => {
-        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
-        AltApp.dispatcher.dispatch({ action: addControlAction, data: null });
-
-        expect(ControlInstanceStore.getState).toHaveBeenCalled();
+    it('listens to control instance store for updates', () => {
         expect(controlInstanceView.state.controls).toEqual(dummyControls);
     });
 
     it('handles control renames', () => {
-        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
         const newName = 'newName';
         const instanceId = dummyControls.get(0).instanceId;
 
@@ -61,7 +45,6 @@ describe('control instance view', () => {
     });
 
     it('handles control deletes', () => {
-        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
         const control = dummyControls.get(0);
 
         spyOn(ControlInstanceActions, 'removeControl');

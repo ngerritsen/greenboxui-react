@@ -80,7 +80,7 @@ export default React.createClass({
     },
     render() {
         const {controls, parameters, selectedControlInstanceId, selectedControlTypeId} = this.state;
-        const userLevel = SettingsStore.getState().settings.get('user');
+        const userLevel = SettingsStore.settings.get('user');
 
         let parametersToShow = parameters.filter((param) => param[userLevel] !== ParameterAccessLevels.hidden);
 

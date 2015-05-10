@@ -22,7 +22,7 @@ export default React.createClass({
                         { label: 'English', value: 'en' },
                         { label: 'Nederlands', value: 'nl' }
                     )}
-                    defaultValue={SettingsStore.getState().settings.get('currentLanguage')}
+                    defaultValue={SettingsStore.settings.get('currentLanguage')}
                 />
             </Slab>
         );

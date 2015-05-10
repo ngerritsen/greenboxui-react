@@ -1,4 +1,3 @@
-import AltApp from '../core/alt-app';
 import shortId from 'shortid';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
@@ -28,23 +27,31 @@ describe('connection store', () => {
         dirty: dirtyIdB
     };
 
-    afterEach(() => AltApp.flush());
+    beforeEach(() => {
+        ConnectionStore.connections = Immutable.List();
+        jasmine.clock().install()
+    });
+
+    afterEach(() => {
+        ConnectionStore.connections = Immutable.List();
+        jasmine.clock().uninstall()
+    });
 
     describe('add a connection tests', () => {
         it('optimistically adds a connection', () => {
             optimisticallyAddConnection(testConnectionA);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
-            expect(ConnectionStore.getState().connections.get(0).dirty).toEqual(testConnectionA.dirty);
+            expect(ConnectionStore.connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.get(0).dirty).toEqual(testConnectionA.dirty);
         });
 
         it('adds connection actually', () => {
             optimisticallyAddConnection(testConnectionA);
             actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
-            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
-            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
+            expect(ConnectionStore.connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.get(0).dirty).toBeFalsy();
+            expect(ConnectionStore.connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
         });
 
         it('adds multiple connections actually', () => {
@@ -53,11 +60,11 @@ describe('connection store', () => {
             actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
             actuallyAddConnection(testConnectionB.connectionId, dirtyIdB);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(2);
-            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
-            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
-            expect(ConnectionStore.getState().connections.get(1).dirty).toBeFalsy();
-            expect(ConnectionStore.getState().connections.get(1).connectionId).toEqual(testConnectionB.connectionId);
+            expect(ConnectionStore.connections.count()).toEqual(2);
+            expect(ConnectionStore.connections.get(0).dirty).toBeFalsy();
+            expect(ConnectionStore.connections.get(0).connectionId).toEqual(testConnectionA.connectionId);
+            expect(ConnectionStore.connections.get(1).dirty).toBeFalsy();
+            expect(ConnectionStore.connections.get(1).connectionId).toEqual(testConnectionB.connectionId);
         });
 
         it('ignores invalid connections', () => {
@@ -67,21 +74,21 @@ describe('connection store', () => {
             optimisticallyAddConnection(invalidConnection1);
             optimisticallyAddConnection(invalidConnection2);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(0);
+            expect(ConnectionStore.connections.count()).toEqual(0);
         });
 
         it('cancels addition of a connection if addition failed', () => {
             optimisticallyAddConnection(testConnectionA);
             failToAddConnection(dirtyIdA);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(0);
+            expect(ConnectionStore.connections.count()).toEqual(0);
         });
 
         it('does not add an existing connection', () => {
             optimisticallyAddConnection(testConnectionA);
             optimisticallyAddConnection(testConnectionA);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.count()).toEqual(1);
         });
     });
 
@@ -92,12 +99,12 @@ describe('connection store', () => {
             optimisticallyAddConnection(testConnectionA);
             actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
 
-            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
+            const connectionIdToRemove = ConnectionStore.connections.get(0).connectionId;
 
             optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
-            expect(ConnectionStore.getState().connections.get(0).dirty).toEqual(dirtyId);
+            expect(ConnectionStore.connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.get(0).dirty).toEqual(dirtyId);
         });
 
         it('actually removes a connection', () => {
@@ -106,12 +113,12 @@ describe('connection store', () => {
             optimisticallyAddConnection(testConnectionA);
             actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
 
-            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
+            const connectionIdToRemove = ConnectionStore.connections.get(0).connectionId;
 
             optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
             actuallyRemoveConnection(dirtyId);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(0);
+            expect(ConnectionStore.connections.count()).toEqual(0);
         });
 
         it('removes one and the right connection from multiple connections', () => {
@@ -123,14 +130,14 @@ describe('connection store', () => {
             optimisticallyAddConnection(testConnectionB);
             actuallyAddConnection(testConnectionB.connectionId, dirtyIdB);
 
-            const connectionIdA = ConnectionStore.getState().connections.get(0).connectionId;
-            const connectionIdB = ConnectionStore.getState().connections.get(1).connectionId;
+            const connectionIdA = ConnectionStore.connections.get(0).connectionId;
+            const connectionIdB = ConnectionStore.connections.get(1).connectionId;
 
             optmisticallyRemoveConnection(connectionIdA, dirtyId);
             actuallyRemoveConnection(dirtyId);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
-            expect(ConnectionStore.getState().connections.get(0).connectionId).toEqual(connectionIdB);
+            expect(ConnectionStore.connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.get(0).connectionId).toEqual(connectionIdB);
         });
 
         it('cancels removal of a connection if removal failed', () => {
@@ -139,56 +146,45 @@ describe('connection store', () => {
             optimisticallyAddConnection(testConnectionA);
             actuallyAddConnection(testConnectionA.connectionId, dirtyIdA);
 
-            const connectionIdToRemove = ConnectionStore.getState().connections.get(0).connectionId;
+            const connectionIdToRemove = ConnectionStore.connections.get(0).connectionId;
 
             optmisticallyRemoveConnection(connectionIdToRemove, dirtyId);
             failToRemoveConnection(dirtyId);
 
-            expect(ConnectionStore.getState().connections.count()).toEqual(1);
-            expect(ConnectionStore.getState().connections.get(0).dirty).toBeFalsy();
+            expect(ConnectionStore.connections.count()).toEqual(1);
+            expect(ConnectionStore.connections.get(0).dirty).toBeFalsy();
         });
     });
 
     function optimisticallyAddConnection(connection) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionActions.ADD_CONNECTION,
-            data: connection
-        });
+        const {sourceControl, targetControl, dirty} = connection;
+        ConnectionActions.addConnectionOptimistic(sourceControl, targetControl, dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function actuallyAddConnection(connectionId, dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionServerActions.ADD_CONNECTION_SUCCEEDED,
-            data: { connectionId: connectionId, clean: dirtyId }
-        });
+    function actuallyAddConnection(connectionId, dirty) {
+        ConnectionActions.addConnectionCompleted(connectionId, dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function failToAddConnection(dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionServerActions.ADD_CONNECTION_FAILED,
-            data: {  clean: dirtyId }
-        });
+    function failToAddConnection(dirty) {
+        ConnectionActions.addConnectionFailed(dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function optmisticallyRemoveConnection(connectionId, dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionActions.REMOVE_CONNECTION,
-            data: { connectionId: connectionId, dirty: dirtyId }
-        });
+    function optmisticallyRemoveConnection(connectionId, dirty) {
+        ConnectionActions.removeConnectionOptimistic(connectionId, dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function actuallyRemoveConnection(dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionServerActions.REMOVE_CONNECTION_SUCCEEDED,
-            data: { clean: dirtyId }
-        });
+    function actuallyRemoveConnection(dirty) {
+        ConnectionActions.removeConnectionCompleted(dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function failToRemoveConnection(dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: ConnectionServerActions.REMOVE_CONNECTION_FAILED,
-            data: {  clean: dirtyId }
-        });
+    function failToRemoveConnection(dirty) {
+        ConnectionActions.removeConnectionFailed(dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
 });

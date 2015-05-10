@@ -22,7 +22,7 @@ describe('connection add tool', () => {
     let connectionAddTool;
 
     beforeEach(() => {
-        spyOn(ControlInstanceStore, 'getState').and.returnValue({ controls: dummyControls });
+        ControlInstanceStore.controls = dummyControls;
         connectionAddTool = ReactTestUtils.renderIntoDocument(
             <ConnectionAddTool/>
         );

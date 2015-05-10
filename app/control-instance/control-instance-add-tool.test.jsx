@@ -89,7 +89,7 @@ describe('control instance add tool', () => {
         React.findDOMNode(controlInstanceAddTool.refs.selectedControlType).value = dummyType;
         ReactTestUtils.Simulate.click(submitButton);
 
-        expect(ControlInstanceActions.addControl).toHaveBeenCalledWith(dummyType, newName);
+        expect(ControlInstanceActions.addControl).toHaveBeenCalled();
     });
 
     it('does not add a control with an invalid name', () => {

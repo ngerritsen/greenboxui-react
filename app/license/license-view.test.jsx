@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
 import GridRow from '../shared/grid/grid-row';
 import LicenseView from './license-view';
@@ -19,8 +18,7 @@ describe('control instance view', () => {
     let licenseView;
 
     beforeEach(() => {
-        spyOn(LicenseStore, 'getState').and.returnValue({ license: dummyLicense });
-
+        LicenseStore.license = dummyLicense;
         licenseView = ReactTestUtils.renderIntoDocument(
             <LicenseView/>
         );
