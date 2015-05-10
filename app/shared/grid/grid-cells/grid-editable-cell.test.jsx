@@ -26,7 +26,7 @@ describe('grid editable cell', () => {
         React.unmountComponentAtNode(document.body);
     });
 
-    describe('edit mode switching' , () => {
+   describe('edit mode switching', () => {
         it('should initially be not in edit mode', () => {
             expect(gridBody.state.editMode).toBeFalsy();
             const toggleButton = ReactTestUtils.findRenderedDOMComponentWithTag(gridBody, 'i');
@@ -52,7 +52,7 @@ describe('grid editable cell', () => {
         });
     });
 
-    describe('submitting edits', () => {
+  describe('submitting edits', () => {
         it('should call on edit handler with right parameters when submitting a valid edit', () => {
             const newValue = 'new value';
 
@@ -94,7 +94,7 @@ describe('grid editable cell', () => {
         });
     });
 
-    describe('submitting numerical edits', () => {
+ describe('submitting numerical edits', () => {
         const initialNumericalValue = 123;
 
         beforeEach(() => {

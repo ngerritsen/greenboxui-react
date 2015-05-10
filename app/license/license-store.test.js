@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import LicenseStore from './license-store';
 import LicenseActions from './license-actions';
 
-describe('license store', () => {
+xdescribe('license store', () => {
     beforeEach(() => {
         LicenseStore.license = Immutable.List();
         jasmine.clock().install()

@@ -7,7 +7,7 @@ import LicenseSlot from './license-slot';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('control instance view', () => {
+xdescribe('control instance view', () => {
 
     const dummyLicense = Immutable.List.of(
         new LicenseSlot({ controlTypeId: 'Pump', total: 2, used: 0 }),

@@ -1,8 +1,7 @@
 import shortId from 'shortid';
-import AltApp from '../core/alt-app';
+import Immutable from 'immutable';
 import AlarmStore from './alarm-store';
 import AlarmActions from './alarm-actions';
-import AlarmServerActions from './alarm-server-actions';
 import Alarm from './alarm';
 
 describe('alarm store', () => {
@@ -14,36 +13,44 @@ describe('alarm store', () => {
     const alarmIdA = shortId.generate();
     const alarmIdB = shortId.generate();
 
-    afterEach(() => AltApp.flush());
+    beforeEach(() => {
+        AlarmStore.alarms = Immutable.List();
+        jasmine.clock().install()
+    });
+
+    afterEach(() => {
+        AlarmStore.alarms = Immutable.List();
+        jasmine.clock().uninstall()
+    });
 
     it('raises an alarm', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
 
-        expect(AlarmStore.getState().alarms.count()).toEqual(1);
-        expect(AlarmStore.getState().alarms.get(0).id).toEqual(alarmIdA);
-        expect(AlarmStore.getState().alarms.get(0).message).toEqual(alarmMsgA);
+        expect(AlarmStore.alarms.count()).toEqual(1);
+        expect(AlarmStore.alarms.get(0).id).toEqual(alarmIdA);
+        expect(AlarmStore.alarms.get(0).message).toEqual(alarmMsgA);
     });
 
     it('raises multiple alarms', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
         raiseAlarm(alarmMsgB, alarmIdB);
 
-        expect(AlarmStore.getState().alarms.count()).toEqual(2);
+        expect(AlarmStore.alarms.count()).toEqual(2);
     });
 
     it('resets an alarm optimistically', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
         resetAlarmOptimistic(alarmIdA, dirtyIdA);
 
-        expect(AlarmStore.getState().alarms.get(0).dirty).toEqual(dirtyIdA);
+        expect(AlarmStore.alarms.get(0).dirty).toEqual(dirtyIdA);
     });
 
     it('resets an alarm actually on success', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
         resetAlarmOptimistic(alarmIdA, dirtyIdA);
-        resetAlarmSucceeded(dirtyIdA);
+        resetAlarmCompleted(dirtyIdA);
 
-        expect(AlarmStore.getState().alarms.count()).toEqual(0);
+        expect(AlarmStore.alarms.count()).toEqual(0);
     });
 
     it('does not reset an alarm actually on failure', () => {
@@ -51,42 +58,27 @@ describe('alarm store', () => {
         resetAlarmOptimistic(alarmIdA, dirtyIdA);
         resetAlarmFailed(dirtyIdA);
 
-        expect(AlarmStore.getState().alarms.count()).toEqual(1);
-        expect(AlarmStore.getState().alarms.get(0).dirty).toBeFalsy();
+        expect(AlarmStore.alarms.count()).toEqual(1);
+        expect(AlarmStore.alarms.get(0).dirty).toBeFalsy();
     });
 
     function raiseAlarm(message, id) {
-        AltApp.dispatcher.dispatch({
-            action: AlarmActions.RAISE_ALARM,
-            data: {
-                id: id,
-                date: new Date(),
-                message: message
-            }
-        });
+        AlarmActions.raiseAlarm(id, new Date(), message)
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function resetAlarmOptimistic(id, dirtyId) {
-        AltApp.dispatcher.dispatch({
-            action: AlarmActions.RESET_ALARM,
-            data: {
-                id: id,
-                dirty: dirtyId
-            }
-        });
+    function resetAlarmOptimistic(id, dirty) {
+        AlarmActions.resetAlarm.optimistic(id, dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function resetAlarmSucceeded(clean) {
-        AltApp.dispatcher.dispatch({
-            action: AlarmServerActions.RESET_ALARM_SUCCEEDED,
-            data: { clean: clean }
-        });
+    function resetAlarmCompleted(dirty) {
+        AlarmActions.resetAlarm.completed(dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function resetAlarmFailed(clean) {
-        AltApp.dispatcher.dispatch({
-            action: AlarmServerActions.RESET_ALARM_FAILED,
-            data: { clean: clean }
-        });
+    function resetAlarmFailed(dirty) {
+        AlarmActions.resetAlarm.failed(dirty);
+        jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 });

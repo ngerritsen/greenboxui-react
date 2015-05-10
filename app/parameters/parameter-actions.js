@@ -2,7 +2,6 @@ import Immutable from 'immutable';
 import shortId from 'shortid';
 import Reflux from 'reflux';
 import Parameter from './parameter';
-import ParameterServerActions from './parameter-server-actions';
 import ParameterApiCalls from './parameter-api-calls';
 
 let ParameterActions = Reflux.createActions({
@@ -22,8 +21,8 @@ ParameterActions.setParameter.listen((controlInstanceId, parameterId, newValue, 
     const dirty = shortId.generate();
 
     let request = ParameterApiCalls.postParameterValue(controlInstanceId, parameterId, newValue);
-    request.then(() => ParameterServerActions.setParameterSucceeded(newValue, dirty));
-    request.catch(() => ParameterServerActions.setParameterFailed(oldValue, dirty));
+    request.then(() => this.completed(newValue, dirty));
+    request.catch(() => this.failed(oldValue, dirty));
 });
 
 export default ParameterActions;

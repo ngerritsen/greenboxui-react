@@ -1,28 +1,13 @@
-import AltApp from '../../core/alt-app';
-import TimeActions from './time-actions';
+import Reflux from 'reflux';
 
-class TimeStore {
-    constructor() {
+export default Reflux.createStore({
+    init() {
         this.time = new Date();
 
-        this.bindAction(TimeActions.updateTime, this.onTimeChanged);
-
-        this._refreshTime();
-    }
-
-    onTimeChanged(payload) {
-        if(payload.time) {
-            this.time = payload.time;
-        }
-    }
-    //Comment
-
-    _refreshTime() {
         setInterval(() => {
             const newTime = new Date();
-            TimeActions.updateTime(newTime);
+            this.time = new Date();
+            this.trigger(this.time)
         }, 1000);
     }
-}
-
-export default AltApp.createStore(TimeStore, 'TimeStore');
+});

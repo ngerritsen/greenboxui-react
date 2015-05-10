@@ -1,7 +1,6 @@
 import Reflux from 'reflux';
 import Immutable from 'immutable';
 import ConnectionActions from './connection-actions';
-import ConnectionServerActions from './connection-server-actions';
 import Connection from './connection';
 
 export default Reflux.createStore({
@@ -29,7 +28,7 @@ export default Reflux.createStore({
     },
     onAddConnectionCompleted(connectionId, dirty) {
         this.connections = this.connections.map((connection) => {
-            if(connection.dirty === clean) {
+            if(connection.dirty === dirty) {
                 connection = connection.set('connectionId', connectionId);
                 connection = connection.remove('dirty');
             }

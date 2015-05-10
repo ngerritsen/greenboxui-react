@@ -6,11 +6,11 @@ export default {
         return {translationDictionary: this._getMappedTranslationIds()};
     },
     componentDidMount() {
-        TranslationStore.listen(this._onTranslationsChanged);
+        this.unsubscribeTranslation = TranslationStore.listen(this._onTranslationsChanged);
         this.setState({ translationDictionary: this._getTranslations() });
     },
     componentWillUnmount() {
-        TranslationStore.unlisten(this._onTranslationsChanged);
+        this.unsubscribeTranslation();
     },
     _getMappedTranslationIds() {
         const translationIds = Immutable.List(this.translations);

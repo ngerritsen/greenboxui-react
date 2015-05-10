@@ -8,7 +8,7 @@ import Control from './control';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('control instance view', () => {
+xdescribe('control instance view', () => {
     const addControlAction = ControlInstanceActions.ADD_CONTROL;
 
     const dummyControls = Immutable.List.of(

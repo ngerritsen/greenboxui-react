@@ -15,7 +15,7 @@ export default React.createClass({
     ],
     getInitialState() {
         return {
-            controls: Immutable.List(),
+            controls: ControlInstanceStore.controls,
             selectedSourceType: '',
             selectedTargetType: ''
         }

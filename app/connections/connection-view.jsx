@@ -17,7 +17,7 @@ export default React.createClass({
     ],
     translations: ['sourceType', 'sourceInstance', 'targetType', 'targetInstance', 'delete'],
     getInitialState() {
-        return { connections: Immutable.List() }
+        return { connections: ConnectionStore.connections }
     },
     _handleDeleteConnection(connection) {
         ConnectionActions.removeConnection(connection.connectionId);

@@ -1,30 +1,21 @@
 import Immutable from 'immutable';
 import shortId from 'shortid';
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import AlarmApiCalls from './alarm-api-calls';
-import AlarmServerActions from './alarm-server-actions';
 
-class AlarmActions {
-    raiseAlarm(message) {
-        this.dispatch({
-            date: new Date(),
-            id: shortId.generate(),
-            message: message
-        });
-    }
+let AlarmActions = Reflux.createActions({
+    'raiseAlarm': {},
+    'resetAlarm': {children: ['optimistic', 'completed', 'failed']}
+});
 
-    resetAlarm(id) {
-        const dirtyId = shortId.generate();
+AlarmActions.resetAlarm.listen((id) => {
+    const dirty = shortId.generate();
 
-        AlarmApiCalls.postResetAlarm()
-            .then(() => AlarmServerActions.resetAlarmSucceeded(dirtyId))
-            .catch(() => AlarmServerActions.resetAlarmFailed(dirtyId));
+    this.optimistic(id, dirty);
 
-        this.dispatch({
-            id: id,
-            dirty: dirtyId
-        });
-    }
-}
+    AlarmApiCalls.postResetAlarm()
+        .then(() => this.completed(dirty))
+        .catch(() => this.failed(dirty));
+});
 
-export default AltApp.createActions(AlarmActions);
+export default AlarmActions;
