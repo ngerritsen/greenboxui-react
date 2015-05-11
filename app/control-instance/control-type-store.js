@@ -7,9 +7,7 @@ export default Reflux.createStore({
     init() {
         this.controlTypes = Immutable.List();
 
-        //this.bindAction(ControlInstanceActions.addControlSucceeded, this.onControlsChanged);
-        //this.bindAction(ControlInstanceServerActions.removeControlSucceeded, this.onControlsChanged);
-
+        this.listenTo(ControlInstanceStore, this.onControlsChanged);
         this.onControlsChanged();
     },
     onControlsChanged() {

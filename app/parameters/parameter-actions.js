@@ -8,7 +8,7 @@ let ParameterActions = Reflux.createActions({
     'refreshParameters': {children: ['completed', 'failed']},
     'registerParameter': {},
     'unregisterParameter': {},
-    'setParameter': {children: ['completed', 'failed']}
+    'setParameter': {children: ['optimistic', 'completed', 'failed']}
 });
 
 ParameterActions.refreshParameters.listen((parameters) => {
@@ -20,8 +20,10 @@ ParameterActions.refreshParameters.listen((parameters) => {
 ParameterActions.setParameter.listen((controlInstanceId, parameterId, newValue, oldValue) => {
     const dirty = shortId.generate();
 
+    this.optimistic(controlInstanceId, parameterId, newValue, dirty);
+
     let request = ParameterApiCalls.postParameterValue(controlInstanceId, parameterId, newValue);
-    request.then(() => this.completed(newValue, dirty));
+    request.then(() => this.completed(dirty));
     request.catch(() => this.failed(oldValue, dirty));
 });
 

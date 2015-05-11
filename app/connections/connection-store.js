@@ -10,21 +10,23 @@ export default Reflux.createStore({
         this.listenToMany(ConnectionActions);
     },
     onAddConnectionOptimistic(sourceControl, targetControl, dirty) {
-        const newConnection = new Connection({
-            sourceControlInstanceId: sourceControl.instanceId,
-            sourceControlTypeId: sourceControl.typeId,
-            sourceControlTypeName: sourceControl.typeName,
-            sourceControlName: sourceControl.name,
-            targetControlInstanceId: targetControl.instanceId,
-            targetControlTypeId: targetControl.typeId,
-            targetControlTypeName: targetControl.typeName,
-            targetControlName: targetControl.name,
-            dirty: dirty
-        });
-        if(!this.connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
-            this.connections = this.connections.push(newConnection);
+        if(targetControl && sourceControl) {
+            const newConnection = new Connection({
+                sourceControlInstanceId: sourceControl.instanceId,
+                sourceControlTypeId: sourceControl.typeId,
+                sourceControlTypeName: sourceControl.typeName,
+                sourceControlName: sourceControl.name,
+                targetControlInstanceId: targetControl.instanceId,
+                targetControlTypeId: targetControl.typeId,
+                targetControlTypeName: targetControl.typeName,
+                targetControlName: targetControl.name,
+                dirty: dirty
+            });
+            if(!this.connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
+                this.connections = this.connections.push(newConnection);
+            }
+            this.trigger(this.connections);
         }
-        this.trigger(this.connections);
     },
     onAddConnectionCompleted(connectionId, dirty) {
         this.connections = this.connections.map((connection) => {

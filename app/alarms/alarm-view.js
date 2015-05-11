@@ -18,7 +18,7 @@ export default React.createClass({
     ],
     translations: ['id', 'date', 'message', 'reset'],
     getInitialState() {
-        return { alarms: Immutable.List() };
+        return { alarms: AlarmStore.alarms };
     },
     _handleResetAlarm(context) {
         const alarmId = context.id;

@@ -7,7 +7,7 @@ import LicenseStore from '../license/license-store';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-xdescribe('control instance add tool', () => {
+describe('control instance add tool', () => {
     const dummyType = 'FakeType';
     const dummyControl = { typeId: dummyType, instanceId: '9874200', name: 'Valve 1' };
 

@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import SettingsStore from './settings-store';
 import SettingsActions from './settings-actions'
 
-xdescribe('settings store', () => {
+describe('settings store', () => {
 
     const settingA1 = 1;
     const settingB1 = 'setting';

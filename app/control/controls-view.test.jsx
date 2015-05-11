@@ -10,8 +10,7 @@ import Grid from '../shared/grid/grid';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-xdescribe('controls view', () => {
-
+describe('controls view', () => {
     const typeIdA = shortId.generate();
     const typeIdB = shortId.generate();
 

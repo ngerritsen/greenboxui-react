@@ -3,18 +3,18 @@ import Translation from './translation';
 import TranslationStore from './translation-store';
 import TranslationActions from './translation-actions';
 
-xdescribe('translation store', () => {
+describe('translation store', () => {
     const dummyTranslation1 = new Translation({ id: 'add', en: 'Add', nl: 'Toevoegen' });
     const dummyTranslation2 = new Translation({ id: 'remove', en: 'Remove' });
 
     beforeEach(() => {
-        SettingsStore.settings = Immutable.Map();
-        refreshTranslations(Immutable.List.of(dummyTranslation1, dummyTranslation2));
+        TranslationStore.translations = Immutable.Map();
         jasmine.clock().install();
+        refreshTranslations(Immutable.List.of(dummyTranslation1, dummyTranslation2));
     });
 
     afterEach(() => {
-        SettingsStore.settings = Immutable.Map();
+        TranslationStore.translations = Immutable.Map();
         jasmine.clock().uninstall()
     });
 

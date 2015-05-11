@@ -15,7 +15,7 @@ export default Reflux.createStore({
             dirty: dirty,
             typeId: typeId,
             name: name,
-            typeName: LicenseStore.getControlTypeName(newControl.controlTypeId)
+            typeName: LicenseStore.getControlTypeName(typeId)
         });
         this.controls = this.controls.push(newControl);
         this.trigger(this.controls);
@@ -37,7 +37,7 @@ export default Reflux.createStore({
         });
     },
 
-    onRenameControlOptimistic(newName, instanceId, dirty) {
+    onRenameControlOptimistic(instanceId, newName, dirty) {
         this.controls = this.controls.map((control) => {
             if(control.instanceId === instanceId) {
                 control = control.set('name', newName);

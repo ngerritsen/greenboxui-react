@@ -19,21 +19,21 @@ import SettingsStore from '../settings/settings-store';
 export default React.createClass({
     mixins: [
         TranslationMixin,
-        Reflux.connect(ControlInstanceStore, 'controls'),
+        Reflux.ListenerMixin,
         Reflux.connect(ParameterStore, 'parameters')
     ],
     translations: ['name', 'value', 'unit', 'all', 'controlType', 'controlInstance'],
     getInitialState() {
         return {
-            controls: ControlInstanceStore.controls,
+            controls: Immutable.List(),
             parameters: ParameterStore.parameters,
             registeredParameters: Immutable.List(),
             selectedControlInstanceId: ''
         }
     },
     componentDidMount() {
-        this.listenToAuto(ControlInstanceStore, this._onChangeControls);
-        this.listenToAuto(ParameterStore, this._onChangeParams);
+        this.listenTo(ControlInstanceStore, this._onChangeControls);
+        this._onChangeControls();
     },
     componentWillUnmount() {
         this.state.registeredParameters.forEach((parameter) => {
@@ -42,19 +42,15 @@ export default React.createClass({
     },
     _onChangeControls() {
         const oldControls = this.state.controls;
-        const newControls = ControlInstanceStore.getState().controls;
+        const newControls = ControlInstanceStore.controls;
         this.setState({ controls: newControls });
         this._processControls(oldControls, newControls);
-    },
-    _onChangeParams() {
-        this.setState({ parameters: ParameterStore.getState().parameters });
     },
     _processControls(oldControls, newControls) {
         const reallyNewControls = newControls.filter((newControl) => {
             const existing = oldControls.find((oldControl) => oldControl.instanceId !== newControl.instanceId);
             return existing ? false : true;
         });
-
         this._registerNewParametersFromControls(reallyNewControls);
     },
     _registerNewParametersFromControls(reallyNewControls) {
@@ -68,7 +64,7 @@ export default React.createClass({
                 });
             });
         });
-        ParameterActions.refreshParameters(ParameterStore.getState().parameters);
+        ParameterActions.refreshParameters(ParameterStore.parameters);
 
         this.setState({ registeredParameters: registeredParameters });
     },
@@ -113,7 +109,7 @@ export default React.createClass({
                 .map((control) => { return { value: control.instanceId, label: control.name }} )
                 .unshift({ value: '', label: this.getTranslation('all') });
 
-        const controlTypeOptions = ControlTypeStore.getState().controlTypes
+        const controlTypeOptions = ControlTypeStore.controlTypes
                 .map((type) => { return { value: type.id, label: type.name }} )
                 .unshift({ value: '', label: this.getTranslation('all') });
 

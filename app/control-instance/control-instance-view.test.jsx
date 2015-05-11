@@ -8,9 +8,7 @@ import Control from './control';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-xdescribe('control instance view', () => {
-    const addControlAction = ControlInstanceActions.ADD_CONTROL;
-
+describe('control instance view', () => {
     const dummyControls = Immutable.List.of(
         new Control({ typeId: 'Pump', instanceId: shortId.generate(), name: 'Pump 1' }),
         new Control({ typeId: 'Valve', instanceId: shortId.generate(), name: 'Valve 1' }),

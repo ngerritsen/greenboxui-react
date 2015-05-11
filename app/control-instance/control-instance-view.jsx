@@ -18,7 +18,7 @@ export default React.createClass({
     ],
     translations: ['type', 'instanceId', 'name', 'delete'],
     getInitialState() {
-        return { controls: Immutable.List() }
+        return { controls: ControlInstanceStore.controls }
     },
     _handleEditControlName(newName, control) {
         const instanceId = control.instanceId;

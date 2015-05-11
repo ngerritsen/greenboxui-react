@@ -3,12 +3,15 @@ import LogLevels from './log-levels';
 import LoggingStore from './logging-store';
 import LoggingActions from './logging-actions';
 
-xdescribe('logging store', () => {
+describe('logging store', () => {
 
     const dummyMessageA = 'This is a log.';
     const dummyMessageB = 'This is second log.';
 
-    beforeEach(() => jasmine.clock().install());
+    beforeEach(() => {
+        LoggingStore.logging = Immutable.List();
+        jasmine.clock().install()
+    });
 
     afterEach(() => {
         LoggingStore.logging = Immutable.List();

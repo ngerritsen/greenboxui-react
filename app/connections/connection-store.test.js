@@ -1,4 +1,5 @@
 import shortId from 'shortid';
+import Immutable from 'immutable';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
 
@@ -36,7 +37,7 @@ describe('connection store', () => {
         jasmine.clock().uninstall()
     });
 
-    xdescribe('add a connection tests', () => {
+    describe('add a connection tests', () => {
         it('optimistically adds a connection', () => {
             addConnectionOptimistic(testConnectionA);
 
@@ -91,7 +92,7 @@ describe('connection store', () => {
         });
     });
 
-    xdescribe('remove a connection tests', () => {
+    describe('remove a connection tests', () => {
         it('optimistically removes a connection', () => {
             const dirtyId = shortId.generate();
 

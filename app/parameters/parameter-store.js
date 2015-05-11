@@ -5,14 +5,14 @@ import Parameter from './parameter';
 import ParameterActions from './parameter-actions';
 
 export default Reflux.createStore({
-    constructor() {
+    init() {
         this.parameters = Immutable.List();
 
         this.listenToMany(ParameterActions);
 
         setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false , 3500);
     },
-    onRegisterParameter(parameterId, controlInstanceId) {
+    onRegisterParameter(controlInstanceId, parameterId) {
         if(!this.parameters.find((param) => parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)) {
             this.parameters = this.parameters.push(new Parameter({
                 parameterId: parameterId,
@@ -20,7 +20,7 @@ export default Reflux.createStore({
             }));
         }
     },
-    onUnregisterParameter(parameterId, controlInstanceId) {
+    onUnregisterParameter(controlInstanceId, parameterId) {
         this.parameters = this.parameters.filter((param) => {
             return !(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)
         });
@@ -28,7 +28,7 @@ export default Reflux.createStore({
     onRefreshParametersCompleted(parameters) {
         this.parameters = Immutable.List(parameters);
     },
-    onSetParameterOptimistic(parameterId, controlInstanceId, newValue, dirty) {
+    onSetParameterOptimistic(controlInstanceId, parameterId, newValue, dirty) {
         this.parameters = this.parameters.map((param) => {
             if(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId) {
                 param = param
@@ -55,5 +55,5 @@ export default Reflux.createStore({
             }
             return param;
         });
-    },
+    }
 });

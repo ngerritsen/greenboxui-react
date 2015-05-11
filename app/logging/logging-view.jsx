@@ -16,7 +16,7 @@ export default React.createClass({
     ],
     translations: ['level', 'date', 'message'],
     getInitialState() {
-        return { logging: Immutable.List() }
+        return { logging: LoggingStore.logging }
     },
     render() {
         const columnInfo = [

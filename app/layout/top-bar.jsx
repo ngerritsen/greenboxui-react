@@ -1,33 +1,29 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Time from '../shared/time/time'
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import SettingsStore from '../settings/settings-store';
 import AlarmStore from '../alarms/alarm-store';
 import Icon from '../shared/icon';
 import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin],
+    mixins: [Reflux.ListenerMixin],
     getInitialState() {
         return {
-            product: 'isii',
-            alarmCount: 0
+            product: SettingsStore.get('product'),
+            alarmCount: AlarmStore.alarms.count()
         }
     },
     componentDidMount() {
-        this.unsubscribe = SettingsStore.listen(this._onSettingsChange);
-        this.listenToAuto(AlarmStore, this._onAlarmsChange);
+        this.listenTo(SettingsStore, this._onSettingsChange);
+        this.listenTo(AlarmStore, this._onAlarmsChange);
     },
-    componentWillUnmount() {
-        this.unsubscribe();
-    },
-    _onSettingsChange(settings) {
-        const product = settings.get('product');
-        this.setState({ product: product });
+    _onSettingsChange() {
+        this.setState({ product: SettingsStore.get('product') });
     },
     _onAlarmsChange() {
-        this.setState({ alarmCount: AlarmStore.getState().alarms.count() });
+        this.setState({ alarmCount: AlarmStore.alarms.count() });
     },
     render() {
         const {product, alarmCount} = this.state;

@@ -1,10 +1,26 @@
 import Immutable from 'immutable';
+import shortId from 'shortid';
 import LicenseStore from './license-store';
 import LicenseActions from './license-actions';
+import LicenseSlot from './license-slot';
 
-xdescribe('license store', () => {
+describe('license store', () => {
+    const dummyLicenseA = new LicenseSlot({
+        controlTypeId: shortId.generate(),
+        controlTypeName: 'TestControlA',
+        total: 10,
+        used: 0
+    });
+
+    const dummyLicenseB = new LicenseSlot({
+        controlTypeId: shortId.generate(),
+        controlTypeName: 'TestControlB',
+        total: 5,
+        used: 2
+    });
+
     beforeEach(() => {
-        LicenseStore.license = Immutable.List();
+        LicenseStore.license = Immutable.List.of(dummyLicenseA, dummyLicenseB);
         jasmine.clock().install()
     });
 

@@ -1,11 +1,6 @@
-import AltApp from '../../core/alt-app';
 import TimeStore from './time-store';
 
-xdescribe('control instance store', () => {
-    const updateTimeAction = TimeActions.UPDATE_TIME;
-
-    afterEach(() => AltApp.flush());
-
+describe('control instance store', () => {
     it('updates time automatically', () => {
         const oldTime = TimeStore.time;
 

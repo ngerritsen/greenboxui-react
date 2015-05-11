@@ -1,8 +1,9 @@
 import shortId from 'shortid';
+import Immutable from 'immutable';
 import ParameterStore from './parameter-store';
 import ParameterActions from './parameter-actions';
 
-xdescribe('parameter store', () => {
+describe('parameter store', () => {
 
     const controlInstanceIdA = shortId.generate();
     const controlInstanceIdB = shortId.generate();
@@ -55,7 +56,7 @@ xdescribe('parameter store', () => {
         const dirty = shortId.generate();
 
         registerParameter(controlInstanceIdA, parameterIdA);
-        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, 0, dirty);
+        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, dirty);
         expect(ParameterStore.parameters.get(0).value).toEqual(newValue);
         expect(ParameterStore.parameters.get(0).dirty).toEqual(dirty);
 
@@ -66,8 +67,8 @@ xdescribe('parameter store', () => {
         const dirty = shortId.generate();
 
         registerParameter(controlInstanceIdA, parameterIdA);
-        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, 0, dirty);
-        setParameterSuccess(newValue, dirty);
+        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, dirty);
+        setParameterCompleted(dirty);
         expect(ParameterStore.parameters.get(0).value).toEqual(newValue);
         expect(ParameterStore.parameters.get(0).dirty).toBeFalsy();
     });
@@ -78,8 +79,8 @@ xdescribe('parameter store', () => {
         const dirty = shortId.generate();
 
         registerParameter(controlInstanceIdA, parameterIdA);
-        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, oldValue, dirty);
-        setParameterFail(oldValue, dirty);
+        setParameterOptimistic(controlInstanceIdA, parameterIdA, newValue, dirty);
+        setParameterFailed(oldValue, dirty);
         expect(ParameterStore.parameters.get(0).value).toEqual(oldValue);
         expect(ParameterStore.parameters.get(0).dirty).toBeFalsy();
     });
@@ -94,18 +95,18 @@ xdescribe('parameter store', () => {
         jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function setParameterOptimistic(controlInstanceId, parameterId, newValue, oldValue, dirty) {
-        ParameterActions.setParameterOptimistic(controlInstanceId, parameterId, newValue, oldValue, dirty);
+    function setParameterOptimistic(controlInstanceId, parameterId, newValue, dirty) {
+        ParameterActions.setParameter.optimistic(controlInstanceId, parameterId, newValue, dirty);
         jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function setParameterSuccess(newValue, dirty) {
-        ParameterActions.setParameterCompleted(newValue, dirty);
+    function setParameterCompleted(dirty) {
+        ParameterActions.setParameter.completed(dirty);
         jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 
-    function setParameterFail(oldValue, dirty) {
-        ParameterActions.setParameterFailed(oldValue, dirty);
+    function setParameterFailed(oldValue, dirty) {
+        ParameterActions.setParameter.failed(oldValue, dirty);
         jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 });

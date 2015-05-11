@@ -1,19 +1,19 @@
 import React from 'react';
 import Immutable from 'immutable';
 import shortId from 'shortid';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import Translator from '../translation/translator';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
 import LicenseActions from '../license/license-actions';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin],
+    mixins: [Reflux.ListenerMixin],
     getInitialState() {
         return { availableLicense: LicenseStore.getAvailableTypes() }
     },
     componentDidMount() {
-        this.listenToAuto(LicenseStore, this._onLicenseChange);
+        this.listenTo(LicenseStore, this._onLicenseChange, this._onLicenseChange);
     },
     _onLicenseChange() {
         this.setState({ availableLicense: LicenseStore.getAvailableTypes() });

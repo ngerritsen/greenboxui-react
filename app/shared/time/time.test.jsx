@@ -3,7 +3,7 @@ import Time from './time';
 
 const ReactTestUtils = React.addons.TestUtils;
 
-xdescribe('time', () => {
+describe('time', () => {
     let time;
 
     beforeEach(() => {

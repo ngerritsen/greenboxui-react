@@ -14,7 +14,7 @@ export default React.createClass({
     ],
     translations: ['controlTypeId', 'controlTypeName', 'total', 'used', 'usage'],
     getInitialState() {
-        return { license: Immutable.List() };
+        return { license: LicenseStore.license };
     },
     _getOnlyOwnedSlots() {
         return this.state.license.filter((slot) => slot.total > 0);
