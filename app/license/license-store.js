@@ -1,57 +1,39 @@
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import Immutable from 'immutable';
 import LicenseSlot from './license-slot';
 import LicenseActions from './license-actions';
 
-class LicenseStore {
-    constructor() {
+export default Reflux.createStore({
+    init() {
         this.license = Immutable.List();
 
-        this.bindAction(LicenseActions.refreshLicense, this.onRefreshLicense);
-        this.bindAction(LicenseActions.useLicenseSlot, this.onUseLicenseSlotOptimistic);
+        this.listenToMany(LicenseActions);
 
-        this.exportPublicMethods({
-            getControlTypeName: this.getControlTypeName,
-            getAvailableTypes: this.getAvailableTypes
-        });
-
-        this.on('init', this.bootstrap);
-    }
-
-    bootstrap() {
         LicenseActions.refreshLicense();
+    },
 
-        // Prevent alt app flush from converting list to regular js array, sorry guys..
-        if (! Immutable.List.isList(this.license)) {
-            this.license = Immutable.List.of(this.license);
-        }
-    }
+    onRefreshLicense(license) {
+        this.license = license;
+    },
 
-    onRefreshLicense(payload) {
-        this.license = payload.license;
-    }
-
-    onUseLicenseSlotOptimistic(payload) {
-        const {amount, controlTypeId} = payload;
+    onUseLicenseSlot(amount, controlTypeId) {
         this.license = this.license.map((slot) => {
             if(slot.controlTypeId === controlTypeId) {
                 slot = slot.set('used', slot.used + amount);
             }
             return slot;
         });
-    }
+    },
 
     getControlTypeName(typeId) {
-        const slot = this.getState().license.find((slot) => slot.controlTypeId === typeId);
+        const slot = this.license.find((slot) => slot.controlTypeId === typeId);
         if (slot) {
             return slot.controlTypeName;
         }
         return 'Unknown control type';
-    }
+    },
 
     getAvailableTypes() {
-        return this.getState().license.filter((slot) => slot.isAvailable);
+        return this.license.filter((slot) => slot.isAvailable);
     }
-}
-
-export default AltApp.createStore(LicenseStore, 'LicenseStore');
+});

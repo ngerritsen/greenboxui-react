@@ -1,7 +1,8 @@
 import React from 'react';
 import AlarmStore from './alarm-store';
 import AlarmActions from './alarm-actions';
-import AutoListener from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
+import Immutable from 'immutable';
 import TranslationMixin from '../translation/translation-mixin';
 import Content from '../shared/content';
 import Slab from '../shared/slab';
@@ -11,13 +12,13 @@ import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
-    mixins: [AutoListener, TranslationMixin],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(AlarmStore, 'alarms')
+    ],
     translations: ['id', 'date', 'message', 'reset'],
     getInitialState() {
-        return { alarms: AlarmStore.getState().alarms };
-    },
-    componentDidMount() {
-        this.listenToAuto(AlarmStore);
+        return { alarms: Immutable.List() };
     },
     _handleResetAlarm(context) {
         const alarmId = context.id;

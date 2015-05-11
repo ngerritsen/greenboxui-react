@@ -1,7 +1,7 @@
 import React from 'react';
 import Slab from '../shared/slab';
 import Immutable from 'immutable';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
@@ -15,13 +15,13 @@ import UserLevels from '../shared/user-levels';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
-    mixins: [TranslationMixin, AutoListenerMixin],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(SettingsStore, 'settings')
+    ],
     translations: ['user', 'service', 'developer'],
     getInitialState() {
         return { settings: Immutable.Map() };
-    },
-    componentDidMount() {
-        this.listenToAuto(SettingsStore);
     },
     _handleChangeProduct(product) {
         SettingsActions.setSettings(Immutable.Map({ product: product }));

@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import TranslationMixin from '../translation/translation-mixin';
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
@@ -11,13 +11,13 @@ import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin, TranslationMixin],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(ConnectionStore, 'connections')
+    ],
     translations: ['sourceType', 'sourceInstance', 'targetType', 'targetInstance', 'delete'],
     getInitialState() {
-        return { connections: ConnectionStore.getState().connections }
-    },
-    componentDidMount() {
-        this.listenToAuto(ConnectionStore);
+        return { connections: ConnectionStore.connections }
     },
     _handleDeleteConnection(connection) {
         ConnectionActions.removeConnection(connection.connectionId);

@@ -1,12 +1,5 @@
-import Immutable from 'immutable';
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 
-class SettingsActions {
-    setSettings(settings) {
-        this.dispatch({
-            settings: settings
-        });
-    }
-}
-
-export default AltApp.createActions(SettingsActions);
+export default Reflux.createActions([
+    'setSettings'
+]);

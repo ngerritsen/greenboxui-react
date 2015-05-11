@@ -1,9 +1,9 @@
 import React from 'react';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import TranslationStore from './translation-store';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin],
+    mixins: [Reflux.ListenerMixin],
     propTypes: {
         id: React.PropTypes.string.isRequired
     },
@@ -11,7 +11,7 @@ export default React.createClass({
         return { translatedString: '' }
     },
     componentDidMount() {
-        this.listenToAuto(TranslationStore, this._onChange);
+        this.listenTo(TranslationStore, this._onChange, this._onChange);
     },
     _onChange() {
         const translatedString = TranslationStore.translate(this.props.id);

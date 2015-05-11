@@ -1,58 +1,48 @@
-import AltApp from '../core/alt-app';
-import BlueBirdPromise from 'bluebird';
+import Reflux from 'reflux';
 import shortId from 'shortid';
-import ControlInstanceServerActions from './control-instance-server-actions';
 import ControlInstanceApiCalls from './control-instance-api-calls';
 import LicenseActions from '../license/license-actions';
 import LicenseStore from '../license/license-store';
-import LoggingActions from '../logging/logging-actions';
-import LogLevels from '../logging/log-levels';
 
-class ControlInstanceActions {
-    addControl(typeId, name) {
-        const dirtyId = shortId.generate();
-        const dummyControlFromServer = {
-            typeId: typeId,
-            name: name,
-            instanceId: shortId.generate()
-        };
+let ControlInstanceActions = Reflux.createActions({
+    'addControl': {children: ['optimistic', 'completed', 'failed']},
+    'renameControl': {children: ['optimistic', 'completed', 'failed']},
+    'removeControl': {children: ['optimistic', 'completed', 'failed']}
+});
 
-        let request = ControlInstanceApiCalls.putNewControl(typeId, name);
-        request.then(() => ControlInstanceServerActions.addControlSucceeded(dirtyId, dummyControlFromServer));
-        request.catch(() => ControlInstanceServerActions.addControlFailed(dirtyId));
+ControlInstanceActions.addControl.listen((typeId, name) => {
+    const dirty = shortId.generate();
+    const dummyControlFromServer = {
+        typeId: typeId,
+        name: name,
+        instanceId: shortId.generate()
+    };
 
-        LicenseActions.useLicenseSlot(typeId, 1);
-        LoggingActions.log(LogLevels.info, `Adding a control of type ${LicenseStore.getControlTypeName(typeId)} with name ${name}.`);
+    LicenseActions.useLicenseSlot(typeId, 1);
+    this.optimistic(dirty, typeId, name);
 
-        this.dispatch({
-            typeId: typeId,
-            name: name,
-            dirty: dirtyId
-        });
-    }
+    let request = ControlInstanceApiCalls.putNewControl(typeId, name);
+    request.then(() => this.completed(dummyControlFromServer, dirty));
+    request.catch(() => this.failed(dirty));
+});
 
-    renameControl(instanceId, newName, oldName) {
-        const dirtyId = shortId.generate();
-        let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
-        request.then(() => ControlInstanceServerActions.renameControlSucceeded(dirtyId, newName));
-        request.catch(() => ControlInstanceServerActions.renameControlFailed(dirtyId, oldName));
-        this.dispatch({
-            instanceId: instanceId,
-            newName: newName,
-            dirty: dirtyId
-        });
-    }
+ControlInstanceActions.renameControl.listen((instanceId, newName, oldName) => {
+    const dirty = shortId.generate();
+    this.optimistic(instanceId, newName, dirty);
 
-    removeControl(instanceId) {
-        const dirtyId = shortId.generate();
-        let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
-        request.then(() => ControlInstanceServerActions.removeControlSucceeded(dirtyId));
-        request.catch(() => ControlInstanceServerActions.removeControlFailed(dirtyId));
-        this.dispatch({
-            instanceId: instanceId,
-            dirty: dirtyId
-        });
-    }
-}
+    let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
+    request.then(() => this.completed(newName, dirty));
+    request.catch(() => this.failed(oldName, dirty));
+});
 
-export default AltApp.createActions(ControlInstanceActions);
+ControlInstanceActions.removeControl.listen((instanceId) => {
+    const dirty = shortId.generate();
+    this.optimistic(instanceId, dirty);
+
+    let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
+    request.then(() => this.completed(dirty));
+    request.catch(() => this.failed(dirty));
+});
+
+
+export default ControlInstanceActions;

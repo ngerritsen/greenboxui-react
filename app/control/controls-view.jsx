@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import TranslationMixin from '../translation/translation-mixin';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ControlTypeStore from '../control-instance/control-type-store';
@@ -17,12 +17,16 @@ import SelectionBox from '../shared/selection-box';
 import SettingsStore from '../settings/settings-store';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin, TranslationMixin],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(ControlInstanceStore, 'controls'),
+        Reflux.connect(ParameterStore, 'parameters')
+    ],
     translations: ['name', 'value', 'unit', 'all', 'controlType', 'controlInstance'],
     getInitialState() {
         return {
-            controls: Immutable.List(),
-            parameters: Immutable.List(),
+            controls: ControlInstanceStore.controls,
+            parameters: ParameterStore.parameters,
             registeredParameters: Immutable.List(),
             selectedControlInstanceId: ''
         }
@@ -80,7 +84,7 @@ export default React.createClass({
     },
     render() {
         const {controls, parameters, selectedControlInstanceId, selectedControlTypeId} = this.state;
-        const userLevel = SettingsStore.getState().settings.get('user');
+        const userLevel = SettingsStore.settings.get('user');
 
         let parametersToShow = parameters.filter((param) => param[userLevel] !== ParameterAccessLevels.hidden);
 

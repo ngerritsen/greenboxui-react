@@ -1,21 +1,12 @@
 import React from 'react';
+import Reflux from 'reflux';
 import moment from 'moment';
 import TimeStore from './time-store';
 
 export default React.createClass({
+    mixins: [Reflux.connect(TimeStore, 'time')],
     getInitialState() {
         return { time: '' }
-    },
-    componentDidMount() {
-        TimeStore.listen(this._onChange);
-        this._onChange();
-    },
-    componentWillUnmount() {
-        TimeStore.unlisten(this._onChange)
-    },
-    _onChange() {
-        const newTime = TimeStore.getState().time;
-        this.setState({ time: newTime });
     },
     render() {
         let timeString = '';

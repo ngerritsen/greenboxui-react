@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import shortId from 'shortid';
 import AutoListenerMixin from '../shared/auto-listener-mixin';
 import Translator from '../translation/translator';
 import ControlInstanceActions from './control-instance-actions';

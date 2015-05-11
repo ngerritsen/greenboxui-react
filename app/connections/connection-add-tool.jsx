@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-import AutoListenerMixin from '../shared/auto-listener-mixin';
+import Reflux from 'reflux';
 import LicenseStore from '../license/license-store';
 import TranslationMixin from '../translation/translation-mixin';
 import Translator from '../translation/translator';
@@ -10,16 +10,15 @@ import ControlInstanceStore from '../control-instance/control-instance-store';
 import Connection from './connection';
 
 export default React.createClass({
-    mixins: [AutoListenerMixin],
+    mixins: [
+        Reflux.connect(ControlInstanceStore, 'controls')
+    ],
     getInitialState() {
         return {
-            controls: Immutable.List(),
+            controls: ControlInstanceStore.controls,
             selectedSourceType: '',
             selectedTargetType: ''
         }
-    },
-    componentDidMount() {
-        this.listenToAuto(ControlInstanceStore);
     },
     _getAvailableControlTypes() {
         return this.state.controls.toSeq()

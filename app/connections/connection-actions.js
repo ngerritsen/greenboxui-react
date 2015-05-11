@@ -1,41 +1,31 @@
-import AltApp from '../core/alt-app';
+import Reflux from 'reflux';
 import shortId from 'shortid';
-import ConnectionServerActions from './connection-server-actions';
 import ConnectionApiCalls from './connection-api-calls';
 import LoggingActions from'../logging/logging-actions';
 import LogLevels from'../logging/log-levels';
 
-class ConnectionActions {
-    addConnection(sourceControl, targetControl) {
-        const dirtyId = shortId.generate();
-        const connectionId = shortId.generate();
+let ConnectionActions = Reflux.createActions({
+    'addConnection': {children: ['optimistic', 'completed', 'failed']},
+    'removeConnection': {children: ['optimistic', 'completed', 'failed']}
+});
 
-        let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
-        request.then(() => ConnectionServerActions.addConnectionSucceeded(dirtyId, connectionId));
-        request.then(() => ConnectionServerActions.addConnectionFailed(dirtyId));
+ConnectionActions.addConnection.listen((sourceControl, targetControl) => {
+    const dirty = shortId.generate();
+    const connectionId = shortId.generate();
 
-        LoggingActions.log(LogLevels.info, `Adding a connection from ${sourceControl.name} to ${targetControl.name}.`);
+    this.optimistic(sourceControl, targetControl, dirty);
+    let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
+    request.then(() => this.completed(connectionId, dirty));
+    request.then(() => this.failed(dirty));
+});
 
-        this.dispatch({
-            sourceControl: sourceControl,
-            targetControl: targetControl,
-            dirty: dirtyId
-        });
-    }
+ConnectionActions.removeConnection.listen((connectionId) => {
+    const dirty = shortId.generate();
 
-    removeConnection(connectionId) {
-        const dirtyId = shortId.generate();
+    this.optimistic(connectionId, dirty);
+    let request = ConnectionApiCalls.putNewConnection(connectionId);
+    request.then(() => this.completed(dirty));
+    request.then(() => this.failed(dirty));
+});
 
-        let request = ConnectionApiCalls.postRemoveConnection(connectionId);
-        request.then(() => ConnectionServerActions.removeConnectionSucceeded(dirtyId));
-        request.catch(() => ConnectionServerActions.removeConnectionFailed(dirtyId));
-
-        this.dispatch({
-            connectionId: connectionId,
-            dirty: dirtyId
-
-        });
-    }
-}
-
-export default AltApp.createActions(ConnectionActions);
+export default ConnectionActions;

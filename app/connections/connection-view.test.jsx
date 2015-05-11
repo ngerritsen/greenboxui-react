@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import AltApp from '../core/alt-app';
 import Immutable from 'immutable';
 import shortId from 'shortid';
 import ConnectionActions from './connection-actions';
@@ -10,8 +9,6 @@ import Connection from './connection';
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('connection view', () => {
-    const addConnectionAction = ConnectionActions.ADD_CONNECTION;
-
     const dummyConnections = Immutable.List.of(
         new Connection({
             connectionId: shortId.generate(),
@@ -45,7 +42,7 @@ describe('connection view', () => {
     let connectionView;
 
     beforeEach(() => {
-        spyOn(ConnectionStore, 'getState').and.returnValue({ connections: dummyConnections });
+        ConnectionStore.connections = dummyConnections;
         connectionView = ReactTestUtils.renderIntoDocument(
             <ConnectionView/>
         );
@@ -57,14 +54,6 @@ describe('connection view', () => {
     });
 
     it('gets initial state from connection store', () => {
-        expect(ConnectionStore.getState).toHaveBeenCalled();
-        expect(connectionView.state.connections).toEqual(dummyConnections);
-    });
-
-    it('listens to connection store for updates', () => {
-        AltApp.dispatcher.dispatch({ action: addConnectionAction, data: null });
-
-        expect(ConnectionStore.getState).toHaveBeenCalled();
         expect(connectionView.state.connections).toEqual(dummyConnections);
     });
 

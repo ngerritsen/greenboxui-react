@@ -10,7 +10,10 @@ import LogLevels from './log-levels';
 
 
 export default React.createClass({
-    mixins: [TranslationMixin, Reflux.connect(LoggingStore, 'logging')],
+    mixins: [
+        TranslationMixin,
+        Reflux.connect(LoggingStore, 'logging')
+    ],
     translations: ['level', 'date', 'message'],
     getInitialState() {
         return { logging: Immutable.List() }

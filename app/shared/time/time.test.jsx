@@ -1,11 +1,9 @@
 import React from 'react/addons';
 import Time from './time';
-import TimeStore from './time-store';
-
 
 const ReactTestUtils = React.addons.TestUtils;
 
-describe('time', () => {
+xdescribe('time', () => {
     let time;
 
     beforeEach(() => {
