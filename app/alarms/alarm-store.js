@@ -15,6 +15,7 @@ export default Reflux.createStore({
             message: message,
             date: date
         }));
+        this.trigger(this.alarms);
     },
     onResetAlarmOptimistic(id, dirty) {
         this.alarms = this.alarms.map((alarm) => {
@@ -23,9 +24,11 @@ export default Reflux.createStore({
             }
             return alarm;
         });
+        this.trigger(this.alarms);
     },
     onResetAlarmCompleted(dirty) {
         this.alarms = this.alarms.filter((alarm) => alarm.dirty !== dirty);
+        this.trigger(this.alarms);
     },
     onResetAlarmFailed(dirty) {
         this.alarms = this.alarms.map((alarm) => {
@@ -34,5 +37,6 @@ export default Reflux.createStore({
             }
             return alarm;
         });
+        this.trigger(this.alarms);
     }
 })

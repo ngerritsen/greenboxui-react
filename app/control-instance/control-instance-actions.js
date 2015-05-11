@@ -10,39 +10,39 @@ let ControlInstanceActions = Reflux.createActions({
     'removeControl': {children: ['optimistic', 'completed', 'failed']}
 });
 
-ControlInstanceActions.addControl.listen((typeId, name) => {
+ControlInstanceActions.addControl.listen(onAddControl);
+ControlInstanceActions.renameControl.listen(onRenameControl);
+ControlInstanceActions.removeControl.listen(onRemoveControl);
+
+function onAddControl(typeId, name) {
     const dirty = shortId.generate();
-    const dummyControlFromServer = {
-        typeId: typeId,
-        name: name,
-        instanceId: shortId.generate()
-    };
+    const instanceId = shortId.generate();
 
     LicenseActions.useLicenseSlot(typeId, 1);
-    this.optimistic(dirty, typeId, name);
+    this.optimistic(typeId, name, dirty);
 
-    let request = ControlInstanceApiCalls.putNewControl(typeId, name);
-    request.then(() => this.completed(dummyControlFromServer, dirty));
-    request.catch(() => this.failed(dirty));
-});
+    ControlInstanceApiCalls.putNewControl(typeId, name)
+        .then(() => this.completed(instanceId, dirty))
+        .catch(() => this.failed(dirty));
+}
 
-ControlInstanceActions.renameControl.listen((instanceId, newName, oldName) => {
+function onRenameControl(instanceId, newName, oldName) {
     const dirty = shortId.generate();
     this.optimistic(instanceId, newName, dirty);
 
-    let request = ControlInstanceApiCalls.postRenamedControl(instanceId, newName);
-    request.then(() => this.completed(newName, dirty));
-    request.catch(() => this.failed(oldName, dirty));
-});
+    ControlInstanceApiCalls.postRenamedControl(instanceId, newName)
+        .then(() => this.completed(newName, dirty))
+        .catch(() => this.failed(oldName, dirty));
+}
 
-ControlInstanceActions.removeControl.listen((instanceId) => {
+function onRemoveControl(instanceId) {
     const dirty = shortId.generate();
     this.optimistic(instanceId, dirty);
 
     let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
     request.then(() => this.completed(dirty));
     request.catch(() => this.failed(dirty));
-});
+}
 
 
 export default ControlInstanceActions;

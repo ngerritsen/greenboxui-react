@@ -29,12 +29,14 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     },
 
     onAddControlFailed(dirty) {
         this.controls = this.controls.filter((control) => {
             return control.dirty !== dirty;
         });
+        this.trigger(this.controls);
     },
 
     onRenameControlOptimistic(instanceId, newName, dirty) {
@@ -45,6 +47,7 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     },
 
     onRenameControlCompleted(newName, dirty) {
@@ -55,6 +58,7 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     },
 
     onRenameControlFailed(oldName, dirty) {
@@ -65,6 +69,7 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     },
 
     onRemoveControlOptimistic(instanceId, dirty) {
@@ -74,10 +79,12 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     },
 
     onRemoveControlCompleted(dirty) {
         this.controls = this.controls.filter((control) => control.dirty !== dirty);
+        this.trigger(this.controls);
     },
 
     onRemoveControlFailed(dirty) {
@@ -87,5 +94,6 @@ export default Reflux.createStore({
             }
             return control;
         });
+        this.trigger(this.controls);
     }
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import shortId from 'shortid';
 import Slab from '../shared/slab';
 import Immutable from 'immutable';
 import Reflux from 'reflux';
@@ -33,7 +34,7 @@ export default React.createClass({
         SettingsActions.setSettings(Immutable.Map({ logToConsole: newValue }));
     },
     _handleRaiseAlarm() {
-        AlarmActions.raiseAlarm('This is a dummy alarm');
+        AlarmActions.raiseAlarm(shortId.generate(), new Date(), 'This is a dummy alarm');
     },
     render() {
         const settings = this.state.settings;
@@ -72,7 +73,7 @@ export default React.createClass({
         );
     },
     _handleAddDummyConfiguration() {
-        const {license} = LicenseStore.getState();
+        const license = LicenseStore.license;
         ControlInstanceActions.addControl(license.get(0).controlTypeId, 'Pump1');
         ControlInstanceActions.addControl(license.get(2).controlTypeId, 'Valve 1');
         ControlInstanceActions.addControl(license.get(2).controlTypeId, 'Valve 2');
@@ -94,7 +95,7 @@ export default React.createClass({
         ControlInstanceActions.addControl(license.get(7).controlTypeId, 'Pineapple Stage 2');
         ControlInstanceActions.addControl(license.get(3).controlTypeId, 'Meteo');
 
-        const controls = ControlInstanceStore.getState().controls;
+        const controls = ControlInstanceStore.controls;
 
         setTimeout(() => {
             ConnectionActions.addConnection(controls.get(0), controls.get(11));

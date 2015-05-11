@@ -5,7 +5,8 @@
     "console"
   ],
   "proto": true,
-  "eqnull": true
+  "eqnull": true,
+  "validthis": true
 }
 
 /*

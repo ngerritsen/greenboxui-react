@@ -9,7 +9,10 @@ let ConnectionActions = Reflux.createActions({
     'removeConnection': {children: ['optimistic', 'completed', 'failed']}
 });
 
-ConnectionActions.addConnection.listen((sourceControl, targetControl) => {
+ConnectionActions.addConnection.listen(onAddConnection);
+ConnectionActions.removeConnection.listen(onRemoveConnection);
+
+function onAddConnection(sourceControl, targetControl) {
     const dirty = shortId.generate();
     const connectionId = shortId.generate();
 
@@ -17,15 +20,15 @@ ConnectionActions.addConnection.listen((sourceControl, targetControl) => {
     let request = ConnectionApiCalls.putNewConnection(sourceControl.instanceId, targetControl.instanceId);
     request.then(() => this.completed(connectionId, dirty));
     request.then(() => this.failed(dirty));
-});
+}
 
-ConnectionActions.removeConnection.listen((connectionId) => {
+function onRemoveConnection(connectionId) {
     const dirty = shortId.generate();
 
     this.optimistic(connectionId, dirty);
     let request = ConnectionApiCalls.putNewConnection(connectionId);
     request.then(() => this.completed(dirty));
     request.then(() => this.failed(dirty));
-});
+}
 
 export default ConnectionActions;

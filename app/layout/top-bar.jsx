@@ -11,7 +11,7 @@ export default React.createClass({
     mixins: [Reflux.ListenerMixin],
     getInitialState() {
         return {
-            product: SettingsStore.get('product'),
+            product: SettingsStore.settings.get('product'),
             alarmCount: AlarmStore.alarms.count()
         }
     },
@@ -20,7 +20,7 @@ export default React.createClass({
         this.listenTo(AlarmStore, this._onAlarmsChange);
     },
     _onSettingsChange() {
-        this.setState({ product: SettingsStore.get('product') });
+        this.setState({ product: SettingsStore.settings.get('product') });
     },
     _onAlarmsChange() {
         this.setState({ alarmCount: AlarmStore.alarms.count() });

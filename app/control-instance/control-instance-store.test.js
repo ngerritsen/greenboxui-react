@@ -4,13 +4,13 @@ import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 
 describe('control instance store', () => {
-    const dirtyIdA = shortId.generate();
-    const dirtyIdB = shortId.generate();
+    const dirtyA = shortId.generate();
+    const dirtyB = shortId.generate();
 
-    const optimisticTestControlA = { typeId: '123', name: 'TestControlA', dirty: dirtyIdA };
-    const actualTestControlA = { typeId: '123', name: 'TestControlA', instanceId: shortId.generate(), dirty: dirtyIdA };
-    const optimisticTestControlB = { typeId: '456', name: 'TestControlB', dirty: dirtyIdB };
-    const actualTestControlB = { typeId: '456', name: 'TestControlB', instanceId: shortId.generate(), dirty: dirtyIdB };
+    const optimisticTestControlA = { typeId: '123', name: 'TestControlA', dirty: dirtyA };
+    const actualTestControlA = { typeId: '123', name: 'TestControlA', instanceId: shortId.generate(), dirty: dirtyA };
+    const optimisticTestControlB = { typeId: '456', name: 'TestControlB', dirty: dirtyB };
+    const actualTestControlB = { typeId: '456', name: 'TestControlB', instanceId: shortId.generate(), dirty: dirtyB };
 
     beforeEach(() => {
         ControlInstanceStore.controls = Immutable.List();
@@ -57,7 +57,7 @@ describe('control instance store', () => {
 
         it('cancels addition of a control if addition failed', () => {
             addControlOptimistic(optimisticTestControlA);
-            addControlFailed(dirtyIdA);
+            addControlFailed(dirtyA);
 
             expect(ControlInstanceStore.controls.count()).toEqual(0);
         });
@@ -65,20 +65,20 @@ describe('control instance store', () => {
 
     describe('remove a control tests', () => {
         it('marks an optimistically removed control as dirty', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
 
             const instanceIdToRemove = ControlInstanceStore.controls.get(0).instanceId;
 
-            removeControlOptimistic(instanceIdToRemove, dirtyId);
+            removeControlOptimistic(instanceIdToRemove, dirty);
 
-            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirty);
         });
 
         it('marks one and the right control as dirty from multiple controls', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
@@ -88,36 +88,36 @@ describe('control instance store', () => {
 
             const instanceIdA = ControlInstanceStore.controls.get(0).instanceId;
 
-            removeControlOptimistic(instanceIdA, dirtyId);
+            removeControlOptimistic(instanceIdA, dirty);
 
             expect(ControlInstanceStore.controls.get(0).instanceId).toEqual(instanceIdA);
-            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirty);
         });
 
         it('actually removes optimistically removed control after successful removal', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
 
             const instanceIdA = ControlInstanceStore.controls.get(0).instanceId;
 
-            removeControlOptimistic(instanceIdA, dirtyId);
-            removeControlCompleted(dirtyId);
+            removeControlOptimistic(instanceIdA, dirty);
+            removeControlCompleted(dirty);
 
             expect(ControlInstanceStore.controls.count()).toEqual(0);
         });
 
         it('cancels removal of a control if removal failed', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
 
             const instanceIdA = ControlInstanceStore.controls.get(0).instanceId;
 
-            removeControlOptimistic(instanceIdA, dirtyId);
-            removeControlFailed(dirtyId);
+            removeControlOptimistic(instanceIdA, dirty);
+            removeControlFailed(dirty);
 
             expect(ControlInstanceStore.controls.count()).toEqual(1);
             expect(ControlInstanceStore.controls.get(0).dirty).toBeFalsy();
@@ -126,7 +126,7 @@ describe('control instance store', () => {
 
     describe('rename a control tests', () => {
         it('renames a control optimistically', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
@@ -134,14 +134,14 @@ describe('control instance store', () => {
             const newName = 'RenamedControlA';
             const instanceIdA = ControlInstanceStore.controls.get(0).instanceId;
 
-            renameControlOptimistic(instanceIdA, newName, dirtyId);
+            renameControlOptimistic(instanceIdA, newName, dirty);
 
             expect(ControlInstanceStore.controls.get(0).name).toEqual(newName);
-            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirtyId);
+            expect(ControlInstanceStore.controls.get(0).dirty).toEqual(dirty);
         });
 
         it('renames the right control successfully on actual successfull rename', () => {
-            const dirtyId = shortId.generate();
+            const dirty = shortId.generate();
 
             addControlOptimistic(optimisticTestControlA);
             addControlCompleted(actualTestControlA);
@@ -152,8 +152,8 @@ describe('control instance store', () => {
             const newName = 'RenamedControlB';
             const instanceIdB = ControlInstanceStore.controls.get(1).instanceId;
 
-            renameControlOptimistic(instanceIdB, newName, dirtyId);
-            renameControlCompleted(newName, dirtyId);
+            renameControlOptimistic(instanceIdB, newName, dirty);
+            renameControlCompleted(newName, dirty);
 
             expect(ControlInstanceStore.controls.get(1).name).toEqual(newName);
             expect(ControlInstanceStore.controls.get(1).dirty).toBeFalsy();

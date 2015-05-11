@@ -8,7 +8,7 @@ describe('alarm store', () => {
     const alarmMsgA = 'alarm msg a';
     const alarmMsgB = 'alarm msg b';
 
-    const dirtyIdA = shortId.generate();
+    const dirtyA = shortId.generate();
 
     const alarmIdA = shortId.generate();
     const alarmIdB = shortId.generate();
@@ -40,23 +40,23 @@ describe('alarm store', () => {
 
     it('resets an alarm optimistically', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmIdA, dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyA);
 
-        expect(AlarmStore.alarms.get(0).dirty).toEqual(dirtyIdA);
+        expect(AlarmStore.alarms.get(0).dirty).toEqual(dirtyA);
     });
 
     it('resets an alarm actually on success', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmIdA, dirtyIdA);
-        resetAlarmCompleted(dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyA);
+        resetAlarmCompleted(dirtyA);
 
         expect(AlarmStore.alarms.count()).toEqual(0);
     });
 
     it('does not reset an alarm actually on failure', () => {
         raiseAlarm(alarmMsgA, alarmIdA);
-        resetAlarmOptimistic(alarmIdA, dirtyIdA);
-        resetAlarmFailed(dirtyIdA);
+        resetAlarmOptimistic(alarmIdA, dirtyA);
+        resetAlarmFailed(dirtyA);
 
         expect(AlarmStore.alarms.count()).toEqual(1);
         expect(AlarmStore.alarms.get(0).dirty).toBeFalsy();

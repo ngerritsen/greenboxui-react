@@ -15,16 +15,20 @@ export default Reflux.createStore({
 
         this.listenToMany(TranslationActions);
 
-        SettingsStore.listen(this.onSetSettings);
+        this.listenTo(SettingsStore, this.onSetSettings);
+
     },
     onRefreshTranslations(translations) {
         this.translations = translations;
+        this.trigger(this.translations);
     },
     onSetCurrentLanguage(languageId) {
         this.currentLanguage = languageId;
+        this.trigger(this.currentLanguage);
     },
     onSetSettings() {
         this.currentLanguage = SettingsStore.settings.get('currentLanguage');
+        this.trigger(this.currentLanguage);
     },
     translate(id) {
         const { translations, currentLanguage, defaultLanguage } = this;

@@ -15,6 +15,7 @@ export default Reflux.createStore({
 
     onRefreshLicense(license) {
         this.license = license;
+        this.trigger(this.license);
     },
 
     onUseLicenseSlot(controlTypeId, amount) {
@@ -24,6 +25,7 @@ export default Reflux.createStore({
             }
             return slot;
         });
+        this.trigger(this.license);
     },
 
     getControlTypeName(typeId) {

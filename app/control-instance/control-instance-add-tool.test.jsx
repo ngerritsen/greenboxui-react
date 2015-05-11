@@ -9,15 +9,13 @@ const ReactTestUtils = React.addons.TestUtils;
 
 describe('control instance add tool', () => {
     const dummyType = 'FakeType';
-    const dummyControl = { typeId: dummyType, instanceId: '9874200', name: 'Valve 1' };
-
+    const dummyAvailableLicense = Immutable.List.of(
+        new LicenseSlot({ controlTypeId: dummyType, total: 10, used: 0 })
+    );
     let controlInstanceAddTool;
 
     beforeEach(() => {
-        spyOn(LicenseStore, 'getAvailableTypes').and.returnValue(Immutable.List.of(
-            new LicenseSlot({ controlTypeId: dummyType, total: 10, used: 0 })
-        ));
-
+        spyOn(LicenseStore, 'getAvailableTypes').and.returnValue(dummyAvailableLicense);
         controlInstanceAddTool = ReactTestUtils.renderIntoDocument(
             <ControlInstanceAddTool/>
         );
@@ -26,6 +24,10 @@ describe('control instance add tool', () => {
     afterEach(() => {
         controlInstanceAddTool.componentWillUnmount();
         React.unmountComponentAtNode(document.body);
+    });
+
+    it('gets initial license state', () => {
+        expect(controlInstanceAddTool.state.availableLicense).toEqual(dummyAvailableLicense);
     });
 
     it('adds a control', () => {

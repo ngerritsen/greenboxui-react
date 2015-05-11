@@ -11,7 +11,8 @@ export default React.createClass({
         return { translatedString: '' }
     },
     componentDidMount() {
-        this.listenTo(TranslationStore, this._onChange, this._onChange);
+        this.listenTo(TranslationStore, this._onChange);
+        this._onChange();
     },
     _onChange() {
         const translatedString = TranslationStore.translate(this.props.id);

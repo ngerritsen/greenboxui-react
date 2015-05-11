@@ -19,14 +19,17 @@ export default Reflux.createStore({
                 controlInstanceId: controlInstanceId
             }));
         }
+        this.trigger(this.parameters);
     },
     onUnregisterParameter(controlInstanceId, parameterId) {
         this.parameters = this.parameters.filter((param) => {
             return !(parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)
         });
+        this.trigger(this.parameters);
     },
     onRefreshParametersCompleted(parameters) {
         this.parameters = Immutable.List(parameters);
+        this.trigger(this.parameters);
     },
     onSetParameterOptimistic(controlInstanceId, parameterId, newValue, dirty) {
         this.parameters = this.parameters.map((param) => {
@@ -37,6 +40,7 @@ export default Reflux.createStore({
             }
             return param;
         });
+        this.trigger(this.parameters);
     },
     onSetParameterCompleted(dirty) {
         this.parameters = this.parameters.map((param) => {
@@ -45,6 +49,7 @@ export default Reflux.createStore({
             }
             return param;
         });
+        this.trigger(this.parameters);
     },
     onSetParameterFailed(oldValue, dirty) {
         this.parameters = this.parameters.map((param) => {
@@ -55,5 +60,6 @@ export default Reflux.createStore({
             }
             return param;
         });
+        this.trigger(this.parameters);
     }
 });

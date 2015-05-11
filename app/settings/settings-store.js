@@ -17,7 +17,6 @@ export default Reflux.createStore({
         settings.forEach((setting, key) => {
             this.settings = this.settings.set(key, setting);
         });
-
         this.trigger(this.settings);
     }
 });

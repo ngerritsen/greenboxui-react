@@ -36,6 +36,7 @@ export default Reflux.createStore({
             }
             return connection;
         });
+        this.trigger(this.connections);
     },
 
     onAddConnectionFailed(dirty) {
@@ -49,10 +50,12 @@ export default Reflux.createStore({
             }
             return connection;
         });
+        this.trigger(this.connections);
     },
 
     onRemoveConnectionCompleted(dirty) {
         this.connections = this.connections.filter((connection) => connection.dirty !== dirty);
+        this.trigger(this.connections);
     },
 
     onRemoveConnectionFailed(dirty) {
@@ -62,6 +65,7 @@ export default Reflux.createStore({
             }
             return connection;
         });
+        this.trigger(this.connections);
     },
     connectionExists(sourceInstanceId, targetInstanceId) {
         return this.connections.find((connection) => connection.sourceControlInstanceId === sourceInstanceId && connection.targetControlInstanceId === targetInstanceId);

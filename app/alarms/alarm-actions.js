@@ -8,14 +8,15 @@ let AlarmActions = Reflux.createActions({
     'resetAlarm': {children: ['optimistic', 'completed', 'failed']}
 });
 
-AlarmActions.resetAlarm.listen((id) => {
-    const dirty = shortId.generate();
+AlarmActions.resetAlarm.listen(onResetAlarm);
 
+function onResetAlarm(id) {
+    const dirty = shortId.generate();
     this.optimistic(id, dirty);
 
     AlarmApiCalls.postResetAlarm()
         .then(() => this.completed(dirty))
         .catch(() => this.failed(dirty));
-});
+}
 
 export default AlarmActions;

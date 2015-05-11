@@ -29,7 +29,7 @@ describe('license view', () => {
         React.unmountComponentAtNode(document.body);
     });
 
-    it('shows only owned licenses', () => {
+    it('gets initial license state and shows only owned licenses', () => {
         const rows = ReactTestUtils.scryRenderedComponentsWithType(licenseView, GridRow);
 
         expect(rows.length).toEqual(2);
