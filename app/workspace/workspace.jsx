@@ -7,7 +7,7 @@ import LicenseView from '../license/license-view'
 import Section from '../shared/section';
 import TitleBar from '../shared/title-bar';
 import WorkspaceStore from './workspace-store';
-import WorksheetSelector from './worksheet-selector';
+import Worksheet from './worksheet';
 
 export default React.createClass({
     mixins: [Reflux.connect(WorkspaceStore, 'workspace')],
@@ -18,15 +18,11 @@ export default React.createClass({
         let worksheets = this.state.workspace.map((worksheet) => {
             const View =  worksheet.view;
             return (
-                <Section columns="6" key={worksheet.id}>
-                    <View/>
-                </Section>
+                <Worksheet view={View} key={worksheet.id}/>
             );
         });
         worksheets = worksheets.push(
-            <Section columns="6" key="worksheet-selector">
-                <WorksheetSelector/>
-            </Section>
+            <Worksheet key="empty-sheet"/>
         );
 
         return (
