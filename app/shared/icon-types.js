@@ -18,7 +18,8 @@ export default Object.freeze({
     search: 'search',
     settings: 'cogs',
     settingsGeneral: 'cogs',
-    time: 'clock-o'
+    time: 'clock-o',
+    workspace: 'columns'
 });
 
 //Current iconset is from font-awesome:

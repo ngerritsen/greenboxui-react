@@ -9,13 +9,22 @@ import GraphView from './graphs/graph-view';
 import IconTypes from './shared/icon-types';
 import LicenseView from './license/license-view';
 import LoggingView from './logging/logging-view';
+import Workspace from './workspace/workspace';
 
-export const routeConfig = [{
+export const routeConfig = [
+    {
         title: 'graphs',
         name: 'graphs',
         path: '/',
         icon: IconTypes.graphs,
         handler: GraphView
+    },
+    {
+        title: 'workspace',
+        name: 'workspace',
+        path: '/workspace',
+        icon: IconTypes.workspace,
+        handler: Workspace
     },
     {
         title: 'control',

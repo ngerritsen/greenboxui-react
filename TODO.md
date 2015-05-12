@@ -1,19 +1,26 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Test out Reflux even more, replace for instance the logging store
+- Layout
+    * Create page title bar element /w icon
+    * Generate page title from routing
+    * Create logical sections/slabs styling and create single page factory
+- Workspaces
+    * Be able to define a workspace's worksheets
+    * Be able to define multiple workspaces
+    * Be able to define workspace worksheet amount
 - Finish logging functionality
     * Be able to filter by log type
     * Be able to delete and flush logs
     * Add more logging
     * Make logging levels visually nice in logging view
-- Fix development adding connections
-- Make graph with actual data
+
 
 ###Backlog
-- Think about more 'utility' or 'intermediate' stores
+- Fix development adding connections
+- Make graph with actual data
 - Support different parameter types in grid
-- Think about unmounting views in unit tests
+- Find a more dry way for unit test boilerplate
 - Find nicer ways to display params
 - Make other themes for grid
 - Immutable for shared components, grid, actions?

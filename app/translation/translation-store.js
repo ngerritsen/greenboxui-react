@@ -72,6 +72,7 @@ function getTranslations() {
         new Translation({ id: 'reset', en: 'Reset', nl: 'Reset' }),
         new Translation({ id: 'level', en: 'Level', nl: 'Niveau' }),
         new Translation({ id: 'logging', en: 'Logging', nl: 'Logging' }),
+        new Translation({ id: 'workspace', en: 'Workspace', nl: 'Werkblad' }),
 
         //User levels
         new Translation({ id: 'userLevel', en: 'User level', nl: 'Gebruikersniveau' }),
