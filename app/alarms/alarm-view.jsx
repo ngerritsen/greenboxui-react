@@ -38,16 +38,12 @@ export default React.createClass({
         ];
 
         return (
-            <Content>
-                <Section>
-                    <Slab>
-                        <Grid
-                            columnInfo={columnInfo}
-                            data={this.state.alarms.toArray()}
-                        />
-                    </Slab>
-                </Section>
-            </Content>
+            <Slab>
+                <Grid
+                    columnInfo={columnInfo}
+                    data={this.state.alarms.toArray()}
+                />
+            </Slab>
         );
     }
 });

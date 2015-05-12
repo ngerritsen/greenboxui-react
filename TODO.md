@@ -1,10 +1,6 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Layout
-    * Create page title bar element /w icon
-    * Generate page title from routing
-    * Create logical sections/slabs styling and create single page factory
 - Workspaces
     * Be able to define a workspace's worksheets
     * Be able to define multiple workspaces

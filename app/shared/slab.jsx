@@ -7,14 +7,13 @@ export default React.createClass({
     },
     render() {
         const slabClassNames = classNames(
-            'slab', 'row', 'clearfix',
+            'slab',
+            'clearfix',
             { 'slab-narrow': this.props.narrow }
         );
         return (
             <div className={slabClassNames}>
-                <div className="small-12 columns">
-                    {this.props.children}
-                </div>
+                {this.props.children}
             </div>
         );
     }

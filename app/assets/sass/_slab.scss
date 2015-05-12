@@ -2,13 +2,10 @@
   @include border-radius(3px);
   @include box-shadow($shallow-shadow);
   background-color: $white;
-  padding: $margin-regular 0;
-}
-
-.row .slab {
   margin-bottom: $margin-regular;
+  padding: $margin-regular;
 }
 
 .slab-narrow {
-  padding: $margin-small 0;
+  padding: $margin-small $margin-regular;
 }

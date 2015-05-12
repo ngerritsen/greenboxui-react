@@ -12,14 +12,6 @@
   padding: $margin-regular;
 }
 
-.content-section {
-  border-right: 0 solid $subtle-gray;
-
-  &:last-child {
-    border-right: 0 solid $subtle-gray;
-  }
-}
-
 .off-canvas-wrap,
 .inner-wrap {
   height: 100%;

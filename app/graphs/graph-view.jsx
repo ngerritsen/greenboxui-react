@@ -8,7 +8,9 @@ import Section from '../shared/section';
 export default React.createClass({
     render() {
         return (
-            <Chart />
+            <Slab>
+                <Chart/>
+            </Slab>
         );
     }
 });

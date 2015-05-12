@@ -5,7 +5,7 @@ export default React.createClass({
     propTypes: {
         options: ImmutablePropTypes.listOf(React.PropTypes.shape({
             label: React.PropTypes.string,
-            value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
+            value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number, React.PropTypes.object)
         })).isRequired,
         defaultValue: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
         handler: React.PropTypes.func,
