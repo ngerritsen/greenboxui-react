@@ -115,29 +115,28 @@ export default React.createClass({
                 .unshift({ value: '', label: this.getTranslation('all') });
 
         return (
-            <Content>
-                <Section>
-                    <Slab>
-                        <div className="row">
-                            <div className="small-6 columns">
-                                <label>{this.getTranslation('controlType')}
-                                    <SelectionBox options={controlTypeOptions} handler={this._handleSelectControlType} ref="controlTypeSelection"/>
-                                </label>
-                            </div>
-                            <div className="small-6 columns">
-                                <label>{this.getTranslation('controlInstance')}
-                                    <SelectionBox options={controlOptions} handler={this._handleSelectControl}  ref="controlSelection"/>
-                                </label>
-                            </div>
+            <div>
+                <Slab>
+                    <div className="row">
+                        <div className="small-6 columns">
+                            <label>{this.getTranslation('controlType')}
+                                <SelectionBox options={controlTypeOptions} handler={this._handleSelectControlType} ref="controlTypeSelection"/>
+                            </label>
                         </div>
-                        <hr></hr>
-                        <Grid
-                            columnInfo={columnInfo}
-                            data={parametersToShow.toArray()}
-                        />
-                    </Slab>
-                </Section>
-            </Content>
+                        <div className="small-6 columns">
+                            <label>{this.getTranslation('controlInstance')}
+                                <SelectionBox options={controlOptions} handler={this._handleSelectControl}  ref="controlSelection"/>
+                            </label>
+                        </div>
+                    </div>
+                </Slab>
+                <Slab>
+                    <Grid
+                        columnInfo={columnInfo}
+                        data={parametersToShow.toArray()}
+                    />
+                </Slab>
+            </div>
         );
     }
 });

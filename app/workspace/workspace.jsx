@@ -9,19 +9,14 @@ import TitleBar from '../shared/title-bar';
 export default React.createClass({
     render() {
         return (
-            <Content>
-                <TitleBar title="workspace" icon="workspace"/>
+            <div className="row uncollapse">
                 <Section columns="6">
-                    <Section columns="12">
-                        <LicenseView/>
-                    </Section>
+                    <LicenseView/>
                 </Section>
                 <Section columns="6">
-                    <Section columns="12">
-                        <ControlInstanceView/>
-                    </Section>
+                    <ControlInstanceView/>
                 </Section>
-            </Content>
+            </div>
         );
     }
 });

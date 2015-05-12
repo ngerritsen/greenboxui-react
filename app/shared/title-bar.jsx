@@ -12,11 +12,10 @@ export default React.createClass({
     },
     render() {
         const {icon, title} = this.props;
-        const iconType = IconTypes[icon];
         return (
             <Section>
                 <h4>
-                    <Icon type={iconType}/>
+                    <Icon type={icon}/>
                     <Translator id={title}/>
                 </h4>
             </Section>

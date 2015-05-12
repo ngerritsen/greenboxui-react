@@ -2,6 +2,7 @@ import React from 'react';
 import Router from 'react-router';
 
 import layoutFactory from './layout/layout-factory';
+import singlePageFactory from './layout/single-page-factory';
 import multiPageFactory from './layout/multi-page-factory';
 import {routeConfig} from './routes';
 
@@ -33,7 +34,7 @@ let internalRoutes = routeConfig.map((route) => {
         return <Route
             name={route.name}
             path={route.path}
-            handler={route.handler}
+            handler={singlePageFactory(route.title, route.icon, route.handler)}
             key={route.name}
         />;
     }

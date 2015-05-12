@@ -5,8 +5,7 @@ import Content from '../shared/content';
 import Section from '../shared/section';
 import SideNav from '../shared/side-nav';
 
-let RouteHandler = Router.RouteHandler;
-let Link = Router.Link;
+const {RouteHandler, Link} = Router;
 
 export default function multiPageFactory(title, link, subNavs) {
     return React.createClass({
