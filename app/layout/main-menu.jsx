@@ -1,9 +1,8 @@
 import React from 'react';
-import Router from 'react-router';
+import {Link} from 'react-router';
+
 import SideNav from '../shared/side-nav';
 import Translator from '../translation/translator';
-
-let Link = Router.Link;
 
 export default React.createClass({
     propTypes: {

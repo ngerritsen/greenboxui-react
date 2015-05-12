@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+
 import SettingsStore from './settings-store';
 import SettingsActions from './settings-actions'
 

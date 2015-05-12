@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactRouter from 'react-router';
+import {Link} from 'react-router';
 import Translator from '../translation/translator';
 import Icon from './icon';
-
-let Link = ReactRouter.Link;
 
 export default React.createClass({
     propTypes: {

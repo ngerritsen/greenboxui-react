@@ -1,13 +1,13 @@
-import GraphView from './graphs/graph-view';
-import ControlInstanceView from './control-instance/control-instance-view';
-import ConnectionView from './connections/connection-view';
-import LicenseView from './license/license-view';
-import ControlView from './control/controls-view';
-import AlarmView from './alarms/alarm-view';
 import About from './settings/about';
-import General from './settings/general';
+import AlarmView from './alarms/alarm-view';
+import ConnectionView from './connections/connection-view';
+import ControlInstanceView from './control-instance/control-instance-view';
 import Development from './settings/development';
+import ControlView from './control/controls-view';
+import General from './settings/general';
+import GraphView from './graphs/graph-view';
 import IconTypes from './shared/icon-types';
+import LicenseView from './license/license-view';
 import LoggingView from './logging/logging-view';
 
 export const routeConfig = [{

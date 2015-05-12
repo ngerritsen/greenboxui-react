@@ -1,5 +1,6 @@
-import shortId from 'shortid';
 import Immutable from 'immutable';
+import shortId from 'shortid';
+
 import ParameterStore from './parameter-store';
 import ParameterActions from './parameter-actions';
 

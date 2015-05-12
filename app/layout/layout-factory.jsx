@@ -1,11 +1,10 @@
 import React from 'react';
 import Reflux from 'reflux';
-import Router from 'react-router';
-import TopBar from './top-bar';
+import {RouteHandler} from 'react-router';
+
 import MainMenu from './main-menu';
 import SettingsStore from '../settings/settings-store';
-
-let RouteHandler = Router.RouteHandler;
+import TopBar from './top-bar';
 
 export default function layoutFactory(routes) {
     return React.createClass({

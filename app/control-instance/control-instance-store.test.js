@@ -1,5 +1,6 @@
-import shortId from 'shortid';
 import Immutable from 'immutable';
+import shortId from 'shortid';
+
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 

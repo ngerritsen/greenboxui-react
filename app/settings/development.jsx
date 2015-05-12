@@ -3,6 +3,8 @@ import shortId from 'shortid';
 import Slab from '../shared/slab';
 import Immutable from 'immutable';
 import Reflux from 'reflux';
+
+import AlarmActions from '../alarms/alarm-actions';
 import ControlInstanceActions from '../control-instance/control-instance-actions';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ConnectionActions from '../connections/connection-actions';
@@ -11,9 +13,8 @@ import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';
 import Setting from './setting';
 import SettingTypes from './setting-types';
-import AlarmActions from '../alarms/alarm-actions';
-import UserLevels from '../shared/user-levels';
 import TranslationMixin from '../translation/translation-mixin';
+import UserLevels from '../shared/user-levels';
 
 export default React.createClass({
     mixins: [

@@ -1,8 +1,9 @@
-import Reflux from 'reflux';
 import Immutable from 'immutable';
+import Reflux from 'reflux';
+
+import Control from './control';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
-import Control from './control';
 
 export default Reflux.createStore({
     init() {

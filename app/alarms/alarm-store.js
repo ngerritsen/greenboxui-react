@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
 import Reflux from 'reflux';
-import AlarmActions from './alarm-actions'
+
 import Alarm from './alarm';
+import AlarmActions from './alarm-actions'
 
 export default Reflux.createStore({
     init() {

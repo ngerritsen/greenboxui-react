@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
-import shortId from 'shortid';
 import Reflux from 'reflux';
+import shortId from 'shortid';
+
 import AlarmApiCalls from './alarm-api-calls';
 
 let AlarmActions = Reflux.createActions({

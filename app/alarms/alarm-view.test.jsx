@@ -1,10 +1,11 @@
-import React from 'react/addons';
 import Immutable from 'immutable';
+import React from 'react/addons';
 import shortId from 'shortid';
+
+import Alarm from './alarm';
 import AlarmStore from './alarm-store';
 import AlarmActions from './alarm-actions';
 import AlarmView from './alarm-view';
-import Alarm from './alarm';
 
 const ReactTestUtils = React.addons.TestUtils;
 

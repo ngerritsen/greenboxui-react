@@ -1,11 +1,12 @@
-import React from 'react';
 import Immutable from 'immutable';
-import shortId from 'shortid';
+import React from 'react';
 import Reflux from 'reflux';
-import Translator from '../translation/translator';
+import shortId from 'shortid';
+
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
 import LicenseActions from '../license/license-actions';
+import Translator from '../translation/translator';
 
 export default React.createClass({
     mixins: [Reflux.ListenerMixin],

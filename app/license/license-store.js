@@ -1,6 +1,7 @@
 import Reflux from 'reflux';
-import Immutable from 'immutable';
 import shortId from 'shortid';
+import Immutable from 'immutable';
+
 import LicenseSlot from './license-slot';
 import LicenseActions from './license-actions';
 

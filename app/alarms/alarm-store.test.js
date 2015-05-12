@@ -1,8 +1,9 @@
-import shortId from 'shortid';
 import Immutable from 'immutable';
+import shortId from 'shortid';
+
+import Alarm from './alarm';
 import AlarmStore from './alarm-store';
 import AlarmActions from './alarm-actions';
-import Alarm from './alarm';
 
 describe('alarm store', () => {
     const alarmMsgA = 'alarm msg a';

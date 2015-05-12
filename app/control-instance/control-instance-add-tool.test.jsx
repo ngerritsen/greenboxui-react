@@ -1,5 +1,6 @@
-import React from 'react/addons';
 import Immutable from 'immutable';
+import React from 'react/addons';
+
 import ControlInstanceAddTool from './control-instance-add-tool';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseSlot from '../license/license-slot';

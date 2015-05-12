@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
-import Reflux from 'reflux';
 import shortId from 'shortid';
+import Reflux from 'reflux';
+
 import LoggingActions from './logging-actions';
 import SettingsStore from '../settings/settings-store';
 import Log from './log';

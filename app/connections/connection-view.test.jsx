@@ -1,10 +1,11 @@
-import React from 'react/addons';
 import Immutable from 'immutable';
+import React from 'react/addons';
 import shortId from 'shortid';
+
+import Connection from './connection';
 import ConnectionActions from './connection-actions';
 import ConnectionView from './connection-view';
 import ConnectionStore from './connection-store';
-import Connection from './connection';
 
 const ReactTestUtils = React.addons.TestUtils;
 

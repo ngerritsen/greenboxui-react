@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+
 import Translation from './translation';
 import TranslationStore from './translation-store';
 import TranslationActions from './translation-actions';

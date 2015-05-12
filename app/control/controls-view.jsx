@@ -1,20 +1,21 @@
-import React from 'react';
 import Immutable from 'immutable';
+import React from 'react';
 import Reflux from 'reflux';
-import TranslationMixin from '../translation/translation-mixin';
+
+import Content from '../shared/content';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ControlTypeStore from '../control-instance/control-type-store';
+import Grid from '../shared/grid/grid';
+import GridCellTypes from '../shared/grid/grid-cell-types';
 import LicenseStore from '../license/license-store';
 import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
 import ParameterAccessLevels from '../parameters/parameter-access-levels';
-import Grid from '../shared/grid/grid';
-import GridCellTypes from '../shared/grid/grid-cell-types';
 import Slab from '../shared/slab';
-import Content from '../shared/content';
 import Section from '../shared/section';
 import SelectionBox from '../shared/selection-box';
 import SettingsStore from '../settings/settings-store';
+import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
     mixins: [

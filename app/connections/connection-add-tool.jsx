@@ -1,13 +1,14 @@
-import React from 'react';
 import Immutable from 'immutable';
+import React from 'react';
 import Reflux from 'reflux';
-import LicenseStore from '../license/license-store';
-import TranslationMixin from '../translation/translation-mixin';
-import Translator from '../translation/translator';
+
 import ConnectionActions from './connection-actions';
 import ConnectionStore from './connection-store';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import Connection from './connection';
+import LicenseStore from '../license/license-store';
+import TranslationMixin from '../translation/translation-mixin';
+import Translator from '../translation/translator';
 
 export default React.createClass({
     mixins: [

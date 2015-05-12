@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+
 import LogLevels from './log-levels';
 import LoggingStore from './logging-store';
 import LoggingActions from './logging-actions';

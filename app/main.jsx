@@ -1,11 +1,11 @@
 import React from 'react';
 import Router from 'react-router';
+
 import layoutFactory from './layout/layout-factory';
 import multiPageFactory from './layout/multi-page-factory';
 import {routeConfig} from './routes';
 
-let Route = Router.Route;
-let RouteHandler = Router.RouteHandler;
+let {Route, RouteHandler} = Router;
 
 let internalRoutes = routeConfig.map((route) => {
     if(route.subRoutes) {

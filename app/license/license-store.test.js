@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import shortId from 'shortid';
+
 import LicenseStore from './license-store';
 import LicenseActions from './license-actions';
 import LicenseSlot from './license-slot';

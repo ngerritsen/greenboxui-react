@@ -1,15 +1,16 @@
+import Immutable from 'immutable';
 import React from 'react';
 import Reflux from 'reflux';
-import Immutable from 'immutable';
 import shortId from 'shortid';
-import TranslationMixin from '../translation/translation-mixin';
+
 import ControlInstanceStore from './control-instance-store';
 import ControlInstanceActions from './control-instance-actions';
 import ControlInstanceAddTool from './control-instance-add-tool';
 import Grid from '../shared/grid/grid';
-import Slab from '../shared/slab';
 import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
+import Slab from '../shared/slab';
+import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
     mixins: [

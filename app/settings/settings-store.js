@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Reflux from 'reflux';
+
 import SettingsActions from './settings-actions'
 import UserLevels from '../shared/user-levels';
 

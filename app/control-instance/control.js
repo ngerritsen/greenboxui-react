@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import shortId from 'shortId';
+
 import Parameter from '../parameters/parameter';
 import ParameterAccessLevels from '../parameters/parameter-access-levels';
 import UserLevels from '../shared/user-levels';

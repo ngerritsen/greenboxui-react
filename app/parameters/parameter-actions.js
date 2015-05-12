@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
-import shortId from 'shortid';
 import Reflux from 'reflux';
+import shortId from 'shortid';
+
 import Parameter from './parameter';
 import ParameterApiCalls from './parameter-api-calls';
 import ParameterAccessLevels from './parameter-access-levels';

@@ -1,15 +1,16 @@
+import Immutable from 'immutable';
 import React from 'react';
+import Reflux from 'reflux';
+
 import AlarmStore from './alarm-store';
 import AlarmActions from './alarm-actions';
-import Reflux from 'reflux';
-import Immutable from 'immutable';
-import TranslationMixin from '../translation/translation-mixin';
 import Content from '../shared/content';
-import Slab from '../shared/slab';
-import Section from '../shared/section';
 import Grid from '../shared/grid/grid';
 import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
+import Slab from '../shared/slab';
+import Section from '../shared/section';
+import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
     mixins: [

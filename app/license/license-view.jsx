@@ -1,6 +1,7 @@
-import React from 'react';
 import Immutable from 'immutable';
+import React from 'react';
 import Reflux from 'reflux';
+
 import TranslationMixin from '../translation/translation-mixin';
 import Slab from '../shared/slab';
 import Grid from '../shared/grid/grid';

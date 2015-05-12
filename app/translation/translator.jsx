@@ -1,5 +1,6 @@
 import React from 'react';
 import Reflux from 'reflux';
+
 import TranslationStore from './translation-store';
 
 export default React.createClass({

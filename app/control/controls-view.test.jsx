@@ -1,12 +1,13 @@
-import React from 'react/addons';
 import Immutable from 'immutable';
+import React from 'react/addons';
 import shortId from 'shortid';
-import ControlsView from './controls-view';
-import ParameterStore from '../parameters/parameter-store';
-import ControlInstanceStore from '../control-instance/control-instance-store';
+
 import Control from '../control-instance/control';
-import Parameter from '../parameters/parameter';
+import ControlsView from './controls-view';
+import ControlInstanceStore from '../control-instance/control-instance-store';
 import Grid from '../shared/grid/grid';
+import Parameter from '../parameters/parameter';
+import ParameterStore from '../parameters/parameter-store';
 
 const ReactTestUtils = React.addons.TestUtils;
 

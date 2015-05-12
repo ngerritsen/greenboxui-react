@@ -1,11 +1,12 @@
 import React from 'react';
 import Immutable from 'immutable';
-import Slab from '../shared/slab';
+
 import Translator from '../translation/translator';
 import SettingsStore from '../settings/settings-store';
 import SettingsActions from './settings-actions';
 import Setting from './setting';
 import SettingTypes from './setting-types';
+import Slab from '../shared/slab';
 
 export default React.createClass({
     _handleChangeLanguage(newLanguageId) {

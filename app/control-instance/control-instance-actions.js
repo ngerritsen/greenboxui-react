@@ -1,5 +1,6 @@
 import Reflux from 'reflux';
 import shortId from 'shortid';
+
 import ControlInstanceApiCalls from './control-instance-api-calls';
 import LicenseActions from '../license/license-actions';
 import LicenseStore from '../license/license-store';
@@ -39,9 +40,9 @@ function onRemoveControl(instanceId) {
     const dirty = shortId.generate();
     this.optimistic(instanceId, dirty);
 
-    let request = ControlInstanceApiCalls.postRemoveControl(instanceId);
-    request.then(() => this.completed(dirty));
-    request.catch(() => this.failed(dirty));
+    ControlInstanceApiCalls.postRemoveControl(instanceId)
+        .then(() => this.completed(dirty))
+        .catch(() => this.failed(dirty));
 }
 
 

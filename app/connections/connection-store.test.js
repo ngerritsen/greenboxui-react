@@ -1,5 +1,6 @@
-import shortId from 'shortid';
 import Immutable from 'immutable';
+import shortId from 'shortid';
+
 import ConnectionStore from './connection-store';
 import ConnectionActions from './connection-actions';
 

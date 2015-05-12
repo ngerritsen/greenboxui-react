@@ -1,8 +1,8 @@
 import React from 'react';
-import Slab from '../shared/slab';
 import Translator from '../translation/translator';
 import Setting from './setting';
 import SettingTypes from './setting-types';
+import Slab from '../shared/slab';
 
 export default React.createClass({
     render() {

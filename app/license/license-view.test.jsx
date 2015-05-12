@@ -1,5 +1,6 @@
-import React from 'react/addons';
 import Immutable from 'immutable';
+import React from 'react/addons';
+
 import GridRow from '../shared/grid/grid-row';
 import LicenseView from './license-view';
 import LicenseStore from './license-store';

@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router';
-import Time from '../shared/time/time'
 import Reflux from 'reflux';
-import SettingsStore from '../settings/settings-store';
+import {Link} from 'react-router';
+
 import AlarmStore from '../alarms/alarm-store';
 import Icon from '../shared/icon';
 import IconTypes from '../shared/icon-types';
+import SettingsStore from '../settings/settings-store';
+import Time from '../shared/time/time'
 
 export default React.createClass({
     mixins: [Reflux.ListenerMixin],

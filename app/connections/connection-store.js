@@ -1,7 +1,8 @@
-import Reflux from 'reflux';
 import Immutable from 'immutable';
-import ConnectionActions from './connection-actions';
+import Reflux from 'reflux';
+
 import Connection from './connection';
+import ConnectionActions from './connection-actions';
 
 export default Reflux.createStore({
     init() {

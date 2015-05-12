@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Reflux from 'reflux';
+
 import ControlInstanceStore from './control-instance-store';
 import LicenseStore from '../license/license-store';
 

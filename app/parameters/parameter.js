@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
+
 import ParameterAccessLevels from './parameter-access-levels';
-import UserLevels from '../shared/user-levels';
 import ParameterTypes from './parameter-types';
+import UserLevels from '../shared/user-levels';
 
 export default Immutable.Record({
     controlInstanceId: null,

@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Reflux from 'reflux';
+
 import Translation from './translation';
 import SettingsStore from '../settings/settings-store';
 import SettingsActions from '../settings/settings-actions';

@@ -1,10 +1,11 @@
+import Immutable from 'immutable';
 import React from 'react/addons';
 import shortId from 'shortid';
-import Immutable from 'immutable';
-import ControlInstanceActions from './control-instance-actions';
-import ControlInstanceView from './control-instance-view';
-import ControlInstanceStore from './control-instance-store';
+
 import Control from './control';
+import ControlInstanceActions from './control-instance-actions';
+import ControlInstanceStore from './control-instance-store';
+import ControlInstanceView from './control-instance-view';
 
 const ReactTestUtils = React.addons.TestUtils;
 
