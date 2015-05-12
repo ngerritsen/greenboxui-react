@@ -22,7 +22,7 @@ export default React.createClass({
     ],
     translations: ['user', 'service', 'developer'],
     getInitialState() {
-        return { settings: Immutable.Map() };
+        return { settings: SettingsStore.settings };
     },
     _handleChangeProduct(product) {
         SettingsActions.setSettings(Immutable.Map({ product: product }));

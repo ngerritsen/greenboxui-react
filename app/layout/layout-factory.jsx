@@ -9,13 +9,15 @@ let RouteHandler = Router.RouteHandler;
 
 export default function layoutFactory(routes) {
     return React.createClass({
-        mixins: [Reflux.connect(SettingsStore, 'settings')],
+        mixins: [Reflux.ListenerMixin],
         getInitialState() {
-            return { product: 'isii' }
+            return { product: SettingsStore.settings.get('product') }
+        },
+        componentDidMount() {
+            this.listenTo(SettingsStore, this._onSettingsChange);
         },
         _onSettingsChange() {
-            const product = SettingsStore.settings.get('product');
-            this.setState({ product: product });
+            this.setState({ product: SettingsStore.settings.get('product') });
         },
         render() {
             return (

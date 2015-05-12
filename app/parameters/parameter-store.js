@@ -10,7 +10,7 @@ export default Reflux.createStore({
 
         this.listenToMany(ParameterActions);
 
-        setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false , 3500);
+        setInterval(() => this.parameters.count() ? ParameterActions.refreshParameters(this.parameters) : false, 3500);
     },
     onRegisterParameter(controlInstanceId, parameterId) {
         if(!this.parameters.find((param) => parameterId === param.parameterId && controlInstanceId === param.controlInstanceId)) {

@@ -64,7 +64,7 @@ export default React.createClass({
                 });
             });
         });
-        ParameterActions.refreshParameters(ParameterStore.parameters);
+        setTimeout(() => ParameterActions.refreshParameters(ParameterStore.parameters), 100);
 
         this.setState({ registeredParameters: registeredParameters });
     },
