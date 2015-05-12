@@ -26,3 +26,11 @@ body {
 .hidden {
   display: none;
 }
+
+h4 {
+  color: lighten($text-color, 10%);
+
+  .fa {
+    margin-right: $margin-regular;
+  }
+}

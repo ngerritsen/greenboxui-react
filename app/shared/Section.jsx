@@ -5,6 +5,9 @@ export default React.createClass({
     propTypes: {
         columns: React.PropTypes.number
     },
+    getDefaultProps() {
+        return { columns: 12 }
+    },
     render() {
         const classNames = classnames([
             'small-12',
