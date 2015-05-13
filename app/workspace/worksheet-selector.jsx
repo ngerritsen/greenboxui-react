@@ -6,16 +6,20 @@ import LoggingView from '../logging/logging-view';
 import SelectionBox from '../shared/selection-box';
 import Slab from '../shared/slab';
 import WorkspaceActions from './workspace-actions';
+import WorksheetViews from './worksheet-views';
 
 export default React.createClass({
-    _handleAddWorksheet(view) {
-        WorkspaceActions.addWorksheet(view);
+    _handleAddWorksheet(viewId) {
+        const views = Immutable.Map(WorksheetViews);
+
+        WorkspaceActions.addWorksheet(views.get(viewId));
     },
     render() {
-        const options = Immutable.List.of(
-            { label: 'alarms', value: AlarmView },
-            { label: 'logging', value: LoggingView }
-        );
+        const options = Immutable.Map(WorksheetViews)
+            .map((view, key) => {
+                return { label: key, value: key };
+            })
+            .toList();
 
         return (
             <Slab>

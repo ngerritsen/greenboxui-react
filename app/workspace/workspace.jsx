@@ -15,15 +15,14 @@ export default React.createClass({
         return { workspace: WorkspaceStore.workspace }
     },
     render() {
-        let worksheets = this.state.workspace.map((worksheet) => {
-            const View =  worksheet.view;
-            return (
-                <Worksheet view={View} key={worksheet.id}/>
-            );
-        });
-        worksheets = worksheets.push(
-            <Worksheet key="empty-sheet"/>
-        );
+        let worksheets =
+            this.state.workspace.map((worksheet) => {
+                const {view, id} = worksheet;
+                return (
+                    <Worksheet view={view} key={id}/>
+                );
+            })
+            .push(<Worksheet key="worksheet-selector"/>);
 
         return (
             <div className="row">

@@ -29,9 +29,11 @@ body {
 
 h4 {
   color: lighten($text-color, 25%);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 
   .fa {
-    margin-right: $margin-regular;
+    font-size: 1.2rem;
+    margin-right: .75rem;
+    top: .2rem;
   }
 }

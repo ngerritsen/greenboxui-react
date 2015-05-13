@@ -9,11 +9,11 @@ export default React.createClass({
     },
     render() {
         const View = this.props.view;
-        const view = View ? View : WorkspaceSelector;
-
+        const ViewToRender = View ? View : WorkspaceSelector;
+        console.log(ViewToRender);
         return (
-            <Section columns="6">
-                {view}
+            <Section columns={6}>
+                <ViewToRender/>
             </Section>
         );
     }
