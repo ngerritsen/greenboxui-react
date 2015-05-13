@@ -1,3 +1,4 @@
+import masonryMixin from 'react-masonry-mixin';
 import React from 'react';
 import Reflux from 'reflux';
 
@@ -10,13 +11,18 @@ import WorkspaceStore from './workspace-store';
 import Worksheet from './worksheet';
 
 export default React.createClass({
-    mixins: [Reflux.connect(WorkspaceStore, 'workspace')],
+    mixins: [
+        masonryMixin('workspace', {
+            transitionDuration: 0
+        }),
+        Reflux.connect(WorkspaceStore, 'workspaces')
+    ],
     getInitialState() {
-        return { workspace: WorkspaceStore.workspace }
+        return { workspaces: WorkspaceStore.workspaces }
     },
     render() {
         let worksheets =
-            this.state.workspace.map((worksheet) => {
+            this.state.workspaces.get(0).worksheets.map((worksheet) => {
                 const {view, id} = worksheet;
                 return (
                     <Worksheet view={view} key={id}/>
@@ -25,7 +31,7 @@ export default React.createClass({
             .push(<Worksheet key="worksheet-selector"/>);
 
         return (
-            <div className="row">
+            <div className="row" ref="workspace">
                 {worksheets}
             </div>
         );

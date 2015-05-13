@@ -1,5 +1,6 @@
 body {
   background-color: $background-color;
+  background-image: url('images/bg.png');
   color: $text-color;
   font-family: 'Roboto', 'Titillium Web', arial, sans-serif;
 }
@@ -36,24 +37,17 @@ h5 {
 }
 
 h4 {
-  color: $on-dark-text-color;
-  font-size: 1.3rem;
+  @include text-shadow(0 2px 5px $shadow-color);
+  color: darken($on-dark-text-color, 1%);
+  font-size: 1.2rem;
 
   .fa {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-right: .75rem;
     top: .2rem;
   }
 }
 
-.vertical-center {
-  padding-bottom: 30%;
-  padding-top: 30%;
-
-  .inner-vertical-center {
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-  }
+.full-width {
+  width: 100%;
 }
-

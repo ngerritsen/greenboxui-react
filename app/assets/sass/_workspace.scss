@@ -1,0 +1,21 @@
+.worksheet {
+  height: auto;
+
+  .slab {
+    @include reset-border-styles();
+    background-color: transparent;
+    border-bottom: 1px solid $subtle-gray;
+    padding: 0;
+    padding-bottom: $margin-small;
+
+    &:last-child {
+      border-bottom: 0 solid $subtle-gray;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .medium-6 {
+    width: 100%;
+  }
+}

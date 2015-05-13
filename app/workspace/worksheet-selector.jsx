@@ -26,13 +26,13 @@ export default React.createClass({
 
         return (
             <Slab>
-                <div className="vertical-center">
-                    <div className="inner-vertical-center">
+                <div className="worksheet-selector">
+                    <label htmlFor="viewSelection">Select a worksheet
                         <SelectionBox options={options} ref="selectedView"/>
-                        <button className="button radius" onClick={this._handleAddWorksheet}>Add</button>
-                    </div>
+                    </label>
+                    <button className="button radius full-width" onClick={this._handleAddWorksheet}>Add</button>
                 </div>
-            </Slab>
+             </Slab>
         );
     }
 });

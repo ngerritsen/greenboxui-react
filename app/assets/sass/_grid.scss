@@ -1,31 +1,37 @@
+$grid-border-color: lighten($subtle-gray, 3%);
+
 .grid {
+  margin: 0 -.3rem;
+}
+
+.grid-body {
   @include reset-spacing();
   display: block;
 }
 
 .grid-row {
   @include reset-spacing();
-  border-bottom: 1px solid $subtle-gray;
+  border-bottom: 1px solid $grid-border-color;
   display: block;
 }
 
 .grid-body-row {
   &:nth-child(even) {
     .grid-cell {
-      background-color: lighten($subtle-gray, 10%);
+      background-color: lighten($subtle-gray, 12.5%);
     }
   }
 }
 
 .grid-cell {
-  border-right: 1px solid  $subtle-gray;
+  border-right: 1px solid $grid-border-color;
   font-size: .9rem;
   height: 1.8rem;
   line-height: 2rem;
   overflow: hidden;
 
   &:first-child {
-    border-left: 1px solid $subtle-gray;
+    border-left: 1px solid $grid-border-color;
   }
 
   .grid-editable-cell {
@@ -56,8 +62,8 @@
 }
 
 .grid-heading {
-  border-bottom: 1px solid $subtle-gray;
-  border-top: 1px solid $subtle-gray;
+  border-bottom: 1px solid $grid-border-color;
+  border-top: 1px solid $grid-border-color;
 
   .grid-cell {
     background-color: lighten($subtle-gray, 7.5%);

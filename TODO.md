@@ -2,15 +2,14 @@
 
 ###Progressgit
 - Workspaces
-    * Be able to define a workspace's worksheets
-    * Be able to define multiple workspaces
-    * Be able to define workspace worksheet amount
+    * Be able to handle multiple workspaces in view
+    * Save workspaces (and maybe other settings) to cookies
+    * Unit test workspace view(s)
 - Finish logging functionality
     * Be able to filter by log type
     * Be able to delete and flush logs
     * Add more logging
     * Make logging levels visually nice in logging view
-
 
 ###Backlog
 - Fix development adding connections

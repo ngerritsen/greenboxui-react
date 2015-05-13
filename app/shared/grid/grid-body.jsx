@@ -138,7 +138,7 @@ export default React.createClass({
 
         return (
             <div>
-                <ul className="grid">
+                <ul className="grid-body">
                     {rowsToShow}
                 </ul>
                 {renderedPagination}

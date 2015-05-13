@@ -117,8 +117,8 @@ export default React.createClass({
                     </div>
 
                     <div className="medium-12 large-2 columns">
-                        <button type="submit" className="button radius button-form" onClick={this._handleAddConnection}>
-                            <Translator id="addConnection"/>
+                        <button type="submit" className="button radius button-form full-width" onClick={this._handleAddConnection}>
+                            <Translator id="add"/>
                         </button>
                     </div>
                 </div>

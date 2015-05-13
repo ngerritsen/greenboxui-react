@@ -13,7 +13,7 @@
       &:hover,
       &:focus,
       &:active {
-        color: $gray;
+        color: darken($on-dark-text-color, 12.5%);
       }
     }
 

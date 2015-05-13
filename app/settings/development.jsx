@@ -96,9 +96,8 @@ export default React.createClass({
         ControlInstanceActions.addControl(license.get(7).controlTypeId, 'Pineapple Stage 2');
         ControlInstanceActions.addControl(license.get(3).controlTypeId, 'Meteo');
 
-        const controls = ControlInstanceStore.controls;
-
         setTimeout(() => {
+            const controls = ControlInstanceStore.controls;
             ConnectionActions.addConnection(controls.get(0), controls.get(11));
             ConnectionActions.addConnection(controls.get(0), controls.get(12));
             ConnectionActions.addConnection(controls.get(11), controls.get(1));

@@ -64,20 +64,22 @@ export default React.createClass({
         return (
             <div>
                 {tools}
-                <GridHeadingRow
-                    columnInfo={this.props.columnInfo}
-                    onSortBy={this._handleSortBy}
-                    sortProperty={this.state.sortProperty}
-                />
-                <GridBody
-                    pagination={this.props.pagination}
-                    columnInfo={this.props.columnInfo}
-                    data={this.props.data}
-                    searchParameter={this.state.searchParameter}
-                    searchBy={this.state.searchBy}
-                    sortProperty={this.state.sortProperty}
-                    sortInversed={this.state.sortInversed}
-                />
+                <div className="grid">
+                    <GridHeadingRow
+                        columnInfo={this.props.columnInfo}
+                        onSortBy={this._handleSortBy}
+                        sortProperty={this.state.sortProperty}
+                    />
+                    <GridBody
+                        pagination={this.props.pagination}
+                        columnInfo={this.props.columnInfo}
+                        data={this.props.data}
+                        searchParameter={this.state.searchParameter}
+                        searchBy={this.state.searchBy}
+                        sortProperty={this.state.sortProperty}
+                        sortInversed={this.state.sortInversed}
+                    />
+                </div>
             </div>
         );
     }

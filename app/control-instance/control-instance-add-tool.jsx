@@ -77,7 +77,7 @@ export default React.createClass({
                     </div>
                     <div className="small-6 medium-2 columns">
                         <button type="submit" className="button radius button-form" onClick={this._handleAddControl}>
-                            <Translator id="addControl"/>
+                            <Translator id="add"/>
                         </button>
                     </div>
                 </div>
