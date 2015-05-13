@@ -13,7 +13,9 @@ export default React.createClass({
         console.log(ViewToRender);
         return (
             <Section columns={6}>
-                <ViewToRender/>
+                <div className="slab worksheet clearfix">
+                    <ViewToRender/>
+                </div>
             </Section>
         );
     }

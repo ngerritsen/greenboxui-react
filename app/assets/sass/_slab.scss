@@ -9,3 +9,19 @@
 .slab-narrow {
   padding: $margin-small $margin-regular;
 }
+
+.worksheet {
+  height: 500px;
+
+  .slab {
+    @include reset-border-styles();
+    background-color: transparent;
+    border-bottom: 1px solid $subtle-gray;
+    padding: 0;
+
+    &:last-child {
+      border-bottom: 0 solid $subtle-gray;
+      margin-bottom: 0;
+    }
+  }
+}
