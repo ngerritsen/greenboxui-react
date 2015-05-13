@@ -7,11 +7,11 @@ import LicenseView from '../license/license-view';
 import LoggingView from '../logging/logging-view';
 
 export default Object.freeze({
-    alarms: AlarmView,
-    connections: ConnectionView,
-    controls: ControlsView,
-    controlInstances: ControlInstanceView,
-    graph: GraphView,
-    license: LicenseView,
-    logging: LoggingView
+    Alarms: AlarmView,
+    Connections: ConnectionView,
+    Controls: ControlsView,
+    ControlInstances: ControlInstanceView,
+    Graph: GraphView,
+    License: LicenseView,
+    Logging: LoggingView
 });

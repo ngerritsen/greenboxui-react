@@ -26,3 +26,15 @@
   margin: 0;
   padding: 0;
 }
+
+@mixin mobile-down() {
+  @media (max-width: em-calc(640)) {
+    @content;
+  }
+}
+
+@mixin tablet-down() {
+  @media (min-width: em-calc(1024)) {
+    @content;
+  }
+}

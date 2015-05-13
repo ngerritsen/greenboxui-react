@@ -7,7 +7,7 @@
 
   .side-nav-item {
     a:not(.button) {
-      color: lighten($gray, 10%);
+      color: $on-dark-text-color;
       font-weight: bold;
 
       &:hover,

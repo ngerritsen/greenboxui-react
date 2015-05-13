@@ -55,7 +55,7 @@ export default React.createClass({
         return (
             <form>
                 <div className="row">
-                    <div className="small-4 columns">
+                    <div className="small-12 medium-4 columns">
                         <label>
                             <Translator id="controlType"/>
                             <select ref="selectedControlType">
@@ -63,19 +63,19 @@ export default React.createClass({
                             </select>
                         </label>
                     </div>
-                    <div className="small-4 columns">
+                    <div className="small-12 medium-4 columns">
                         <label>
                             <Translator id="controlName"/>
                             <input type="text" ref="controlNameInput"/>
                         </label>
                     </div>
-                    <div className="small-2 columns">
+                    <div className="small-6 medium-2 columns">
                         <label>
                             <Translator id="amount"/>
                             <input type="number" ref="controlAmountInput" defaultValue="1"/>
                         </label>
                     </div>
-                    <div className="small-2 columns">
+                    <div className="small-6 medium-2 columns">
                         <button type="submit" className="button radius button-form" onClick={this._handleAddControl}>
                             <Translator id="addControl"/>
                         </button>

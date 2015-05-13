@@ -9,10 +9,13 @@ import WorkspaceActions from './workspace-actions';
 import WorksheetViews from './worksheet-views';
 
 export default React.createClass({
-    _handleAddWorksheet(viewId) {
+    _handleAddWorksheet(event) {
+        event.preventDefault();
+
+        const selectedView = React.findDOMNode(this.refs.selectedView).value;
         const views = Immutable.Map(WorksheetViews);
 
-        WorkspaceActions.addWorksheet(views.get(viewId));
+        WorkspaceActions.addWorksheet(views.get(selectedView));
     },
     render() {
         const options = Immutable.Map(WorksheetViews)
@@ -23,7 +26,12 @@ export default React.createClass({
 
         return (
             <Slab>
-                <SelectionBox options={options} handler={this._handleAddWorksheet}/>
+                <div className="vertical-center">
+                    <div className="inner-vertical-center">
+                        <SelectionBox options={options} ref="selectedView"/>
+                        <button className="button radius" onClick={this._handleAddWorksheet}>Add</button>
+                    </div>
+                </div>
             </Slab>
         );
     }

@@ -30,17 +30,10 @@ export default React.createClass({
             <form>
                 <div className="row">
                     <div className="small-4 columns">
-                        <div className="row">
-                            <div className="small-2 columns">
-                                <label htmlFor="search" className="inline"><i className={`fa fa-${IconTypes.search} fa-lg`}></i></label>
-                            </div>
-                            <div className="small-10 columns">
-                                <select ref="searchBySelection" onChange={this._handleSearch}>
-                                    <option value={''} key={'all'}>{this.getTranslation('all')}</option>
-                                {searchOptions}
-                                </select>
-                            </div>
-                        </div>
+                        <select ref="searchBySelection" onChange={this._handleSearch}>
+                            <option value={''} key={'all'}>{this.getTranslation('all')}</option>
+                        {searchOptions}
+                        </select>
                     </div>
                     <div className="small-8 columns">
                         <input type="text" id="search" placeholder={this.getTranslation('search')} ref="searchInput" onChange={this._handleSearch}></input>

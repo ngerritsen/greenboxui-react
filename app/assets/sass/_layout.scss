@@ -8,8 +8,16 @@
 }
 
 .content {
-  max-width: 1750px;
+  max-width: 2000px;
   padding: $margin-regular;
+
+  @include mobile-down() {
+    padding: $margin-regular $margin-small;
+  }
+
+  @include mobile-down() {
+    padding: $margin-small 0;
+  }
 }
 
 .off-canvas-wrap,
@@ -20,4 +28,13 @@
 
 .inner-wrap {
   overflow: auto;
+}
+
+//Set gutter width
+@media only screen {
+  .row .columns,
+  .row .column {
+    padding-left: .6rem;
+    padding-right: .6rem;
+  }
 }

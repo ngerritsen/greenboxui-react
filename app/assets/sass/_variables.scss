@@ -4,17 +4,18 @@ $gray: darken($white, 50%);
 $light-gray: darken($white, 25%);
 $subtle-gray: darken($white, 12.5%);
 $barely-white: darken($white, 4%);
-$primary-color: #2181f7;
+$primary-color: #0090ff;
 
-$primary-color-isii-compact: #2181f7;
+$primary-color-isii-compact: #0090ff;
 $primary-color-isii: #fa1333;
 
 $positive-color: #16e067;
 $negative-color: #ec1721;
 
 $text-color: #333;
-$link-color: saturate(lighten($primary-color, 7.5%), 12.5%);
-$background-color: darken($white, 5%);
+$on-dark-text-color: #fafafa;
+$link-color: saturate(lighten($primary-color, 7.5%), 15%);
+$background-color: #465267;
 
 $margin-base: 1rem;
 $margin-regular: $margin-base;
