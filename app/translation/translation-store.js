@@ -73,6 +73,7 @@ function getTranslations() {
         new Translation({ id: 'level', en: 'Level', nl: 'Niveau' }),
         new Translation({ id: 'logging', en: 'Logging', nl: 'Logging' }),
         new Translation({ id: 'workspace', en: 'Workspace', nl: 'Werkblad' }),
+        new Translation({ id: 'workspaces', en: 'Workspaces', nl: 'Werkbladen' }),
 
         //User levels
         new Translation({ id: 'userLevel', en: 'User level', nl: 'Gebruikersniveau' }),

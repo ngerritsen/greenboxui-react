@@ -1,0 +1,47 @@
+$tabs-base-bg-color: lighten($background-color, 15%);
+$tabs-base-bg-color-hover: lighten($tabs-base-bg-color, 20%);
+
+$tabs-bg-color: rgba($tabs-base-bg-color, .7);
+$tabs-bg-color-hover: rgba($tabs-base-bg-color-hover, .3);
+$tabs-bg-color-active: rgba($link-color, .95);
+
+.tabs-container {
+  margin: 0 -.3rem;
+  margin-bottom: $margin-regular;
+}
+
+.tabs {
+  @include border-radius(2px);
+  @include box-shadow($shallow-shadow);
+  background-color: $tabs-bg-color;
+
+  .tab-title {
+    a {
+      @include reset-spacing();
+      @include vertical-center-height(2.75rem);
+
+      background-color: transparent;
+      color: $on-dark-text-color;
+      font-family: 'Roboto', Arial, 'sans-serif';
+      font-size: .9rem;
+      padding: 0 $margin-regular;
+
+      &:hover {
+        background-color: $tabs-bg-color-hover;
+      }
+    }
+
+    &.active {
+      a {
+        background-color: $tabs-bg-color-active;
+        color: $on-dark-text-color;
+      }
+
+      &:first-child {
+        a {
+          @include border-radius(2px 0 0 2px);
+        }
+      }
+    }
+  }
+}

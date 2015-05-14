@@ -1,10 +1,9 @@
 import React from 'react';
 import Reflux from 'reflux';
-import { Route, RouteHandler, Link } from 'react-router';
 
 import WorkspaceView from './workspace-view';
+import WorkspaceSelector from './workspace-selector';
 import WorkspaceStore from './workspace-store';
-import WorkspaceActions from './workspace-actions';
 
 export default React.createClass({
     mixins: [
@@ -16,36 +15,22 @@ export default React.createClass({
     getInitialState() {
         return { workspaces: WorkspaceStore.workspaces }
     },
-    _handleAddWorkspace(event) {
-        event.preventDefault();
-
-        WorkspaceActions.addWorkspace();
+    _getWorkspaceId() {
+        const query = this.context.router.getCurrentQuery();
+        const workspaceId = query.workspaceId;
+        if (!workspaceId) {
+            return this.state.workspaces.get(0).id;
+        }
+        else {
+            return workspaceId;
+        }
     },
     render() {
-        const query = this.context.router.getCurrentQuery();
-        let selectedWorkspaceId = query.workspaceId;
-        if(!query.workspaceId) {
-            selectedWorkspaceId = this.state.workspaces.get(0).id;
-        }
-        const tabs =
-            this.state.workspaces.map((workspace, index) => {
-                return (
-                    <li className="tab-title" key={workspace.id}>
-                        <Link to="workspace" query={{workspaceId: workspace.id}}>Workspace {index + 1}</Link>
-                    </li>
-                );
-            })
-            .push(
-                <li className="tab-title" key="add-new-workspace">
-                    <a href="" onClick={this._handleAddWorkspace}>Add</a>
-                </li>
-            );
+        const workspaceId = this._getWorkspaceId();
         return (
             <div>
-                <ul className="tabs">
-                    {tabs}
-                </ul>
-                <WorkspaceView id={selectedWorkspaceId}/>
+                <WorkspaceSelector current={workspaceId} workspaces={this.state.workspaces}/>
+                <WorkspaceView id={workspaceId}/>
             </div>
         );
     }

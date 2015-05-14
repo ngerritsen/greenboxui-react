@@ -33,6 +33,7 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={this.state.logging.toArray()}
+                        pagination={20}
                     />
                 </Slab>
             </div>

@@ -20,6 +20,7 @@ export default React.createClass({
     },
     render() {
         const workspace = this.state.workspaces.find((workspace) => workspace.id === this.props.id);
+        const workspaceId = workspace.id;
         const worksheets =
             workspace.worksheets.map((worksheet) => {
                 const {view, id} = worksheet;
@@ -28,6 +29,7 @@ export default React.createClass({
                 );
             })
             .push(<Worksheet workspaceId={workspaceId} key="worksheet-selector"/>);
+
         return (
             <div className="row" ref="workspace">
                 {worksheets}

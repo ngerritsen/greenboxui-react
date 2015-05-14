@@ -134,6 +134,7 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={parametersToShow.toArray()}
+                        pagination={20}
                     />
                 </Slab>
             </div>

@@ -1,4 +1,5 @@
 export default Object.freeze({
+    add: 'plus',
     alarm: 'bell',
     configure: 'wrench',
     confirm: 'check-circle',

@@ -50,6 +50,7 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={this.state.controls.toArray()}
+                        pagination={20}
                     />
                 </Slab>
             </div>

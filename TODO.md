@@ -2,9 +2,10 @@
 
 ###Progressgit
 - Workspaces
-    * Be able to handle multiple workspaces in view
     * Save workspaces (and maybe other settings) to cookies
     * Unit test workspace view(s)
+    * Add name to worksheets (and workspaces?)
+    * Maybe a seperate tabs view
 - Finish logging functionality
     * Be able to filter by log type
     * Be able to delete and flush logs

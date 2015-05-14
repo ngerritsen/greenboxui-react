@@ -20,9 +20,9 @@ export const routeConfig = [
         handler: GraphView
     },
     {
-        title: 'workspace',
-        name: 'workspace',
-        path: '/workspace',
+        title: 'workspaces',
+        name: 'workspaces',
+        path: '/workspaces',
         icon: IconTypes.workspace,
         handler: WorkspacesView
     },

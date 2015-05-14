@@ -46,7 +46,7 @@ export default React.createClass({
                     <Grid
                         columnInfo={columnInfo}
                         data={this.state.connections.toArray()}
-                        pagination={10}
+                        pagination={20}
                     />
                 </Slab>
             </div>
