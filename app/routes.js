@@ -9,7 +9,7 @@ import GraphView from './graphs/graph-view';
 import IconTypes from './shared/icon-types';
 import LicenseView from './license/license-view';
 import LoggingView from './logging/logging-view';
-import Workspace from './workspace/workspace';
+import WorkspacesView from './workspace/workspaces-view';
 
 export const routeConfig = [
     {
@@ -24,7 +24,7 @@ export const routeConfig = [
         name: 'workspace',
         path: '/workspace',
         icon: IconTypes.workspace,
-        handler: Workspace
+        handler: WorkspacesView
     },
     {
         title: 'control',

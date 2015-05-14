@@ -11,6 +11,9 @@ export default React.createClass({
         handler: React.PropTypes.func,
         ref: React.PropTypes.string
     },
+    getInitialState() {
+        return { selectedValue: this._getDefaultValue() }
+    },
     _getRef() {
         const propRef = this.props.ref;
         const defaultRef = 'selectedOption';
@@ -20,7 +23,13 @@ export default React.createClass({
         event.preventDefault();
 
         const selectedValue = React.findDOMNode(this.refs[this._getRef()]).value;
-        this.props.handler(selectedValue);
+
+        if(this.props.handler) {
+            this.props.handler(selectedValue);
+        }
+        else {
+            this.setState({ selectedValue: selectedValue })
+        }
     },
     _getDefaultValue() {
         const {defaultValue, options} = this.props;
@@ -37,7 +46,7 @@ export default React.createClass({
             return <option value={option.value} key={`${option.value}${option.label}`}>{option.label}</option>;
         });
         return (
-            <select ref={this._getRef()} value={this._getDefaultValue()} onChange={this._handleSelectionChange}>
+            <select ref={this._getRef()} value={this.state.selectedValue} onChange={this._handleSelectionChange}>
                 {options}
             </select>
         )

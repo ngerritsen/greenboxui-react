@@ -5,16 +5,16 @@ import WorkspaceSelector from './worksheet-selector';
 
 export default React.createClass({
     propTypes: {
+        workspaceId: React.PropTypes.string,
         view: React.PropTypes.element
     },
     render() {
         const View = this.props.view;
         const ViewToRender = View ? View : WorkspaceSelector;
-        console.log(ViewToRender);
         return (
             <Section columns={6}>
                 <div className="slab worksheet clearfix">
-                    <ViewToRender/>
+                    <ViewToRender workspaceId={this.props.workspaceId}/>
                 </div>
             </Section>
         );

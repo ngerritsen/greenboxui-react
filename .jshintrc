@@ -6,7 +6,8 @@
   ],
   "proto": true,
   "eqnull": true,
-  "validthis": true
+  "validthis": true,
+  "-W067": true
 }
 
 /*

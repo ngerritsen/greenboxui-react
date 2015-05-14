@@ -72,12 +72,12 @@ gulp.task('bundle-watch', function() {
         cache: {},
         packageCache: {}
     });
-
-    bundle = watchify(bundle);
+    bundle = watchify(bundle, { poll: 100 });
     bundle.transform(babelify.configure({
         ignore: /(bower_components)|(node_modules)/
     }));
     bundle.on('update', function(){
+        console.log('starting rebundle..');
         executeBundle(bundle);
     });
     return executeBundle(bundle);

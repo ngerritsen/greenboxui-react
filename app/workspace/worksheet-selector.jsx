@@ -9,13 +9,16 @@ import WorkspaceActions from './workspace-actions';
 import WorksheetViews from './worksheet-views';
 
 export default React.createClass({
+    propTypes: {
+        workspaceId: React.PropTypes.string.isRequired
+    },
     _handleAddWorksheet(event) {
         event.preventDefault();
 
         const selectedView = React.findDOMNode(this.refs.selectedView).value;
         const views = Immutable.Map(WorksheetViews);
-
-        WorkspaceActions.addWorksheet(views.get(selectedView));
+        console.log(this.props.workspaceId);
+        WorkspaceActions.addWorksheet(this.props.workspaceId, views.get(selectedView));
     },
     render() {
         const options = Immutable.Map(WorksheetViews)
