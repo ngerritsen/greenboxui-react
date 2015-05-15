@@ -25,7 +25,8 @@ button.button {
 
   &:hover,
   &:focus,
-  &:active {
+  &:active,
+  &:target {
     @include reset-border-styles();
     @include reset-spacing();
     @include opacity(1);

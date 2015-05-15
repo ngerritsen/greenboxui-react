@@ -9,21 +9,15 @@ export default React.createClass({
     mixins: [
         Reflux.connect(WorkspaceStore, 'workspaces')
     ],
-    contextTypes: {
-        router: React.PropTypes.func.isRequired
-    },
     getInitialState() {
         return { workspaces: WorkspaceStore.workspaces }
     },
     _getWorkspaceId() {
-        const query = this.context.router.getCurrentQuery();
-        const workspaceId = query.workspaceId;
-        if (!workspaceId) {
+        const id = this.props.params.id;
+        if(id === 'default') {
             return this.state.workspaces.get(0).id;
         }
-        else {
-            return workspaceId;
-        }
+        return id;
     },
     render() {
         const workspaceId = this._getWorkspaceId();

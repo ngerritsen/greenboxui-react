@@ -2,8 +2,9 @@ import masonryMixin from 'react-masonry-mixin';
 import React from 'react';
 import Reflux from 'reflux';
 
+import Section from '../shared/section';
 import WorkspaceStore from './workspace-store';
-import Worksheet from './worksheet';
+import WorksheetSelector from './worksheet-selector';
 
 export default React.createClass({
     propTypes: {
@@ -24,11 +25,21 @@ export default React.createClass({
         const worksheets =
             workspace.worksheets.map((worksheet) => {
                 const {view, id} = worksheet;
+                const View = view;
                 return (
-                    <Worksheet view={view} key={id}/>
+                    <Section columns={6} key={id}>
+                        <div className="slab worksheet clearfix">
+                            <h5>{worksheet.name}</h5>
+                            <View/>
+                        </div>
+                    </Section>
                 );
             })
-            .push(<Worksheet workspaceId={workspaceId} key="worksheet-selector"/>);
+            .push(
+                <Section columns={6} key="worksheet-selector">
+                    <WorksheetSelector workspaceId={workspaceId}/>
+                </Section>
+            );
 
         return (
             <div className="row" ref="workspace">

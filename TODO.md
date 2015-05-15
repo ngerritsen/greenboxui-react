@@ -1,11 +1,6 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Workspaces
-    * Save workspaces (and maybe other settings) to cookies
-    * Unit test workspace view(s)
-    * Add name to worksheets (and workspaces?)
-    * Maybe a seperate tabs view
 - Finish logging functionality
     * Be able to filter by log type
     * Be able to delete and flush logs
@@ -13,14 +8,14 @@
     * Make logging levels visually nice in logging view
 
 ###Backlog
-- Fix development adding connections
+- Immutable for grid?
+- Make routing with params better
 - Make graph with actual data
 - Support different parameter types in grid
 - Find a more dry way for unit test boilerplate
 - Find nicer ways to display params
 - Make other themes for grid
-- Immutable for shared components, grid, actions?
-- Build Log component
+- Save stuff to cookies
 - Hook up to real greenbox
 - Experiment /w aria
 

@@ -7,17 +7,27 @@ import GridCellTypes from '../shared/grid/grid-cell-types';
 import LoggingStore from './logging-store';
 import LogLevels from './log-levels';
 import Slab from '../shared/slab';
+import SelectionBox from '../shared/selection-box';
 import TranslationMixin from '../translation/translation-mixin';
+import Translator from '../translation/translator';
 
 
 export default React.createClass({
+    displayName: 'Logging',
     mixins: [
         TranslationMixin,
         Reflux.connect(LoggingStore, 'logging')
     ],
     translations: ['level', 'date', 'message'],
     getInitialState() {
-        return { logging: LoggingStore.logging }
+        return {
+            logging: LoggingStore.logging,
+            show: {
+                info: true,
+                warning: true,
+                error: true
+            }
+        }
     },
     render() {
         const columnInfo = [
@@ -29,6 +39,30 @@ export default React.createClass({
 
         return (
             <div>
+                <Slab>
+                    <form>
+                        <div className="row">
+                            <div className="small-12 medium-4 columns">
+                                <input id="show-info" type="checkbox"/>
+                                <label for="show-info">
+                                    <Translator id="showInfo"/>
+                                </label>
+                            </div>
+                            <div className="small-12 medium-4 columns">
+                                <input id="show-warnings" type="checkbox"/>
+                                <label for="show-warnings">
+                                    <Translator id="showWarnings"/>
+                                </label>
+                            </div>
+                            <div className="small-12 medium-4 columns">
+                                <input id="show-errors" type="checkbox"/>
+                                <label for="show-errors">
+                                    <Translator id="showErrors"/>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </Slab>
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}

@@ -17,7 +17,6 @@ export default React.createClass({
 
         const selectedView = React.findDOMNode(this.refs.selectedView).value;
         const views = Immutable.Map(WorksheetViews);
-        console.log(this.props.workspaceId);
         WorkspaceActions.addWorksheet(this.props.workspaceId, views.get(selectedView));
     },
     render() {

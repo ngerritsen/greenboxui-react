@@ -18,6 +18,7 @@ import SettingsStore from '../settings/settings-store';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
+    displayName: 'Controls',
     mixins: [
         TranslationMixin,
         Reflux.ListenerMixin,

@@ -1,6 +1,12 @@
 .worksheet {
   height: auto;
 
+  h5 {
+    @include reset-spacing();
+    color: lighten($text-color, 10%);
+    margin-bottom: $margin-regular;
+  }
+
   .slab {
     @include reset-border-styles();
     background-color: transparent;

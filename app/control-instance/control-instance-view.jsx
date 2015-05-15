@@ -13,6 +13,7 @@ import Slab from '../shared/slab';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
+    displayName: 'Control Instances',
     mixins: [
         TranslationMixin,
         Reflux.connect(ControlInstanceStore, 'controls')

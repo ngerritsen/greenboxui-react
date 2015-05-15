@@ -16,7 +16,7 @@ export default function singlePageFactory(title, icon, Component) {
                 <Content>
                     <TitleBar title={title} icon={icon}/>
                     <Section>
-                        <Component/>
+                        <Component params={this.props.params}/>
                     </Section>
                 </Content>
             );

@@ -28,7 +28,7 @@ export default React.createClass({
 
                 return (
                         <li className={classNames} key={workspace.id}>
-                            <Link to="workspaces" query={{workspaceId: workspace.id}}>Workspace {index + 1}</Link>
+                            <Link to="workspaces" params={{id: workspace.id}}>Workspace {index + 1}</Link>
                         </li>
                     );
                 })

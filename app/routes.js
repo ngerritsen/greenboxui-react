@@ -22,7 +22,8 @@ export const routeConfig = [
     {
         title: 'workspaces',
         name: 'workspaces',
-        path: '/workspaces',
+        path: '/workspaces/:id',
+        params: {id: 'default'},
         icon: IconTypes.workspace,
         handler: WorkspacesView
     },

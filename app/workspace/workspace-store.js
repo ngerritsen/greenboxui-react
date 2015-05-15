@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import shortId from 'shortid';
 
 import Workspace from './workspace';
+import Worksheet from './worksheet';
 import WorkspaceActions from './workspace-actions';
 
 export default Reflux.createStore({
@@ -21,7 +22,8 @@ export default Reflux.createStore({
     onAddWorksheet(workspaceId, view) {
         this.workspaces = this.workspaces.map((workspace) => {
             if(workspace.id === workspaceId) {
-                const newWorksheets = workspace.worksheets.push({ view: view, id: shortId.generate()});
+                const worksheet = new Worksheet({ view: view, id: shortId.generate(), name: view.displayName});
+                const newWorksheets = workspace.worksheets.push(worksheet);
                 workspace = workspace.set('worksheets', newWorksheets);
             }
             return workspace;

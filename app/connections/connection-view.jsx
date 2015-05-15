@@ -12,6 +12,7 @@ import Slab from '../shared/slab';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
+    displayName: 'Connections',
     mixins: [
         TranslationMixin,
         Reflux.connect(ConnectionStore, 'connections')

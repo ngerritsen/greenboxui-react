@@ -15,10 +15,10 @@ export default React.createClass({
     render() {
         const filteredItems = this.props.items.filter((item) => item.inMenu !== false);
         const items = filteredItems.map((item) => {
-            const {name, icon, title} = item;
+            const {name, icon, title, params} = item;
             return (
                 <li className="side-nav-item" role="menuitem" key={name}>
-                    <Link to={name} activeClassName="active">
+                    <Link to={name} params={params} activeClassName="active">
                         <Icon type={icon} fixedWidth={true}/>
                         <Translator id={title}/>
                     </Link>

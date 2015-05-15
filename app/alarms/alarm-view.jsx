@@ -13,6 +13,7 @@ import Section from '../shared/section';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
+    displayName: 'Alarms',
     mixins: [
         TranslationMixin,
         Reflux.connect(AlarmStore, 'alarms')
