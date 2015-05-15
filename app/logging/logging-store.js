@@ -26,5 +26,13 @@ export default Reflux.createStore({
         if(SettingsStore.settings.get('logToConsole')) {
             console.log(log.message);
         }
+    },
+    onRemoveLog(id) {
+        this.logging = this.logging.filter((log) => log.id !== id);
+        this.trigger(this.logging);
+    },
+    onFlushLogging() {
+        this.logging = Immutable.List();
+        this.trigger(this.logging);
     }
 });

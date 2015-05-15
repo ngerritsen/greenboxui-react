@@ -4,6 +4,8 @@ import Reflux from 'reflux';
 import Control from './control';
 import ControlInstanceActions from './control-instance-actions';
 import LicenseStore from '../license/license-store';
+import LogLevels from '../logging/log-levels';
+import LoggingActions from '../logging/logging-actions';
 
 export default Reflux.createStore({
     init() {
@@ -12,12 +14,14 @@ export default Reflux.createStore({
         this.listenToMany(ControlInstanceActions);
     },
     onAddControlOptimistic(typeId, name, dirty) {
+        const typeName = LicenseStore.getControlTypeName(typeId);
         let newControl = new Control({
             dirty: dirty,
             typeId: typeId,
             name: name,
-            typeName: LicenseStore.getControlTypeName(typeId)
+            typeName: typeName
         });
+        LoggingActions.log(LogLevels.info, `Adding control of type ${typeName} with name: ${name}`);
         this.controls = this.controls.push(newControl);
         this.trigger(this.controls);
     },

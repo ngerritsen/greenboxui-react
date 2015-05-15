@@ -2,9 +2,7 @@
 
 ###Progressgit
 - Finish logging functionality
-    * Be able to filter by log type
     * Be able to delete and flush logs
-    * Add more logging
     * Make logging levels visually nice in logging view
 
 ###Backlog

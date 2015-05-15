@@ -123,6 +123,11 @@ function getTranslations() {
         new Translation({ id: 'uiVersion', en: 'UI version', nl: 'UI versie' }),
         new Translation({ id: 'addDummyConfig', en: 'Add dummy configuration', nl: 'Dummy configuratie toevoegen' }),
         new Translation({ id: 'raiseAnAlarm', en: 'Raise an alarm', nl: 'Activeer een alarm' }),
-        new Translation({ id: 'logToConsole', en: 'Log to the console', nl: 'Log naar de console' })
+        new Translation({ id: 'logToConsole', en: 'Log to the console', nl: 'Log naar de console' }),
+
+        //Logging
+        new Translation({ id: 'showErrors', en: 'Show errors', nl: 'Toon errors' }),
+        new Translation({ id: 'showWarnings', en: 'Show warnings', nl: 'Toon waarschuwingen' }),
+        new Translation({ id: 'showInfo', en: 'Show info', nl: 'Toon info' })
     );
 }

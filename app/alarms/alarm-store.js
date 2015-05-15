@@ -3,6 +3,8 @@ import Reflux from 'reflux';
 
 import Alarm from './alarm';
 import AlarmActions from './alarm-actions'
+import LogLevels from '../logging/log-levels';
+import LoggingActions from '../logging/logging-actions';
 
 export default Reflux.createStore({
     init() {
@@ -16,6 +18,7 @@ export default Reflux.createStore({
             message: message,
             date: date
         }));
+        LoggingActions.log(LogLevels.warning, `Alarm with id ${id} triggered: ${message}`);
         this.trigger(this.alarms);
     },
     onResetAlarmOptimistic(id, dirty) {

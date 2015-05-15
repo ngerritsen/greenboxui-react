@@ -35,4 +35,11 @@ describe('logging view', () => {
         expect(loggingView.state.logging).toEqual(dummyLogging);
         expect(rows.length).toEqual(2);
     });
+
+    it('filters by log level', () => {
+        loggingView._handleToggleError();
+        const rows = ReactTestUtils.scryRenderedComponentsWithType(loggingView, GridRow);
+
+        expect(rows.length).toEqual(1);
+    });
 });

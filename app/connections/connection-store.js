@@ -3,6 +3,8 @@ import Reflux from 'reflux';
 
 import Connection from './connection';
 import ConnectionActions from './connection-actions';
+import LogLevels from '../logging/log-levels';
+import LoggingActions from '../logging/logging-actions';
 
 export default Reflux.createStore({
     init() {
@@ -26,6 +28,7 @@ export default Reflux.createStore({
             if(!this.connectionExists(newConnection.sourceControlInstanceId, newConnection.targetControlInstanceId)) {
                 this.connections = this.connections.push(newConnection);
             }
+            LoggingActions.log(LogLevels.info, `Adding connection between ${sourceControl.name} and ${targetControl.name}`);
             this.trigger(this.connections);
         }
     },

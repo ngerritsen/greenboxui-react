@@ -31,10 +31,13 @@
 }
 
 //Set gutter width
-@media only screen {
-  .row .columns,
-  .row .column {
-    padding-left: .6rem;
-    padding-right: .6rem;
-  }
+.row .columns,
+.row .column {
+  padding-left: $gutter-width;
+  padding-right: $gutter-width;
+}
+
+.row .row {
+  margin-left: -$gutter-width;
+  margin-right: -$gutter-width;
 }
