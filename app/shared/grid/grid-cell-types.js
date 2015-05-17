@@ -4,5 +4,6 @@ export default Object.freeze({
     progress: 'PROGRESS',
     action: 'ACTION',
     custom: 'CUSTOM',
-    date: 'DATE'
+    date: 'DATE',
+    icon: 'ICON'
 });

@@ -1,8 +1,9 @@
+import Immutable from 'immutable';
 import masonryMixin from 'react-masonry-mixin';
-import React from 'react';
+import React from 'react/addons';
 import Reflux from 'reflux';
 
-import Section from '../shared/section';
+import Section from '../shared/layout/section';
 import WorkspaceStore from './workspace-store';
 import WorksheetSelector from './worksheet-selector';
 
@@ -34,16 +35,20 @@ export default React.createClass({
                         </div>
                     </Section>
                 );
-            })
-            .push(
-                <Section columns={6} key="worksheet-selector">
-                    <WorksheetSelector workspaceId={workspaceId}/>
-                </Section>
-            );
+            });
+        const tools = Immutable.List.of((
+            <Section columns={6} key="worksheet-selector">
+                <WorksheetSelector workspaceId={workspaceId}/>
+            </Section>
+        ));
+        const renderedSheets = React.addons.createFragment({
+            worksheets: worksheets,
+            tools: tools
+        });
 
         return (
             <div className="row" ref="workspace">
-                {worksheets}
+                {renderedSheets}
             </div>
         );
     }

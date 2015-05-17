@@ -3,8 +3,8 @@ import React from 'react';
 
 import AlarmView from '../alarms/alarm-view';
 import LoggingView from '../logging/logging-view';
-import SelectionBox from '../shared/selection-box';
-import Slab from '../shared/slab';
+import SelectionBox from '../shared/interaction/selection-box';
+import Slab from '../shared/layout/slab';
 import WorkspaceActions from './workspace-actions';
 import WorksheetViews from './worksheet-views';
 

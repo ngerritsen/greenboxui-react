@@ -1,0 +1,12 @@
+.progress {
+  background-color: $subtle-gray;
+  border: 0 solid $white;
+  height: .5rem;
+  margin-bottom: 0;
+  margin-top: .65rem;
+  padding: 0;
+
+  .meter {
+    background-color: $primary-color;
+  }
+}

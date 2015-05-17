@@ -1,12 +1,8 @@
 ##Scrumboard Greenbox UI
 
 ###Progressgit
-- Finish logging functionality
-    * Be able to delete and flush logs
-    * Make logging levels visually nice in logging view
 
 ###Backlog
-- Immutable for grid?
 - Make routing with params better
 - Make graph with actual data
 - Support different parameter types in grid
@@ -20,3 +16,5 @@
 ###Bugs:
 - Pagination does not refresh on search
 - Fix warning proptype checker
+- Fix warning iterable.length deprecated, probably in grid test
+- Uncaught TypeError: Cannot read property 'removeChild' of null, masonry.

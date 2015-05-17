@@ -2,8 +2,8 @@ import React from 'react';
 import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import SelectionBox from '../shared/selection-box';
-import Switch from '../shared/switch';
+import SelectionBox from '../shared/interaction/selection-box';
+import Switch from '../shared/interaction/switch';
 import SettingTypes from './setting-types';
 import Translator from '../translation/translator';
 

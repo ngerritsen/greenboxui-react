@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Icon from '../shared/icon';
-import IconTypes from '../shared/icon-types';
-import Section from '../shared/section';
-import Translator from '../translation/translator';
+import Icon from '../icon';
+import IconTypes from '../icon-types';
+import Section from './section';
+import Translator from '../../translation/translator';
 
 export default React.createClass({
     propTypes: {

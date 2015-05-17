@@ -2,15 +2,15 @@ import React from 'react';
 import Reflux from 'reflux';
 import Immutable from 'immutable';
 
-import Checkbox from '../shared/checkbox';
+import Checkbox from '../shared/interaction/checkbox';
 import Grid from '../shared/grid/grid';
 import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
 import LoggingActions from '../logging/logging-actions';
 import LoggingStore from './logging-store';
 import LogLevels from './log-levels';
-import Slab from '../shared/slab';
-import SelectionBox from '../shared/selection-box';
+import Slab from '../shared/layout/slab';
+import SelectionBox from '../shared/interaction/selection-box';
 import TranslationMixin from '../translation/translation-mixin';
 import Translator from '../translation/translator';
 
@@ -66,10 +66,22 @@ export default React.createClass({
     },
     render() {
         const {info, warning, error} = this.state;
-        const columnInfo = [
-            { title: this.getTranslation('level'), columns: 2, id: 'level' },
+        const columnInfo = Immutable.List.of(
+            { title: this.getTranslation('level'), columns: 1, id: 'level',
+                type: GridCellTypes.icon,
+                iconMap: Immutable.Map({
+                    [LogLevels.info]: IconTypes.info,
+                    [LogLevels.warning]: IconTypes.warning,
+                    [LogLevels.error]: IconTypes.error
+                }),
+                colorMap: Immutable.Map({
+                    [LogLevels.info]: 'primary',
+                    [LogLevels.warning]: 'warning',
+                    [LogLevels.error]: 'error'
+                })
+            },
             { title: this.getTranslation('date'), columns: 2, id: 'date', type: GridCellTypes.date },
-            { title: this.getTranslation('message'), columns: 7, id: 'message' },
+            { title: this.getTranslation('message'), columns: 8, id: 'message' },
             { title: this.getTranslation('delete'), columns: 1, id: 'delete',
                 type: GridCellTypes.action,
                 actionIcon: IconTypes.remove,
@@ -77,7 +89,7 @@ export default React.createClass({
                 sort: false
             },
             { title: 'id', id: 'id', unique: true, show: false }
-        ];
+        );
 
         const filteredLogging = this._filterLogging();
 
@@ -106,7 +118,7 @@ export default React.createClass({
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}
-                        data={filteredLogging.toArray()}
+                        data={filteredLogging}
                         pagination={20}
                     />
                 </Slab>

@@ -1,5 +1,7 @@
-import React from 'react';
 import Immutable from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import React from 'react';
+
 import TranslationMixin from '../../translation/translation-mixin';
 import IconTypes from '../icon-types';
 
@@ -8,7 +10,7 @@ export default React.createClass({
     translations: ['all', 'search'],
     propTypes: {
         onSearch: React.PropTypes.func.isRequired,
-        columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+        columnInfo: ImmutablePropTypes.listOf(React.PropTypes.object).isRequired
     },
     getInitialState() {
         return { translatedStrings: Immutable.Map({

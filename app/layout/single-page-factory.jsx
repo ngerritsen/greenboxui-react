@@ -1,11 +1,11 @@
 import React from 'react';
 import Router from 'react-router';
 
-import Content from '../shared/content';
-import Section from '../shared/section';
-import SideNav from '../shared/side-nav';
-import Slab from '../shared/slab';
-import TitleBar from '../shared/title-bar';
+import Content from '../shared/layout/content';
+import Section from '../shared/layout/section';
+import SideNav from '../shared/layout/side-nav';
+import Slab from '../shared/layout/slab';
+import TitleBar from '../shared/layout/title-bar';
 
 const {RouteHandler, Link} = Router;
 

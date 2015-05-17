@@ -1,0 +1,13 @@
+.hidden {
+  display: none;
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.full-width {
+  width: 100%;
+}

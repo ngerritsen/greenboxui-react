@@ -1,9 +1,5 @@
 $grid-border-color: lighten($subtle-gray, 3%);
 
-.grid {
-  margin: 0 -.3rem;
-}
-
 .grid-body {
   @include reset-spacing();
   display: block;

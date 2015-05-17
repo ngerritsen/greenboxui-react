@@ -8,6 +8,7 @@ export default Object.freeze({
     controls: 'cubes',
     development: 'flask',
     edit: 'pencil',
+    error: 'times-circle',
     graphs: 'line-chart',
     info: 'info-circle',
     license: 'key',
@@ -20,6 +21,7 @@ export default Object.freeze({
     settings: 'cogs',
     settingsGeneral: 'cogs',
     time: 'clock-o',
+    warning: 'exclamation-triangle',
     workspace: 'columns'
 });
 

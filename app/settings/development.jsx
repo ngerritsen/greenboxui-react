@@ -1,6 +1,6 @@
 import React from 'react';
 import shortId from 'shortid';
-import Slab from '../shared/slab';
+import Slab from '../shared/layout/slab';
 import Immutable from 'immutable';
 import Reflux from 'reflux';
 

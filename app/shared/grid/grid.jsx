@@ -1,4 +1,7 @@
+import Immutable from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react/addons';
+
 import GridHeadingRow from './grid-heading-row';
 import GridBody from './grid-body';
 import GridToolbar from './grid-toolbar';
@@ -7,7 +10,7 @@ const PureRenderMixin = React.addons.PureRenderMixin;
 export default React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        columnInfo: React.PropTypes.arrayOf(React.PropTypes.shape({
+        columnInfo: ImmutablePropTypes.listOf(React.PropTypes.shape({
             columns: React.PropTypes.number.isRequired,
             handler: React.PropTypes.func,
             id: React.PropTypes.string.isRequired,
@@ -19,9 +22,11 @@ export default React.createClass({
             total: React.PropTypes.number,
             unique: React.PropTypes.bool,
             show: React.PropTypes.bool,
-            actionIcon: React.PropTypes.string
+            actionIcon: React.PropTypes.string,
+            iconMap: React.PropTypes.instanceOf(Immutable.Map),
+            colorMap: React.PropTypes.instanceOf(Immutable.Map)
         })),
-        data: React.PropTypes.array.isRequired,
+        data: React.PropTypes.instanceOf(Immutable.List).isRequired,
         showTools: React.PropTypes.bool,
         pagination: React.PropTypes.number
     },
@@ -52,6 +57,9 @@ export default React.createClass({
         });
     },
     render() {
+        const {searchBy, sortProperty, sortInversed, searchParameter} = this.state;
+        const {columnInfo, pagination} = this.props;
+        const data = this.props.data.toArray();
         let tools = '';
 
         if(this.props.showTools) {
@@ -66,18 +74,18 @@ export default React.createClass({
                 {tools}
                 <div className="grid">
                     <GridHeadingRow
-                        columnInfo={this.props.columnInfo}
+                        columnInfo={columnInfo}
                         onSortBy={this._handleSortBy}
-                        sortProperty={this.state.sortProperty}
+                        sortProperty={sortProperty}
                     />
                     <GridBody
-                        pagination={this.props.pagination}
-                        columnInfo={this.props.columnInfo}
-                        data={this.props.data}
-                        searchParameter={this.state.searchParameter}
-                        searchBy={this.state.searchBy}
-                        sortProperty={this.state.sortProperty}
-                        sortInversed={this.state.sortInversed}
+                        pagination={pagination}
+                        columnInfo={columnInfo}
+                        data={data}
+                        searchParameter={searchParameter}
+                        searchBy={searchBy}
+                        sortProperty={sortProperty}
+                        sortInversed={sortInversed}
                     />
                 </div>
             </div>

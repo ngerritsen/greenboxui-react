@@ -1,0 +1,26 @@
+$base-font: 'Roboto', Arial, sans-serif;
+
+body {
+  color: $text-color;
+  font-family: $base-font;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $base-font;
+}
+
+h4 {
+  @include text-shadow(0 2px 5px $shadow-color);
+  color: darken($on-dark-text-color, 1%);
+  font-size: 1.2rem;
+
+  .fa {
+    font-size: 1.1rem;
+    margin-right: .75rem;
+    top: .2rem;
+  }
+}

@@ -1,9 +1,15 @@
 @import 'compass';
+
 @import '../../bower_components/foundation/scss/normalize';
 @import '../../bower_components/foundation/scss/foundation';
-@import './variables';
+
 @import './utils';
+@import './measures';
+@import './colors';
+
 @import './base';
+@import './typography';
+@import './text-colors';
 @import './layout';
 @import './main-menu';
 @import './grid';
@@ -17,3 +23,5 @@
 @import './icons';
 @import './workspace';
 @import './tabs';
+@import './progress-bars';
+

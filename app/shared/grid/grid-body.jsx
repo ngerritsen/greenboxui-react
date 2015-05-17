@@ -1,4 +1,6 @@
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import React from 'react/addons';
+
 import GridRow from './grid-row';
 import GridPagination from './grid-pagination';
 import _ from 'underscore';
@@ -7,7 +9,7 @@ const PureRenderMixin = React.addons.PureRenderMixin;
 export default React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        columnInfo: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        columnInfo: ImmutablePropTypes.listOf(React.PropTypes.object).isRequired,
         data: React.PropTypes.array.isRequired,
         pagination: React.PropTypes.number,
         searchParameter: React.PropTypes.string,
@@ -49,8 +51,8 @@ export default React.createClass({
             return this._searchCellData(rowData[searchBy], formattedSearchParameter)
         }
         else {
-            for(let i = 0; i < columnInfo.length; i++) {
-                let cellData = rowData[columnInfo[i].id];
+            for(let i = 0; i < columnInfo.count(); i++) {
+                let cellData = rowData[columnInfo.get(i).id];
                 if (this._searchCellData(cellData, formattedSearchParameter)) {
                     return true;
                 }
@@ -80,7 +82,7 @@ export default React.createClass({
         });
     },
     _getUniqueId() {
-        const uniqueColumn = _(this.props.columnInfo).find((column) => column.unique);
+        const uniqueColumn = this.props.columnInfo.find((column) => column.unique);
         return uniqueColumn ? uniqueColumn.id : false;
     },
     _getKey(rowData, index) {

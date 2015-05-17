@@ -2,7 +2,7 @@ import React from 'react';
 import Translator from '../translation/translator';
 import Setting from './setting';
 import SettingTypes from './setting-types';
-import Slab from '../shared/slab';
+import Slab from '../shared/layout/slab';
 
 export default React.createClass({
     render() {

@@ -1,4 +1,6 @@
+import Immutable from 'immutable';
 import React from 'react/addons';
+
 import GridBody from './grid-body';
 import GridRow from './grid-row';
 import GridPagination from './grid-pagination';
@@ -6,10 +8,10 @@ import GridPagination from './grid-pagination';
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('grid body', () => {
-    const dummyColumnInfo = [
+    const dummyColumnInfo = Immutable.List.of(
         { title: 'Id', columns: 6, id: 'id', unique: true },
         { title: 'Name', columns: 6, id: 'name' }
-    ];
+    );
     const dummyData = [
         { id: 1, name: 'bear' },
         { id: 2, name: 'armory7' },
@@ -59,13 +61,14 @@ describe('grid body', () => {
         });
 
         it('sets the key to the index when there is no unique column', () => {
-            let noUniqueColumnInfo = dummyColumnInfo.slice(); /* use slice to copy array by value */
-            noUniqueColumnInfo[0].unique = false;
+            let uniqueColumn = dummyColumnInfo.get(0);
+            uniqueColumn.unique = false;
+            const noUniqueColumnInfo = dummyColumnInfo.set(0, uniqueColumn);
             gridBody.setProps({ columnInfo: noUniqueColumnInfo });
             const renderedRows = ReactTestUtils.scryRenderedComponentsWithType(gridBody, GridRow);
-            expect(renderedRows[0].props.reactKey).toEqual(0);
-            expect(renderedRows[1].props.reactKey).toEqual(1);
-            expect(renderedRows[2].props.reactKey).toEqual(2);
+            expect(renderedRows[0].props.reactKey).toEqual(1);
+            expect(renderedRows[1].props.reactKey).toEqual(2);
+            expect(renderedRows[2].props.reactKey).toEqual(3);
         });
     });
 

@@ -1,4 +1,6 @@
+import Immutable from 'immutable';
 import React from 'react/addons';
+
 import GridRow from './grid-row';
 import GridEditableCell from './grid-cells/grid-editable-cell';
 import GridActionCell from './grid-cells/grid-action-cell';
@@ -8,10 +10,10 @@ import GridCellTypes from './grid-cell-types';
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('grid row', () => {
-    const dummyColumnInfo = [
+    const dummyColumnInfo = Immutable.List.of(
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }
-    ];
+    );
     const dummyData = {
         id: 1,
         name: 'bear',

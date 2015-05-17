@@ -6,7 +6,7 @@ import SettingsStore from '../settings/settings-store';
 import SettingsActions from './settings-actions';
 import Setting from './setting';
 import SettingTypes from './setting-types';
-import Slab from '../shared/slab';
+import Slab from '../shared/layout/slab';
 
 export default React.createClass({
     _handleChangeLanguage(newLanguageId) {

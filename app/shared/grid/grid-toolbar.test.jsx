@@ -1,13 +1,15 @@
+import Immutable from 'immutable';
 import React from 'react/addons';
+
 import GridToolBar from './grid-toolbar';
 
 const ReactTestUtils = React.addons.TestUtils;
 
 describe('grid toolbar', () => {
-    const dummyColumnInfo = [
+    const dummyColumnInfo = Immutable.List.of(
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }
-    ];
+    );
 
     let onSearchDummyCallback = jasmine.createSpy('onSearchDummyCallback');
 
@@ -34,7 +36,7 @@ describe('grid toolbar', () => {
 
     it('fires the search handler with the correct parameters when the search by input changes', () => {
         const dummySearchParameter = 'bear';
-        const dummySearchByParameter = dummyColumnInfo[0].id;
+        const dummySearchByParameter = dummyColumnInfo.get(0).id;
 
         React.findDOMNode(gridToolbar.refs.searchInput).value = dummySearchParameter;
         React.findDOMNode(gridToolbar.refs.searchBySelection).value = dummySearchByParameter;

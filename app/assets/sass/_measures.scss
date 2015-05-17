@@ -1,28 +1,9 @@
-$white: #fff;
-$black: #000;
-$gray: darken($white, 50%);
-$light-gray: darken($white, 25%);
-$subtle-gray: darken($white, 12.5%);
-$barely-white: darken($white, 4%);
-$primary-color: #0090ff;
-
-$primary-color-isii-compact: #0090ff;
-$primary-color-isii: #fa1333;
-
-$positive-color: #16e067;
-$negative-color: #ec1721;
-
-$text-color: #333;
-$on-dark-text-color: #fafafa;
-$link-color: saturate(lighten($primary-color, 7.5%), 15%);
-$background-color: #465267;
-
 $margin-base: 1rem;
 $margin-regular: $margin-base;
 $margin-small: $margin-base/2;
 $margin-large: $margin-base*2;
 
-$gutter-width: .6rem;
+$gutter-width: .5rem;
 
 $top-bar-height: 3.5rem;
 

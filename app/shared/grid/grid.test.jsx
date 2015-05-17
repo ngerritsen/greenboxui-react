@@ -1,4 +1,6 @@
+import Immutable from 'immutable';
 import React from 'react/addons';
+
 import Grid from './grid';
 import GridRow from './grid-row';
 import GridHeadingRow from './grid-heading-row';
@@ -10,16 +12,16 @@ const ReactTestUtils = React.addons.TestUtils;
 describe('grid', () => {
     let grid;
 
-    const dummyColumnInfo = [
+    const dummyColumnInfo = Immutable.List.of(
         { title: 'Id', columns: 5, id: 'id', unique: true },
         { title: 'Name', columns: 7, id: 'name' }
-    ];
+    );
 
-    const dummyData = [
+    const dummyData = Immutable.List.of(
         { id: 1, name: 'bear' },
         { id: 2, name: 'armory7' },
         { id: 3, name: 'closet' }
-    ];
+    );
 
     beforeEach(() => {
         grid = ReactTestUtils.renderIntoDocument(
@@ -46,7 +48,7 @@ describe('grid', () => {
 
         expect(gridBody).toBeDefined();
         expect(gridBody.props.columnInfo).toEqual(dummyColumnInfo);
-        expect(gridBody.props.data).toEqual(dummyData);
+        expect(gridBody.props.data).toEqual(dummyData.toArray());
     });
 
     it('does not render tools if show tools prop is false', () => {
@@ -73,7 +75,7 @@ describe('grid', () => {
 
     it('passes the search parameter to the right components when the search handler is called', () => {
         const dummySearchParameter = 'bear';
-        const dummySearchBy = dummyColumnInfo[0].id;
+        const dummySearchBy = dummyColumnInfo.get(0).id;
 
         const gridToolbar = ReactTestUtils.findRenderedComponentWithType(grid, GridToolbar);
         const gridBody = ReactTestUtils.findRenderedComponentWithType(grid, GridBody);

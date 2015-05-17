@@ -8,7 +8,7 @@ import ConnectionStore from './connection-store';
 import Grid from '../shared/grid/grid';
 import GridCellTypes from '../shared/grid/grid-cell-types';
 import IconTypes from '../shared/icon-types';
-import Slab from '../shared/slab';
+import Slab from '../shared/layout/slab';
 import TranslationMixin from '../translation/translation-mixin';
 
 export default React.createClass({
@@ -25,7 +25,7 @@ export default React.createClass({
         ConnectionActions.removeConnection(connection.connectionId);
     },
     render() {
-        const columnInfo = [
+        const columnInfo = Immutable.List.of(
             { title: this.getTranslation('sourceType'), columns: 2, id: 'sourceControlTypeName' },
             { title: this.getTranslation('sourceInstance'), columns: 3, id: 'sourceControlName' },
             { title: this.getTranslation('targetType'), columns: 2, id: 'targetControlTypeName' },
@@ -36,7 +36,7 @@ export default React.createClass({
                 handler: this._handleDeleteConnection,
                 sort: false
             }
-        ];
+        );
 
         return (
             <div>
@@ -46,7 +46,7 @@ export default React.createClass({
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}
-                        data={this.state.connections.toArray()}
+                        data={this.state.connections}
                         pagination={20}
                     />
                 </Slab>

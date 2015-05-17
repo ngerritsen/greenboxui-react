@@ -85,6 +85,7 @@ function getTranslations() {
         new Translation({ id: 'typeId', en: 'Type ID', nl: 'Type ID' }),
         new Translation({ id: 'controlType', en: 'Control type', nl: 'Regeling type' }),
         new Translation({ id: 'controlInstance', en: 'Control instance', nl: 'Regeling instantie' }),
+        new Translation({ id: 'controlTypeName', en: 'Control type', nl: 'Regeling type' }),
         new Translation({ id: 'controlTypeId', en: 'Control type ID', nl: 'Regeling type ID' }),
         new Translation({ id: 'instanceId', en: 'Instance ID', nl: 'Instantie ID' }),
         new Translation({ id: 'value', en: 'Value', nl: 'Waarde' }),
@@ -128,6 +129,7 @@ function getTranslations() {
         //Logging
         new Translation({ id: 'showErrors', en: 'Show errors', nl: 'Toon errors' }),
         new Translation({ id: 'showWarnings', en: 'Show warnings', nl: 'Toon waarschuwingen' }),
-        new Translation({ id: 'showInfo', en: 'Show info', nl: 'Toon info' })
+        new Translation({ id: 'showInfo', en: 'Show info', nl: 'Toon info' }),
+        new Translation({ id: 'flushLogging', en: 'Flush logging', nl: 'Leeg logging' })
     );
 }

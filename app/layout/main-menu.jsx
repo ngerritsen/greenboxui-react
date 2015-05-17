@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import SideNav from '../shared/side-nav';
+import SideNav from '../shared/layout/side-nav';
 import Translator from '../translation/translator';
 
 export default React.createClass({

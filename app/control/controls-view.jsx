@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 import React from 'react';
 import Reflux from 'reflux';
 
-import Content from '../shared/content';
+import Content from '../shared/layout/content';
 import ControlInstanceStore from '../control-instance/control-instance-store';
 import ControlTypeStore from '../control-instance/control-type-store';
 import Grid from '../shared/grid/grid';
@@ -11,9 +11,9 @@ import LicenseStore from '../license/license-store';
 import ParameterStore from '../parameters/parameter-store';
 import ParameterActions from '../parameters/parameter-actions';
 import ParameterAccessLevels from '../parameters/parameter-access-levels';
-import Slab from '../shared/slab';
-import Section from '../shared/section';
-import SelectionBox from '../shared/selection-box';
+import Slab from '../shared/layout/slab';
+import Section from '../shared/layout/section';
+import SelectionBox from '../shared/interaction/selection-box';
 import SettingsStore from '../settings/settings-store';
 import TranslationMixin from '../translation/translation-mixin';
 
@@ -86,14 +86,14 @@ export default React.createClass({
 
         let parametersToShow = parameters.filter((param) => param[userLevel] !== ParameterAccessLevels.hidden);
 
-        const columnInfo = [
+        const columnInfo = Immutable.List.of(
             { title: this.getTranslation('name'), columns: 6, id: 'name' },
             { title: this.getTranslation('value'), columns: 3, id: 'value',
                 type: ((data) => data[userLevel] === ParameterAccessLevels.fullAccess ? GridCellTypes.editable : GridCellTypes.readonly),
                 handler: this._handleSetParameter
             },
             { title: this.getTranslation('unit'), columns: 3, id: 'unit'}
-        ];
+        );
 
         if(!selectedControlInstanceId && selectedControlTypeId) {
             parametersToShow = parameters.filter((parameter) => {
@@ -134,7 +134,7 @@ export default React.createClass({
                 <Slab>
                     <Grid
                         columnInfo={columnInfo}
-                        data={parametersToShow.toArray()}
+                        data={parametersToShow}
                         pagination={20}
                     />
                 </Slab>

@@ -19,31 +19,36 @@ export default React.createClass({
     },
     render() {
         const {workspaces, current} = this.props;
-        const tabs =
-            workspaces.map((workspace, index) => {
-                const classNames = classnames([
-                    'tab-title',
-                    {'active': workspace.id === current}
-                ]);
+        const links = workspaces.map((workspace, index) => {
+            const classNames = classnames([
+                'tab-title',
+                {'active': workspace.id === current}
+            ]);
 
-                return (
-                        <li className={classNames} key={workspace.id}>
-                            <Link to="workspaces" params={{id: workspace.id}}>Workspace {index + 1}</Link>
-                        </li>
-                    );
-                })
-                .push(
-                    <li className="tab-title" key="add-new-workspace">
-                        <a href="" onClick={this._handleAddWorkspace}>
-                            <Icon type={IconTypes.add}/>
-                        </a>
-                    </li>
-                );
+            return (
+                <li className={classNames} key={workspace.id}>
+                    <Link to="workspaces" params={{id: workspace.id}}>Workspace {index + 1}</Link>
+                </li>
+            );
+        });
+
+        const tools = Immutable.List.of((
+            <li className="tab-title" key="add-new-workspace">
+                <a href="" onClick={this._handleAddWorkspace}>
+                    <Icon type={IconTypes.add}/>
+                </a>
+            </li>
+        ));
+
+        const tabsToRender = React.addons.createFragment({
+            links: links,
+            tools: tools
+        });
 
         return (
             <div className="tabs-container">
                 <ul className="tabs">
-                    {tabs}
+                    {tabsToRender}
                 </ul>
             </div>
         );

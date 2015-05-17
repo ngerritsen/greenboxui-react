@@ -1,9 +1,9 @@
 import React from 'react';
 import Router from 'react-router';
 
-import Content from '../shared/content';
-import Section from '../shared/section';
-import SideNav from '../shared/side-nav';
+import Content from '../shared/layout/content';
+import Section from '../shared/layout/section';
+import SideNav from '../shared/layout/side-nav';
 
 const {RouteHandler, Link} = Router;
 
