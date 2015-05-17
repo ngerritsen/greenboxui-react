@@ -5,7 +5,7 @@ import Icon from '../../icon';
 
 export default React.createClass({
     propTypes: {
-        value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number).isRequired,
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
         iconMap: React.PropTypes.instanceOf(Immutable.Map).isRequired
     },
     render() {

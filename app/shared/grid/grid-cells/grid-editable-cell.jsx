@@ -6,7 +6,7 @@ export default React.createClass({
     propTypes: {
         context: React.PropTypes.object.isRequired,
         onEdit: React.PropTypes.func.isRequired,
-        value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number).isRequired
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired
     },
     getInitialState() {
       return { editMode: false };

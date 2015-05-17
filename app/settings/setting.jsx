@@ -13,12 +13,12 @@ export default React.createClass({
         type: React.PropTypes.string,
         handler: React.PropTypes.func,
         actionLabel: React.PropTypes.string,
-        value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number),
+        value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
         options: ImmutablePropTypes.listOf(React.PropTypes.shape({
             label: React.PropTypes.string,
-            value: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
+            value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
         })),
-        defaultValue: React.PropTypes.oneOfType(React.PropTypes.string, React.PropTypes.number)
+        defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
     },
     getDefaultProps() {
         return { type: SettingTypes.info }

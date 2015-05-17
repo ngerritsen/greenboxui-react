@@ -62,7 +62,8 @@ describe('grid row', () => {
             { title: 'Name', columns: 4, id: 'name', type: GridCellTypes.editable, handler: dummyEditFunc },
             { title: 'Action', columns: 4, id: 'action', type: GridCellTypes.action, handler: dummyActionFunc, actionIcon: 'testIcon' },
             { title: 'Progress', columns: 2, id: 'progress', type: GridCellTypes.progress, total: 'total', value: 'progress' },
-            { title: 'Dummy', columns: 2, id: 'dummy', type: ((data) => data.dummy.editable ? GridCellTypes.editable : GridCellTypes.readonly), handler: dummyEditFunc }
+            { title: 'Dummy', columns: 2, id: 'dummy', value: 'progress',
+                type: ((data) => data.dummy.editable ? GridCellTypes.editable : GridCellTypes.readonly), handler: dummyEditFunc }
         ];
 
         gridRow.setProps({ columnInfo: templatedDummyColumnInfo });
@@ -90,7 +91,7 @@ describe('grid row', () => {
 
         expect(editableCells[1]).toBeDefined();
         expect(editableCells[1].props.context).toEqual(dummyData);
-        expect(editableCells[1].props.value).toEqual(dummyData.dummy);
+        expect(editableCells[1].props.value).toEqual(dummyData.progress);
         expect(editableCells[1].props.onEdit).toEqual(dummyEditFunc);
     });
 });

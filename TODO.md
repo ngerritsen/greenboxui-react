@@ -15,5 +15,4 @@
 
 ###Bugs:
 - Pagination does not refresh on search
-- Fix warning proptype checker
 - Uncaught TypeError: Cannot read property 'removeChild' of null, masonry.

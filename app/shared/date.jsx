@@ -3,9 +3,7 @@ import moment from 'moment';
 
 export default React.createClass({
     propTypes: {
-       date: React.PropTypes.oneOfType(
-           React.PropTypes.object
-       )
+       date: React.PropTypes.object
     },
     render() {
         const dateString = moment(this.props.date.getTime()).calendar();
