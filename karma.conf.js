@@ -3,6 +3,7 @@ module.exports = function(config) {
         basePath: './app',
         frameworks: ['browserify', 'jasmine'],
         browsers: ['Chrome'],
+        reporters: ['mocha'],
         preprocessors: {
             '**/*.test.js': ['browserify'],
             '**/*.test.jsx': ['browserify']
@@ -11,6 +12,12 @@ module.exports = function(config) {
             debug: true,
             transform: ['babelify'],
             extensions: ['.jsx']
-        }
+        },
+        plugins: [
+            'karma-jasmine',
+            'karma-browserify',
+            'karma-chrome-launcher',
+            'karma-mocha-reporter'
+        ]
     });
 };

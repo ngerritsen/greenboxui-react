@@ -64,7 +64,7 @@ describe('alarm store', () => {
     });
 
     function raiseAlarm(message, id) {
-        AlarmActions.raiseAlarm(id, new Date(), message)
+        AlarmActions.raiseAlarm(id, new Date(), message);
         jasmine.clock().tick(jasmine.DEFAULT_TIMEOUT_INTERVAL);
     }
 

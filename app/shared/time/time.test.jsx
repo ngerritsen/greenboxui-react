@@ -19,6 +19,7 @@ describe('time', () => {
 
     it('listens to the time store', () => {
         let oldTime = time.state.time;
+
         setTimeout(() => {
             let newTime = time.state.time;
             expect(oldTime).not.toEqual(newTime);

@@ -16,5 +16,4 @@
 ###Bugs:
 - Pagination does not refresh on search
 - Fix warning proptype checker
-- Fix warning iterable.length deprecated, probably in grid test
 - Uncaught TypeError: Cannot read property 'removeChild' of null, masonry.

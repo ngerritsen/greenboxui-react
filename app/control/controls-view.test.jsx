@@ -62,14 +62,14 @@ describe('controls view', () => {
 
     it('renders all the parameters', () => {
         const grid = ReactTestUtils.findRenderedComponentWithType(controlsView, Grid);
-        expect(grid.props.data.length).toEqual(4);
+        expect(grid.props.data.count()).toEqual(4);
     });
 
     it('filters controls by type', () => {
         controlsView._handleSelectControlType(typeIdA);
 
         const grid = ReactTestUtils.findRenderedComponentWithType(controlsView, Grid);
-        expect(grid.props.data.length).toEqual(2);
+        expect(grid.props.data.count()).toEqual(2);
     });
 
     it('filters controls by instance', () => {
@@ -77,6 +77,6 @@ describe('controls view', () => {
         controlsView._handleSelectControl(controlIdB);
 
         const grid = ReactTestUtils.findRenderedComponentWithType(controlsView, Grid);
-        expect(grid.props.data.length).toEqual(1);
+        expect(grid.props.data.count()).toEqual(1);
     })
 });
