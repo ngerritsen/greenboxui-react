@@ -5,6 +5,8 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var path = require('path');
 var browserSync = require('browser-sync').create();
+var autoprefixer = require('autoprefixer-core');
+var postcss = require('gulp-postcss');
 var sass = require('gulp-sass');
 var $ = require('gulp-load-plugins')();
 
@@ -101,15 +103,13 @@ function executeBundle(bundle) {
 
 gulp.task('sass', ['scss-lint'], function(){
     gulp.src('./app/assets/sass/main.scss')
-        //.pipe($.sourcemaps.init())
+        .pipe($.sourcemaps.init())
         .pipe(sass({
             sourcemap: true,
             style: 'compressed'
         }))
-        .pipe($.autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        //.pipe($.sourcemaps.write('.'))
+        .pipe(postcss([ autoprefixer({ browsers: ["> 0%"] }) ]))
+        .pipe($.sourcemaps.write('.'))
         .pipe(gulp.dest('app/assets'))
         .pipe(browserSync.reload({stream:true}));
 
