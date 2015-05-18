@@ -57,6 +57,18 @@ gulp.task('test', ['lint'], function(){
        });
 });
 
+gulp.task('sass', ['scss-lint'], function(){
+    gulp.src('./app/assets/sass/main.scss')
+        .pipe(sass({
+            sourcemap: true,
+            style: 'compact'
+        }))
+        .pipe(postcss([ autoprefixer({ browsers: ["> 0%"] }) ]))
+        .pipe(gulp.dest('app/assets'))
+        .pipe(browserSync.reload({stream:true}));
+
+});
+
 gulp.task('bundle', function() {
     var bundle = browserify({
             debug: true,
@@ -100,20 +112,6 @@ function executeBundle(bundle) {
         .pipe($.filter(files.bundle))
         .pipe(browserSync.reload({stream:true}));
 }
-
-gulp.task('sass', ['scss-lint'], function(){
-    gulp.src('./app/assets/sass/main.scss')
-        .pipe($.sourcemaps.init())
-        .pipe(sass({
-            sourcemap: true,
-            style: 'compressed'
-        }))
-        .pipe(postcss([ autoprefixer({ browsers: ["> 0%"] }) ]))
-        .pipe($.sourcemaps.write('.'))
-        .pipe(gulp.dest('app/assets'))
-        .pipe(browserSync.reload({stream:true}));
-
-});
 
 gulp.task('clean', function() {
     gulp.src(path.resolve(paths.dist, '*'))

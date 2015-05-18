@@ -2,6 +2,7 @@ node_modules
 app/bower_components
 app/bundle.js
 app/assets/main.css
+app/assets/main.css.map
 dist
 .idea
 .sass-cache
