@@ -1,7 +1,7 @@
 .slab {
-  @include border-radius(2px);
-  @include box-shadow($shallow-shadow);
   background-color: $white;
+  border-radius: 2px;
+  box-shadow: $shallow-shadow;
   margin-bottom: $margin-regular;
   padding: $margin-regular;
 }

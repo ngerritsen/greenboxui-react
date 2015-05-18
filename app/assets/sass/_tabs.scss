@@ -11,9 +11,9 @@ $tabs-bg-color-active: rgba($link-color, .95);
 }
 
 .tabs {
-  @include border-radius(2px);
-  @include box-shadow($shallow-shadow);
   background-color: $tabs-bg-color;
+  border-radius: 2px;
+  box-shadow: $shallow-shadow;
 
   .tab-title {
     a {
@@ -39,7 +39,7 @@ $tabs-bg-color-active: rgba($link-color, .95);
 
       &:first-child {
         a {
-          @include border-radius(2px 0 0 2px);
+          border-radius: 2px 0 0 2px;
         }
       }
     }

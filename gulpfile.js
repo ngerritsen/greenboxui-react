@@ -5,6 +5,7 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var path = require('path');
 var browserSync = require('browser-sync').create();
+var sass = require('gulp-sass');
 var $ = require('gulp-load-plugins')();
 
 const files = {
@@ -98,14 +99,20 @@ function executeBundle(bundle) {
         .pipe(browserSync.reload({stream:true}));
 }
 
-gulp.task('compass', ['scss-lint'], function(){
+gulp.task('sass', ['scss-lint'], function(){
     gulp.src('./app/assets/sass/main.scss')
-        .pipe($.compass({
-            css: 'app/assets',
-            sass: 'app/assets/sass'
+        //.pipe($.sourcemaps.init())
+        .pipe(sass({
+            sourcemap: true,
+            style: 'compressed'
         }))
-        .pipe($.filter('**/*.css'))
+        .pipe($.autoprefixer({
+            browsers: ['last 2 versions']
+        }))
+        //.pipe($.sourcemaps.write('.'))
+        .pipe(gulp.dest('app/assets'))
         .pipe(browserSync.reload({stream:true}));
+
 });
 
 gulp.task('clean', function() {
@@ -167,16 +174,16 @@ gulp.task('connectDist', function () {
 
 gulp.task('watch', function() {
     gulp.watch([paths.scripts, paths.react, '!./app/bundle.js'], ['lint']);
-    gulp.watch([paths.styles], ['compass']);
+    gulp.watch([paths.styles], ['sass']);
     gulp.watch(['./app/index.html'], browserSync.reload());
 });
 
 gulp.task('dev',
-    ['compass', 'test', 'bundle-watch', 'serve', 'watch']
+    ['sass', 'test', 'bundle-watch', 'serve', 'watch']
 );
 
 gulp.task('default', ['dev']);
 
 gulp.task('build',
-    ['lint', 'compass', 'test', 'bundle', 'test', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'optimize-images', 'connectDist']
+    ['lint', 'sass', 'test', 'bundle', 'test', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'optimize-images', 'connectDist']
 );

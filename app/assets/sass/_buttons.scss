@@ -1,13 +1,13 @@
 button.button {
-  @include box-shadow($shallow-shadow);
   background-color: $primary-color;
+  box-shadow: $shallow-shadow;
   font-size: .8rem;
   padding: .7rem .9rem;
   text-transform: uppercase;
 
   &:hover {
-    @include box-shadow($medium-shadow);
     background-color: lighten($primary-color, 5%);
+    box-shadow: $medium-shadow;
   }
 
   &.button-form {
@@ -18,10 +18,10 @@ button.button {
 .icon-button {
   @include reset-border-styles();
   @include reset-spacing();
-  @include opacity(.8);
   background-color: transparent;
   color: inherit;
   display: inline-block;
+  opacity: .8;
 
   &:hover,
   &:focus,
@@ -29,9 +29,9 @@ button.button {
   &:target {
     @include reset-border-styles();
     @include reset-spacing();
-    @include opacity(1);
     background-color: transparent;
     color: inherit;
+    opacity: 1;
   }
 }
 

@@ -14,9 +14,9 @@ h5 {
 }
 
 h4 {
-  @include text-shadow(0 2px 5px $shadow-color);
   color: darken($on-dark-text-color, 1%);
   font-size: 1.2rem;
+  text-shadow: 0 2px 5px $shadow-color;
 
   .fa {
     font-size: 1.1rem;

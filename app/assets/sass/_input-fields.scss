@@ -12,29 +12,29 @@ select {
 input[type="text"],
 input[type="number"],
 textarea {
-  @include border-radius(3px);
-  @include box-shadow($subtle-shallow-shadow);
   background-color: $white;
   border-color: lighten($light-gray, 5%);
+  border-radius: 3px;
+  box-shadow: $subtle-shallow-shadow;
 
   &:focus {
-    @include box-shadow($subtle-medium-shadow);
     background-color: $barely-white;
     border-color: lighten($light-gray, 5%);
+    box-shadow: $subtle-medium-shadow;
   }
 }
 
 select {
-  @include border-radius(3px);
-  @include box-shadow($subtle-shallow-shadow);
   border-color: lighten($light-gray, 5%);
+  border-radius: 3px;
+  box-shadow: $subtle-shallow-shadow;
 }
 //git status
 
 .switch {
   &.tiny {
     label:after {
-      @include box-shadow($medium-shadow);
+      box-shadow: $medium-shadow;
       height: 1.1rem;
       left: .2rem;
       top: .2rem;

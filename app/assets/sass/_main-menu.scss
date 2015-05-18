@@ -1,8 +1,8 @@
 .left-off-canvas-menu {
   @include reset-border-styles();
-  @include transform(translate3d(-105%, 0, 0));
-  @include box-shadow($hard-deep-shadow);
   background-color: darken($white, 1%);
+  box-shadow: $hard-deep-shadow;
+  transform: translate3d(-105%, 0, 0);
   z-index: $z-index-main-menu;
 }
 
@@ -35,11 +35,11 @@
 }
 
 .move-right > .inner-wrap {
-  @include transform(translate3d(0, 0, 0));
+  transform: translate3d(0, 0, 0);
 }
 
 .move-right .left-off-canvas-menu {
-  @include transform(translate3d(0, 0, 0));
+  transform: translate3d(0, 0, 0);
 }
 
 .move-right .exit-off-canvas {

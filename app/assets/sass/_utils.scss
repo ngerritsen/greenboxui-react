@@ -8,11 +8,11 @@
 }
 
 @mixin reset-border-radius() {
-  @include border-radius(0);
+  border-radius: 0;
 }
 
 @mixin reset-box-shadow() {
-  @include box-shadow(0 0 0 $white);
+  box-shadow: 0 0 0 $white;
 }
 
 @mixin reset-border-styles() {

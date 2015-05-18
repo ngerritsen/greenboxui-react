@@ -82,7 +82,7 @@ ul.pagination {
 
   li {
     a {
-      @include border-radius(99px);
+      border-radius: 99px;
     }
 
     &.current {

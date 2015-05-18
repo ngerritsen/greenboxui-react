@@ -1,7 +1,7 @@
 .notifications {
-  @include box-shadow($medium-shadow);
-  @include border-radius(99px);
   background-color: $primary-color-isii;
+  border-radius: 99px;
+  box-shadow: $medium-shadow;
   display: block;
   font-size: .8rem;
   font-weight: bold;
@@ -13,10 +13,10 @@
 
 .fa {
   &.clickable {
-    @include opacity(1);
+    opacity: 1;
 
     &:hover {
-      @include opacity(.8);
+      opacity: .8;
     }
   }
 
