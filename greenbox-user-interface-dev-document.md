@@ -38,16 +38,16 @@ functionality to develop this. The following choices have been made:
     
   * React: [facebook.github.io/react](https://facebook.github.io/react/)
 
-* Flux (Alt)
+* Flux (Reflux)
   * What?: Flux is a design pattern developed by Facebook alongside ReactJS. It manages the data within the application
     in a one-way data flow. It uses a Action --> Dispatcher --> Store --> View pattern.
   * Why?: Because it is developed alongside ReactJS, the two frameworks are made for each other. The one-directional
     data flow makes it very insightful how data is flowing through the application and less error prone. In the Greenbox
-    we will have a lot of data changing all the time and Flux scales very well to more complex applications. Alt is one
+    we will have a lot of data changing all the time and Flux scales very well to more complex applications. Reflux is one
     of the better implementations of Flux.
     
   * Flux: [facebook.github.io/flux](http://facebook.github.io/flux/)  
-  * Alt: [github.com/goatslacker/alt](https://github.com/goatslacker/alt)
+  * Alt: [github.com/spoike/refluxjs](https://github.com/spoike/refluxjs)
 
 ###Additional Libraries:
 * Immutable JS
@@ -100,12 +100,11 @@ same name as that file but with .test appended to the name.
 
 When testing React components, use the ReactTestUtils to render the component in the DOM. Do not
 directly access state of the component you are testing, try to test what's rendered in to the DOM. Trigger scenarios by
-setting new props or Simulating a DOM event.
-
-When testing Flux (Alt) stores you can use Alt.flush() after each test to get a fresh store.
+setting new props or Simulating a DOM event. Always clean the DOM afterwards.
 
 Testing framework used is Jasmine with Karma as it's runner. Jasmine is a full featured testing framework and on of the
-most popular/supported framework. Karma runs Jasmine tests in a real browser for more realistic tests. For react
+most popular/supported framework. Karma runs Jasmine tests in a real browser for more realistic tests. We use the mocha
+test reporter because it shows in a tree which tests are running/failing.
 
 Jasmine Guide: [jasmine.github.io/2.2/introduction.html](http://jasmine.github.io/2.2/introduction.html)  
 
