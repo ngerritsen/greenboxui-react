@@ -18,26 +18,29 @@ export default React.createClass({
             label: React.PropTypes.string,
             value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
         })),
-        defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
+        defaultValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number, React.PropTypes.bool])
     },
     getDefaultProps() {
         return { type: SettingTypes.info }
     },
     render() {
+        const {value, handler, actionLabel, options, defaultValue} = this.props;
+        console.log(`default value: ${defaultValue}`);
         let setting = '';
         const {type, label} = this.props;
 
         if(type === SettingTypes.info) {
-            setting = <span className="setting-value">{this.props.value}</span>;
+            setting = <span className="setting-value">{value}</span>;
         }
         else if(type === SettingTypes.action) {
-            setting = <button className="button radius" onClick={this.props.handler}><Translator id={this.props.actionLabel}/></button>
+            setting = <button className="button radius" onClick={handler}><Translator id={actionLabel}/></button>
         }
         else if(type === SettingTypes.selection) {
-            setting = <SelectionBox options={this.props.options} handler={this.props.handler} defaultValue={this.props.defaultValue}/>
+            console.log()
+            setting = <SelectionBox options={options} handler={handler} defaultValue={defaultValue}/>
         }
         else if(type === SettingTypes.onOff) {
-            setting = <Switch value={this.props.defaultValue} handler={this.props.handler}/>
+            setting = <Switch value={defaultValue} handler={handler}/>
         }
 
         return (
